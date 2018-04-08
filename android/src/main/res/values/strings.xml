@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">react-native-date-picker</string>
+    <string name="overlay">overlay</string>
+</resources>

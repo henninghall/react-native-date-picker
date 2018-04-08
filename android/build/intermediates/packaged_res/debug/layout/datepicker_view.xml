@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:id="@+id/container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        >
+        <cn.carbswang.android.numberpickerview.library.NumberPickerView
+            android:id="@+id/day"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:background="#FFFFFF"
+            app:npv_ShowCount="5"
+            app:npv_RespondChangeOnDetached="false"
+            app:npv_TextSizeNormal="18sp"
+            app:npv_TextSizeSelected="21sp"
+            app:npv_WrapSelectorWheel="true"
+            app:npv_TextColorSelected="#000000"
+            app:npv_TextColorNormal="#aaaaaa"
+            app:npv_DividerColor="#cccccc"
+            app:npv_ItemPaddingHorizontal="3dp"
+
+            />
+
+        <cn.carbswang.android.numberpickerview.library.NumberPickerView
+            android:id="@+id/hour"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:layout_toEndOf="@+id/day"
+            android:layout_toRightOf="@+id/day"
+            android:background="#FFFFFF"
+            app:npv_DividerColor="#cccccc"
+            app:npv_RespondChangeOnDetached="false"
+            app:npv_ShowCount="5"
+            app:npv_TextColorNormal="#aaaaaa"
+            app:npv_TextColorSelected="#000000"
+            app:npv_TextSizeNormal="18sp"
+            app:npv_TextSizeSelected="21sp"
+            app:npv_WrapSelectorWheel="true"
+            app:npv_ItemPaddingHorizontal="3dp"
+            android:gravity="center"
+            />
+
+        <cn.carbswang.android.numberpickerview.library.NumberPickerView
+            android:id="@+id/minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:layout_toEndOf="@+id/hour"
+            android:layout_toRightOf="@+id/hour"
+            android:background="#FFFFFF"
+            app:npv_DividerColor="#cccccc"
+            app:npv_RespondChangeOnDetached="false"
+            app:npv_ShowCount="5"
+            app:npv_TextColorNormal="#aaaaaa"
+            app:npv_TextColorSelected="#000000"
+            app:npv_TextSizeNormal="18sp"
+            app:npv_TextSizeSelected="21sp"
+            app:npv_WrapSelectorWheel="true"
+            app:npv_ItemPaddingHorizontal="3dp"
+            android:gravity="center"
+            />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/overlay_top"
+        android:src="@drawable/overlay"
+        android:layout_width="match_parent"
+        android:contentDescription="@string/overlay"
+        android:layout_height="20dp"
+        android:rotation="180"
+        />
+
+    <ImageView
+        android:id="@+id/overlay_bottom"
+        android:src="@drawable/overlay"
+        android:layout_width="match_parent"
+        android:contentDescription="@string/overlay"
+        android:layout_height="20dp"
+        android:layout_marginTop="140dp"
+        />
+
+
+</RelativeLayout>

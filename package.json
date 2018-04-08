@@ -1,0 +1,16 @@
+{
+  "name": "react-native-date-picker",
+  "version": "1.0.0",
+  "description": "A Cross Platform React Native Picker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:henninghall/react-native-date-picker.git"
+  },
+  "author": "henninghall",
+  "license": "MIT",
+  "homepage": "https://github.com/henninghall/react-native-date-picker"
+}

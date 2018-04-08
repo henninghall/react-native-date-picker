@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/henninghall/Projects/ReactNativePassenger/node_modules/react-native-picker/android/src/main/assets"/><source path="/Users/henninghall/Projects/ReactNativePassenger/node_modules/react-native-picker/android/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/Users/henninghall/Projects/ReactNativePassenger/node_modules/react-native-picker/android/src/release/assets"/></dataSet></merger>
