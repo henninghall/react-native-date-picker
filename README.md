@@ -6,6 +6,9 @@ A cross platform date picker component for React Native. This component uses the
 
 `$ yarn add @henninghall/react-native-date-picker`
 
+`$ react-native link `
+
+
 ## Usage
 
 ```js
