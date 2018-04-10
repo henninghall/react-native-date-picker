@@ -1,0 +1,5 @@
+rootProject.name = 'DatePickerExample'
+include ':@henninghall/react-native-date-picker'
+project(':@henninghall/react-native-date-picker').projectDir = new File(rootProject.projectDir, '../node_modules/@henninghall/react-native-date-picker/android')
+
+include ':app'

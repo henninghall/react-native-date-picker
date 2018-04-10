@@ -1,19 +1,3 @@
-# react-native-date-picker
-
-
-📅 React Native Date Picker is a date picker component for React Native working on iOS and Android. It uses the default DatePickerIOS on iOS and a custom picker on Android which has similar look and feel.
-
-
-## Installation
-
-`yarn add @henninghall/react-native-date-picker`
-
-`react-native link `
-
-
-## Usage
-
-```js
 import React, { Component } from 'react';
 import { View, StyleSheet} from 'react-native';
 
@@ -21,8 +5,8 @@ import DatePicker from '@henninghall/react-native-date-picker';
 
 export default class App extends Component {
 
-  state = { chosenDate: new Date()}
-  
+  state = { chosenDate: new Date() }
+
   setDate = (newDate) => this.setState({ chosenDate: newDate })
 
   render() {
@@ -46,6 +30,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 })
-
-```
-
