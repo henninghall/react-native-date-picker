@@ -422,8 +422,8 @@
     to-fast-properties "^2.0.0"
 
 "@henninghall/react-native-date-picker@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@henninghall/react-native-date-picker/-/react-native-date-picker-1.0.0.tgz#c5f3aafb077b058deda1ca5670cd2d6b9de7baf4"
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@henninghall/react-native-date-picker/-/react-native-date-picker-1.0.2.tgz#a90050aa3daac19c1f280cfb86bcbd95be8fef46"
 
 abab@^1.0.4:
   version "1.0.4"
@@ -3763,6 +3763,10 @@ mixin-deep@^1.2.0:
   dependencies:
     minimist "0.0.8"
 
+moment@^2.22.1:
+  version "2.22.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.1.tgz#529a2e9bf973f259c9643d237fda84de3a26e8ad"
+
 morgan@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.9.0.tgz#d01fa6c65859b76fcf31b3cb53a3821a311d8051"
@@ -4292,6 +4296,10 @@ react-devtools-core@3.1.0:
 react-is@^16.3.1:
   version "16.3.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.3.1.tgz#ee66e6d8283224a83b3030e110056798488359ba"
+
+react-native-device-info@^0.21.5:
+  version "0.21.5"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.21.5.tgz#99478a2d68182e012297f2d63f2bd1b788106dee"
 
 react-native@0.55.2:
   version "0.55.2"

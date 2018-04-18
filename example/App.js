@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet} from 'react-native';
 
-import DatePicker from '@henninghall/react-native-date-picker';
+import DatePicker from 'react-native-date-picker';
 
 export default class App extends Component {
 
