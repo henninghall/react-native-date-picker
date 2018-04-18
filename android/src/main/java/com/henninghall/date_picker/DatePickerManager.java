@@ -8,7 +8,10 @@ import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
+import org.apache.commons.lang3.LocaleUtils;
+
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -31,6 +34,11 @@ public class DatePickerManager extends SimpleViewManager<View>  {
   @ReactProp(name = "date")
   public void setDate(PickerView view, @Nullable double date) {
        view.setDate(new Date((long)date));
+  }
+
+  @ReactProp(name = "locale")
+  public void setLocale(PickerView view, @Nullable String locale) {
+    view.setLocale(LocaleUtils.toLocale(locale));
   }
 
   public Map getExportedCustomBubblingEventTypeConstants() {

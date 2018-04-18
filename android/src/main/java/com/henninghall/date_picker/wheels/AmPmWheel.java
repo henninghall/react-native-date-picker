@@ -2,35 +2,36 @@ package com.henninghall.date_picker.wheels;
 
 import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.WheelChangeListener;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 
-public class HourWheel extends Wheel {
+public class AmPmWheel extends Wheel {
 
-    public HourWheel(NumberPickerView p, WheelChangeListener listener, Locale locale){
+    public AmPmWheel(NumberPickerView p, WheelChangeListener listener, Locale locale){
         super(p, listener, locale);
     }
 
     @Override
     void init() {
-        int numberOfHours = Utils.usesAmPm(locale) ? 12 : 24;
+        values.add("AM");
+        values.add("PM");
 
-
-        for(int i=0; i<numberOfHours; i++) {
-            values.add(format.format(cal.getTime()));
-            cal.add(Calendar.HOUR_OF_DAY, 1);
-        }
         picker.setDisplayedValues(values.toArray(new String[0]));
+
         picker.setMinValue(0);
-        picker.setMaxValue(numberOfHours - 1);
+        picker.setMaxValue(1);
+        picker.setValue(0);
     }
 
     @Override
     public String getFormatTemplate() {
-        return Utils.usesAmPm(locale) ? "hh": "HH";
+        return Utils.usesAmPm(locale) ? "a" : "";
     }
+
 
 }

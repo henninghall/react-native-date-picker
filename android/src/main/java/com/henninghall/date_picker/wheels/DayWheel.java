@@ -12,10 +12,8 @@ import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class DayWheel extends Wheel {
 
-    private static String DAY_FORMAT_TEMPLATE = "yy EEE d MMM";
-
     public DayWheel(NumberPickerView p, WheelChangeListener listener, Locale locale){
-        super(p, listener, DAY_FORMAT_TEMPLATE, locale);
+        super(p, listener, locale);
     }
 
     @Override
@@ -43,7 +41,10 @@ public class DayWheel extends Wheel {
 
     }
 
-
+    @Override
+    public String getFormatTemplate() {
+        return "yy EEE d MMM";
+    }
 
 
 }

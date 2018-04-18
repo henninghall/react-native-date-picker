@@ -1,5 +1,7 @@
 package com.henninghall.date_picker.wheels;
 
+import android.view.ViewManager;
+
 import com.henninghall.date_picker.WheelChangeListener;
 
 import java.text.SimpleDateFormat;
@@ -14,8 +16,8 @@ import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 public abstract class Wheel {
 
     abstract void init();
+    abstract String getFormatTemplate();
 
-    private String formatTemplate;
     ArrayList<String> values;
     NumberPickerView picker;
     Locale locale;
@@ -23,14 +25,13 @@ public abstract class Wheel {
     Calendar cal = Calendar.getInstance();
 
 
-    Wheel(NumberPickerView picker, final WheelChangeListener listener, String formatTemplate, Locale locale){
-        this.formatTemplate = formatTemplate;
+    Wheel(NumberPickerView picker, final WheelChangeListener listener, Locale locale){
         this.locale = locale;
         this.picker = picker;
-        values = new ArrayList<>();
-        format = new SimpleDateFormat(formatTemplate, locale);
+        this.values = new ArrayList<>();
+        this.format = new SimpleDateFormat(getFormatTemplate(), locale);
+        refresh();
 
-        init();
         picker.setOnValueChangedListener(new NumberPickerView.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPickerView picker, int oldVal, int newVal) {
@@ -40,20 +41,22 @@ public abstract class Wheel {
 
     }
 
-    public String getFormatTemplate() {
-        return formatTemplate;
-    }
-
     public String getValue() {
         return values.get(picker.getValue());
     }
 
     public void setValue(Date date) {
-        picker.setValue(values.indexOf(format.format(date)));
+        int index = values.indexOf(format.format(date));
+        if(index > -1) picker.setValue(index);
     }
 
-    public void updateLocale(Locale locale) {
-        this.locale = locale;
+    public void setLocale(Locale locale) {
+        this.locale =locale;
+        refresh();
+    }
+
+    private void refresh() {
+        this.format = new SimpleDateFormat(getFormatTemplate(), locale);
         init();
     }
 

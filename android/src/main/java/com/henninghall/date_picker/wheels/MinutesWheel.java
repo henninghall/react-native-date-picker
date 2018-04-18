@@ -11,10 +11,8 @@ import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class MinutesWheel extends Wheel {
 
-    private static String FORMAT_TEMPLATE = "mm";
-
     public MinutesWheel(NumberPickerView p, WheelChangeListener listener, Locale locale){
-        super(p, listener, FORMAT_TEMPLATE , locale);
+        super(p, listener, locale);
     }
 
     @Override
@@ -28,6 +26,10 @@ public class MinutesWheel extends Wheel {
         picker.setMaxValue(59);
     }
 
+    @Override
+    public String getFormatTemplate() {
+        return "mm";
+    }
 
 
 }

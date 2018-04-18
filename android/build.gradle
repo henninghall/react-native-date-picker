@@ -25,4 +25,6 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.facebook.react:react-native:+'
     compile 'cn.carbswang.android:NumberPickerView:1.1.1'
+    compile 'org.apache.commons:commons-lang3:3.6'
+
 }

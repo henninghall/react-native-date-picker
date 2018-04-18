@@ -30,7 +30,7 @@ export default class App extends Component {
         <DatePicker
           date={this.state.chosenDate}
           onDateChange={this.setDate}
-          style={styles.picker}
+          style={{ width: 300, height: 170 }}
         />
       </View>
     );
@@ -43,10 +43,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
-  },
-  picker: { 
-    width: 300, 
-    height: 170,
   },
 })
 
