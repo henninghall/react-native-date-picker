@@ -38,7 +38,7 @@ public class DatePickerManager extends SimpleViewManager<View>  {
 
   @ReactProp(name = "locale")
   public void setLocale(PickerView view, @Nullable String locale) {
-    view.setLocale(LocaleUtils.toLocale(locale));
+    view.setLocale(LocaleUtils.toLocale(locale.replace('-','_')));
   }
 
   public Map getExportedCustomBubblingEventTypeConstants() {

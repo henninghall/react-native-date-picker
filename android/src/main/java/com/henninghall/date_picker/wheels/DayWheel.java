@@ -24,7 +24,6 @@ public class DayWheel extends Wheel {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DAY_OF_MONTH, -5000);
 
-
         for(int i=0; i<=(max-min); i++){
             values.add(format.format(cal.getTime()));
             cal.add(Calendar.DAY_OF_MONTH, 1);

@@ -1,6 +1,8 @@
 package com.henninghall.date_picker.wheels;
 
+import android.view.ViewGroup;
 import android.view.ViewManager;
+import android.view.ViewParent;
 
 import com.henninghall.date_picker.WheelChangeListener;
 
@@ -14,6 +16,8 @@ import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 
 public abstract class Wheel {
+
+    private final ViewGroup parent;
 
     abstract void init();
     abstract boolean visible();
@@ -29,8 +33,7 @@ public abstract class Wheel {
     Wheel(NumberPickerView picker, final WheelChangeListener listener, Locale locale){
         this.locale = locale;
         this.picker = picker;
-        this.values = new ArrayList<>();
-        this.format = new SimpleDateFormat(getFormatTemplate(), locale);
+        this.parent = (ViewGroup) picker.getParent();
         refresh();
 
         picker.setOnValueChangedListener(new NumberPickerView.OnValueChangeListener() {
@@ -52,18 +55,26 @@ public abstract class Wheel {
     }
 
     public void setLocale(Locale locale) {
-        this.locale =locale;
+        this.locale = locale;
         refresh();
     }
 
     private void refresh() {
         this.format = new SimpleDateFormat(getFormatTemplate(), locale);
-        if (visible()) init();
+        this.values = new ArrayList<>();
+
+        if (visible()) {
+            add();
+            init();
+        }
         else remove();
     }
 
     private void remove() {
         ((ViewManager) picker.getParent()).removeView(picker);
+    }
+    private void add() {
+        parent.addView(picker);
     }
 
 }
