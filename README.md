@@ -5,7 +5,7 @@ A date picker component for React Native working on iOS and Android. It uses the
 
 ## Installation
 
-`yarn add react-native-date-picker-x`
+`yarn add @henninghall/react-native-date-picker`
 
 `react-native link `
 
@@ -16,7 +16,7 @@ A date picker component for React Native working on iOS and Android. It uses the
 import React, { Component } from 'react';
 import { View, StyleSheet} from 'react-native';
 
-import DatePicker from 'react-native-date-picker-x';
+import DatePicker from '@henninghall/react-native-date-picker';
 
 export default class App extends Component {
 
