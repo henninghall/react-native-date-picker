@@ -42,6 +42,11 @@ public class DayWheel extends Wheel {
     }
 
     @Override
+    boolean visible() {
+        return true;
+    }
+
+    @Override
     public String getFormatTemplate() {
         return "yy EEE d MMM";
     }

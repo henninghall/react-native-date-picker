@@ -47,7 +47,6 @@ public class PickerView extends RelativeLayout {
 
         dateFormat = new SimpleDateFormat(getDateFormatTemplate(), locale);
 
-        ((ViewManager) ampmPicker.getParent()).removeView(ampmPicker);
     }
 
     WheelChangeListener onWheelChangeListener = new WheelChangeListener(){

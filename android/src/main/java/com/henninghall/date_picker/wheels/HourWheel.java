@@ -29,8 +29,13 @@ public class HourWheel extends Wheel {
     }
 
     @Override
+    public boolean visible() {
+        return true;
+    }
+
+    @Override
     public String getFormatTemplate() {
-        return Utils.usesAmPm(locale) ? "hh": "HH";
+        return Utils.usesAmPm(locale) ? "h": "HH";
     }
 
 }

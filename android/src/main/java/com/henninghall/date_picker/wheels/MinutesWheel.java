@@ -27,6 +27,11 @@ public class MinutesWheel extends Wheel {
     }
 
     @Override
+    boolean visible() {
+        return true;
+    }
+
+    @Override
     public String getFormatTemplate() {
         return "mm";
     }

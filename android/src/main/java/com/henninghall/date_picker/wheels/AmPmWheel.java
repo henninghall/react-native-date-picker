@@ -29,6 +29,11 @@ public class AmPmWheel extends Wheel {
     }
 
     @Override
+    boolean visible() {
+        return Utils.usesAmPm(locale);
+    }
+
+    @Override
     public String getFormatTemplate() {
         return Utils.usesAmPm(locale) ? "a" : "";
     }

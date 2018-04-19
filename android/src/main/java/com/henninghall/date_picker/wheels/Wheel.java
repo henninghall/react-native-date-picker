@@ -16,6 +16,7 @@ import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 public abstract class Wheel {
 
     abstract void init();
+    abstract boolean visible();
     abstract String getFormatTemplate();
 
     ArrayList<String> values;
@@ -42,7 +43,7 @@ public abstract class Wheel {
     }
 
     public String getValue() {
-        return values.get(picker.getValue());
+        return visible() ? values.get(picker.getValue()) : "";
     }
 
     public void setValue(Date date) {
@@ -57,7 +58,12 @@ public abstract class Wheel {
 
     private void refresh() {
         this.format = new SimpleDateFormat(getFormatTemplate(), locale);
-        init();
+        if (visible()) init();
+        else remove();
+    }
+
+    private void remove() {
+        ((ViewManager) picker.getParent()).removeView(picker);
     }
 
 }
