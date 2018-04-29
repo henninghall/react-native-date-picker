@@ -30,7 +30,6 @@ export default class App extends Component {
         <DatePicker
           date={this.state.chosenDate}
           onDateChange={this.setDate}
-          style={{ width: 300, height: 170 }}
         />
       </View>
     );
