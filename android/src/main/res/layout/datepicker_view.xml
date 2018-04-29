@@ -7,13 +7,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     >
 
     <RelativeLayout
+        android:id="@+id/wheelsWrapper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:foregroundGravity="center"
         >
         <cn.carbswang.android.numberpickerview.library.NumberPickerView
             android:id="@+id/day"
@@ -29,7 +30,6 @@
             app:npv_TextColorNormal="#aaaaaa"
             app:npv_DividerColor="#cccccc"
             app:npv_ItemPaddingHorizontal="3dp"
-
             />
 
         <cn.carbswang.android.numberpickerview.library.NumberPickerView
@@ -48,7 +48,6 @@
             app:npv_TextSizeSelected="21sp"
             app:npv_WrapSelectorWheel="true"
             app:npv_ItemPaddingHorizontal="3dp"
-            android:gravity="center"
             />
 
         <cn.carbswang.android.numberpickerview.library.NumberPickerView
@@ -67,7 +66,6 @@
             app:npv_TextSizeSelected="21sp"
             app:npv_WrapSelectorWheel="true"
             app:npv_ItemPaddingHorizontal="3dp"
-            android:gravity="center"
             />
 
         <cn.carbswang.android.numberpickerview.library.NumberPickerView
@@ -76,7 +74,6 @@
             android:layout_height="160dp"
             android:layout_toEndOf="@+id/minutes"
             android:layout_toRightOf="@+id/minutes"
-            android:background="#FFFFFF"
             app:npv_DividerColor="#cccccc"
             app:npv_RespondChangeOnDetached="false"
             app:npv_ShowCount="5"
@@ -86,7 +83,8 @@
             app:npv_TextSizeSelected="21sp"
             app:npv_WrapSelectorWheel="true"
             app:npv_ItemPaddingHorizontal="3dp"
-            android:gravity="center"
+            android:foregroundGravity="center"
+
             />
     </RelativeLayout>
 

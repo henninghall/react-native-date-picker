@@ -17,7 +17,14 @@ const NativeDatePicker = requireNativeComponent(`DatePickerManager`, DatePickerA
 class DatePickerAndroid extends React.Component {
 
     _onChange = e => this.props.onDateChange(new Date(parseInt(e.nativeEvent.date)));
-    render = () => <NativeDatePicker {...this.props} date={this.props.date.getTime()} onChange={this._onChange} />;
+    _style = () => ({ ...style, ...this.props.style })
+    render = () => <NativeDatePicker {...this.props} date={this.props.date.getTime()} onChange={this._onChange} style={this._style()} />;
+}
+
+const style = {
+    minWidth: 300,
+    minHeight: 180,
+    borderWidth: 1,
 }
 
 DatePickerAndroid.propTypes = DatePickerIOS.propTypes;

@@ -29,9 +29,13 @@ export default class App extends Component {
           date={this.state.chosenDate}
           onDateChange={this.setDate}
           locale={this.state.locale}
-          style={{ width: 300, height: 170 }}
         />
+
         <Text>Current locale: {this.state.locale}</Text>
+        <Text>Current date: {this.state.chosenDate.toISOString()}</Text>
+        <Text></Text>
+        
+        
         <SearchInput
           onChangeText={(term) => { this.searchUpdated(term) }}
           style={styles.searchInput}

@@ -26,12 +26,10 @@ public class DayWheel extends Wheel {
 
         for(int i=0; i<=(max-min); i++){
             values.add(format.format(cal.getTime()));
+            displayValues.add(displayFormat.format(cal.getTime()).substring(3));
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
 
-
-        ArrayList<String> displayValues = new ArrayList<>();
-        for (String s : values) displayValues.add(s.substring(3));
         picker.setDisplayedValues(displayValues.toArray(new String[0]));
 
         picker.setMinValue(min);
