@@ -12,5 +12,8 @@
   },
   "author": "henninghall",
   "license": "MIT",
-  "homepage": "https://github.com/henninghall/react-native-date-picker"
+  "homepage": "https://github.com/henninghall/react-native-date-picker",
+  "keywords": [
+        "datepicker", "date-picker", "date picker", "react native", "react native date picker", "react-native", "react-native-date-picker"
+  ]
 }
