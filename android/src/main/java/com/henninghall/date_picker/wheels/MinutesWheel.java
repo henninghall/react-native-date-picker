@@ -17,8 +17,12 @@ public class MinutesWheel extends Wheel {
 
     @Override
     void init() {
+        Calendar cal = Calendar.getInstance();
         for(int i=0; i<60; i++) {
+
             values.add(format.format(cal.getTime()));
+            displayValues.add(format.format(cal.getTime()));
+
             cal.add(Calendar.MINUTE, 1);
         }
         picker.setDisplayedValues(values.toArray(new String[0]));
