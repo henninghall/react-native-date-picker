@@ -26,5 +26,6 @@ dependencies {
     compile 'com.facebook.react:react-native:+'
     compile 'cn.carbswang.android:NumberPickerView:1.1.1'
     compile 'org.apache.commons:commons-lang3:3.6'
+    compile group: 'net.time4j', name: 'time4j-android', version: '3.42-2018e'
 
 }

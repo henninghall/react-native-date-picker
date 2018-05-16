@@ -1,9 +1,8 @@
 package com.henninghall.date_picker.wheels;
 
-import com.henninghall.date_picker.R;
+import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.WheelChangeListener;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -22,11 +21,18 @@ public class DayWheel extends Wheel {
         int min = 0;
         int max = 10000; // bug
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DAY_OF_MONTH, -5000);
+        cal.add(Calendar.DAY_OF_MONTH, -max/2);
 
         for(int i=0; i<=(max-min); i++){
             values.add(format.format(cal.getTime()));
-            displayValues.add(displayFormat.format(cal.getTime()).substring(3));
+
+            // Print "today" if date is today
+            if(i == max/2){
+                String todayString = Utils.printToday(locale);
+                String todayStringCapitalized = todayString .substring(0, 1).toUpperCase() + todayString.substring(1);
+                displayValues.add(todayStringCapitalized);
+            }
+            else displayValues.add(displayFormat.format(cal.getTime()).substring(3));
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
 

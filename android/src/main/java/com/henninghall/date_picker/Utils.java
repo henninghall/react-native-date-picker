@@ -12,5 +12,9 @@ public class Utils {
         return df instanceof SimpleDateFormat && ((SimpleDateFormat) df).toPattern().contains("a");
     }
 
+    public static String printToday(Locale locale) {
+        return UnitPatterns.of(locale).getYesterdayWord();
+    }
+
 
 }
