@@ -1,6 +1,5 @@
 package com.henninghall.date_picker.wheels;
 
-import com.henninghall.date_picker.PickerValue;
 import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.WheelChangeListener;
 
