@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
 
 ## Goal
 The goal is to make a cross platform variant of [DatePickerIOS](https://facebook.github.io/react-native/docs/datepickerios.html) by implementing a Android variant with similar look and feel.
+
 ![react native date picker](https://facebook.github.io/react-native/docs/assets/DatePickerIOS/maximumDate.gif)
 
 
