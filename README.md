@@ -47,3 +47,19 @@ const styles = StyleSheet.create({
 
 ```
 
+## Goal
+The goal is to make a cross platform variant of [DatePickerIOS](https://facebook.github.io/react-native/docs/datepickerios.html) by implementing a Android variant with similar look and feel.
+![react native date picker](https://facebook.github.io/react-native/docs/assets/DatePickerIOS/maximumDate.gif)
+
+
+
+## TODO
+- [x] Mode: datetime
+- [x] Locale support. (AM/PM, 12h/24h toggled and strings translated) 
+- [x] Replace todays date with the string "Today" (considering locale)
+- [ ] Animate to date when state change occur. 
+- [ ] Transparent background support. (Probably need to include transparent gradient).
+- [ ] Align text to right.
+- [ ] Mode: date
+- [ ] Mode: time
+- [ ] Support maximumDate/minimumDate. (Gray out and animate back to max/min value if exceeded). 
