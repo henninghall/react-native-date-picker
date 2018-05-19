@@ -46,7 +46,15 @@ public abstract class Wheel {
 
     public String getValue() {
         if(!visible()) return "";
-        return values.get(picker.getValue());
+        return getValueAtIndex(getIndex());
+    }
+
+    public int getIndex() {
+        return picker.getValue();
+    }
+
+    public String getValueAtIndex(int index) {
+        return values.get(index);
     }
 
     public void setValue(Date date) {
@@ -89,4 +97,7 @@ public abstract class Wheel {
         picker.setVisibility(View.VISIBLE);
     }
 
+    public Locale getLocale() {
+        return locale;
+    }
 }

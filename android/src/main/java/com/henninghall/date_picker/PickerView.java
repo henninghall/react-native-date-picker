@@ -1,5 +1,6 @@
 package com.henninghall.date_picker;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -23,6 +24,8 @@ import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 public class PickerView extends RelativeLayout {
 
     private final RelativeLayout wheelsWrapper;
+    private final NumberPickerView hourPicker;
+    private final NumberPickerView ampmPicker;
     private SimpleDateFormat dateFormat;
     private HourWheel hourWheel;
     private DayWheel dayWheel;
@@ -39,19 +42,20 @@ public class PickerView extends RelativeLayout {
 
         Locale locale = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP ? Locale.forLanguageTag("en") : Locale.getDefault();
 
-        NumberPickerView hourPicker = (NumberPickerView) rootView.findViewById(R.id.hour);
-        hourWheel = new HourWheel(hourPicker, onWheelChangeListener, locale);
-
         NumberPickerView dayPicker = (NumberPickerView) rootView.findViewById(R.id.day);
         dayWheel = new DayWheel(dayPicker, onWheelChangeListener, locale);
 
         NumberPickerView minutePicker = (NumberPickerView) rootView.findViewById(R.id.minutes);
         minutesWheel = new MinutesWheel(minutePicker, onWheelChangeListener, locale);
 
-        NumberPickerView ampmPicker = (NumberPickerView) rootView.findViewById(R.id.ampm);
+        ampmPicker = (NumberPickerView) rootView.findViewById(R.id.ampm);
         ampmWheel = new AmPmWheel(ampmPicker, onWheelChangeListener, locale);
 
+        hourPicker = (NumberPickerView) rootView.findViewById(R.id.hour);
+        hourWheel = new HourWheel(hourPicker, onWheelChangeListener, locale);
+
         dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
+        changeAmPmWhenPassingMidnightOrNoon();
     }
 
     WheelChangeListener onWheelChangeListener = new WheelChangeListener(){
@@ -59,9 +63,7 @@ public class PickerView extends RelativeLayout {
         public void onChange() {
             WritableMap event = Arguments.createMap();
             try {
-                String dateString = getDateString();
-
-                Date date = dateFormat.parse(dateString);
+                Date date = dateFormat.parse(getDateString());
                 event.putDouble("date", date.getTime());
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -115,5 +117,20 @@ public class PickerView extends RelativeLayout {
     public void requestLayout() {
         super.requestLayout();
         post(measureAndLayout);
+    }
+
+    private void changeAmPmWhenPassingMidnightOrNoon(){
+        hourPicker.setOnValueChangeListenerInScrolling(new NumberPickerView.OnValueChangeListenerInScrolling() {
+            @Override
+            public void onValueChangeInScrolling(NumberPickerView picker, int oldVal, int newVal) {
+                if(Utils.usesAmPm(hourWheel.getLocale())){
+                    String oldValue = hourWheel.getValueAtIndex(oldVal);
+                    String newValue = hourWheel.getValueAtIndex(newVal);
+                    boolean passingNoonOrMidnight = (oldValue.equals("12") && newValue.equals("11")) || oldValue.equals("11") && newValue.equals("12");
+                    if (passingNoonOrMidnight) ampmPicker.smoothScrollToValue((ampmPicker.getValue() + 1) % 2);
+                }
+            }
+        });
+
     }
 }

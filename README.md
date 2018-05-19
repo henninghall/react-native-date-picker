@@ -59,10 +59,9 @@ The goal is to make a cross platform variant of [DatePickerIOS](https://facebook
 - [x] Locale support. (AM/PM, 12h/24h toggled and strings translated) 
 - [x] Replace todays date with the string "Today" (considering locale)
 - [x] Animate to date when state change occur. 
+- [x] Switch between AM/PM when scrolling between forenoon and afternoon.
 - [ ] Transparent background support. (Probably need to include transparent gradient).
 - [ ] Align text to right.
 - [ ] Mode: date
 - [ ] Mode: time
 - [ ] Support maximumDate/minimumDate. (Gray out and animate back to max/min value if exceeded). 
-- [ ] Switch between AM/PM when scrolling between forenoon and afternoon.
-
