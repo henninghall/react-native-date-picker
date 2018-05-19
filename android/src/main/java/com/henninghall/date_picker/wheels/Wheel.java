@@ -33,7 +33,7 @@ public abstract class Wheel {
         this.locale = locale;
         this.picker = picker;
 
-        refresh();
+        refresh(false);
 
         picker.setOnValueChangedListener(new NumberPickerView.OnValueChangeListener() {
             @Override
@@ -62,18 +62,21 @@ public abstract class Wheel {
 
     public void setLocale(Locale locale) {
         this.locale = locale;
-        refresh();
+        refresh(true);
     }
 
-    private void refresh() {
+    private void refresh(boolean keepOldValue) {
         this.displayFormat = new SimpleDateFormat(getFormatTemplate(), locale);
         this.format = new SimpleDateFormat(getFormatTemplate(), LocaleUtils.toLocale("en_US"));
         this.values = new ArrayList<>();
         this.displayValues= new ArrayList<>();
+        int oldValue = picker.getValue();
 
         if (visible()) {
             add();
             init();
+            if(keepOldValue) picker.setValue(oldValue);
+
         }
         else remove();
 

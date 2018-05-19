@@ -3,11 +3,7 @@ package com.henninghall.date_picker.wheels;
 import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.WheelChangeListener;
 
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
@@ -34,7 +30,6 @@ public class AmPmWheel extends Wheel {
 
         picker.setMinValue(0);
         picker.setMaxValue(1);
-        picker.setValue(0);
     }
 
     @Override
