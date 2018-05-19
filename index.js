@@ -5,10 +5,12 @@ import {
     DatePickerIOS,
     Text,
     requireNativeComponent,
-    ViewPropTypes
+    ViewPropTypes,
+    StyleSheet,
 } from 'react-native';
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
+import { DatePicker } from 'react-native-date-picker-x';
 
 const ios = Platform.OS === 'ios';
 
@@ -17,16 +19,28 @@ const NativeDatePicker = requireNativeComponent(`DatePickerManager`, DatePickerA
 class DatePickerAndroid extends React.Component {
 
     _onChange = e => this.props.onDateChange(new Date(parseInt(e.nativeEvent.date)));
-    _style = () => ({ ...style, ...this.props.style })
-    render = () => <NativeDatePicker {...this.props} date={this.props.date.getTime()} onChange={this._onChange} style={this._style()} />;
+    render = () => (
+        <NativeDatePicker
+            {...this.props }
+            date={this.props.date.getTime()}
+            onChange={this._onChange}
+            style={[styles.picker, this.props.style]}
+        />
+    )
 }
 
-const style = {
-    minWidth: 300,
-    minHeight: 180,
-    borderWidth: 1,
+class DatePickerIOSWithSize extends React.Component {
+    render = () => <DatePickerIOS {...this.props} style={[styles.picker, this.props.style]} />
 }
+
+
+const styles = StyleSheet.create({
+    picker: {
+        width: 310,
+        height: 180,
+    }
+})
 
 DatePickerAndroid.propTypes = DatePickerIOS.propTypes;
 
-export default ios ? DatePickerIOS : DatePickerAndroid;
+export default ios ? DatePickerIOSWithSize : DatePickerAndroid;
