@@ -58,7 +58,7 @@ The goal is to make a cross platform variant of [DatePickerIOS](https://facebook
 - [x] Mode: datetime
 - [x] Locale support. (AM/PM, 12h/24h toggled and strings translated) 
 - [x] Replace todays date with the string "Today" (considering locale)
-- [ ] Animate to date when state change occur. 
+- [x] Animate to date when state change occur. 
 - [ ] Transparent background support. (Probably need to include transparent gradient).
 - [ ] Align text to right.
 - [ ] Mode: date
