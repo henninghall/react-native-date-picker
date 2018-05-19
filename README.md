@@ -64,5 +64,5 @@ The goal is to make a cross platform variant of [DatePickerIOS](https://facebook
 - [ ] Mode: date
 - [ ] Mode: time
 - [ ] Support maximumDate/minimumDate. (Gray out and animate back to max/min value if exceeded). 
-- [ ] Switch between AM/PM when scrolling between between forenoon and afternoon.
+- [ ] Switch between AM/PM when scrolling between forenoon and afternoon.
 
