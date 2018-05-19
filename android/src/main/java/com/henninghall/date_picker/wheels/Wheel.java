@@ -51,7 +51,13 @@ public abstract class Wheel {
 
     public void setValue(Date date) {
         int index = values.indexOf(format.format(date));
-        if(index > -1) picker.setValue(index);
+        if(index > -1) {
+
+            // Set value directly during initializing
+            // After init, always smooth scroll to value
+            if(picker.getValue() == 0) picker.setValue(index);
+            else picker.smoothScrollToValue(index);
+        }
     }
 
     public void setLocale(Locale locale) {

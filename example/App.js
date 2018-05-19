@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, Text, TouchableOpacity } from 'react-native';
+import { Button, View, StyleSheet, ScrollView, Text, TouchableOpacity } from 'react-native';
 import SearchInput, { createFilter } from 'react-native-search-filter';
 import DeviceInfo from 'react-native-device-info';
 import DatePicker from 'react-native-date-picker-x';
@@ -21,8 +21,8 @@ export default class App extends Component {
 
   render() {
     const result = locales.filter(createFilter(this.state.searchTerm)).slice(0, 5);
-    console.log({result});
-    
+    console.log({ result });
+
     return (
       <View style={styles.container}>
         <DatePicker
@@ -34,8 +34,12 @@ export default class App extends Component {
         <Text>Current locale: {this.state.locale}</Text>
         <Text>Current date: {this.state.chosenDate.toISOString()}</Text>
         <Text></Text>
-        
-        
+
+        <Button title='Change date'
+          onPress={() => this.setState({
+            chosenDate: new Date(this.state.chosenDate.getTime() + 86400000)
+          })} />
+
         <SearchInput
           onChangeText={(term) => { this.searchUpdated(term) }}
           style={styles.searchInput}
@@ -43,7 +47,7 @@ export default class App extends Component {
         />
         <ScrollView>
           {result.map(locale => (
-            <TouchableOpacity onPress={() => this.setState({locale})} key={locale} style={styles.item}>
+            <TouchableOpacity onPress={() => this.setState({ locale })} key={locale} style={styles.item}>
               <Text>{locale}</Text>
             </TouchableOpacity>
           ))
@@ -53,7 +57,7 @@ export default class App extends Component {
       </View>
     );
   }
-  
+
 }
 
 const styles = StyleSheet.create({

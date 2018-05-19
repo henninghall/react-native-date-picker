@@ -13,7 +13,7 @@ public class Utils {
     }
 
     public static String printToday(Locale locale) {
-        return UnitPatterns.of(locale).getYesterdayWord();
+        return UnitPatterns.of(locale).getTodayWord();
     }
 
 
