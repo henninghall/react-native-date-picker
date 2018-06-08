@@ -51,7 +51,6 @@ public abstract class Wheel {
         picker.smoothScrollToValue(index );
     }
 
-
     public String getValue() {
         if(!visible()) return "";
         return getValueAtIndex(getIndex());
