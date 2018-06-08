@@ -5,6 +5,11 @@ import DeviceInfo from 'react-native-device-info';
 import DatePicker from 'react-native-date-picker-x';
 import locales from './locales';
 
+Date.prototype.addHours = function(h) {    
+  this.setTime(this.getTime() + (h*60*60*1000)); 
+  return this;   
+}
+
 export default class App extends Component {
 
   searchUpdated(term) {
@@ -29,6 +34,8 @@ export default class App extends Component {
           date={this.state.chosenDate}
           onDateChange={this.setDate}
           locale={this.state.locale}
+          minimumDate={new Date()}
+          maximumDate={(new Date()).addHours(24*5)}
         />
 
         <Text>Current locale: {this.state.locale}</Text>
@@ -66,6 +73,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
+    marginTop: 15,
   },
   item: {
     borderWidth: 1,

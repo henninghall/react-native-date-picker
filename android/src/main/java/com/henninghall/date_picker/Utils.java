@@ -3,6 +3,7 @@ package com.henninghall.date_picker;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class Utils {
@@ -16,5 +17,8 @@ public class Utils {
         return UnitPatterns.of(locale).getTodayWord();
     }
 
+    public static Date unixToDate(double date) {
+        return new Date((long)date);
+    }
 
 }

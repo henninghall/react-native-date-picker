@@ -17,9 +17,9 @@ public class DayWheel extends Wheel {
 
     @Override
     void init() {
+
         int min = 0;
         int max = 10000; // bug
-
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DAY_OF_MONTH, -max/2);
 
@@ -40,6 +40,15 @@ public class DayWheel extends Wheel {
 
         picker.setMinValue(min);
         picker.setMaxValue(max);
+        picker.setValue(5000);
+//        picker.setMinAndMaxShowIndex(4995, 5005);
+
+//        if(minDate != null){
+//            int index = values.indexOf(format.format(minDate));
+//            if(index > -1) picker.setMinValue(index);
+//        }
+
+
     }
 
     @Override

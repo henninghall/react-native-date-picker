@@ -1,8 +1,6 @@
 package com.henninghall.date_picker;
 
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Arguments;
@@ -12,9 +10,13 @@ import com.henninghall.date_picker.wheels.AmPmWheel;
 import com.henninghall.date_picker.wheels.DayWheel;
 import com.henninghall.date_picker.wheels.HourWheel;
 import com.henninghall.date_picker.wheels.MinutesWheel;
+import com.henninghall.date_picker.wheels.Wheel;
+
+import org.apache.commons.lang3.time.DateUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -31,7 +33,8 @@ public class PickerView extends RelativeLayout {
     private DayWheel dayWheel;
     private MinutesWheel minutesWheel;
     private AmPmWheel ampmWheel;
-    private int i = 0;
+    private Date minDate;
+    private Date maxDate;
 
     public PickerView() {
         super(DatePickerManager.context);
@@ -56,19 +59,24 @@ public class PickerView extends RelativeLayout {
 
         dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
         changeAmPmWhenPassingMidnightOrNoon();
+
     }
 
     WheelChangeListener onWheelChangeListener = new WheelChangeListener(){
         @Override
-        public void onChange() {
+        public void onChange(Wheel wheel) {
             WritableMap event = Arguments.createMap();
             try {
                 Date date = dateFormat.parse(getDateString());
-                event.putDouble("date", date.getTime());
+                if (date.before(minDate)) wheel.animateToDate(minDate);
+                if (date.after(maxDate)) wheel.animateToDate(maxDate);
+                else {
+                    event.putDouble("date", date.getTime());
+                    DatePickerManager.context.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "dateChange", event);
+                }
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            DatePickerManager.context.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "dateChange", event);
         }
     };
 
@@ -85,6 +93,14 @@ public class PickerView extends RelativeLayout {
                 + " " + hourWheel.getValue()
                 + " " + minutesWheel.getValue()
                 + ampmWheel.getValue();
+    }
+
+    public void setMinimumDate(Date date) {
+        minDate = DateUtils.truncate(date, Calendar.MINUTE);
+    }
+
+    public void setMaximumDate(Date date) {
+        maxDate = DateUtils.truncate(date, Calendar.MINUTE);
     }
 
     public void setDate(Date date) {

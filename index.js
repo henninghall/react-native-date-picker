@@ -19,10 +19,14 @@ const NativeDatePicker = requireNativeComponent(`DatePickerManager`, DatePickerA
 class DatePickerAndroid extends React.Component {
 
     _onChange = e => this.props.onDateChange(new Date(parseInt(e.nativeEvent.date)));
+    _maximumDate = () => this.props.maximumDate && this.props.maximumDate.getTime();
+    _minimumDate = () => this.props.minimumDate && this.props.minimumDate.getTime();
     render = () => (
         <NativeDatePicker
             {...this.props }
             date={this.props.date.getTime()}
+            minimumDate={this._minimumDate()}
+            maximumDate={this._maximumDate()}
             onChange={this._onChange}
             style={[styles.picker, this.props.style]}
         />

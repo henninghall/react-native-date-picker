@@ -34,13 +34,23 @@ public class DatePickerManager extends SimpleViewManager<View>  {
 
   @ReactProp(name = "date")
   public void setDate(PickerView view, @Nullable double date) {
-       view.setDate(new Date((long)date));
+       view.setDate(Utils.unixToDate(date));
   }
 
   @ReactProp(name = "locale")
   public void setLocale(PickerView view, @Nullable String locale) {
     view.setLocale(LocaleUtils.toLocale(locale.replace('-','_')));
     view.requestLayout();
+  }
+
+  @ReactProp(name = "minimumDate")
+  public void setMinimumDate(PickerView view, @Nullable double date) {
+    view.setMinimumDate(Utils.unixToDate(date));
+  }
+
+  @ReactProp(name = "maximumDate")
+  public void setMaximumDate(PickerView view, @Nullable double date) {
+    view.setMaximumDate(Utils.unixToDate(date));
   }
 
   public Map getExportedCustomBubblingEventTypeConstants() {

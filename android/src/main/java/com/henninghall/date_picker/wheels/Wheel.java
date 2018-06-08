@@ -1,5 +1,6 @@
 package com.henninghall.date_picker.wheels;
 
+import android.util.Log;
 import android.view.View;
 
 import com.henninghall.date_picker.WheelChangeListener;
@@ -16,6 +17,10 @@ import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public abstract class Wheel {
 
+    private final Wheel self;
+    private int minIndex;
+    private int prevValue;
+
     abstract void init();
     abstract boolean visible();
     abstract String getFormatTemplate();
@@ -27,22 +32,25 @@ public abstract class Wheel {
     SimpleDateFormat format;
     SimpleDateFormat displayFormat;
 
-
-
     Wheel(NumberPickerView picker, final WheelChangeListener listener, Locale locale){
+        this.self = this;
         this.locale = locale;
         this.picker = picker;
-
         refresh(false);
-
         picker.setOnValueChangedListener(new NumberPickerView.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPickerView picker, int oldVal, int newVal) {
-                listener.onChange();
+                prevValue = oldVal;
+                listener.onChange(self);
             }
         });
-
     }
+
+    public void animateToDate(Date date) {
+        int index = values.indexOf(format.format(date));
+        picker.smoothScrollToValue(index );
+    }
+
 
     public String getValue() {
         if(!visible()) return "";
@@ -72,6 +80,7 @@ public abstract class Wheel {
         this.locale = locale;
         refresh(true);
     }
+
 
     private void refresh(boolean keepOldValue) {
         this.displayFormat = new SimpleDateFormat(getFormatTemplate(), locale);
