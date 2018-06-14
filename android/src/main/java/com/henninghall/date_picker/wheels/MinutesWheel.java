@@ -1,37 +1,36 @@
 package com.henninghall.date_picker.wheels;
 
-import com.henninghall.date_picker.R;
-import com.henninghall.date_picker.WheelChangeListener;
-
+import com.henninghall.date_picker.PickerView;
 import java.util.Calendar;
-import java.util.Locale;
+import java.util.Date;
 
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 
 public class MinutesWheel extends Wheel {
 
-    public MinutesWheel(NumberPickerView p, WheelChangeListener listener, Locale locale){
-        super(p, listener, locale);
+    public MinutesWheel(NumberPickerView minutePicker, PickerView pickerView) {
+        super(minutePicker, pickerView);
     }
 
     @Override
     void init() {
-        Calendar cal = Calendar.getInstance();
-        for(int i=0; i<60; i++) {
+        Calendar cal = pickerView.getInitialDate();
 
+        for(int i=0; i<60; i = i + pickerView.minuteInterval) {
             values.add(format.format(cal.getTime()));
             displayValues.add(format.format(cal.getTime()));
-
-            cal.add(Calendar.MINUTE, 1);
+            cal.add(Calendar.MINUTE, pickerView.minuteInterval);
         }
-        picker.setDisplayedValues(values.toArray(new String[0]));
+
         picker.setMinValue(0);
-        picker.setMaxValue(59);
+        picker.setMaxValue(0);
+        picker.setDisplayedValues(values.toArray(new String[0]));
+        picker.setMaxValue(displayValues.size() - 1);
     }
 
     @Override
-    boolean visible() {
+    public boolean visible() {
         return true;
     }
 
@@ -39,6 +38,5 @@ public class MinutesWheel extends Wheel {
     public String getFormatTemplate() {
         return "mm";
     }
-
 
 }

@@ -1,54 +1,47 @@
 package com.henninghall.date_picker.wheels;
 
-import android.util.Log;
 import android.view.View;
-
-import com.henninghall.date_picker.WheelChangeListener;
-
+import com.henninghall.date_picker.PickerView;
 import org.apache.commons.lang3.LocaleUtils;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
-
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 
 public abstract class Wheel {
 
     private final Wheel self;
-    private int minIndex;
-    private int prevValue;
-
+    public PickerView pickerView;
     abstract void init();
-    abstract boolean visible();
+    public abstract boolean visible();
     abstract String getFormatTemplate();
 
     ArrayList<String> values;
     ArrayList<String> displayValues;
     NumberPickerView picker;
-    Locale locale;
-    SimpleDateFormat format;
+    public SimpleDateFormat format;
     SimpleDateFormat displayFormat;
 
-    Wheel(NumberPickerView picker, final WheelChangeListener listener, Locale locale){
+    public Wheel(NumberPickerView picker, final PickerView pickerView) {
         this.self = this;
-        this.locale = locale;
+        this.pickerView = pickerView;
         this.picker = picker;
         refresh(false);
         picker.setOnValueChangedListener(new NumberPickerView.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPickerView picker, int oldVal, int newVal) {
-                prevValue = oldVal;
-                listener.onChange(self);
+                pickerView.getListener().onChange(self);
             }
         });
     }
 
+    public int getIndexOfDate(Date date){
+        return values.indexOf(format.format(date));
+    }
+
     public void animateToDate(Date date) {
-        int index = values.indexOf(format.format(date));
-        picker.smoothScrollToValue(index );
+        picker.smoothScrollToValue(getIndexOfDate(date));
     }
 
     public String getValue() {
@@ -65,7 +58,7 @@ public abstract class Wheel {
     }
 
     public void setValue(Date date) {
-        int index = values.indexOf(format.format(date));
+        int index = getIndexOfDate(date);
         if(index > -1) {
 
             // Set value directly during initializing
@@ -75,14 +68,8 @@ public abstract class Wheel {
         }
     }
 
-    public void setLocale(Locale locale) {
-        this.locale = locale;
-        refresh(true);
-    }
-
-
-    private void refresh(boolean keepOldValue) {
-        this.displayFormat = new SimpleDateFormat(getFormatTemplate(), locale);
+    public void refresh(boolean keepOldValue) {
+        this.displayFormat = new SimpleDateFormat(getFormatTemplate(), pickerView.locale);
         this.format = new SimpleDateFormat(getFormatTemplate(), LocaleUtils.toLocale("en_US"));
         this.values = new ArrayList<>();
         this.displayValues= new ArrayList<>();
@@ -105,7 +92,4 @@ public abstract class Wheel {
         picker.setVisibility(View.VISIBLE);
     }
 
-    public Locale getLocale() {
-        return locale;
-    }
 }
