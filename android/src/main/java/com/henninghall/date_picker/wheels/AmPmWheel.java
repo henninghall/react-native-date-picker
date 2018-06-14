@@ -1,28 +1,21 @@
 package com.henninghall.date_picker.wheels;
 
+import com.henninghall.date_picker.PickerView;
 import com.henninghall.date_picker.Utils;
-import com.henninghall.date_picker.WheelChangeListener;
-
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 
 public class AmPmWheel extends Wheel {
 
-    public AmPmWheel(NumberPickerView p, WheelChangeListener listener, Locale locale){
-        super(p, listener, locale);
+    public AmPmWheel(NumberPickerView ampmPicker, PickerView pickerView) {
+        super(ampmPicker, pickerView);
     }
 
     @Override
     void init() {
 
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = pickerView.getInitialDate();
 
         cal.set(Calendar.HOUR_OF_DAY, 0);
         displayValues.add(displayFormat.format(cal.getTime()));
@@ -39,14 +32,13 @@ public class AmPmWheel extends Wheel {
     }
 
     @Override
-    boolean visible() {
-        return Utils.usesAmPm(locale);
+    public boolean visible() {
+        return Utils.usesAmPm(pickerView.locale);
     }
 
     @Override
     public String getFormatTemplate() {
-        return Utils.usesAmPm(locale) ? " a " : "";
+        return Utils.usesAmPm(pickerView.locale) ? " a " : "";
     }
-
 
 }

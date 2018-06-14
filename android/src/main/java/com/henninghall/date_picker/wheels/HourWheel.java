@@ -1,23 +1,23 @@
 package com.henninghall.date_picker.wheels;
 
+import com.henninghall.date_picker.PickerView;
 import com.henninghall.date_picker.Utils;
-import com.henninghall.date_picker.WheelChangeListener;
 import java.util.Calendar;
-import java.util.Locale;
 
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 
 public class HourWheel extends Wheel {
 
-    public HourWheel(NumberPickerView p, WheelChangeListener listener, Locale locale){
-        super(p, listener, locale);
+    public HourWheel(NumberPickerView hourPicker, PickerView pickerView) {
+        super(hourPicker, pickerView);
     }
 
     @Override
     void init() {
-        int numberOfHours = Utils.usesAmPm(locale) ? 12 : 24;
-        Calendar cal = Calendar.getInstance();
+        int numberOfHours = Utils.usesAmPm(pickerView.locale) ? 12 : 24;
+        Calendar cal = pickerView.getInitialDate();
+
         for(int i=0; i<numberOfHours; i++) {
             values.add(format.format(cal.getTime()));
             displayValues.add(format.format(cal.getTime()));
@@ -35,7 +35,7 @@ public class HourWheel extends Wheel {
 
     @Override
     public String getFormatTemplate() {
-        return Utils.usesAmPm(locale) ? "h": "HH";
+        return Utils.usesAmPm(pickerView.locale) ? "h": "HH";
     }
 
 }

@@ -2,17 +2,13 @@ package com.henninghall.date_picker;
 
 import android.support.annotation.Nullable;
 import android.view.View;
-
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
-
 import net.time4j.android.ApplicationStarter;
-
 import org.apache.commons.lang3.LocaleUtils;
 
-import java.util.Date;
 import java.util.Map;
 
 public class DatePickerManager extends SimpleViewManager<View>  {
@@ -51,6 +47,12 @@ public class DatePickerManager extends SimpleViewManager<View>  {
   @ReactProp(name = "maximumDate")
   public void setMaximumDate(PickerView view, @Nullable double date) {
     view.setMaximumDate(Utils.unixToDate(date));
+  }
+
+  @ReactProp(name = "minuteInterval")
+  public void setMinuteInterval(PickerView view, @Nullable int interval) throws Exception {
+    if (interval < 0 || interval > 59) throw new Exception("Minute interval out of bounds");
+    if (interval > 1) view.setMinuteInterval(interval);
   }
 
   public Map getExportedCustomBubblingEventTypeConstants() {

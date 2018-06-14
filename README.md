@@ -61,7 +61,7 @@ The goal is to make a cross platform variant of [DatePickerIOS](https://facebook
 - [x] Animate to date when state change occur. 
 - [x] Switch between AM/PM when scrolling between forenoon and afternoon.
 - [x] Support maximumDate/minimumDate.
-- [ ] Minute interval prop.
+- [x] Minute interval prop.
 - [ ] Colored background support.
 - [ ] Align text to right.
 - [ ] Mode: date

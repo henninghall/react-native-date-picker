@@ -25,8 +25,7 @@ export default class App extends Component {
   setDate = (newDate) => this.setState({ chosenDate: newDate })
 
   render() {
-    const result = locales.filter(createFilter(this.state.searchTerm)).slice(0, 5);
-    console.log({ result });
+    const result = locales.filter(createFilter(this.state.searchTerm)).slice(0, 5);    
 
     return (
       <View style={styles.container}>
@@ -34,6 +33,7 @@ export default class App extends Component {
           date={this.state.chosenDate}
           onDateChange={this.setDate}
           locale={this.state.locale}
+          minuteInterval={1}
           minimumDate={new Date()}
           maximumDate={(new Date()).addHours(24*5)}
         />
