@@ -77,8 +77,8 @@ public class PickerView extends RelativeLayout {
             WritableMap event = Arguments.createMap();
             try {
                 Date date = dateFormat.parse(getDateString());
-                if (date.before(minDate)) applyOnVisibleWheels(new AnimateToDate(minDate));
-                if (date.after(maxDate)) applyOnVisibleWheels(new AnimateToDate(maxDate));
+                if (minDate != null && date.before(minDate)) applyOnVisibleWheels(new AnimateToDate(minDate));
+                if (maxDate != null && date.after(maxDate)) applyOnVisibleWheels(new AnimateToDate(maxDate));
                 else {
                     event.putDouble("date", date.getTime());
                     DatePickerManager.context.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "dateChange", event);
