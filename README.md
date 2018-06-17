@@ -10,40 +10,49 @@
 `react-native link `
 
 
-## Usage
+## Minimal Example
 
 ```js
 import React, { Component } from 'react';
-import { View, StyleSheet} from 'react-native';
-
 import DatePicker from 'react-native-date-picker-x';
 
 export default class App extends Component {
 
-  state = { chosenDate: new Date()}
-  
-  setDate = (newDate) => this.setState({ chosenDate: newDate })
+  state = { date: new Date() }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <DatePicker
-          date={this.state.chosenDate}
-          onDateChange={this.setDate}
-        />
-      </View>
-    );
-  }
+  render = () =>
+    <DatePicker
+      date={this.state.date}
+      onDateChange={date => this.setState({ date })}
+    />
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-  },
-})
+```
+
+## Extended Example
+
+```js
+import React, { Component } from 'react';
+import DatePicker from 'react-native-date-picker-x';
+
+const today = new Date();
+const tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000); 
+
+export default class App extends Component {
+
+  state = { date: new Date() }
+
+  render = () =>
+     <DatePicker
+        date={this.state.date}
+        onDateChange={date => this.setState({ date })}
+        locale={'en-US'}
+        minuteInterval={5}
+        minimumDate={today}
+        maximumDate={tomorrow}
+      />
+}
 
 ```
 
