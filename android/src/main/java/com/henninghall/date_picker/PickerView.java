@@ -78,7 +78,7 @@ public class PickerView extends RelativeLayout {
             try {
                 Date date = dateFormat.parse(getDateString());
                 if (minDate != null && date.before(minDate)) applyOnVisibleWheels(new AnimateToDate(minDate));
-                if (maxDate != null && date.after(maxDate)) applyOnVisibleWheels(new AnimateToDate(maxDate));
+                else if (maxDate != null && date.after(maxDate)) applyOnVisibleWheels(new AnimateToDate(maxDate));
                 else {
                     event.putDouble("date", date.getTime());
                     DatePickerManager.context.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "dateChange", event);
