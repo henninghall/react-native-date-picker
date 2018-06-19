@@ -45,6 +45,7 @@ public class PickerView extends RelativeLayout {
     private Date maxDate;
     public int minuteInterval = 1;
     public Locale locale;
+    public Mode mode;
 
     public PickerView() {
         super(DatePickerManager.context);
@@ -164,13 +165,14 @@ public class PickerView extends RelativeLayout {
                 + ampmWheel.getValue();
     }
 
+    public void setMode(Mode mode) {
+        this.mode = mode;
+        applyOnAllWheels(new Refresh());
+    }
+
     public Collection<Wheel> getVisibleWheels() {
         Collection<Wheel> visibleWheels = new ArrayList<>();
-        for (Wheel wheel: getAllWheels()) {
-            if (wheel.visible()) {
-                visibleWheels.add(wheel);
-            }
-        }
+        for (Wheel wheel: getAllWheels()) if (wheel.visible()) visibleWheels.add(wheel);
         return visibleWheels;
     }
 

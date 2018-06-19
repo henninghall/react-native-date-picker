@@ -1,5 +1,6 @@
 package com.henninghall.date_picker.wheels;
 
+import com.henninghall.date_picker.Mode;
 import com.henninghall.date_picker.PickerView;
 import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.WheelChangeListener;
@@ -47,7 +48,7 @@ public class DayWheel extends Wheel {
 
     @Override
     public boolean visible() {
-        return true;
+        return pickerView.mode == Mode.datetime;
     }
 
     @Override

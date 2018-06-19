@@ -1,5 +1,6 @@
 package com.henninghall.date_picker.wheels;
 
+import com.henninghall.date_picker.Mode;
 import com.henninghall.date_picker.PickerView;
 import com.henninghall.date_picker.Utils;
 import java.util.Calendar;
@@ -33,7 +34,7 @@ public class AmPmWheel extends Wheel {
 
     @Override
     public boolean visible() {
-        return Utils.usesAmPm(pickerView.locale);
+        return Utils.usesAmPm(pickerView.locale) && pickerView.mode != Mode.date;
     }
 
     @Override

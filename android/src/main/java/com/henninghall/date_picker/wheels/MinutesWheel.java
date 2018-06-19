@@ -1,5 +1,6 @@
 package com.henninghall.date_picker.wheels;
 
+import com.henninghall.date_picker.Mode;
 import com.henninghall.date_picker.PickerView;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,7 +32,7 @@ public class MinutesWheel extends Wheel {
 
     @Override
     public boolean visible() {
-        return true;
+        return pickerView.mode != Mode.date;
     }
 
     @Override
