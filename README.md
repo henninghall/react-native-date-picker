@@ -71,10 +71,11 @@ The goal is to make a cross platform variant of [DatePickerIOS](https://facebook
 - [x] Switch between AM/PM when scrolling between forenoon and afternoon.
 - [x] Support maximumDate/minimumDate.
 - [x] Minute interval prop.
+- [x] Mode: time
+- [ ] Mode: date
 - [ ] Colored background support.
 - [ ] Align text to right.
-- [ ] Mode: date
-- [ ] Mode: time
+
 
 <!--
 ## TODO EXTRA
