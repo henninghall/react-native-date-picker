@@ -3,7 +3,7 @@ import { Button, View, StyleSheet, ScrollView, Text, TouchableOpacity } from 're
 import SearchInput, { createFilter } from 'react-native-search-filter';
 import DeviceInfo from 'react-native-device-info';
 import DatePicker from 'react-native-date-picker-x';
-import locales from './locales';
+import locales from '../locales';
 
 Date.prototype.addHours = function(h) {    
   this.setTime(this.getTime() + (h*60*60*1000)); 
@@ -12,17 +12,11 @@ Date.prototype.addHours = function(h) {
 
 export default class App extends Component {
 
-  searchUpdated(term) {
-    this.setState({ searchTerm: term })
-  }
-
   state = {
     chosenDate: new Date(),
     searchTerm: '',
     locale: DeviceInfo.getDeviceLocale(),
   }
-
-  setDate = (newDate) => this.setState({ chosenDate: newDate })
 
   render() {
     const result = locales.filter(createFilter(this.state.searchTerm)).slice(0, 5);    
@@ -48,7 +42,7 @@ export default class App extends Component {
           })} />
 
         <SearchInput
-          onChangeText={(term) => { this.searchUpdated(term) }}
+          onChangeText={this.searchUpdated}
           style={styles.searchInput}
           placeholder="Change locale"
         />
@@ -64,6 +58,8 @@ export default class App extends Component {
       </View>
     );
   }
+  setDate = (newDate) => this.setState({ chosenDate: newDate })
+  searchUpdated = (term) => this.setState({ searchTerm: term })
 
 }
 

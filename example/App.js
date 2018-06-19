@@ -4,22 +4,7 @@ import SearchInput, { createFilter } from 'react-native-search-filter';
 import DeviceInfo from 'react-native-device-info';
 import DatePicker from 'react-native-date-picker-x';
 import locales from './locales';
-import MinimalExample from './MinimalExample';
-import ExtendedExample from './ExtendedExample';
-
-const MINIMAL_EXAMPLE = 'MINIMAL_EXAMPLE';
-const EXTENDED_EXAMPLE = 'EXTENDED_EXAMPLE';
-
-const examples = {
-  [MINIMAL_EXAMPLE]: {
-    buttonTitle: 'Show minimal example',
-    component: <MinimalExample />
-  },
-  [EXTENDED_EXAMPLE]: {
-    buttonTitle: 'Show extended example',
-    component: <ExtendedExample />
-  }
-}
+import examples from './examples';
 
 export default class App extends Component {
 
@@ -28,6 +13,7 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.header}>Examples</Text>
         {!this.state.picker && this.renderButtons()}
         {!!this.state.picker && this.renderBackButton()}
         {!!this.state.picker && this.renderPicker()}
@@ -67,12 +53,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    // justifyContent: 'center',
     backgroundColor: 'white',
     marginTop: 15,
   },
   text: {
     color: 'dodgerblue',
     fontSize: 16,
+  },
+  header: {
+    color: 'black',
+    fontSize: 22,
+    margin: 20,
   }
 })

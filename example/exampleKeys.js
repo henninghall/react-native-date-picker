@@ -1,0 +1,5 @@
+export const EXAMPLE_KEYS = {
+    MINIMAL : 'MINIMAL',
+    ADVANCED : 'ADVANCED',
+    TIME_MODE : 'TIME_MODE',
+}
