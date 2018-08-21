@@ -10,7 +10,7 @@ Date.prototype.addHours = function (h) {
   return this;
 }
 
-export default class App extends Component {
+export default class Advanced extends Component {
 
   state = {
     chosenDate: new Date(),
@@ -20,7 +20,6 @@ export default class App extends Component {
 
   render() {
     const result = locales.filter(createFilter(this.state.searchTerm)).slice(0, 5);
-    const { backgroundColor } = this.props;
     return (
       <View style={styles.container}>
         <DatePicker
@@ -30,7 +29,7 @@ export default class App extends Component {
           minuteInterval={1}
           minimumDate={new Date()}
           maximumDate={(new Date()).addHours(24 * 5)}
-          style={this.style()}
+          fadeToColor={this.props.backgroundColor}
         />
 
         <Text>Current locale: {this.state.locale}</Text>
@@ -63,7 +62,6 @@ export default class App extends Component {
   }
   setDate = (newDate) => this.setState({ chosenDate: newDate })
   searchUpdated = (term) => this.setState({ searchTerm: term })
-  style = () => this.props.backgroundColor && ({ backgroundColor: this.props.backgroundColor })
 
 }
 

@@ -62,10 +62,9 @@ public class DatePickerManager extends SimpleViewManager<View>  {
     view.setMaximumDate(Utils.unixToDate(date));
   }
 
-  @ReactProp(name = "userStyle")
-  public void setUserStyle(PickerView view, @Nullable ReadableMap style) {
-    view.style.set(style);
-    Log.v("style", "s");
+  @ReactProp(name = "fadeToColor")
+  public void setFadeToColor(PickerView view, @Nullable String color) {
+    view.style.setFadeToColor(color);
   }
 
   @ReactProp(name = "minuteInterval")

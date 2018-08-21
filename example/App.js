@@ -30,7 +30,7 @@ export default class App extends Component {
 
   renderPicker = () => {
     const Picker = examples[this.state.picker].component;
-    return <Picker backgroundColor={this.state.color} setBackground={this.setBackgroundColor} />
+    return <Picker backgroundColor={this.state.backgroundColor} setBackground={this.setBackgroundColor} />
   }
 
   renderButtons = () =>
