@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.henninghall.date_picker.wheelFunctions.AnimateToDate;
@@ -46,10 +47,12 @@ public class PickerView extends RelativeLayout {
     public int minuteInterval = 1;
     public Locale locale;
     public Mode mode;
+    public Style style;
 
     public PickerView() {
         super(DatePickerManager.context);
         View rootView = inflate(getContext(), R.layout.datepicker_view, this);
+        this.style = new Style(this);
 
         RelativeLayout wheelsWrapper = (RelativeLayout) rootView.findViewById(R.id.wheelsWrapper);
         wheelsWrapper.setWillNotDraw(false);

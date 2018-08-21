@@ -7,14 +7,14 @@ import { EXAMPLE_KEYS } from './exampleKeys'
 export default {
     [EXAMPLE_KEYS.MINIMAL]: {
         buttonTitle: 'Minimal',
-        component: <Minimal />
+        component: Minimal
     },
     [EXAMPLE_KEYS.ADVANCED]: {
         buttonTitle: 'Advanced',
-        component: <Advanced />
+        component: Advanced
     },
     [EXAMPLE_KEYS.TIME_MODE]: {
         buttonTitle: 'Time mode',
-        component: <TimeMode />
+        component: TimeMode
     }
 }

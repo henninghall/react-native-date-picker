@@ -5,12 +5,12 @@ import DeviceInfo from 'react-native-device-info';
 import DatePicker from 'react-native-date-picker-x';
 import locales from '../locales';
 
-Date.prototype.addHours = function(h) {    
-  this.setTime(this.getTime() + (h*60*60*1000)); 
-  return this;   
+Date.prototype.addHours = function (h) {
+  this.setTime(this.getTime() + (h * 60 * 60 * 1000));
+  return this;
 }
 
-export default class App extends Component {
+export default class Advanced extends Component {
 
   state = {
     chosenDate: new Date(),
@@ -19,8 +19,7 @@ export default class App extends Component {
   }
 
   render() {
-    const result = locales.filter(createFilter(this.state.searchTerm)).slice(0, 5);    
-
+    const result = locales.filter(createFilter(this.state.searchTerm)).slice(0, 5);
     return (
       <View style={styles.container}>
         <DatePicker
@@ -29,12 +28,13 @@ export default class App extends Component {
           locale={this.state.locale}
           minuteInterval={1}
           minimumDate={new Date()}
-          maximumDate={(new Date()).addHours(24*5)}
+          maximumDate={(new Date()).addHours(24 * 5)}
+          fadeToColor={this.props.backgroundColor}
         />
 
         <Text>Current locale: {this.state.locale}</Text>
         <Text>Current date: {this.state.chosenDate.toISOString()}</Text>
-        <Text></Text>
+        <Text />
 
         <Button title='Change date'
           onPress={() => this.setState({
@@ -54,7 +54,9 @@ export default class App extends Component {
           ))
           }
         </ScrollView>
+        <Text />
 
+        <Button title={'Change background color'} onPress={() => this.props.setBackground(randomColor())} />
       </View>
     );
   }
@@ -63,12 +65,13 @@ export default class App extends Component {
 
 }
 
+const randomColor = () => '#' + Math.floor(Math.random() * 16777215).toString(16);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
     marginTop: 15,
   },
   item: {

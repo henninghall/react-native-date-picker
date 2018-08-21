@@ -1,7 +1,10 @@
 package com.henninghall.date_picker;
 
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
+
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -57,6 +60,11 @@ public class DatePickerManager extends SimpleViewManager<View>  {
   @ReactProp(name = "maximumDate")
   public void setMaximumDate(PickerView view, @Nullable double date) {
     view.setMaximumDate(Utils.unixToDate(date));
+  }
+
+  @ReactProp(name = "fadeToColor")
+  public void setFadeToColor(PickerView view, @Nullable String color) {
+    view.style.setFadeToColor(color);
   }
 
   @ReactProp(name = "minuteInterval")

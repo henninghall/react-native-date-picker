@@ -8,20 +8,30 @@ import examples from './examples';
 
 export default class App extends Component {
 
-  state = { picker: undefined }
+  state = {
+    picker: undefined,
+    backgroundColor: undefined,
+  }
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView
+        style={[styles.container, { backgroundColor: this.state.backgroundColor }]}
+        contentContainerStyle={styles.content}>
         <Text style={styles.header}>Examples</Text>
         {!this.state.picker && this.renderButtons()}
         {!!this.state.picker && this.renderBackButton()}
         {!!this.state.picker && this.renderPicker()}
-      </View>
+      </ScrollView>
     );
   }
 
-  renderPicker = () => examples[this.state.picker].component
+  setBackgroundColor = backgroundColor => this.setState({ backgroundColor })
+
+  renderPicker = () => {
+    const Picker = examples[this.state.picker].component;
+    return <Picker backgroundColor={this.state.backgroundColor} setBackground={this.setBackgroundColor} />
+  }
 
   renderButtons = () =>
     Object.keys(examples)
@@ -52,9 +62,11 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#abcdef',
     marginTop: 15,
+  },
+  content: {
+    alignItems: 'center',
   },
   text: {
     color: 'dodgerblue',
