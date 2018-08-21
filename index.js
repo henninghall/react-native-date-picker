@@ -17,22 +17,22 @@ const ios = Platform.OS === 'ios';
 const NativeDatePicker = requireNativeComponent(`DatePickerManager`, DatePickerAndroid, { nativeOnly: { onChange: true } });
 
 class DatePickerAndroid extends React.Component {
-
     static defaultProps = { 
         mode: 'datetime',
         minuteInterval: 1,
      };
-  
+     
     _onChange = e => this.props.onDateChange(new Date(parseInt(e.nativeEvent.date)));
     _maximumDate = () => this.props.maximumDate && this.props.maximumDate.getTime();
     _minimumDate = () => this.props.minimumDate && this.props.minimumDate.getTime();
     render = () => (
         <NativeDatePicker
             {...this.props }
-            date={this.props.date.getTime()}
             minimumDate={this._minimumDate()}
             maximumDate={this._maximumDate()}
+            date={this.props.date.getTime()}            
             onChange={this._onChange}
+            userStyle={this.props.style}
             style={[styles.picker, this.props.style]}
         />
     )
