@@ -67,6 +67,11 @@ public class DatePickerManager extends SimpleViewManager<View>  {
     view.style.setFadeToColor(color);
   }
 
+  @ReactProp(name = "textColor")
+  public void setTextColor(PickerView view, @Nullable String color) {
+    view.style.setTextColor(color);
+  }
+
   @ReactProp(name = "minuteInterval")
   public void setMinuteInterval(PickerView view, @Nullable int interval) throws Exception {
     if (interval < 0 || interval > 59) throw new Exception("Minute interval out of bounds");
