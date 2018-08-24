@@ -10,7 +10,7 @@ export default class App extends Component {
 
   state = {
     picker: undefined,
-    backgroundColor: undefined,
+    backgroundColor: "#ffffff",
   }
 
   render() {
@@ -62,11 +62,11 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#abcdef',
-    marginTop: 15,
+    paddingTop: 15,
   },
   content: {
     alignItems: 'center',
+    flex: 1,
   },
   text: {
     color: 'dodgerblue',

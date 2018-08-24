@@ -16,6 +16,7 @@ export default class Advanced extends Component {
     chosenDate: new Date(),
     searchTerm: '',
     locale: DeviceInfo.getDeviceLocale(),
+    textColor: '#000000',
   }
 
   render() {
@@ -30,6 +31,7 @@ export default class Advanced extends Component {
           minimumDate={new Date()}
           maximumDate={(new Date()).addHours(24 * 5)}
           fadeToColor={this.props.backgroundColor}
+          textColor={this.state.textColor}
         />
 
         <Text>Current locale: {this.state.locale}</Text>
@@ -56,16 +58,20 @@ export default class Advanced extends Component {
         </ScrollView>
         <Text />
 
-        <Button title={'Change background color'} onPress={() => this.props.setBackground(randomColor())} />
+        <Button title={'Change background color'} onPress={this.changeColors} />
       </View>
     );
   }
+
+  changeColors = () => {
+    this.props.setBackground(randomColor());
+    this.setState({ textColor: randomColor() })
+  }
+
   setDate = (newDate) => this.setState({ chosenDate: newDate })
   searchUpdated = (term) => this.setState({ searchTerm: term })
 
 }
-
-const randomColor = () => '#' + Math.floor(Math.random() * 16777215).toString(16);
 
 const styles = StyleSheet.create({
   container: {
@@ -73,6 +79,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 15,
+    backgroundColor: 'transparent',
   },
   item: {
     borderWidth: 1,
@@ -92,3 +99,10 @@ const styles = StyleSheet.create({
     width: 100,
   }
 })
+
+const randomColor = () => '#' + pad(Math.floor(Math.random() * 16777215).toString(16), 6);
+
+function pad(n, width) {
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+}

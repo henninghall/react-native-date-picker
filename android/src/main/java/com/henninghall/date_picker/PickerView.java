@@ -1,11 +1,9 @@
 package com.henninghall.date_picker;
 
-import android.annotation.SuppressLint;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.henninghall.date_picker.wheelFunctions.AnimateToDate;

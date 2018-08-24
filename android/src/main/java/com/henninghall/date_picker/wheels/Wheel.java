@@ -19,7 +19,7 @@ public abstract class Wheel {
 
     ArrayList<String> values;
     ArrayList<String> displayValues;
-    NumberPickerView picker;
+    public NumberPickerView picker;
     public SimpleDateFormat format;
     SimpleDateFormat displayFormat;
 

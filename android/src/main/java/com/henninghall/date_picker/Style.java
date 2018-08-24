@@ -4,12 +4,18 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.widget.ImageView;
 
+import com.henninghall.date_picker.wheelFunctions.TextColor;
+
+import org.w3c.dom.Text;
+
 
 class Style {
     private final GradientDrawable gradientBottom;
     private final GradientDrawable gradientTop;
+    private final PickerView pickerView;
 
     public Style(PickerView pickerView) {
+        this.pickerView = pickerView;
         ImageView overlayTop = (ImageView) pickerView.findViewById(R.id.overlay_top);
         ImageView overlayBottom = (ImageView) pickerView.findViewById(R.id.overlay_bottom);
         this.gradientTop =  (GradientDrawable) overlayTop.getDrawable();
@@ -26,6 +32,10 @@ class Style {
             gradientTop.setColors(new int[] {startColor, endColor});
             gradientBottom.setColors(new int[] {startColor, endColor});
         }
+    }
+
+    public void setTextColor(String color) {
+        this.pickerView.applyOnAllWheels(new TextColor(color));
     }
 
     private boolean validColor(String color){
