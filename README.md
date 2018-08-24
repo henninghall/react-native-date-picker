@@ -51,6 +51,8 @@ export default class App extends Component {
         minuteInterval={5}
         minimumDate={today}
         maximumDate={tomorrow}
+        textColor={'#ffffff'}
+        fadeToColor={'#000000'}
       />
 }
 
@@ -63,7 +65,7 @@ The goal with React Native Date Picker is to make a cross platform variant of [D
 
 
 
-## TODO
+## Roadmap
 - [x] Mode: datetime
 - [x] Locale support. (AM/PM, 12h/24h toggled and strings translated) 
 - [x] Replace todays date with the string "Today" (considering locale)
@@ -72,8 +74,9 @@ The goal with React Native Date Picker is to make a cross platform variant of [D
 - [x] Support maximumDate/minimumDate.
 - [x] Minute interval prop.
 - [x] Mode: time
+- [x] Colored background support.
+- [x] Colored text support.
 - [ ] Mode: date
-- [ ] Colored background support.
 - [ ] Align text to right.
 
 <!--

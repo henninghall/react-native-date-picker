@@ -51,23 +51,6 @@
         [self addTarget:self action:@selector(didChange)
        forControlEvents:UIControlEventValueChanged];
     }
-    
-    
-    unsigned result = 0;
-    NSScanner *scanner = [NSScanner scannerWithString:@"#0000ff"];
-    
-    [scanner setScanLocation:1]; // bypass '#' character
-    [scanner scanHexInt:&result];
-    
-    
-    [self setValue:UIColorFromRGB(result) forKeyPath:@"textColor"];
-    SEL selector = NSSelectorFromString(@"setHighlightsToday:");
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDatePicker instanceMethodSignatureForSelector:selector]];
-    BOOL no = NO;
-    [invocation setSelector:selector];
-    [invocation setArgument:&no atIndex:2];
-    [invocation invokeWithTarget:self];
-    
     return self;
 }
 
