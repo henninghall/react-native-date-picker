@@ -5,6 +5,7 @@ import DeviceInfo from 'react-native-device-info';
 import DatePicker from 'react-native-date-picker-x';
 import locales from './locales';
 import examples from './examples';
+import Advanced from './examples/Advanced';
 
 export default class App extends Component {
 
@@ -18,7 +19,7 @@ export default class App extends Component {
       <ScrollView
         style={[styles.container, { backgroundColor: this.state.backgroundColor }]}
         contentContainerStyle={styles.content}>
-        <Text style={styles.header}>Examples</Text>
+        <Text style={styles.header}>{!this.state.picker && 'Examples'}</Text>
         {!this.state.picker && this.renderButtons()}
         {!!this.state.picker && this.renderBackButton()}
         {!!this.state.picker && this.renderPicker()}
@@ -51,7 +52,7 @@ export default class App extends Component {
   renderBackButton = (key) => (
     <TouchableOpacity
       onPress={() => this.setState({ picker: undefined })}
-      style={{ margin: 10 }}
+      style={{ margin: 10, position: 'absolute', top: 0, left: 10, }}
     >
       <Text style={styles.text}>Back</Text>
     </TouchableOpacity>
@@ -61,12 +62,11 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingTop: 15,
   },
   content: {
     alignItems: 'center',
-    flex: 1,
+    // flex: 1,
   },
   text: {
     color: 'dodgerblue',
