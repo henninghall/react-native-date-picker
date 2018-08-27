@@ -4297,13 +4297,13 @@ react-is@^16.3.1:
   version "16.3.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.3.1.tgz#ee66e6d8283224a83b3030e110056798488359ba"
 
-react-native-date-picker-x@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/react-native-date-picker-x/-/react-native-date-picker-x-1.3.0.tgz#b38e911c7b12e0808988711cd2396fefbe43cc4e"
+react-native-date-picker-x@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-date-picker-x/-/react-native-date-picker-x-1.4.0.tgz#15c75bb4e7a2553f7dc7f11a42a5cd3b0d83e5cd"
 
-react-native-device-info@^0.21.5:
-  version "0.21.5"
-  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.21.5.tgz#99478a2d68182e012297f2d63f2bd1b788106dee"
+react-native-device-info@^0.22.5:
+  version "0.22.5"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.22.5.tgz#9b1882cbb030f2926cff77336e7cd2e87edf52bf"
 
 react-native-search-filter@^0.1.1, react-native-search-filter@^0.1.3:
   version "0.1.3"

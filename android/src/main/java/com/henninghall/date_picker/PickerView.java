@@ -124,7 +124,7 @@ public class PickerView extends RelativeLayout {
     }
 
     public void setDate(Date date) {
-        applyOnVisibleWheels(new SetDate(date));
+        applyOnAllWheels(new SetDate(date));
     }
 
     public void setLocale(Locale locale) {

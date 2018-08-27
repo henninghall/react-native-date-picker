@@ -13,6 +13,8 @@ public abstract class Wheel {
 
     private final Wheel self;
     public PickerView pickerView;
+    private String userSetValue;
+
     abstract void init();
     public abstract boolean visible();
     abstract String getFormatTemplate();
@@ -45,7 +47,7 @@ public abstract class Wheel {
     }
 
     public String getValue() {
-        if(!visible()) return "";
+        if(!visible()) return userSetValue;
         return getValueAtIndex(getIndex());
     }
 
@@ -58,6 +60,7 @@ public abstract class Wheel {
     }
 
     public void setValue(Date date) {
+        this.userSetValue = format.format(date);
         int index = getIndexOfDate(date);
         if(index > -1) {
 

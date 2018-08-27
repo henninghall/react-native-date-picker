@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Dimensions, Button, View, StyleSheet, ScrollView, Text, TouchableOpacity } from 'react-native';
 import SearchInput, { createFilter } from 'react-native-search-filter';
 import DatePicker from 'react-native-date-picker-x';
-import Carousel from 'react-native-snap-carousel';
 import PropSlider from '../PropSlider';
 import LocalePicker from '../propPickers/LocalePicker';
 import ModePicker from '../propPickers/ModePicker';
@@ -79,7 +78,7 @@ export default class Advanced extends Component {
     },
     {
       name: 'textColor', component:
-        <TextColor onChange={() =>  this.setState({ textColor: randomColor() })} />
+        <TextColor onChange={() => this.setState({ textColor: randomColor() })} />
     },
   ]
 
