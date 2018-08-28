@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import { Button, View, StyleSheet, ScrollView, Text, TouchableOpacity, TouchableHighlight } from 'react-native';
-import SearchInput, { createFilter } from 'react-native-search-filter';
-import DeviceInfo from 'react-native-device-info';
-import DatePicker from 'react-native-date-picker-x';
-import locales from './locales';
+import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import examples from './examples';
-import Advanced from './examples/Advanced';
 
 export default class App extends Component {
 

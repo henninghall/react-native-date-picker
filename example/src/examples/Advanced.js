@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { Dimensions, Button, View, StyleSheet, ScrollView, Text, TouchableOpacity } from 'react-native';
-import SearchInput, { createFilter } from 'react-native-search-filter';
+import { StyleSheet, Text, View } from 'react-native';
 import DatePicker from 'react-native-date-picker-x';
-import PropSlider from '../PropSlider';
-import LocalePicker from '../propPickers/LocalePicker';
-import ModePicker from '../propPickers/ModePicker';
+import DeviceInfo from 'react-native-device-info';
 import DateChange from '../propPickers/DateChange';
 import FadeToColor from '../propPickers/FadeToColor';
+import LocalePicker from '../propPickers/LocalePicker';
+import ModePicker from '../propPickers/ModePicker';
 import TextColor from '../propPickers/TextColor';
-import DeviceInfo from 'react-native-device-info';
+import PropSlider from '../PropSlider';
 
 Date.prototype.addHours = function (h) {
   this.setTime(this.getTime() + (h * 60 * 60 * 1000));

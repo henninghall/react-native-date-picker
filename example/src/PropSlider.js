@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, Dimensions, Button, View, StyleSheet, ScrollView, Text, TouchableOpacity } from 'react-native';
-import SearchInput, { createFilter } from 'react-native-search-filter';
-import DatePicker from 'react-native-date-picker-x';
+import { Dimensions, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 const { width, height } = Dimensions.get('screen')
 
