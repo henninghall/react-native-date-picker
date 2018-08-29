@@ -1,6 +1,9 @@
 package com.henninghall.date_picker;
 
 
+import android.util.TypedValue;
+import android.view.View;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,4 +24,18 @@ public class Utils {
         return new Date((long)date);
     }
 
+    public static int getWheelHeight(View pickerView) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 160, pickerView.getResources().getDisplayMetrics());
+    }
+
+    public static String localeToYmdPattern(Locale locale) {
+        DateFormat formatter = DateFormat.getDateInstance(DateFormat.SHORT, locale);
+        String pattern = ((SimpleDateFormat)formatter).toLocalizedPattern();
+        pattern = pattern.replaceAll("\\[", "");
+        pattern = pattern.replaceAll("]", "");
+        pattern = pattern.replaceAll(" ", "");
+        pattern = pattern.replaceAll("[.]", "/");
+        pattern = pattern.replaceAll("-", "/");
+        return pattern;
+}
 }

@@ -13,8 +13,8 @@ import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class DayWheel extends Wheel {
 
-    public DayWheel(NumberPickerView dayPicker, PickerView pickerView) {
-        super(dayPicker, pickerView);
+    public DayWheel(PickerView pickerView, int id) {
+        super(pickerView, id);
     }
 
     @Override

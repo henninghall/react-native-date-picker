@@ -10,8 +10,8 @@ import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class MinutesWheel extends Wheel {
 
-    public MinutesWheel(NumberPickerView minutePicker, PickerView pickerView) {
-        super(minutePicker, pickerView);
+    public MinutesWheel(PickerView pickerView, int id) {
+        super(pickerView, id);
     }
 
     @Override

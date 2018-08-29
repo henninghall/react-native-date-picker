@@ -10,8 +10,8 @@ import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class HourWheel extends Wheel {
 
-    public HourWheel(NumberPickerView hourPicker, PickerView pickerView) {
-        super(hourPicker, pickerView);
+    public HourWheel(PickerView pickerView, int id) {
+        super(pickerView, id);
     }
 
     @Override

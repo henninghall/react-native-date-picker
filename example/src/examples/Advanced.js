@@ -35,7 +35,7 @@ export default class Advanced extends Component {
           locale={this.state.locale}
           minuteInterval={1}
           minimumDate={new Date()}
-          maximumDate={(new Date()).addHours(24 * 5)}
+          maximumDate={(new Date()).addHours(24 * 5 * 1000)}
           fadeToColor={this.props.backgroundColor}
           textColor={this.state.textColor}
           mode={this.state.mode}

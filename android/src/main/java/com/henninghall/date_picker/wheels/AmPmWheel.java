@@ -9,8 +9,8 @@ import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class AmPmWheel extends Wheel {
 
-    public AmPmWheel(NumberPickerView ampmPicker, PickerView pickerView) {
-        super(ampmPicker, pickerView);
+    public AmPmWheel(PickerView pickerView, int id) {
+        super(pickerView, id);
     }
 
     @Override

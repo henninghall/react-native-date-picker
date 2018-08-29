@@ -33,12 +33,13 @@ public class DatePickerManager extends SimpleViewManager<View>  {
 
   @ReactProp(name = "mode")
   public void setMode(PickerView view, @Nullable String mode) {
+    Mode m;
     try {
-      view.setMode(Mode.valueOf(mode));
+      m = Mode.valueOf(mode);
     } catch (Exception e) {
       throw new IllegalArgumentException("Invalid mode. Valid modes: 'datetime', 'date', 'time'");
     }
-
+    view.setMode(m);
   }
 
   @ReactProp(name = "date")

@@ -11,10 +11,13 @@ import com.henninghall.date_picker.wheelFunctions.Refresh;
 import com.henninghall.date_picker.wheelFunctions.SetDate;
 import com.henninghall.date_picker.wheelFunctions.WheelFunction;
 import com.henninghall.date_picker.wheels.AmPmWheel;
+import com.henninghall.date_picker.wheels.DateWheel;
 import com.henninghall.date_picker.wheels.DayWheel;
 import com.henninghall.date_picker.wheels.HourWheel;
 import com.henninghall.date_picker.wheels.MinutesWheel;
+import com.henninghall.date_picker.wheels.MonthWheel;
 import com.henninghall.date_picker.wheels.Wheel;
+import com.henninghall.date_picker.wheels.YearWheel;
 
 import org.apache.commons.lang3.time.DateUtils;
 
@@ -33,41 +36,41 @@ import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class PickerView extends RelativeLayout {
 
-    private final NumberPickerView hourPicker;
-    private final NumberPickerView ampmPicker;
     private SimpleDateFormat dateFormat;
     private HourWheel hourWheel;
     private DayWheel dayWheel;
     public MinutesWheel minutesWheel;
     private AmPmWheel ampmWheel;
-    private Date minDate;
-    private Date maxDate;
     public int minuteInterval = 1;
     public Locale locale;
     public Mode mode;
     public Style style;
+    public DateWheel dateWheel;
+    public MonthWheel monthWheel;
+    public YearWheel yearWheel;
+    public Date maxDate;
+    public Date minDate;
+    private WheelOrderUpdater wheelOrderUpdater;
 
     public PickerView() {
         super(DatePickerManager.context);
         View rootView = inflate(getContext(), R.layout.datepicker_view, this);
         this.style = new Style(this);
+        this.wheelOrderUpdater = new WheelOrderUpdater(this);
 
         RelativeLayout wheelsWrapper = (RelativeLayout) rootView.findViewById(R.id.wheelsWrapper);
         wheelsWrapper.setWillNotDraw(false);
 
         locale = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP ? Locale.forLanguageTag("en") : Locale.getDefault();
 
-        NumberPickerView dayPicker = (NumberPickerView) rootView.findViewById(R.id.day);
-        dayWheel = new DayWheel(dayPicker, this);
+        yearWheel = new YearWheel( this, R.id.year);
+        monthWheel = new MonthWheel( this, R.id.month);
+        dateWheel = new DateWheel( this, R.id.date);
 
-        NumberPickerView minutePicker = (NumberPickerView) rootView.findViewById(R.id.minutes);
-        minutesWheel = new MinutesWheel(minutePicker, this);
-
-        ampmPicker = (NumberPickerView) rootView.findViewById(R.id.ampm);
-        ampmWheel = new AmPmWheel(ampmPicker, this);
-
-        hourPicker = (NumberPickerView) rootView.findViewById(R.id.hour);
-        hourWheel = new HourWheel(hourPicker,this);
+        dayWheel = new DayWheel( this, R.id.day);
+        minutesWheel = new MinutesWheel( this, R.id.minutes);
+        ampmWheel = new AmPmWheel(this, R.id.ampm);
+        hourWheel = new HourWheel(this, R.id.hour);
 
         dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
         changeAmPmWhenPassingMidnightOrNoon();
@@ -78,6 +81,9 @@ public class PickerView extends RelativeLayout {
         public void onChange(Wheel wheel) {
             WritableMap event = Arguments.createMap();
             try {
+                String pattern = dateFormat.toPattern();
+                String dateString = getDateString();
+
                 Date date = dateFormat.parse(getDateString());
                 if (minDate != null && date.before(minDate)) applyOnVisibleWheels(new AnimateToDate(minDate));
                 else if (maxDate != null && date.after(maxDate)) applyOnVisibleWheels(new AnimateToDate(maxDate));
@@ -102,14 +108,14 @@ public class PickerView extends RelativeLayout {
     };
 
     private void changeAmPmWhenPassingMidnightOrNoon(){
-        hourPicker.setOnValueChangeListenerInScrolling(new NumberPickerView.OnValueChangeListenerInScrolling() {
+        hourWheel.picker.setOnValueChangeListenerInScrolling(new NumberPickerView.OnValueChangeListenerInScrolling() {
             @Override
             public void onValueChangeInScrolling(NumberPickerView picker, int oldVal, int newVal) {
                 if(Utils.usesAmPm(locale)){
                     String oldValue = hourWheel.getValueAtIndex(oldVal);
                     String newValue = hourWheel.getValueAtIndex(newVal);
                     boolean passingNoonOrMidnight = (oldValue.equals("12") && newValue.equals("11")) || oldValue.equals("11") && newValue.equals("12");
-                    if (passingNoonOrMidnight) ampmPicker.smoothScrollToValue((ampmPicker.getValue() + 1) % 2,false);
+                    if (passingNoonOrMidnight) ampmWheel.picker.smoothScrollToValue((ampmWheel.picker.getValue() + 1) % 2,false);
                 }
             }
         });
@@ -130,6 +136,7 @@ public class PickerView extends RelativeLayout {
     public void setLocale(Locale locale) {
         this.locale = locale;
         dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
+        wheelOrderUpdater.update(locale, mode);
         applyOnAllWheels(new Refresh());
     }
 
@@ -153,14 +160,24 @@ public class PickerView extends RelativeLayout {
     }
 
     private String getDateFormatTemplate() {
-        return dayWheel.getFormatTemplate() + " "
+        String dateTemplate = (mode == Mode.date)
+                ? (yearWheel.getFormatTemplate() + " "
+                + monthWheel.getFormatTemplate() + " "
+                + dateWheel.getFormatTemplate())
+                : dayWheel.getFormatTemplate();
+        return dateTemplate + " "
                 + hourWheel.getFormatTemplate() + " "
                 + minutesWheel.getFormatTemplate()
                 +  ampmWheel.getFormatTemplate();
     }
 
     private String getDateString() {
-        return dayWheel.getValue()
+        String dateString= (mode == Mode.date)
+                ? (yearWheel.getValue() + " "
+                + monthWheel.getValue() + " "
+                + dateWheel.getValue())
+                : dayWheel.getValue();
+        return dateString
                 + " " + hourWheel.getValue()
                 + " " + minutesWheel.getValue()
                 + ampmWheel.getValue();
@@ -168,7 +185,9 @@ public class PickerView extends RelativeLayout {
 
     public void setMode(Mode mode) {
         this.mode = mode;
-        applyOnAllWheels(new Refresh());
+        dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
+        applyOnAllWheels(new Refresh(false));
+        wheelOrderUpdater.update(locale, mode);
     }
 
     public Collection<Wheel> getVisibleWheels() {
@@ -178,7 +197,7 @@ public class PickerView extends RelativeLayout {
     }
 
     public List<Wheel> getAllWheels(){
-        return new ArrayList<>(Arrays.asList(dayWheel, hourWheel, minutesWheel, ampmWheel));
+        return new ArrayList<>(Arrays.asList(yearWheel, monthWheel, dateWheel, dayWheel, hourWheel, minutesWheel, ampmWheel));
     }
 
     public void applyOnAllWheels(WheelFunction function) {

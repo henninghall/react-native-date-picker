@@ -2,6 +2,8 @@ package com.henninghall.date_picker.wheels;
 
 import android.view.View;
 import com.henninghall.date_picker.PickerView;
+import com.henninghall.date_picker.R;
+
 import org.apache.commons.lang3.LocaleUtils;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,12 +14,13 @@ import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 public abstract class Wheel {
 
     private final Wheel self;
+    public final int id;
     public PickerView pickerView;
     private String userSetValue;
 
     abstract void init();
     public abstract boolean visible();
-    abstract String getFormatTemplate();
+    public abstract String getFormatTemplate();
 
     ArrayList<String> values;
     ArrayList<String> displayValues;
@@ -25,10 +28,11 @@ public abstract class Wheel {
     public SimpleDateFormat format;
     SimpleDateFormat displayFormat;
 
-    public Wheel(NumberPickerView picker, final PickerView pickerView) {
+    public Wheel(final PickerView pickerView, final int id) {
+        this.id = id;
         this.self = this;
         this.pickerView = pickerView;
-        this.picker = picker;
+        this.picker = (NumberPickerView) pickerView.findViewById(id);
         refresh(false);
         picker.setOnValueChangedListener(new NumberPickerView.OnValueChangeListener() {
             @Override
