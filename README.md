@@ -13,7 +13,7 @@
 <table>
   <tr>
     <td align="center"><b>iOS</b></td>
-    <td align="center"><b>Android</b></td>  
+    <td align="center"><b>Android (Smoother in reality)</b></td>  
   </tr>
    <tr>
     <td><img src="https://facebook.github.io/react-native/docs/assets/DatePickerIOS/maximumDate.gif" alt="React Native Date Picker IOS" width="338px" />
