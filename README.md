@@ -1,12 +1,28 @@
-# React Native Date Picker 
+# React Native Date Picker &nbsp;&nbsp; ![npm package](https://badge.fury.io/js/react-native-date-picker-x.svg) <img src="https://www.iconsdb.com/icons/preview/soylent-red/new-badge-xxl.png" alt="React Native Date Picker IOS" width="40dp" style="float:right"/>
 
-📅 React Native Date Picker is a cross platform component working on both iOS and Android. It uses the default DatePickerIOS on iOS and a custom picker on Android which has similar look and feel. The datetime mode might be particulary interesting if you looking for a way to avoid two different popup pickers on android. 
 
+<!-- 
+[![Monthly download](https://img.shields.io/npm/dm/react-native-date-picker-x.svg)](https://img.shields.io/npm/dm/react-native-date-picker-x.svg)
+[![Total downloads](https://img.shields.io/npm/dt/react-native-date-picker-x.svg)](https://img.shields.io/npm/dt/react-native-date- picker-x.svg) -->
+
+📱 &nbsp;Supporting iOS and Android <br>
+🌍 &nbsp;Multiple languages<br>
+🎨 &nbsp;Customizable<br>
+
+<div>
+<div style="width:40%;float:left; text-align:center; margin-bottom:5px">iOS</div> <div style="width:40%;float:left; text-align:center;margin-bottom:5px; margin-left:10px">Android</div>
+<img src="https://facebook.github.io/react-native/docs/assets/DatePickerIOS/maximumDate.gif" alt="React Native Date Picker IOS" width="40%" />
+<img src="docs/react-native-date-picker-android.gif" alt="React Native Date Picker Android" width="40%" style="margin-left:10px" />
+</div>
 
 ## Installation
 
+`npm install react-native-date-picker-x ` 
+<br>
+or <br>
 `yarn add react-native-date-picker-x`
-
+<br>
+<br>
 `react-native link `
 
 
@@ -58,11 +74,9 @@ export default class App extends Component {
 
 ```
 
-## Goal
-The goal with React Native Date Picker is to make a cross platform variant of [DatePickerIOS](https://facebook.github.io/react-native/docs/datepickerios.html) by implementing a Android variant with similar look and feel.
 
-![react native date picker](https://facebook.github.io/react-native/docs/assets/DatePickerIOS/maximumDate.gif)
-
+## About
+📅 &nbsp; React Native Date Picker is a cross platform component working on both iOS and Android. It uses the slightly improved DatePickerIOS on iOS and a custom picker on Android which has similar look and feel. The datetime mode might be particulary interesting if you looking for a way to avoid two different popup pickers on android. 
 
 
 ## Roadmap
