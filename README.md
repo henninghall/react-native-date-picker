@@ -67,21 +67,22 @@ The goal with React Native Date Picker is to make a cross platform variant of [D
 
 ## Roadmap
 - [x] Mode: datetime
+- [x] Mode: date
+- [x] Mode: time
 - [x] Locale support. (AM/PM, 12h/24h toggled and strings translated) 
 - [x] Replace todays date with the string "Today" (considering locale)
 - [x] Animate to date when state change occur. 
 - [x] Switch between AM/PM when scrolling between forenoon and afternoon.
 - [x] Support maximumDate/minimumDate.
 - [x] Minute interval prop.
-- [x] Mode: time
 - [x] Colored background support.
 - [x] Colored text support.
-- [ ] Mode: date
-- [ ] Align text to right.
+
 
 <!--
 ## TODO EXTRA
 - [ ] Transparent background support. (Probably need to include transparent gradient).
 - [ ] Screen recordings
 - [ ] Gray out max/min values. 
+- [ ] Align text to right.
 -->
