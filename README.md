@@ -1,18 +1,31 @@
-# React Native Date Picker &nbsp;&nbsp; ![npm package](https://badge.fury.io/js/react-native-date-picker-x.svg) <img src="https://www.iconsdb.com/icons/preview/soylent-red/new-badge-xxl.png" alt="React Native Date Picker IOS" width="40dp" style="float:right"/>
+# React Native Date Picker &nbsp;&nbsp; ![npm package](https://badge.fury.io/js/react-native-date-picker-x.svg)<img src="https://www.iconsdb.com/icons/preview/soylent-red/new-badge-xxl.png" alt="React Native Date Picker" width="40dp" align="right"/>
 
 
 <!-- 
 [![Monthly download](https://img.shields.io/npm/dm/react-native-date-picker-x.svg)](https://img.shields.io/npm/dm/react-native-date-picker-x.svg)
 [![Total downloads](https://img.shields.io/npm/dt/react-native-date-picker-x.svg)](https://img.shields.io/npm/dt/react-native-date- picker-x.svg) -->
 
-📱 &nbsp;Supporting iOS and Android <br>
-🌍 &nbsp;Multiple languages<br>
-🎨 &nbsp;Customizable<br>
+📱 Supporting iOS and Android <br>
+🌍 Multiple languages<br>
+🎨 Customizable<br>
 
-<div>
-<div style="width:40%;float:left; text-align:center; margin-bottom:5px">iOS</div> <div style="width:40%;float:left; text-align:center;margin-bottom:5px; margin-left:10px">Android</div>
-<img src="https://facebook.github.io/react-native/docs/assets/DatePickerIOS/maximumDate.gif" alt="React Native Date Picker IOS" width="40%" />
-<img src="docs/react-native-date-picker-android.gif" alt="React Native Date Picker Android" width="40%" style="margin-left:10px" />
+
+<table>
+  <tr>
+    <td align="center"><b>iOS</b></td>
+    <td align="center"><b>Android</b></td>  
+  </tr>
+   <tr>
+    <td><img src="https://facebook.github.io/react-native/docs/assets/DatePickerIOS/maximumDate.gif" alt="React Native Date Picker IOS" width="338px" />
+    </td>
+    <td><img src="docs/react-native-date-picker-android.gif" alt="React Native Date Picker Android" width="338px" style="margin-left:10px" />
+    </td>  
+  </tr>
+  
+  </table>
+
+
+
 </div>
 
 ## Installation
