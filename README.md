@@ -13,13 +13,17 @@
 <table>
   <tr>
     <td align="center"><b>iOS</b></td>
-    <td align="center"><b>Android (Smoother in reality)</b></td>  
+    <td align="center"><b>Android</b></td>  
   </tr>
    <tr>
     <td><img src="https://facebook.github.io/react-native/docs/assets/DatePickerIOS/maximumDate.gif" alt="React Native Date Picker IOS" width="338px" />
     </td>
     <td><img src="docs/react-native-date-picker-android.gif" alt="React Native Date Picker Android" width="338px" style="margin-left:10px" />
     </td>  
+  </tr>
+      <tr>
+    <td align="center">A slightly improved DatePickerIOS.</td>
+    <td align="center">A custom made native component. (Smoother in reality)</td>  
   </tr>
   
   </table>
