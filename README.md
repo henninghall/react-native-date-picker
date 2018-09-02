@@ -27,6 +27,7 @@
   </tr>
   
   </table>
+  
 ## Installation
 
 1. `npm install react-native-date-picker-x --save` or  `yarn add react-native-date-picker-x`
