@@ -53,17 +53,17 @@ export default class App extends Component {
 ```
 
 ## Properties
-Prop | Description | Screenshots
------------- | ------------- | -------------
+Prop | Description | Screenshots Android | Screenshot iOS
+------------- | ------------- | ------------- | -------------
 date | The currently selected date. |
 onDateChange | Date change handler |
 fadeToColor | Android picker is fading towords this background color. {color, 'none',} |
 maximumDate |  Maximum selectable date. |
 minimumDate |  Minimum selectable date |
-minuteInterval | The interval at which minutes can be selected. | <img src="docs/minute-interval-ios.png" alt="Date picker minute interval IOS" height="120px" /><img src="docs/minute-interval-android.png" alt="Date picker minute interval Android" height="120px" />
-mode | The date picker mode. {'datetime', 'date', 'time'} | <img src="docs/datetime-mode-ios.png" alt="Datetime mode ios" height="120px" /><img src="docs/datetime-mode-android.png" alt="datetime mode android" height="120px" /><img src="docs/date-mode-ios.png" alt="date mode ios" height="120px" /><img src="docs/date-mode-android.png" alt="date mode android" height="120px" /><img src="docs/time-mode-ios.png" alt="time mode ios" height="120px" /><img src="docs/time-mode-android.png" alt="time mode android" height="120px" />
-locale | The locale for the date picker. Changes language, date order and am/pm preferences. Value needs to be a <a title="react native datepicker locale id" href="https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html">Locale ID.</a>| <img src="docs/locale-ios.png" alt="React Native Date picker locale language ios" height="120px" /><img src="docs/locale-android.png" alt="React Native Date picker locale language android" height="120px" />
-textColor | Changes the text color. | <img src="docs/colors-ios.png" alt="text color background color ios" height="120px" /><img src="docs/colors-android.png" alt="Text color background color android" height="120px" />
+minuteInterval | The interval at which minutes can be selected. | <img src="docs/minute-interval-ios.png" alt="Date picker minute interval IOS" height="120px" />|<img src="docs/minute-interval-android.png" alt="Date picker minute interval Android" height="120px" />
+mode | The date picker mode. {'datetime', 'date', 'time'} | <img src="docs/datetime-mode-ios.png" alt="Datetime mode ios" height="120px" /><img src="docs/date-mode-ios.png" alt="date mode ios" height="120px" /><img src="docs/time-mode-ios.png" alt="time mode ios" height="120px" />|<img src="docs/date-mode-android.png" alt="date mode android" height="120px" /><img src="docs/datetime-mode-android.png" alt="datetime mode android" height="120px" /><img src="docs/time-mode-android.png" alt="time mode android" height="120px" /> |
+locale | The locale for the date picker. Changes language, date order and am/pm preferences. Value needs to be a <a title="react native datepicker locale id" href="https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html">Locale ID.</a>| <img src="docs/locale-ios.png" alt="React Native Date picker locale language ios" height="120px" />|<img src="docs/locale-android.png" alt="React Native Date picker locale language android" height="120px" />
+textColor | Changes the text color. | <img src="docs/colors-ios.png" alt="text color background color ios" height="120px" />|<img src="docs/colors-android.png" alt="Text color background color android" height="120px" />
 
 ## About
 📅 &nbsp; React Native Date Picker is a cross platform component working on both iOS and Android. It uses the slightly improved DatePickerIOS on iOS and a custom picker on Android which has similar look and feel. The datetime mode might be particulary interesting if you looking for a way to avoid two different popup pickers on android. 
