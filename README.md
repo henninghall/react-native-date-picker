@@ -1,13 +1,17 @@
-# React Native Date Picker &nbsp;&nbsp; ![npm package](https://badge.fury.io/js/react-native-date-picker-x.svg)<img src="https://www.iconsdb.com/icons/preview/soylent-red/new-badge-xxl.png" alt="React Native Date Picker" width="40dp" align="right"/>
+# React Native Date Picker
+![npm package](https://badge.fury.io/js/react-native-date-picker-x.svg)<img src="https://www.iconsdb.com/icons/preview/soylent-red/new-badge-xxl.png" alt="React Native Date Picker" width="40dp" align="right"/>
 
+This is a React Native Date Picker with following main features: 
 
+📱 Supporting iOS and Android <br>
+📅 3 different modes: Time, Date, DateTime <br>
+🌍 Multiple languages<br>
+🎨 Customizable<br>
 <!-- 
 [![Monthly download](https://img.shields.io/npm/dm/react-native-date-picker-x.svg)](https://img.shields.io/npm/dm/react-native-date-picker-x.svg)
 [![Total downloads](https://img.shields.io/npm/dt/react-native-date-picker-x.svg)](https://img.shields.io/npm/dt/react-native-date- picker-x.svg) -->
 
-📱 Supporting iOS and Android <br>
-🌍 Multiple languages<br>
-🎨 Customizable<br>
+
 
 
 <table>
@@ -16,14 +20,14 @@
     <td align="center"><b>Android</b></td>  
   </tr>
    <tr>
-    <td><img src="https://facebook.github.io/react-native/docs/assets/DatePickerIOS/maximumDate.gif" alt="React Native Date Picker IOS" width="338px" />
+    <td><img src="https://facebook.github.io/react-native/docs/assets/DatePickerIOS/maximumDate.gif" alt="React Native Date Picker IOS" height="150px" />
     </td>
-    <td><img src="docs/react-native-date-picker-android.gif" alt="React Native Date Picker Android" width="338px" style="margin-left:10px" />
+    <td><img src="docs/react-native-date-picker-android.gif" alt="React Native Date Picker Android" height="150px" style="margin-left:10px" />
     </td>  
   </tr>
       <tr>
     <td align="center">A slightly improved DatePickerIOS.</td>
-    <td align="center">A custom made native component. (Smoother in reality)</td>  
+    <td align="center">A custom made native component.</td>  
   </tr>
   
   </table>
@@ -54,7 +58,7 @@ export default class App extends Component {
 ```
 
 ## Properties
-Prop | Description | Screenshots Android | Screenshot iOS
+Prop | Description | Screenshots iOS | Screenshot Android
 ------------- | ------------- | ------------- | -------------
 date | The currently selected date. |
 onDateChange | Date change handler |
