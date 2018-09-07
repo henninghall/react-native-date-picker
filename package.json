@@ -4,7 +4,9 @@
   "description": "A Cross Platform React Native Picker",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "mv README.md githubREADME.md && mv npmREADME.md README.md",
+    "postpublish": "mv README.md npmREADME.md && mv githubREADME.md README.md"
   },
   "repository": {
     "type": "git",
