@@ -16,13 +16,13 @@ public class MonthWheel extends Wheel
         final int max = 12;
         final Calendar cal = this.pickerView.getInitialDate();
         final SimpleDateFormat format = new SimpleDateFormat(this.getFormatTemplate(), this.pickerView.locale);
-        for (int i = min; i <= max; ++i) {
+        for (int i = min; i < max; ++i) {
             this.values.add(format.format(cal.getTime()));
             this.displayValues.add(format.format(cal.getTime()));
-            cal.add(2, 1);
+            cal.add(Calendar.MONTH, 1);
         }
-        this.picker.setDisplayedValues((String[])this.displayValues.toArray(new String[0]));
-        this.picker.setMinValue(0);
+        this.picker.setDisplayedValues(this.displayValues.toArray(new String[0]));
+        this.picker.setMinValue(min);
         this.picker.setMaxValue(max);
     }
     
@@ -36,4 +36,3 @@ public class MonthWheel extends Wheel
         return "LLLL";
     }
 }
-
