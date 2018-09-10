@@ -74,7 +74,6 @@ textColor | Changes the text color. | <img src="docs/colors-ios.png" alt="text c
 ## About
 📅 &nbsp; React Native Date Picker is a cross platform component working on both iOS and Android. It uses the slightly improved DatePickerIOS on iOS and a custom picker on Android which has similar look and feel. The datetime mode might be particulary interesting if you looking for a way to avoid two different popup pickers on android. 
 
-
 ## Roadmap
 - [x] Mode: datetime
 - [x] Mode: date
@@ -87,6 +86,12 @@ textColor | Changes the text color. | <img src="docs/colors-ios.png" alt="text c
 - [x] Minute interval prop.
 - [x] Colored background support.
 - [x] Colored text support.
+
+## Why another React Native date picker?
+One of the strongest reason to use react native is its cross platform compatibility. Most of the official components are working seemlessly on both platforms but there are some with single platform support only. The react native date picker is one example where both <a href="https://facebook.github.io/react-native/docs/datepickerios">DatePickerIOS</a> and <a href="https://facebook.github.io/react-native/docs/datepickerandroid">DatePickerAndroid</a> are present. The reason for this is that the default date picker is implemented in seperate ways, iOS normally have an integrated view picker wheel where android has different pickers in a dialog format.
+
+If you want to use these pickers you can combile the official ones or a third party module that already done that for you. If you on the other hand want have a more unified design between your android and ios app, this module is for you. The datetime mode can be particular helpful to avoid 2 separate picker dialogs on android. 
+
 
 
 <!--
