@@ -1,16 +1,5 @@
-import {
-    Platform,
-    NativeModules,
-    NativeAppEventEmitter,
-    Text,
-    requireNativeComponent,
-    ViewPropTypes,
-    StyleSheet,
-    DatePickerIOS,
-} from 'react-native';
-import React, { Component } from 'react'
-import PropTypes from 'prop-types';
-import { DatePicker } from 'react-native-date-picker-x';
+import React from 'react';
+import { DatePickerIOS, requireNativeComponent, StyleSheet } from 'react-native';
 
 const NativeDatePicker = requireNativeComponent(`DatePickerManager`, DatePickerAndroid, { nativeOnly: { onChange: true } });
 

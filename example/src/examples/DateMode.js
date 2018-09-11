@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DatePicker from 'react-native-date-picker-x';
+import DatePicker from 'react-native-date-picker';
 
 export default class DateMode extends Component {
 
@@ -10,8 +10,6 @@ export default class DateMode extends Component {
       date={this.state.date}
       onDateChange={date => this.setState({ date })}
       mode={'date'}
-      style={{borderWidth: 1}}
-      locale={'sv-SE'}
     />
 
 }

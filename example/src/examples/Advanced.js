@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import DatePicker from 'react-native-date-picker-x';
+import DatePicker from 'react-native-date-picker';
 import DeviceInfo from 'react-native-device-info';
 import DateChange from '../propPickers/DateChange';
 import FadeToColor from '../propPickers/FadeToColor';
