@@ -4271,9 +4271,9 @@ react-is@^16.3.1:
   version "16.3.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.3.1.tgz#ee66e6d8283224a83b3030e110056798488359ba"
 
-react-native-date-picker-x@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/react-native-date-picker-x/-/react-native-date-picker-x-1.4.1.tgz#7484fc632767a606fcd239165b614cb3dbbf8b27"
+react-native-date-picker@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-2.0.0.tgz#a2364e44ecf2bf7deef5da667444674d8b9ddbba"
 
 react-native-device-info@^0.22.5:
   version "0.22.5"

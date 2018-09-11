@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DatePicker from 'react-native-date-picker-x';
+import DatePicker from 'react-native-date-picker';
 
 export default class TimeMode extends Component {
 

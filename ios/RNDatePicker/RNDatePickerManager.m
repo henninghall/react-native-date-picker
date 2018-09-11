@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#import "DatePickerXManager.h"
+#import "RNDatePickerManager.h"
 
 
 #import "DatePicker.h"
@@ -22,7 +22,7 @@ RCT_ENUM_CONVERTER(UIDatePickerMode, (@{
 
 @end
 
-@implementation DatePickerXManager
+@implementation RNDatePickerManager
 
 RCT_EXPORT_MODULE()
 

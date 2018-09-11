@@ -14,6 +14,6 @@
 
 @end
 
-@interface DatePickerXManager : RCTViewManager
+@interface RNDatePickerManager : RCTViewManager
 
 @end

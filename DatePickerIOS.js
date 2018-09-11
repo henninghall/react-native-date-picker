@@ -19,7 +19,7 @@ const invariant = require('fbjs/lib/invariant');
 
 import type {ViewProps} from 'ViewPropTypes';
 
-const RCTDatePickerIOS = requireNativeComponent('DatePickerX');
+const RCTDatePickerIOS = requireNativeComponent('RNDatePicker');
 
 type Event = Object;
 
