@@ -5,6 +5,7 @@ import DeviceInfo from 'react-native-device-info';
 import DateChange from '../propPickers/DateChange';
 import FadeToColor from '../propPickers/FadeToColor';
 import LocalePicker from '../propPickers/LocalePicker';
+import MinMaxDateChange from '../propPickers/MinMaxDateChange';
 import ModePicker from '../propPickers/ModePicker';
 import TextColor from '../propPickers/TextColor';
 import PropSlider from '../PropSlider';
@@ -14,6 +15,10 @@ Date.prototype.addHours = function (h) {
   return this;
 }
 
+export const defaultMinDate = new Date().addHours(-24 * 5);
+export const defaultMaxDate = new Date().addHours(24 * 5);
+
+export const readableDate = date => date ? date.toISOString().substr(0, 19).replace('T', ' ') : 'undefined'
 
 export default class Advanced extends Component {
 
@@ -24,6 +29,8 @@ export default class Advanced extends Component {
     selectedProp: 'mode',
     locale: DeviceInfo.getDeviceLocale(),
     mode: 'datetime',
+    minDate: defaultMinDate,
+    maxDate: defaultMaxDate,
   }
 
   render() {
@@ -34,13 +41,13 @@ export default class Advanced extends Component {
           onDateChange={this.setDate}
           locale={this.state.locale}
           minuteInterval={1}
-          minimumDate={new Date()}
-          maximumDate={(new Date()).addHours(24 * 5 * 1000)}
+          minimumDate={this.state.minDate}
+          maximumDate={this.state.maxDate}
           fadeToColor={this.props.backgroundColor}
           textColor={this.state.textColor}
           mode={this.state.mode}
         />
-        <Text>Picker date: {this.state.chosenDate.toISOString()}</Text>
+        <Text>Picker date: {readableDate(this.state.chosenDate)}</Text>
         <Text />
         <Text>Change prop: </Text>
         <Text />
@@ -69,8 +76,17 @@ export default class Advanced extends Component {
         <DateChange value={this.state.chosenDate} onChange={chosenDate => this.setState({ chosenDate })} />
     },
     { name: 'minuteInterval' },
-    { name: 'minDate' },
-    { name: 'maxDate' },
+    {
+      name: 'minDate', component:
+        <MinMaxDateChange value={this.state.minDate} onChange={minDate => this.setState({ minDate })}
+          defaultDate={defaultMinDate}
+        />
+    },
+    {
+      name: 'maxDate', component:
+        <MinMaxDateChange value={this.state.maxDate} onChange={maxDate => this.setState({ maxDate })}
+          defaultDate={defaultMaxDate} />
+    },
     {
       name: 'fadeToColor', component:
         <FadeToColor onChange={() => this.props.setBackground(randomColor())} />
