@@ -1,11 +1,13 @@
 package com.henninghall.date_picker;
 
 
+import android.text.format.DateUtils;
 import android.util.TypedValue;
 import android.view.View;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -21,7 +23,7 @@ public class Utils {
     }
 
     public static Date unixToDate(double date) {
-        return new Date((long)date);
+        return date > 0 ? new Date((long)date) : null;
     }
 
     public static int getWheelHeight(View pickerView) {
@@ -37,5 +39,17 @@ public class Utils {
         pattern = pattern.replaceAll("[.]", "/");
         pattern = pattern.replaceAll("-", "/");
         return pattern;
-}
+    }
+
+    public static boolean isToday(Calendar cal){
+        return DateUtils.isToday(cal.getTimeInMillis());
+    }
+
+    public static Date getTruncatedDateOrNull(Date date) {
+        try {
+            return org.apache.commons.lang3.time.DateUtils.truncate(date, Calendar.MINUTE);
+        } catch (Exception e){
+            return null;
+        }
+    }
 }

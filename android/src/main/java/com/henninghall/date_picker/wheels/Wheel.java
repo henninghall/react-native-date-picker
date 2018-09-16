@@ -32,14 +32,21 @@ public abstract class Wheel {
         this.id = id;
         this.self = this;
         this.pickerView = pickerView;
-        this.picker = (NumberPickerView) pickerView.findViewById(id);
-        refresh(false);
+        this.picker = pickerView.findViewById(id);
+        clearValues();
         picker.setOnValueChangedListener(new NumberPickerView.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPickerView picker, int oldVal, int newVal) {
                 pickerView.getListener().onChange(self);
             }
         });
+    }
+
+    private void clearValues(){
+        this.displayFormat = new SimpleDateFormat(getFormatTemplate(), pickerView.locale);
+        this.format = new SimpleDateFormat(getFormatTemplate(), LocaleUtils.toLocale("en_US"));
+        this.values = new ArrayList<>();
+        this.displayValues= new ArrayList<>();
     }
 
     public int getIndexOfDate(Date date){
@@ -66,37 +73,22 @@ public abstract class Wheel {
     public void setValue(Date date) {
         this.userSetValue = format.format(date);
         int index = getIndexOfDate(date);
-        if(index > -1) {
 
-            // Set value directly during initializing
-            // After init, always smooth scroll to value
+        if(index > -1) {
+            // Set value directly during initializing. After init, always smooth scroll to value
             if(picker.getValue() == 0) picker.setValue(index);
             else picker.smoothScrollToValue(index);
         }
     }
 
-    public void refresh(boolean keepOldValue) {
-        this.displayFormat = new SimpleDateFormat(getFormatTemplate(), pickerView.locale);
-        this.format = new SimpleDateFormat(getFormatTemplate(), LocaleUtils.toLocale("en_US"));
-        this.values = new ArrayList<>();
-        this.displayValues= new ArrayList<>();
-        int oldValue = picker.getValue();
-
-        if (visible()) {
-            add();
-            init();
-            if(keepOldValue) picker.setValue(oldValue);
-
-        }
-        else remove();
-
+    public void refresh() {
+        clearValues();
+        init();
     }
 
-    private void remove() {
-        picker.setVisibility(View.GONE);
-    }
-    private void add() {
-        picker.setVisibility(View.VISIBLE);
+    public void updateVisibility(){
+        int visibility = visible() ? View.VISIBLE: View.GONE;
+        picker.setVisibility(visibility);
     }
 
 }

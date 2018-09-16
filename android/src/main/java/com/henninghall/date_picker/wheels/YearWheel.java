@@ -12,7 +12,7 @@ public class YearWheel extends Wheel
 
     public YearWheel(final PickerView pickerView, final int id) {
         super(pickerView, id);
-        this.defaultStartYear = 0;
+        this.defaultStartYear = 1900;
         this.defaultEndYear = 2100;
     }
 
@@ -27,6 +27,7 @@ public class YearWheel extends Wheel
             displayValues.add(String.valueOf(startYear + i));
         }
 
+        picker.setMaxValue(0);
         picker.setDisplayedValues(displayValues.toArray(new String[0]));
         picker.setMinValue(0);
         picker.setMaxValue(max);
@@ -36,14 +37,14 @@ public class YearWheel extends Wheel
         if (this.pickerView.maxDate == null) {
             return this.defaultEndYear;
         }
-        final Calendar cal = Calendar.getInstance();
+        final Calendar cal = pickerView.getInitialDate();
         cal.setTime(this.pickerView.maxDate);
         return cal.get(Calendar.YEAR);
     }
 
     private int getStartYear() {
         if (this.pickerView.minDate != null) {
-            final Calendar cal = Calendar.getInstance();
+            final Calendar cal = pickerView.getInitialDate();
             cal.setTime(this.pickerView.minDate);
             return cal.get(Calendar.YEAR);
         }
