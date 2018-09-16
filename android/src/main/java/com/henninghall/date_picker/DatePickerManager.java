@@ -1,23 +1,22 @@
 package com.henninghall.date_picker;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
-import android.view.View;
 
-import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
+
 import net.time4j.android.ApplicationStarter;
 import org.apache.commons.lang3.LocaleUtils;
 
 import java.util.Map;
 
-public class DatePickerManager extends SimpleViewManager<View>  {
+public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
   public static final String REACT_CLASS = "DatePickerManager";
   public static ThemedReactContext context;
+  private double date;
 
   @Override
   public String getName() {
@@ -44,13 +43,12 @@ public class DatePickerManager extends SimpleViewManager<View>  {
 
   @ReactProp(name = "date")
   public void setDate(PickerView view, @Nullable double date) {
-       view.setDate(Utils.unixToDate(date));
+      this.date = date;
   }
 
   @ReactProp(name = "locale")
   public void setLocale(PickerView view, @Nullable String locale) {
     view.setLocale(LocaleUtils.toLocale(locale.replace('-','_')));
-    view.requestLayout();
   }
 
   @ReactProp(name = "minimumDate")
@@ -77,6 +75,13 @@ public class DatePickerManager extends SimpleViewManager<View>  {
   public void setMinuteInterval(PickerView view, @Nullable int interval) throws Exception {
     if (interval < 0 || interval > 59) throw new Exception("Minute interval out of bounds");
     if (interval > 1) view.setMinuteInterval(interval);
+  }
+
+  @Override
+  protected void onAfterUpdateTransaction(PickerView view) {
+    super.onAfterUpdateTransaction(view);
+    view.updateDisplayValuesIfNeeded();
+    view.setDate(Utils.unixToDate(date));
   }
 
   public Map getExportedCustomBubblingEventTypeConstants() {

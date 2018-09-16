@@ -9,6 +9,7 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.henninghall.date_picker.wheelFunctions.AnimateToDate;
 import com.henninghall.date_picker.wheelFunctions.Refresh;
 import com.henninghall.date_picker.wheelFunctions.SetDate;
+import com.henninghall.date_picker.wheelFunctions.UpdateVisibility;
 import com.henninghall.date_picker.wheelFunctions.WheelFunction;
 import com.henninghall.date_picker.wheels.AmPmWheel;
 import com.henninghall.date_picker.wheels.DateWheel;
@@ -51,6 +52,9 @@ public class PickerView extends RelativeLayout {
     public Date maxDate;
     public Date minDate;
     private WheelOrderUpdater wheelOrderUpdater;
+    public boolean isInitialized = false;
+    public boolean requireDisplayValueUpdate = true;
+
 
     public PickerView() {
         super(DatePickerManager.context);
@@ -81,9 +85,6 @@ public class PickerView extends RelativeLayout {
         public void onChange(Wheel wheel) {
             WritableMap event = Arguments.createMap();
             try {
-                String pattern = dateFormat.toPattern();
-                String dateString = getDateString();
-
                 Date date = dateFormat.parse(getDateString());
                 if (minDate != null && date.before(minDate)) applyOnVisibleWheels(new AnimateToDate(minDate));
                 else if (maxDate != null && date.after(maxDate)) applyOnVisibleWheels(new AnimateToDate(maxDate));
@@ -96,6 +97,7 @@ public class PickerView extends RelativeLayout {
             }
         }
     };
+
 
     private final Runnable measureAndLayout = new Runnable() {
         @Override
@@ -122,11 +124,13 @@ public class PickerView extends RelativeLayout {
     }
 
     public void setMinimumDate(Date date) {
-        minDate = DateUtils.truncate(date, Calendar.MINUTE);
+        minDate = Utils.getTruncatedDateOrNull(date);
+        requireDisplayValueUpdate = true;
     }
 
     public void setMaximumDate(Date date) {
-        maxDate = DateUtils.truncate(date, Calendar.MINUTE);
+        maxDate = Utils.getTruncatedDateOrNull(date);
+        requireDisplayValueUpdate = true;
     }
 
     public void setDate(Date date) {
@@ -137,12 +141,12 @@ public class PickerView extends RelativeLayout {
         this.locale = locale;
         dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
         wheelOrderUpdater.update(locale, mode);
-        applyOnAllWheels(new Refresh());
+        requireDisplayValueUpdate = true;
     }
 
     public void setMinuteInterval(int interval) {
         this.minuteInterval = interval;
-        applyOnVisibleWheels(new Refresh());
+        requireDisplayValueUpdate = true;
     }
 
     // Rounding cal to closest minute interval
@@ -186,7 +190,7 @@ public class PickerView extends RelativeLayout {
     public void setMode(Mode mode) {
         this.mode = mode;
         dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
-        applyOnAllWheels(new Refresh(false));
+        applyOnAllWheels(new UpdateVisibility());
         wheelOrderUpdater.update(locale, mode);
     }
 
@@ -218,4 +222,10 @@ public class PickerView extends RelativeLayout {
         return onWheelChangeListener;
     }
 
+    public void updateDisplayValuesIfNeeded() {
+        if(requireDisplayValueUpdate) {
+            applyOnAllWheels(new Refresh());
+            requireDisplayValueUpdate = false;
+        }
+    }
 }
