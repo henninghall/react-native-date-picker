@@ -20,25 +20,26 @@ public class WheelOrderUpdater
     }
     
     public void update(final Locale locale, final Mode mode) {
-
-        if (mode != Mode.date) {
-            return;
-        }
+        if (mode != Mode.date) return;
         String lastYmdPattern = ymdPattern;
         ymdPattern = Utils.localeToYmdPattern(locale);
         if(lastYmdPattern.equals(ymdPattern)) return;
+
         final ArrayList<Wheel> wheelOrder = this.ymdPatternToWheelOrder(ymdPattern);
+        wheelOrder.get(0).picker.setLayoutParams(getDefaultLayoutParams());
         this.placeWheelRightOf(wheelOrder.get(0), wheelOrder.get(1));
         this.placeWheelRightOf(wheelOrder.get(1), wheelOrder.get(2));
     }
     
     private void placeWheelRightOf(final Wheel leftWheel, final Wheel rightWheel) {
-        final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(-2, Utils.getWheelHeight((View)this.pickerView));
+        final RelativeLayout.LayoutParams params = getDefaultLayoutParams();
         params.addRule(1, leftWheel.id);
-        if (Build.VERSION.SDK_INT >= 17) {
-            params.addRule(17, leftWheel.id);
-        }
-        rightWheel.picker.setLayoutParams((ViewGroup.LayoutParams)params);
+        if (Build.VERSION.SDK_INT >= 17) params.addRule(17, leftWheel.id);
+        rightWheel.picker.setLayoutParams(params);
+    }
+
+    private RelativeLayout.LayoutParams getDefaultLayoutParams(){
+        return new RelativeLayout.LayoutParams(-2, Utils.getWheelHeight(this.pickerView));
     }
     
     private ArrayList<Wheel> ymdPatternToWheelOrder(final String ymdPattern) {
