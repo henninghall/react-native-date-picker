@@ -1,6 +1,5 @@
 
-# React Native Date Picker  [![npm version](https://badge.fury.io/js/react-native-date-picker.svg)](https://badge.fury.io/js/react-native-date-picker)<img align="right" width="40" height="40" src="https://camo.githubusercontent.com/9dfa7191b95dd9f03a9b2171fe2d8ae2f9c42fdc/68747470733a2f2f7777772e69636f6e7364622e636f6d2f69636f6e732f707265766965772f736f796c656e742d7265642f6e65772d62616467652d78786c2e706e67">
-
+# React Native Date Picker [![npm](https://img.shields.io/npm/v/react-native-date-picker.svg)](https://npmjs.com/package/react-native-date-picker) 
 
 This is a React Native Date Picker with following main features: 
 
