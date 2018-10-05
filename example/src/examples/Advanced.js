@@ -8,6 +8,7 @@ import LocalePicker from '../propPickers/LocalePicker';
 import MinMaxDateChange from '../propPickers/MinMaxDateChange';
 import ModePicker from '../propPickers/ModePicker';
 import TextColor from '../propPickers/TextColor';
+import TimeZoneOffsetInMinutes from '../propPickers/TimeZoneOffsetInMinutes';
 import PropSlider from '../PropSlider';
 
 Date.prototype.addHours = function (h) {
@@ -31,6 +32,7 @@ export default class Advanced extends Component {
     mode: 'datetime',
     minDate: defaultMinDate,
     maxDate: defaultMaxDate,
+    timeZoneOffsetInMinutes: undefined,
   }
 
   render() {
@@ -46,6 +48,7 @@ export default class Advanced extends Component {
           fadeToColor={this.props.backgroundColor}
           textColor={this.state.textColor}
           mode={this.state.mode}
+          timeZoneOffsetInMinutes={this.state.timeZoneOffsetInMinutes}
         />
         <Text>Picker date: {readableDate(this.state.chosenDate)}</Text>
         <Text />
@@ -70,6 +73,10 @@ export default class Advanced extends Component {
     {
       name: 'locale', component:
         <LocalePicker locale={this.state.locale} onChange={locale => this.setState({ locale })} />
+    },
+    {
+      name: 'timeZoneOffset', component:
+        <TimeZoneOffsetInMinutes onChange={timeZoneOffsetInMinutes => this.setState({ timeZoneOffsetInMinutes })} />
     },
     {
       name: 'date', component:
