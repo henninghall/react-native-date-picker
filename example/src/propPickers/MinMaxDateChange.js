@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, Button, View, StyleSheet } from 'react-native';
 import { readableDate } from '../examples/Advanced'
+import { PropButton } from '../PropButton';
 
 export default class extends Component {
 
@@ -29,9 +30,6 @@ export default class extends Component {
         value={this.props.value && new Date(this.props.value.getTime()).addHours(hourDiff)} />
 
 }
-
-
-const PropButton = ({ title, value, onChange }) => <Button title={title} onPress={() => onChange(value)} />
 
 const styles = StyleSheet.create({
     row: {
