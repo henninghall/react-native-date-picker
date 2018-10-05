@@ -5,25 +5,35 @@ const NativeDatePicker = requireNativeComponent(`DatePickerManager`, DatePickerA
 
 class DatePickerAndroid extends React.Component {
 
-    static defaultProps = { 
+    static defaultProps = {
         mode: 'datetime',
         minuteInterval: 1,
-     };
-  
-    _onChange = e => this.props.onDateChange(new Date(parseInt(e.nativeEvent.date)));
-    _maximumDate = () => this.props.maximumDate && this.props.maximumDate.getTime();
-    _minimumDate = () => this.props.minimumDate && this.props.minimumDate.getTime();
+    };
+
     render = () => (
         <NativeDatePicker
-            {...this.props }
-            date={this.props.date.getTime()}
+            {...this.props}
+            date={this._date()}
             minimumDate={this._minimumDate()}
             maximumDate={this._maximumDate()}
             onChange={this._onChange}
             style={[styles.picker, this.props.style]}
         />
     )
+
+    _onChange = e => this.props.onDateChange(new Date(parseInt(e.nativeEvent.date + this._getOffsetMillis())));
+    _maximumDate = () => this._toUnixMillisWithTimeZoneOffset(this.props.maximumDate);
+    _minimumDate = () => this._toUnixMillisWithTimeZoneOffset(this.props.minimumDate);
+    _date = () => this._toUnixMillisWithTimeZoneOffset(this.props.date);
+    _toUnixMillisWithTimeZoneOffset = date => date && this._toUnixMillis(date) - this._getOffsetMillis();
+    _toUnixMillis = date => date.getTime()
+
+    _getOffsetMillis = () => this.props.timeZoneOffsetInMinutes === undefined ? 0
+        : -toMs(this.props.timeZoneOffsetInMinutes + new Date().getTimezoneOffset())
+
 }
+
+const toMs = minutes => minutes * 60 * 1000
 
 const styles = StyleSheet.create({
     picker: {
