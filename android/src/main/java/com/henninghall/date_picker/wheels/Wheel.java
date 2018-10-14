@@ -32,7 +32,7 @@ public abstract class Wheel {
         this.id = id;
         this.self = this;
         this.pickerView = pickerView;
-        this.picker = pickerView.findViewById(id);
+        this.picker = (NumberPickerView) pickerView.findViewById(id);
         clearValues();
         picker.setOnValueChangedListener(new NumberPickerView.OnValueChangeListener() {
             @Override
