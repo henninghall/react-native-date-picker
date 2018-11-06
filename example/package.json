@@ -10,7 +10,7 @@
     "moment": "^2.22.1",
     "react": "16.4.1",
     "react-native": "0.56.0",
-    "react-native-date-picker": "^2.0.0",
+    "react-native-date-picker": "^2.2.0",
     "react-native-device-info": "^0.22.5"
   },
   "devDependencies": {
