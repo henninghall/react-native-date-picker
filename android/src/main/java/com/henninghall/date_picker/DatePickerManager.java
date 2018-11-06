@@ -74,7 +74,7 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
   @ReactProp(name = "minuteInterval")
   public void setMinuteInterval(PickerView view, @Nullable int interval) throws Exception {
     if (interval < 0 || interval > 59) throw new Exception("Minute interval out of bounds");
-    if (interval > 1) view.setMinuteInterval(interval);
+    view.setMinuteInterval(interval);
   }
 
   @Override
