@@ -89,7 +89,7 @@ public class PickerView extends RelativeLayout {
                 if (minDate != null && date.before(minDate)) applyOnVisibleWheels(new AnimateToDate(minDate));
                 else if (maxDate != null && date.after(maxDate)) applyOnVisibleWheels(new AnimateToDate(maxDate));
                 else {
-                    event.putDouble("date", date.getTime());
+                    event.putString("date", Utils.dateToIso(date));
                     DatePickerManager.context.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "dateChange", event);
                 }
             } catch (ParseException e) {

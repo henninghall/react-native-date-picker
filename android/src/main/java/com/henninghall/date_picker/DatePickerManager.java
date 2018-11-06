@@ -16,7 +16,7 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
   public static final String REACT_CLASS = "DatePickerManager";
   public static ThemedReactContext context;
-  private double date;
+  private String date;
 
   @Override
   public String getName() {
@@ -42,7 +42,7 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
   }
 
   @ReactProp(name = "date")
-  public void setDate(PickerView view, @Nullable double date) {
+  public void setDate(PickerView view, @Nullable String date) {
       this.date = date;
   }
 
@@ -52,13 +52,13 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
   }
 
   @ReactProp(name = "minimumDate")
-  public void setMinimumDate(PickerView view, @Nullable double date) {
-    view.setMinimumDate(Utils.unixToDate(date));
+  public void setMinimumDate(PickerView view, @Nullable String date) {
+    view.setMinimumDate(Utils.isoToDate(date));
   }
 
   @ReactProp(name = "maximumDate")
-  public void setMaximumDate(PickerView view, @Nullable double date) {
-    view.setMaximumDate(Utils.unixToDate(date));
+  public void setMaximumDate(PickerView view, @Nullable String date) {
+    view.setMaximumDate(Utils.isoToDate(date));
   }
 
   @ReactProp(name = "fadeToColor")
@@ -80,8 +80,8 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
   @Override
   protected void onAfterUpdateTransaction(PickerView view) {
     super.onAfterUpdateTransaction(view);
-    view.updateDisplayValuesIfNeeded();
-    view.setDate(Utils.unixToDate(date));
+      view.updateDisplayValuesIfNeeded();
+      view.setDate(Utils.isoToDate(date));
   }
 
   public Map getExportedCustomBubblingEventTypeConstants() {

@@ -5,11 +5,14 @@ import android.text.format.DateUtils;
 import android.util.TypedValue;
 import android.view.View;
 
+import java.sql.Time;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class Utils {
 
@@ -22,8 +25,17 @@ public class Utils {
         return UnitPatterns.of(locale).getTodayWord();
     }
 
-    public static Date unixToDate(double date) {
-        return date > 0 ? new Date((long)date) : null;
+    public static Date isoToDate(String date)  {
+        try {
+            return getIsoUTCFormat().parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String dateToIso(Date date) {
+        return getIsoUTCFormat().format(date);
     }
 
     public static int getWheelHeight(View pickerView) {
@@ -52,4 +64,11 @@ public class Utils {
             return null;
         }
     }
+
+    private static SimpleDateFormat getIsoUTCFormat(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
+        format.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return format;
+    }
+
 }
