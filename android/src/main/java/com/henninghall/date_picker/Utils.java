@@ -26,6 +26,7 @@ public class Utils {
     }
 
     public static Date isoToDate(String date)  {
+        if(date == null) return null;
         try {
             return getIsoUTCFormat().parse(date);
         } catch (ParseException e) {
