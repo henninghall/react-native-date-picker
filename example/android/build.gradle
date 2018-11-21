@@ -10,8 +10,11 @@ buildscript {
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath "com.vanniktech:gradle-android-junit-jacoco-plugin:0.13.0"
+
     }
 }
+apply plugin: "com.vanniktech.android.junit.jacoco"
 
 allprojects {
     repositories {
@@ -37,4 +40,16 @@ ext {
     compileSdkVersion = 26
     targetSdkVersion = 26
     supportLibVersion = "26.1.0"
+}
+
+junitJacoco {
+    jacocoVersion = '0.8.2' // type String
+    ignoreProjects = [] // type String array
+    excludes = [
+            '**/MainApplication*',
+            '**/BuildConfig.*',
+            '**/R$*',
+    ]
+    includeNoLocationClasses = true // type boolean
+    includeInstrumentationCoverageInMergedReport = true // type boolean
 }

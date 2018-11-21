@@ -45,12 +45,5 @@ public class HelloWorldEspressoTest {
         minimal = onView(allOf(withText("Minimal"), isDisplayed()));
         minimal.perform(click());
 
-
-        try {
-            Thread.sleep(30000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
     }
 }
