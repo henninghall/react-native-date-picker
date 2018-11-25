@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropSlider from '../PropSlider';
 
 const data = [
-    { name: 'datetime' },
-    { name: 'date' },
-    { name: 'time' },
+    { name: 'datetime'},
+    { name: 'date '},
+    { name: 'time'},
 ]
 
 export default class extends Component {

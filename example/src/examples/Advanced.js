@@ -70,7 +70,7 @@ export default class Advanced extends Component {
   propertyList = () => [
     {
       name: 'mode', component:
-        <ModePicker selected={this.state.mode} onChange={mode => this.setState({ mode })} />
+        <ModePicker selected={this.state.mode} onChange={mode => this.setState({ mode: mode.replace(' ', '') })} />
     },
     {
       name: 'locale', component:
@@ -86,7 +86,9 @@ export default class Advanced extends Component {
     },
     {
       name: 'minuteInterval', component:
-        <MinuteInterval value={this.state.minuteInterval} onChange={minuteInterval => this.setState({ minuteInterval })} />
+        <MinuteInterval value={this.state.minuteInterval}
+          onChange={minuteInterval => this.setState({ minuteInterval })}
+        />
     },
     {
       name: 'minDate', component:
