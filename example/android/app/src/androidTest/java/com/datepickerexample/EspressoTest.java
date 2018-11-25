@@ -9,31 +9,19 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
-import android.util.Log;
 
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.swipeDown;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.StringContains.containsString;
 
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Clock;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Locale;
+import java.util.Calendar;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -50,18 +38,20 @@ public class EspressoTest {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     private String getDateString(int dayDiff) {
-        DateTimeFormatter ymdFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US);
-        return ymdFormat.format(LocalDateTime.now().plusDays(dayDiff));
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, dayDiff);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(c.getTime());
     }
 
     private int getCurrentMinute(){
-        DateTimeFormatter mm = DateTimeFormatter.ofPattern("mm", Locale.US);
-        return Integer.parseInt(mm.format(LocalDateTime.now()));
+        Calendar c = Calendar.getInstance();
+        return c.get(Calendar.MINUTE);
     }
 
     @Before
-    public void waitForAppToStart() {
-        sleep(7000);
+    public void beforeEach() {
+        sleep(8000);
         onView(withText("Advanced")).perform(click());
     }
 

@@ -83,20 +83,22 @@ public class PickerView extends RelativeLayout {
     WheelChangeListener onWheelChangeListener = new WheelChangeListener(){
         @Override
         public void onChange(Wheel wheel) {
-            WritableMap event = Arguments.createMap();
             try {
                 Date date = dateFormat.parse(getDateString());
                 if (minDate != null && date.before(minDate)) applyOnVisibleWheels(new AnimateToDate(minDate));
                 else if (maxDate != null && date.after(maxDate)) applyOnVisibleWheels(new AnimateToDate(maxDate));
-                else {
-                    event.putString("date", Utils.dateToIso(date));
-                    DatePickerManager.context.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "dateChange", event);
-                }
+                else dateChangeEvent(date);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
     };
+
+    private void dateChangeEvent(Date date) {
+        WritableMap event = Arguments.createMap();
+        event.putString("date", Utils.dateToIso(date));
+        DatePickerManager.context.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "dateChange", event);
+    }
 
 
     private final Runnable measureAndLayout = new Runnable() {
@@ -134,7 +136,16 @@ public class PickerView extends RelativeLayout {
     }
 
     public void setDate(Date date) {
-        applyOnAllWheels(new SetDate(date));
+        Date nextDate = date;
+        if (minDate != null && nextDate.before(minDate)) {
+            nextDate = minDate;
+            this.dateChangeEvent(nextDate);
+        }
+        else if (maxDate != null && nextDate.after(maxDate)) {
+            nextDate = maxDate;
+            this.dateChangeEvent(nextDate);
+        }
+        applyOnAllWheels(new SetDate(nextDate));
     }
 
     public void setLocale(Locale locale) {
