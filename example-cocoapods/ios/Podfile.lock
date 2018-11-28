@@ -1,0 +1,30 @@
+PODS:
+  - React (0.57.7):
+    - React/Core (= 0.57.7)
+  - react-native-date-picker (2.2.1):
+    - React
+  - React/Core (0.57.7):
+    - yoga (= 0.57.7.React)
+  - yoga (0.57.7.React)
+
+DEPENDENCIES:
+  - React (from `../node_modules/react-native`)
+  - react-native-date-picker (from `../node_modules/react-native-date-picker`)
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
+
+EXTERNAL SOURCES:
+  React:
+    :path: ../node_modules/react-native
+  react-native-date-picker:
+    :path: ../node_modules/react-native-date-picker
+  yoga:
+    :path: ../node_modules/react-native/ReactCommon/yoga
+
+SPEC CHECKSUMS:
+  React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-date-picker: e6ce9225e56a3aeaddc01847be02c7ed1477de58
+  yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
+
+PODFILE CHECKSUM: 74280a6d663f7ca045d2efeeeb62f80c71e4f4bd
+
+COCOAPODS: 1.4.0
