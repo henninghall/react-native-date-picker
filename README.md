@@ -43,7 +43,7 @@ This is a React Native Date Picker with following main features:
 ## Installation
 
 1. `npm install react-native-date-picker --save` or  `yarn add react-native-date-picker`
-2. `react-native link `
+2. `react-native link react-native-date-picker`
 
 
 ## Minimal Example
