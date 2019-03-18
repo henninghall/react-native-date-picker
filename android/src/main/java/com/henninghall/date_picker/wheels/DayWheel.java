@@ -6,6 +6,7 @@ import com.henninghall.date_picker.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class DayWheel extends Wheel {
@@ -33,22 +34,27 @@ public class DayWheel extends Wheel {
     }
 
     private Calendar getStartCal(){
-        Calendar cal = pickerView.getInitialDate();
+        Calendar cal;
         if (pickerView.minDate != null) {
-            cal.setTime(pickerView.minDate);
+            cal = (Calendar) pickerView.minDate.clone();
             resetToMidnight(cal);
+        } else {
+            cal = (Calendar) pickerView.getInitialDate().clone();
+            cal.add(Calendar.DATE, -defaultNumberOfDays / 2);
         }
-        else cal.add(Calendar.DATE, -defaultNumberOfDays / 2);
         return cal;
     }
 
     private Calendar getEndCal(){
-        Calendar cal = Calendar.getInstance();
+        Calendar cal;
         if (pickerView.maxDate != null) {
-            cal.setTime(pickerView.maxDate);
+            cal = (Calendar) pickerView.maxDate.clone();
             resetToMidnight(cal);
+        } else {
+            cal = (Calendar) pickerView.getInitialDate().clone();
+            cal.setTime(new Date());
+            cal.add(Calendar.DATE, defaultNumberOfDays / 2);
         }
-        else cal.add(Calendar.DATE, defaultNumberOfDays / 2);
         return cal;
     }
 

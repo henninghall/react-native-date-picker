@@ -7,6 +7,7 @@ import com.henninghall.date_picker.R;
 import org.apache.commons.lang3.LocaleUtils;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
@@ -49,11 +50,12 @@ public abstract class Wheel {
         this.displayValues= new ArrayList<>();
     }
 
-    public int getIndexOfDate(Date date){
-        return values.indexOf(format.format(date));
+    public int getIndexOfDate(Calendar date){
+        format.setTimeZone(pickerView.timeZone);
+        return values.indexOf(format.format(date.getTime()));
     }
 
-    public void animateToDate(Date date) {
+    public void animateToDate(Calendar date) {
         picker.smoothScrollToValue(getIndexOfDate(date));
     }
 
@@ -70,8 +72,9 @@ public abstract class Wheel {
         return values.get(index);
     }
 
-    public void setValue(Date date) {
-        this.userSetValue = format.format(date);
+    public void setValue(Calendar date) {
+        format.setTimeZone(pickerView.timeZone);
+        this.userSetValue = format.format(date.getTime());
         int index = getIndexOfDate(date);
 
         if(index > -1) {
