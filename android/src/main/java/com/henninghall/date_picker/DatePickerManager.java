@@ -11,12 +11,16 @@ import net.time4j.android.ApplicationStarter;
 import org.apache.commons.lang3.LocaleUtils;
 
 import java.util.Map;
+import java.util.TimeZone;
 
 public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
   public static final String REACT_CLASS = "DatePickerManager";
   public static ThemedReactContext context;
   private String date;
+  private String minimumDate;
+  private String maximumDate;
+  private boolean utc;
 
   @Override
   public String getName() {
@@ -43,7 +47,7 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
   @ReactProp(name = "date")
   public void setDate(PickerView view, @Nullable String date) {
-      this.date = date;
+    this.date = date;
   }
 
   @ReactProp(name = "locale")
@@ -53,12 +57,12 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
   @ReactProp(name = "minimumDate")
   public void setMinimumDate(PickerView view, @Nullable String date) {
-    view.setMinimumDate(Utils.isoToDate(date));
+    this.minimumDate = date;
   }
 
   @ReactProp(name = "maximumDate")
   public void setMaximumDate(PickerView view, @Nullable String date) {
-    view.setMaximumDate(Utils.isoToDate(date));
+    this.maximumDate = date;
   }
 
   @ReactProp(name = "fadeToColor")
@@ -77,11 +81,25 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
     view.setMinuteInterval(interval);
   }
 
+  @ReactProp(name = "utc")
+  public void setUtc(PickerView view, @Nullable boolean utc) throws Exception {
+    this.utc = utc;
+  }
+
+
+
   @Override
   protected void onAfterUpdateTransaction(PickerView view) {
-    super.onAfterUpdateTransaction(view);
-      view.updateDisplayValuesIfNeeded();
-      view.setDate(Utils.isoToDate(date));
+   super.onAfterUpdateTransaction(view);
+
+    TimeZone timeZone = utc ? TimeZone.getTimeZone("UTC") : TimeZone.getDefault();
+    view.setTimeZone(timeZone);
+    view.setMinimumDate(Utils.isoToCalendar(minimumDate, timeZone));
+    view.setMaximumDate(Utils.isoToCalendar(maximumDate, timeZone));
+
+    // Refresh which options are available. Should happen before updating the date
+    view.updateDisplayValuesIfNeeded();
+    view.setDate(Utils.isoToCalendar(date, timeZone));
   }
 
   public Map getExportedCustomBubblingEventTypeConstants() {

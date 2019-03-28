@@ -1,5 +1,6 @@
 package com.henninghall.date_picker;
 
+import android.os.Build;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -20,8 +21,6 @@ import com.henninghall.date_picker.wheels.MonthWheel;
 import com.henninghall.date_picker.wheels.Wheel;
 import com.henninghall.date_picker.wheels.YearWheel;
 
-import org.apache.commons.lang3.time.DateUtils;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +30,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
@@ -49,11 +49,12 @@ public class PickerView extends RelativeLayout {
     public DateWheel dateWheel;
     public MonthWheel monthWheel;
     public YearWheel yearWheel;
-    public Date maxDate;
-    public Date minDate;
+    public Calendar maxDate;
+    public Calendar minDate;
     private WheelOrderUpdater wheelOrderUpdater;
     public boolean isInitialized = false;
     public boolean requireDisplayValueUpdate = true;
+    public TimeZone timeZone;
 
 
     public PickerView() {
@@ -65,7 +66,7 @@ public class PickerView extends RelativeLayout {
         RelativeLayout wheelsWrapper = (RelativeLayout) rootView.findViewById(R.id.wheelsWrapper);
         wheelsWrapper.setWillNotDraw(false);
 
-        locale = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP ? Locale.forLanguageTag("en") : Locale.getDefault();
+        locale = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? Locale.forLanguageTag("en") : Locale.getDefault();
 
         yearWheel = new YearWheel( this, R.id.year);
         monthWheel = new MonthWheel( this, R.id.month);
@@ -85,7 +86,10 @@ public class PickerView extends RelativeLayout {
         public void onChange(Wheel wheel) {
             WritableMap event = Arguments.createMap();
             try {
-                Date date = dateFormat.parse(getDateString());
+                dateFormat.setTimeZone(timeZone);
+                Calendar date = Calendar.getInstance(timeZone);
+                date.setTime(dateFormat.parse(getDateString()));
+
                 if (minDate != null && date.before(minDate)) applyOnVisibleWheels(new AnimateToDate(minDate));
                 else if (maxDate != null && date.after(maxDate)) applyOnVisibleWheels(new AnimateToDate(maxDate));
                 else {
@@ -123,18 +127,18 @@ public class PickerView extends RelativeLayout {
         });
     }
 
-    public void setMinimumDate(Date date) {
-        minDate = Utils.getTruncatedDateOrNull(date);
+    public void setMinimumDate(Calendar cal) {
+        minDate = Utils.getTruncatedCalendarOrNull(cal);
         requireDisplayValueUpdate = true;
     }
 
-    public void setMaximumDate(Date date) {
-        maxDate = Utils.getTruncatedDateOrNull(date);
+    public void setMaximumDate(Calendar cal) {
+        maxDate = Utils.getTruncatedCalendarOrNull(cal);
         requireDisplayValueUpdate = true;
     }
 
-    public void setDate(Date date) {
-        applyOnAllWheels(new SetDate(date));
+    public void setDate(Calendar cal) {
+        applyOnAllWheels(new SetDate(cal));
     }
 
     public void setLocale(Locale locale) {
@@ -227,5 +231,13 @@ public class PickerView extends RelativeLayout {
             applyOnAllWheels(new Refresh());
             requireDisplayValueUpdate = false;
         }
+    }
+
+    public void setTimeZone(TimeZone timeZone) {
+        this.timeZone = timeZone;
+    }
+
+    public TimeZone getTimeZone() {
+        return timeZone;
     }
 }

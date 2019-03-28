@@ -25,18 +25,20 @@ public class Utils {
         return UnitPatterns.of(locale).getTodayWord();
     }
 
-    public static Date isoToDate(String date)  {
-        if(date == null) return null;
+    public static Calendar isoToCalendar(String dateString, TimeZone timeZone)  {
+        if(dateString == null) return null;
         try {
-            return getIsoUTCFormat().parse(date);
+            Calendar calendar = Calendar.getInstance(timeZone);
+            calendar.setTime(getIsoUTCFormat().parse(dateString));
+            return calendar;
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public static String dateToIso(Date date) {
-        return getIsoUTCFormat().format(date);
+    public static String dateToIso(Calendar date) {
+        return getIsoUTCFormat().format(date.getTime());
     }
 
     public static int getWheelHeight(View pickerView) {
@@ -58,9 +60,9 @@ public class Utils {
         return DateUtils.isToday(cal.getTimeInMillis());
     }
 
-    public static Date getTruncatedDateOrNull(Date date) {
+    public static Calendar getTruncatedCalendarOrNull(Calendar cal) {
         try {
-            return org.apache.commons.lang3.time.DateUtils.truncate(date, Calendar.MINUTE);
+            return org.apache.commons.lang3.time.DateUtils.truncate(cal, Calendar.MINUTE);
         } catch (Exception e){
             return null;
         }
@@ -69,6 +71,7 @@ public class Utils {
     private static SimpleDateFormat getIsoUTCFormat(){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
         format.setTimeZone(TimeZone.getTimeZone("UTC"));
+
         return format;
     }
 

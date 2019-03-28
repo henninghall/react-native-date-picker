@@ -2,13 +2,14 @@ package com.henninghall.date_picker.wheelFunctions;
 
 import com.henninghall.date_picker.wheels.Wheel;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class AnimateToDate implements WheelFunction {
 
-    private Date date;
+    private Calendar date;
 
-    public AnimateToDate(Date date) {
+    public AnimateToDate(Calendar date) {
         this.date = date;
     }
 
