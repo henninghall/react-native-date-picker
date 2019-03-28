@@ -90,16 +90,16 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
   @Override
   protected void onAfterUpdateTransaction(PickerView view) {
-    super.onAfterUpdateTransaction(view);
-
-    // Refresh which options are available. Should happen before updating the date
-    view.updateDisplayValuesIfNeeded();
+   super.onAfterUpdateTransaction(view);
 
     TimeZone timeZone = utc ? TimeZone.getTimeZone("UTC") : TimeZone.getDefault();
     view.setTimeZone(timeZone);
-    view.setDate(Utils.isoToCalendar(date, timeZone));
     view.setMinimumDate(Utils.isoToCalendar(minimumDate, timeZone));
     view.setMaximumDate(Utils.isoToCalendar(maximumDate, timeZone));
+
+    // Refresh which options are available. Should happen before updating the date
+    view.updateDisplayValuesIfNeeded();
+    view.setDate(Utils.isoToCalendar(date, timeZone));
   }
 
   public Map getExportedCustomBubblingEventTypeConstants() {
