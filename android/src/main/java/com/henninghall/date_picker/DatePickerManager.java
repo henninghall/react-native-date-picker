@@ -30,7 +30,7 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
   @Override
   public PickerView createViewInstance(ThemedReactContext reactContext) {
     DatePickerManager.context = reactContext;
-    ApplicationStarter.initialize(reactContext, true); // with prefetch on background thread
+    ApplicationStarter.initialize(reactContext, false); // false = no need to prefetch on time data background tread
     return new PickerView();
   }
 
@@ -86,16 +86,14 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
     this.utc = utc;
   }
 
-
-
   @Override
   protected void onAfterUpdateTransaction(PickerView view) {
    super.onAfterUpdateTransaction(view);
 
     TimeZone timeZone = utc ? TimeZone.getTimeZone("UTC") : TimeZone.getDefault();
     view.setTimeZone(timeZone);
-    view.setMinimumDate(Utils.isoToCalendar(minimumDate, timeZone));
-    view.setMaximumDate(Utils.isoToCalendar(maximumDate, timeZone));
+    if(minimumDate != null) view.setMinimumDate(Utils.isoToCalendar(minimumDate, timeZone));
+    if(maximumDate != null) view.setMaximumDate(Utils.isoToCalendar(maximumDate, timeZone));
 
     // Refresh which options are available. Should happen before updating the date
     view.updateDisplayValuesIfNeeded();

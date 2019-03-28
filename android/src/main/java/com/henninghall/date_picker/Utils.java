@@ -5,6 +5,8 @@ import android.text.format.DateUtils;
 import android.util.TypedValue;
 import android.view.View;
 
+import net.time4j.PrettyTime;
+
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -22,7 +24,7 @@ public class Utils {
     }
 
     public static String printToday(Locale locale) {
-        return UnitPatterns.of(locale).getTodayWord();
+        return PrettyTime.of(locale).printToday();
     }
 
     public static Calendar isoToCalendar(String dateString, TimeZone timeZone)  {
