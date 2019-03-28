@@ -47,7 +47,7 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
   @ReactProp(name = "date")
   public void setDate(PickerView view, @Nullable String date) {
-      this.date = date;
+    this.date = date;
   }
 
   @ReactProp(name = "locale")
@@ -57,12 +57,12 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
   @ReactProp(name = "minimumDate")
   public void setMinimumDate(PickerView view, @Nullable String date) {
-    this.minimumDate = minimumDate;
+    this.minimumDate = date;
   }
 
   @ReactProp(name = "maximumDate")
   public void setMaximumDate(PickerView view, @Nullable String date) {
-    this.maximumDate = maximumDate;
+    this.maximumDate = date;
   }
 
   @ReactProp(name = "fadeToColor")
@@ -92,9 +92,10 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
   protected void onAfterUpdateTransaction(PickerView view) {
     super.onAfterUpdateTransaction(view);
 
-    TimeZone timeZone = utc ? TimeZone.getTimeZone("UTC") : TimeZone.getDefault();
-
+    // Refresh which options are available. Should happen before updating the date
     view.updateDisplayValuesIfNeeded();
+
+    TimeZone timeZone = utc ? TimeZone.getTimeZone("UTC") : TimeZone.getDefault();
     view.setTimeZone(timeZone);
     view.setDate(Utils.isoToCalendar(date, timeZone));
     view.setMinimumDate(Utils.isoToCalendar(minimumDate, timeZone));
