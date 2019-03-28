@@ -30,10 +30,10 @@ class DatePickerAndroid extends React.Component {
         this.props.onDateChange(jsDate)
     }
 
-    _maximumDate = () => this._toIsoWithTimeZoneOffset(this.props.maximumDate);
-    
-    _minimumDate = () => this._toIsoWithTimeZoneOffset(this.props.minimumDate);
-    
+    _maximumDate = () => this.props.minimumDate && this._toIsoWithTimeZoneOffset(this.props.maximumDate);
+
+    _minimumDate = () => this.props.minimumDate && this._toIsoWithTimeZoneOffset(this.props.minimumDate);
+
     _date = () => this._toIsoWithTimeZoneOffset(this.props.date);
 
     _fromIsoWithTimeZoneOffset = date => {
@@ -42,7 +42,7 @@ class DatePickerAndroid extends React.Component {
 
         return moment.utc(date).subtract(this.props.timeZoneOffsetInMinutes, 'minutes')
     }
-    
+
     _toIsoWithTimeZoneOffset = date => {
         if (this.props.timeZoneOffsetInMinutes === undefined)
             return moment(date).toISOString()
