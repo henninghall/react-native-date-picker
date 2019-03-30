@@ -1,5 +1,5 @@
 
-# React Native Date Picker  [![npm](https://img.shields.io/npm/v/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) [![Build status](https://img.shields.io/bitrise/288d828c2f6731e6/master.svg?token=mGBI2QhCJBx18ffiS-MfpA)](https://app.bitrise.io/app/288d828c2f6731e6#/builds) 
+# React Native Date Picker  [![npm](https://img.shields.io/npm/v/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) [![Build status](https://img.shields.io/bitrise/288d828c2f6731e6/master.svg?token=mGBI2QhCJBx18ffiS-MfpA)](https://app.bitrise.io/app/288d828c2f6731e6#/builds) [![npm](https://img.shields.io/npm/dm/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) 
 
 
 <!--
@@ -42,7 +42,7 @@ This is a React Native Date Picker with following main features:
   
 ## Installation
 
-1. `npm install react-native-date-picker --save` or  `yarn add react-native-date-picker`
+1. `npm install react-native-date-picker --save` &nbsp;&nbsp; **or** &nbsp;&nbsp; `yarn add react-native-date-picker`
 2. `react-native link react-native-date-picker`
 
 
