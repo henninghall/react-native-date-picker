@@ -2,8 +2,10 @@ package com.henninghall.date_picker.wheels;
 
 import com.henninghall.date_picker.Mode;
 import com.henninghall.date_picker.PickerView;
+import com.henninghall.date_picker.Settings;
 import com.henninghall.date_picker.Utils;
 import java.util.Calendar;
+
 
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
@@ -16,7 +18,7 @@ public class HourWheel extends Wheel {
 
     @Override
     void init() {
-        int numberOfHours = Utils.usesAmPm(pickerView.locale) ? 12 : 24;
+        int numberOfHours = Settings.usesAmPm() ? 12 : 24;
         Calendar cal = pickerView.getInitialDate();
 
         for(int i=0; i<numberOfHours; i++) {
@@ -36,7 +38,7 @@ public class HourWheel extends Wheel {
 
     @Override
     public String getFormatTemplate() {
-        return Utils.usesAmPm(pickerView.locale) ? "h": "HH";
+        return Settings.usesAmPm() ? "h": "HH";
     }
 
 }
