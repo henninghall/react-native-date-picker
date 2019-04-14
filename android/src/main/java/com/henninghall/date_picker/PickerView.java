@@ -77,7 +77,7 @@ public class PickerView extends RelativeLayout {
         ampmWheel = new AmPmWheel(this, R.id.ampm);
         hourWheel = new HourWheel(this, R.id.hour);
 
-        dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
+        setDateFormat();
         changeAmPmWhenPassingMidnightOrNoon();
     }
 
@@ -89,6 +89,7 @@ public class PickerView extends RelativeLayout {
                 dateFormat.setTimeZone(timeZone);
                 Calendar date = Calendar.getInstance(timeZone);
                 date.setTime(dateFormat.parse(getDateString()));
+                update2DigitYearStart(date);
 
                 if (minDate != null && date.before(minDate)) applyOnVisibleWheels(new AnimateToDate(minDate));
                 else if (maxDate != null && date.after(maxDate)) applyOnVisibleWheels(new AnimateToDate(maxDate));
@@ -139,11 +140,12 @@ public class PickerView extends RelativeLayout {
 
     public void setDate(Calendar cal) {
         applyOnAllWheels(new SetDate(cal));
+        update2DigitYearStart(cal);
     }
 
     public void setLocale(Locale locale) {
         this.locale = locale;
-        dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
+        setDateFormat();
         wheelOrderUpdater.update(locale, mode);
         requireDisplayValueUpdate = true;
     }
@@ -193,7 +195,7 @@ public class PickerView extends RelativeLayout {
 
     public void setMode(Mode mode) {
         this.mode = mode;
-        dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
+        setDateFormat();
         applyOnAllWheels(new UpdateVisibility());
         wheelOrderUpdater.update(locale, mode);
     }
@@ -240,4 +242,13 @@ public class PickerView extends RelativeLayout {
     public TimeZone getTimeZone() {
         return timeZone;
     }
+    public void setDateFormat(){
+        dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
+    }
+    public void update2DigitYearStart(Calendar selectedDate){
+        Calendar cal = (Calendar) selectedDate.clone();
+        cal.add(Calendar.YEAR, -50); // subtract 50 years to hit the middle of the century
+        dateFormat.set2DigitYearStart(cal.getTime());
+    }
+
 }
