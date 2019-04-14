@@ -18,9 +18,6 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
   public static final String REACT_CLASS = "DatePickerManager";
   public static ThemedReactContext context;
   private String date;
-  private String minimumDate;
-  private String maximumDate;
-  private boolean utc;
 
   @Override
   public String getName() {
