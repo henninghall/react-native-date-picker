@@ -1,6 +1,7 @@
 package com.henninghall.date_picker;
 
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -37,7 +38,7 @@ import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class PickerView extends RelativeLayout {
 
-    private SimpleDateFormat dateFormat;
+    public SimpleDateFormat dateFormat;
     private HourWheel hourWheel;
     private DayWheel dayWheel;
     public MinutesWheel minutesWheel;
@@ -49,13 +50,12 @@ public class PickerView extends RelativeLayout {
     public DateWheel dateWheel;
     public MonthWheel monthWheel;
     public YearWheel yearWheel;
-    public Calendar maxDate;
-    public Calendar minDate;
     private WheelOrderUpdater wheelOrderUpdater;
-    public boolean isInitialized = false;
     public boolean requireDisplayValueUpdate = true;
-    public TimeZone timeZone;
-
+    public TimeZone timeZone = TimeZone.getDefault();
+    private DateBoundary minDate;
+    private DateBoundary maxDate;
+    private WheelChangeListener onWheelChangeListener = new WheelChangeListenerImpl(this);
 
     public PickerView() {
         super(DatePickerManager.context);
@@ -71,7 +71,6 @@ public class PickerView extends RelativeLayout {
         yearWheel = new YearWheel( this, R.id.year);
         monthWheel = new MonthWheel( this, R.id.month);
         dateWheel = new DateWheel( this, R.id.date);
-
         dayWheel = new DayWheel( this, R.id.day);
         minutesWheel = new MinutesWheel( this, R.id.minutes);
         ampmWheel = new AmPmWheel(this, R.id.ampm);
@@ -80,29 +79,6 @@ public class PickerView extends RelativeLayout {
         setDateFormat();
         changeAmPmWhenPassingMidnightOrNoon();
     }
-
-    WheelChangeListener onWheelChangeListener = new WheelChangeListener(){
-        @Override
-        public void onChange(Wheel wheel) {
-            WritableMap event = Arguments.createMap();
-            try {
-                dateFormat.setTimeZone(timeZone);
-                Calendar date = Calendar.getInstance(timeZone);
-                date.setTime(dateFormat.parse(getDateString()));
-                update2DigitYearStart(date);
-
-                if (minDate != null && date.before(minDate)) applyOnVisibleWheels(new AnimateToDate(minDate));
-                else if (maxDate != null && date.after(maxDate)) applyOnVisibleWheels(new AnimateToDate(maxDate));
-                else {
-                    event.putString("date", Utils.dateToIso(date));
-                    DatePickerManager.context.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "dateChange", event);
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-    };
-
 
     private final Runnable measureAndLayout = new Runnable() {
         @Override
@@ -128,17 +104,18 @@ public class PickerView extends RelativeLayout {
         });
     }
 
-    public void setMinimumDate(Calendar cal) {
-        minDate = Utils.getTruncatedCalendarOrNull(cal);
+    public void setMinimumDate(String date) {
+        minDate = new DateBoundary(this, date);
         requireDisplayValueUpdate = true;
     }
 
-    public void setMaximumDate(Calendar cal) {
-        maxDate = Utils.getTruncatedCalendarOrNull(cal);
+    public void setMaximumDate(String date) {
+        maxDate = new DateBoundary(this, date);
         requireDisplayValueUpdate = true;
     }
 
-    public void setDate(Calendar cal) {
+    public void f(String isoDate) {
+        Calendar cal = Utils.isoToCalendar(isoDate, timeZone);
         applyOnAllWheels(new SetDate(cal));
         update2DigitYearStart(cal);
     }
@@ -181,7 +158,7 @@ public class PickerView extends RelativeLayout {
                 +  ampmWheel.getFormatTemplate();
     }
 
-    private String getDateString() {
+    public String getDateString() {
         String dateString= (mode == Mode.date)
                 ? (yearWheel.getValue() + " "
                 + monthWheel.getValue() + " "
@@ -237,10 +214,17 @@ public class PickerView extends RelativeLayout {
 
     public void setTimeZone(TimeZone timeZone) {
         this.timeZone = timeZone;
+        requireDisplayValueUpdate = true;
     }
 
-    public TimeZone getTimeZone() {
-        return timeZone;
+    public Calendar getMinimumDate(){
+        if (minDate == null) return null;
+        return minDate.get();
+    }
+
+    public Calendar getMaximumDate(){
+        if (maxDate == null) return null;
+        return maxDate.get();
     }
     public void setDateFormat(){
         dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);

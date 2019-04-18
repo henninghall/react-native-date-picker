@@ -18,9 +18,6 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
   public static final String REACT_CLASS = "DatePickerManager";
   public static ThemedReactContext context;
   private String date;
-  private String minimumDate;
-  private String maximumDate;
-  private boolean utc;
 
   @Override
   public String getName() {
@@ -57,12 +54,12 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
   @ReactProp(name = "minimumDate")
   public void setMinimumDate(PickerView view, @Nullable String date) {
-    this.minimumDate = date;
+    view.setMinimumDate(date);
   }
 
   @ReactProp(name = "maximumDate")
   public void setMaximumDate(PickerView view, @Nullable String date) {
-    this.maximumDate = date;
+    view.setMaximumDate(date);
   }
 
   @ReactProp(name = "fadeToColor")
@@ -83,21 +80,17 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
   @ReactProp(name = "utc")
   public void setUtc(PickerView view, @Nullable boolean utc) throws Exception {
-    this.utc = utc;
+    TimeZone timeZone = utc ? TimeZone.getTimeZone("UTC") : TimeZone.getDefault();
+    view.setTimeZone(timeZone);
   }
 
   @Override
   protected void onAfterUpdateTransaction(PickerView view) {
    super.onAfterUpdateTransaction(view);
-
-    TimeZone timeZone = utc ? TimeZone.getTimeZone("UTC") : TimeZone.getDefault();
-    view.setTimeZone(timeZone);
-    if(minimumDate != null) view.setMinimumDate(Utils.isoToCalendar(minimumDate, timeZone));
-    if(maximumDate != null) view.setMaximumDate(Utils.isoToCalendar(maximumDate, timeZone));
-
-    // Refresh which options are available. Should happen before updating the date
+    // updateDisplayValuesIfNeeded() refreshes
+    // which options are available. Should happen before updating the selected date.
     view.updateDisplayValuesIfNeeded();
-    view.setDate(Utils.isoToCalendar(date, timeZone));
+    view.setDate(date);
   }
 
   public Map getExportedCustomBubblingEventTypeConstants() {

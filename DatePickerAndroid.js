@@ -11,7 +11,7 @@ class DatePickerAndroid extends React.Component {
         minuteInterval: 1,
     };
 
-    render = () => {
+    render(){
         return (
             <NativeDatePicker
                 {...this.props}
@@ -30,7 +30,7 @@ class DatePickerAndroid extends React.Component {
         this.props.onDateChange(jsDate)
     }
 
-    _maximumDate = () => this.props.minimumDate && this._toIsoWithTimeZoneOffset(this.props.maximumDate);
+    _maximumDate = () => this.props.maximumDate && this._toIsoWithTimeZoneOffset(this.props.maximumDate);
 
     _minimumDate = () => this.props.minimumDate && this._toIsoWithTimeZoneOffset(this.props.minimumDate);
 

@@ -34,17 +34,17 @@ public class YearWheel extends Wheel
     }
 
     private int getEndYear() {
-        if (this.pickerView.maxDate == null) {
+        if (this.pickerView.getMaximumDate() == null) {
             return this.defaultEndYear;
         }
-        return this.pickerView.maxDate.get(Calendar.YEAR);
+        return this.pickerView.getMaximumDate().get(Calendar.YEAR);
     }
 
     private int getStartYear() {
-        if (this.pickerView.minDate == null) {
+        if (this.pickerView.getMinimumDate() == null) {
             return this.defaultStartYear;
         }
-        return this.pickerView.minDate.get(Calendar.YEAR);
+        return this.pickerView.getMinimumDate().get(Calendar.YEAR);
     }
 
     @Override
