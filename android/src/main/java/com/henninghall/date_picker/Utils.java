@@ -18,11 +18,6 @@ import java.util.TimeZone;
 
 public class Utils {
 
-    public static boolean usesAmPm(Locale locale) {
-        DateFormat df = DateFormat.getTimeInstance(DateFormat.FULL, locale);
-        return df instanceof SimpleDateFormat && ((SimpleDateFormat) df).toPattern().contains("a");
-    }
-
     public static String printToday(Locale locale) {
         return PrettyTime.of(locale).printToday();
     }

@@ -75,11 +75,10 @@ public class PickerView extends RelativeLayout {
         minutesWheel = new MinutesWheel( this, R.id.minutes);
         ampmWheel = new AmPmWheel(this, R.id.ampm);
         hourWheel = new HourWheel(this, R.id.hour);
-        dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
 
+        setDateFormat();
         changeAmPmWhenPassingMidnightOrNoon();
     }
-
 
     private final Runnable measureAndLayout = new Runnable() {
         @Override
@@ -95,7 +94,7 @@ public class PickerView extends RelativeLayout {
         hourWheel.picker.setOnValueChangeListenerInScrolling(new NumberPickerView.OnValueChangeListenerInScrolling() {
             @Override
             public void onValueChangeInScrolling(NumberPickerView picker, int oldVal, int newVal) {
-                if(Utils.usesAmPm(locale)){
+                if(Settings.usesAmPm()){
                     String oldValue = hourWheel.getValueAtIndex(oldVal);
                     String newValue = hourWheel.getValueAtIndex(newVal);
                     boolean passingNoonOrMidnight = (oldValue.equals("12") && newValue.equals("11")) || oldValue.equals("11") && newValue.equals("12");
@@ -115,14 +114,15 @@ public class PickerView extends RelativeLayout {
         requireDisplayValueUpdate = true;
     }
 
-    public void setDate(String isoDate) {
+    public void f(String isoDate) {
         Calendar cal = Utils.isoToCalendar(isoDate, timeZone);
         applyOnAllWheels(new SetDate(cal));
+        update2DigitYearStart(cal);
     }
 
     public void setLocale(Locale locale) {
         this.locale = locale;
-        dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
+        setDateFormat();
         wheelOrderUpdater.update(locale, mode);
         requireDisplayValueUpdate = true;
     }
@@ -172,7 +172,7 @@ public class PickerView extends RelativeLayout {
 
     public void setMode(Mode mode) {
         this.mode = mode;
-        dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
+        setDateFormat();
         applyOnAllWheels(new UpdateVisibility());
         wheelOrderUpdater.update(locale, mode);
     }
@@ -226,4 +226,13 @@ public class PickerView extends RelativeLayout {
         if (maxDate == null) return null;
         return maxDate.get();
     }
+    public void setDateFormat(){
+        dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
+    }
+    public void update2DigitYearStart(Calendar selectedDate){
+        Calendar cal = (Calendar) selectedDate.clone();
+        cal.add(Calendar.YEAR, -50); // subtract 50 years to hit the middle of the century
+        dateFormat.set2DigitYearStart(cal.getTime());
+    }
+
 }
