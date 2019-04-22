@@ -114,7 +114,7 @@ public class PickerView extends RelativeLayout {
         requireDisplayValueUpdate = true;
     }
 
-    public void f(String isoDate) {
+    public void setDate(String isoDate) {
         Calendar cal = Utils.isoToCalendar(isoDate, timeZone);
         applyOnAllWheels(new SetDate(cal));
         update2DigitYearStart(cal);
