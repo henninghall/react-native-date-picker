@@ -83,6 +83,14 @@ timeZoneOffsetInMinutes | Timezone offset in minutes (default: device's timezone
 ## About
 📅 &nbsp; React Native Date Picker is a cross platform component working on both iOS and Android. It uses the slightly improved DatePickerIOS on iOS and a custom picker on Android which has similar look and feel. The datetime mode might be particulary interesting if you looking for a way to avoid two different popup pickers on android. 
 
+## FAQ
+
+### How do i change the date order? (To YYYY-MM-DD etc)
+The order is determined by the `locale` prop. Set for instance `locale='fr'`to get the France preference.
+
+### How do i change the 12/24h or AM/PM format?
+On iOS the 12/24h preference is determined by the `locale` prop. Set for instance `locale='fr'`to get the France preference. On Android the 12/24h format is determined by the device setting. When using 12h mode the AM/PM part of the picker will be displayed. 
+
 ## Roadmap
 - [x] Mode: datetime
 - [x] Mode: date
