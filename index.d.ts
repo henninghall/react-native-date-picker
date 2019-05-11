@@ -2,7 +2,6 @@ import { Component } from 'react'
 import { ViewProps } from 'react-native'
 
 interface Props extends ViewProps {
-  textColor?: string
   /**
    * The currently selected date.
    */
@@ -73,6 +72,16 @@ interface Props extends ViewProps {
    * instance, to show times in Pacific Standard Time, pass -7 * 60.
    */
   timeZoneOffsetInMinutes?: number
+   
+  /**
+   * Android picker is fading towords this background color. { color, 'none' }
+   */ 
+  fadeToColor?: string
+  
+  /**
+   * Changes the text color.	
+   */
+  textColor?: string
 }
 
 class DatePicker extends Component<Props> {}
