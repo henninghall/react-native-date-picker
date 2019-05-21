@@ -100,7 +100,13 @@ public class DayWheel extends Wheel {
 
     @Override
     public String getFormatTemplate() {
-        return (pickerView.locale.getLanguage() ==  "ja") ? "yy MMMd日 EEE" : "yy EEE d MMM";
+        String locale = pickerView.locale.getLanguage();
+        if(locale == "ko")
+            return "yy MMM d일 (EEE)";
+        if(locale == "ja")
+            return "yy MMMd日 EEE";
+        
+        return "yy EEE d MMM";
     }
 
 }
