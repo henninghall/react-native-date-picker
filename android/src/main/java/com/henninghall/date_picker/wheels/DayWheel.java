@@ -35,10 +35,15 @@ public class DayWheel extends Wheel {
 
     private Calendar getStartCal(){
         Calendar cal;
+        Calendar max = pickerView.getMaximumDate();
         Calendar min = pickerView.getMinimumDate();
         if (min != null) {
             cal = (Calendar) min.clone();
             resetToMidnight(cal);
+        } else if (max != null) {
+            cal = (Calendar) max.clone();
+            resetToMidnight(cal);
+            cal.add(Calendar.DATE, -cal.getActualMaximum(Calendar.DAY_OF_YEAR) / 2);
         } else {
             cal = (Calendar) pickerView.getInitialDate().clone();
             cal.add(Calendar.DATE, -defaultNumberOfDays / 2);
@@ -49,9 +54,14 @@ public class DayWheel extends Wheel {
     private Calendar getEndCal(){
         Calendar cal;
         Calendar max = pickerView.getMaximumDate();
+        Calendar min = pickerView.getMinimumDate();
         if (max != null) {
             cal = (Calendar) max.clone();
             resetToMidnight(cal);
+        } else if (min != null) {
+            cal = (Calendar) min.clone();
+            resetToMidnight(cal);
+            cal.add(Calendar.DATE, cal.getActualMaximum(Calendar.DAY_OF_YEAR) / 2);
         } else {
             cal = (Calendar) pickerView.getInitialDate().clone();
             cal.setTime(new Date());
