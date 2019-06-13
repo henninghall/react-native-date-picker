@@ -113,7 +113,7 @@ public class DayWheel extends Wheel {
         String locale = pickerView.locale.getLanguage();
         if(locale == "ko")
             return "yy MMM d일 (EEE)";
-        if(locale == "ja")
+        if(locale == "ja" || locale.contains("zh"))
             return "yy MMMd日 EEE";
         
         return "yy EEE d MMM";
