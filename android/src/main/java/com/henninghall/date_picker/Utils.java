@@ -1,18 +1,18 @@
 package com.henninghall.date_picker;
 
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.text.format.DateUtils;
 import android.util.TypedValue;
 import android.view.View;
 
 import net.time4j.PrettyTime;
 
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -70,6 +70,14 @@ public class Utils {
         format.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         return format;
+    }
+
+    public static float dpToPixels(int dp, Context context){
+        return TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dp,
+                context.getResources().getDisplayMetrics()
+        );
     }
 
 }

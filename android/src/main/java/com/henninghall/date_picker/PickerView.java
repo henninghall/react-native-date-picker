@@ -1,8 +1,10 @@
 package com.henninghall.date_picker;
 
 import android.os.Build;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Arguments;
@@ -63,7 +65,7 @@ public class PickerView extends RelativeLayout {
         this.style = new Style(this);
         this.wheelOrderUpdater = new WheelOrderUpdater(this);
 
-        RelativeLayout wheelsWrapper = (RelativeLayout) rootView.findViewById(R.id.wheelsWrapper);
+        LinearLayout wheelsWrapper = (LinearLayout) rootView.findViewById(R.id.wheelsWrapper);
         wheelsWrapper.setWillNotDraw(false);
 
         locale = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? Locale.forLanguageTag("en") : Locale.getDefault();

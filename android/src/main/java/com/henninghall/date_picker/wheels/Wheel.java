@@ -2,15 +2,13 @@ package com.henninghall.date_picker.wheels;
 
 import android.view.View;
 import com.henninghall.date_picker.PickerView;
-import com.henninghall.date_picker.R;
 
 import org.apache.commons.lang3.LocaleUtils;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
+import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public abstract class Wheel {
 

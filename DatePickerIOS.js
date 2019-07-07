@@ -17,7 +17,7 @@ import React from 'react';
 import { StyleSheet, View, requireNativeComponent } from 'react-native';
 const invariant = require('fbjs/lib/invariant');
 
-import type {ViewProps} from 'ViewPropTypes';
+import type { ViewProps } from 'ViewPropTypes';
 
 const RCTDatePickerIOS = requireNativeComponent('RNDatePicker');
 
@@ -29,7 +29,7 @@ type Props = $ReadOnly<{|
   /**
    * The currently selected date.
    */
-  date?: ?Date,
+  date ?: ? Date,
 
   /**
    * Provides an initial value that will change when the user starts selecting
@@ -39,36 +39,36 @@ type Props = $ReadOnly<{|
    * causes it to go out of sync with native. The initialDate prop is intended
    * to allow you to have native be source of truth.
    */
-  initialDate?: ?Date,
+  initialDate ?: ? Date,
 
   /**
    * The date picker locale.
    */
-  locale?: ?string,
+  locale ?: ? string,
 
   /**
    * Maximum date.
    *
    * Restricts the range of possible date/time values.
    */
-  maximumDate?: ?Date,
+  maximumDate ?: ? Date,
 
   /**
    * Minimum date.
    *
    * Restricts the range of possible date/time values.
    */
-  minimumDate?: ?Date,
+  minimumDate ?: ? Date,
 
   /**
    * The interval at which minutes can be selected.
    */
-  minuteInterval?: ?(1 | 2 | 3 | 4 | 5 | 6 | 10 | 12 | 15 | 20 | 30),
+  minuteInterval ?: ? (1 | 2 | 3 | 4 | 5 | 6 | 10 | 12 | 15 | 20 | 30),
 
   /**
    * The date picker mode.
    */
-  mode?: ?('date' | 'time' | 'datetime'),
+  mode ?: ? ('date' | 'time' | 'datetime'),
 
   /**
    * Date change handler.
@@ -77,7 +77,7 @@ type Props = $ReadOnly<{|
    * The first and only argument is an Event. For getting the date the picker
    * was changed to, use onDateChange instead.
    */
-  onChange?: ?(event: Event) => void,
+  onChange ?: ? (event: Event) => void,
 
   /**
    * Date change handler.
@@ -88,14 +88,14 @@ type Props = $ReadOnly<{|
    */
   onDateChange: (date: Date) => void,
 
-  /**
-   * Timezone offset in minutes.
-   *
-   * By default, the date picker will use the device's timezone. With this
-   * parameter, it is possible to force a certain timezone offset. For
-   * instance, to show times in Pacific Standard Time, pass -7 * 60.
-   */
-  timeZoneOffsetInMinutes?: ?number,
+    /**
+     * Timezone offset in minutes.
+     *
+     * By default, the date picker will use the device's timezone. With this
+     * parameter, it is possible to force a certain timezone offset. For
+     * instance, to show times in Pacific Standard Time, pass -7 * 60.
+     */
+    timeZoneOffsetInMinutes ?: ? number,
 |}>;
 
 /**
@@ -138,35 +138,33 @@ export default class DatePickerIOS extends React.Component<Props> {
       'A selected date or initial date should be specified.',
     );
     return (
-      <View style={props.style}>
-        <RCTDatePickerIOS
-          ref={picker => {
-            this._picker = picker;
-          }}
-          style={styles.datePickerIOS}
-          date={
-            props.date
-              ? props.date.getTime()
-              : props.initialDate
-                ? props.initialDate.getTime()
-                : undefined
-          }
-          locale={props.locale ? props.locale : undefined}
-          maximumDate={
-            props.maximumDate ? props.maximumDate.getTime() : undefined
-          }
-          minimumDate={
-            props.minimumDate ? props.minimumDate.getTime() : undefined
-          }
-          mode={props.mode}
-          minuteInterval={props.minuteInterval}
-          timeZoneOffsetInMinutes={props.timeZoneOffsetInMinutes}
-          onChange={this._onChange}
-          onStartShouldSetResponder={() => true}
-          onResponderTerminationRequest={() => false}
-          textColor={props.textColor}
-        />
-      </View>
+      <RCTDatePickerIOS
+        ref={picker => {
+          this._picker = picker;
+        }}
+        style={[styles.datePickerIOS, props.style]}
+        date={
+          props.date
+            ? props.date.getTime()
+            : props.initialDate
+              ? props.initialDate.getTime()
+              : undefined
+        }
+        locale={props.locale ? props.locale : undefined}
+        maximumDate={
+          props.maximumDate ? props.maximumDate.getTime() : undefined
+        }
+        minimumDate={
+          props.minimumDate ? props.minimumDate.getTime() : undefined
+        }
+        mode={props.mode}
+        minuteInterval={props.minuteInterval}
+        timeZoneOffsetInMinutes={props.timeZoneOffsetInMinutes}
+        onChange={this._onChange}
+        onStartShouldSetResponder={() => true}
+        onResponderTerminationRequest={() => false}
+        textColor={props.textColor}
+      />
     );
   }
 }

@@ -4,7 +4,7 @@ import moment from 'moment'
 
 const NativeDatePicker = requireNativeComponent(`DatePickerManager`, DatePickerAndroid, { nativeOnly: { onChange: true } });
 
-class DatePickerAndroid extends React.Component {
+class DatePickerAndroid extends React.PureComponent {
 
     static defaultProps = {
         mode: 'datetime',
