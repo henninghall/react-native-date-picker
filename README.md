@@ -70,7 +70,7 @@ Prop | Description | Screenshots iOS | Screenshot Android
 ------------- | ------------- | ------------- | -------------
 date | The currently selected date. |
 onDateChange | Date change handler |
-fadeToColor | Android picker is fading towords this background color. {color, 'none',} |
+fadeToColor | Android picker is fading towords this background color. {color, 'none'} |
 maximumDate |  Maximum selectable date. |
 minimumDate |  Minimum selectable date |
 minuteInterval | The interval at which minutes can be selected. | <img src="docs/minute-interval-ios.png" alt="Date picker minute interval IOS" height="120px" />|<img src="docs/minute-interval-android.png" alt="Date picker minute interval Android" height="120px" />
