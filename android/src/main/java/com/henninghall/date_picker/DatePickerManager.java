@@ -1,11 +1,15 @@
 package com.henninghall.date_picker;
 
+import android.content.res.Resources;
 import android.support.annotation.Nullable;
+import android.util.Log;
+import android.util.TypedValue;
 
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
+import com.facebook.react.uimanager.annotations.ReactPropGroup;
 
 import net.time4j.android.ApplicationStarter;
 import org.apache.commons.lang3.LocaleUtils;
@@ -82,6 +86,15 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
   public void setUtc(PickerView view, @Nullable boolean utc) throws Exception {
     TimeZone timeZone = utc ? TimeZone.getTimeZone("UTC") : TimeZone.getDefault();
     view.setTimeZone(timeZone);
+  }
+
+  @ReactPropGroup(names = {"height", "width"}, customType = "Style")
+  public void setStyle(PickerView view, int index, Integer style) {
+    if(index == 0) view.style.setHeight(style);
+    if(index == 1) {
+      int width = (int) Utils.dpToPixels(style, DatePickerManager.context);
+      view.style.setWidth(width);
+    }
   }
 
   @Override
