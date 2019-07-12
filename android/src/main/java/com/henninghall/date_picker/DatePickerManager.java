@@ -91,10 +91,6 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
   @ReactPropGroup(names = {"height", "width"}, customType = "Style")
   public void setStyle(PickerView view, int index, Integer style) {
     if(index == 0) view.style.setHeight(style);
-    if(index == 1) {
-      int width = (int) Utils.dpToPixels(style, DatePickerManager.context);
-      view.style.setWidth(width);
-    }
   }
 
   @Override

@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout android:id="@+id/container"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    xmlns:custom="http://schemas.android.com/apk/res-auto">
-
+>
     <LinearLayout
         android:id="@+id/wheelsWrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         >
+        <cn.carbswang.android.numberpickerview.library.NumberPickerView
+            android:id="@+id/emptyStart"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            custom:npv_DividerColor="#cccccc"
+            custom:npv_RespondChangeOnDetached="false"
+            custom:npv_ShownCount="5"
+            custom:npv_TextColorNormal="#aaaaaa"
+            custom:npv_TextColorSelected="#000000"
+            custom:npv_TextSizeNormal="18sp"
+            custom:npv_TextSizeSelected="21sp"
+            custom:npv_WrapSelectorWheel="true"
+            custom:npv_ItemPaddingHorizontal="0dp"
+            />
         <cn.carbswang.android.numberpickerview.library.NumberPickerView
             android:id="@+id/year"
             android:layout_width="wrap_content"
@@ -26,6 +40,21 @@
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
             custom:npv_ItemPaddingHorizontal="3dp"
+            />
+        <cn.carbswang.android.numberpickerview.library.NumberPickerView
+            android:id="@+id/empty1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            custom:npv_DividerColor="#cccccc"
+            custom:npv_RespondChangeOnDetached="false"
+            custom:npv_ShownCount="5"
+            custom:npv_TextColorNormal="#aaaaaa"
+            custom:npv_TextColorSelected="#000000"
+            custom:npv_TextSizeNormal="18sp"
+            custom:npv_TextSizeSelected="21sp"
+            custom:npv_WrapSelectorWheel="true"
+            custom:npv_ItemPaddingHorizontal="0dp"
             />
         <cn.carbswang.android.numberpickerview.library.NumberPickerView
             android:id="@+id/month"
@@ -42,6 +71,21 @@
             custom:npv_ItemPaddingHorizontal="3dp"
             />
         <cn.carbswang.android.numberpickerview.library.NumberPickerView
+            android:id="@+id/empty2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            custom:npv_DividerColor="#cccccc"
+            custom:npv_RespondChangeOnDetached="false"
+            custom:npv_ShownCount="5"
+            custom:npv_TextColorNormal="#aaaaaa"
+            custom:npv_TextColorSelected="#000000"
+            custom:npv_TextSizeNormal="18sp"
+            custom:npv_TextSizeSelected="21sp"
+            custom:npv_WrapSelectorWheel="true"
+            custom:npv_ItemPaddingHorizontal="0dp"
+            />
+        <cn.carbswang.android.numberpickerview.library.NumberPickerView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -56,10 +100,24 @@
             custom:npv_ItemPaddingHorizontal="3dp"
             />
         <cn.carbswang.android.numberpickerview.library.NumberPickerView
-            android:id="@+id/day"
+            android:id="@+id/empty3"
             android:layout_width="0dp"
-            android:layout_weight="4"
+            android:layout_weight="1"
             android:layout_height="match_parent"
+            custom:npv_DividerColor="#cccccc"
+            custom:npv_RespondChangeOnDetached="false"
+            custom:npv_ShownCount="5"
+            custom:npv_TextColorNormal="#aaaaaa"
+            custom:npv_TextColorSelected="#000000"
+            custom:npv_TextSizeNormal="18sp"
+            custom:npv_TextSizeSelected="21sp"
+            custom:npv_WrapSelectorWheel="true"
+            custom:npv_ItemPaddingHorizontal="0dp"
+            />
+        <cn.carbswang.android.numberpickerview.library.NumberPickerView
+            android:id="@+id/day"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             custom:npv_ShownCount="5"
             custom:npv_RespondChangeOnDetached="false"
             custom:npv_TextSizeNormal="18sp"
@@ -68,13 +126,12 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
-            custom:npv_ItemPaddingHorizontal="3dp"/>
-
+            custom:npv_ItemPaddingHorizontal="3dp"
+            />
         <cn.carbswang.android.numberpickerview.library.NumberPickerView
             android:id="@+id/hour"
-            android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             custom:npv_DividerColor="#cccccc"
             custom:npv_RespondChangeOnDetached="false"
             custom:npv_ShownCount="5"
@@ -88,8 +145,7 @@
 
         <cn.carbswang.android.numberpickerview.library.NumberPickerView
             android:id="@+id/minutes"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             custom:npv_DividerColor="#cccccc"
             custom:npv_RespondChangeOnDetached="false"
@@ -104,8 +160,7 @@
 
         <cn.carbswang.android.numberpickerview.library.NumberPickerView
             android:id="@+id/ampm"
-            android:layout_weight="1.5"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             custom:npv_DividerColor="#cccccc"
             custom:npv_RespondChangeOnDetached="false"
@@ -116,9 +171,23 @@
             custom:npv_TextSizeSelected="21sp"
             custom:npv_WrapSelectorWheel="true"
             custom:npv_ItemPaddingHorizontal="3dp"
-            android:foregroundGravity="center"
-
             />
+        <cn.carbswang.android.numberpickerview.library.NumberPickerView
+            android:id="@+id/emptyEnd"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            custom:npv_DividerColor="#cccccc"
+            custom:npv_RespondChangeOnDetached="false"
+            custom:npv_ShownCount="5"
+            custom:npv_TextColorNormal="#aaaaaa"
+            custom:npv_TextColorSelected="#000000"
+            custom:npv_TextSizeNormal="18sp"
+            custom:npv_TextSizeSelected="21sp"
+            custom:npv_WrapSelectorWheel="true"
+            custom:npv_ItemPaddingHorizontal="0dp"
+            />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

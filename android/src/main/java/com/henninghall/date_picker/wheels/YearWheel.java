@@ -1,5 +1,7 @@
 package com.henninghall.date_picker.wheels;
 
+import android.graphics.Paint;
+
 import com.henninghall.date_picker.Mode;
 import com.henninghall.date_picker.PickerView;
 
@@ -53,8 +55,14 @@ public class YearWheel extends Wheel
     }
 
     @Override
+    public Paint.Align getTextAlign() {
+        return Paint.Align.RIGHT;
+    }
+
+    @Override
     public String getFormatTemplate() {
         return "y";
     }
+
 }
 

@@ -40,17 +40,11 @@ class Style {
         this.pickerView.applyOnAllWheels(new TextColor(color));
     }
 
-    public void setWidth(int width) {
-        View view = pickerView.findViewById(R.id.container);
-        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-        layoutParams.width = width;
-        view.setLayoutParams(layoutParams);
-    }
-
     public void setHeight(int height) {
         int showCount = height / DP_PER_SHOW_SHOW_COUNT;
         int oddShowCount = showCount % 2 == 0 ? showCount + 1 : showCount;
         pickerView.applyOnAllWheels(new SetShowCount(oddShowCount));
+        pickerView.setShownCountOnEmptyWheels(oddShowCount);
     }
 
     private boolean validColor(String color){
