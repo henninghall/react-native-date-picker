@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { DatePickerIOS, View } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
 export default class MinimalExample extends Component {
