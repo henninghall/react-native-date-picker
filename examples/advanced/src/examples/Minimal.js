@@ -9,9 +9,7 @@ export default class MinimalExample extends Component {
   render = () =>
     <DatePicker
       date={this.state.date}
-      locale={"sv-SE"}
       onDateChange={date => this.setState({ date })} 
-      style={{width:240, height: 200}}
     />
 
 }
