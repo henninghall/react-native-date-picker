@@ -139,6 +139,7 @@ export default class DatePickerIOS extends React.Component<Props> {
     );
     return (
       <RCTDatePickerIOS
+        key={this.props.textColor} // preventing "Today" string keep old text color when text color changes
         ref={picker => {
           this._picker = picker;
         }}

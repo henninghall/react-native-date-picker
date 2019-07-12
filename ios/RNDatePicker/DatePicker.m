@@ -64,12 +64,6 @@
     
     // Setting picker text color
     [self setValue:UIColorFromRGB(intColor) forKeyPath:@"textColor"];
-    SEL selector = NSSelectorFromString(@"setHighlightsToday:");
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDatePicker instanceMethodSignatureForSelector:selector]];
-    BOOL no = NO;
-    [invocation setSelector:selector];
-    [invocation setArgument:&no atIndex:2];
-    [invocation invokeWithTarget:self];
 }
 
 
