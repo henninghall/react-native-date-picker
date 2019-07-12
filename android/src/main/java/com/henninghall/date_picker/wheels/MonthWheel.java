@@ -1,5 +1,7 @@
 package com.henninghall.date_picker.wheels;
 
+import android.graphics.Paint;
+
 import java.text.*;
 import java.util.*;
 import com.henninghall.date_picker.*;
@@ -33,6 +35,11 @@ public class MonthWheel extends Wheel
     @Override
     public String getFormatTemplate() {
         return "LLLL";
+    }
+
+    @Override
+    public Paint.Align getTextAlign() {
+        return Paint.Align.LEFT;
     }
 
     private String getUsString(Calendar cal) {

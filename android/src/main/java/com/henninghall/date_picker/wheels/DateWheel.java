@@ -1,5 +1,7 @@
 package com.henninghall.date_picker.wheels;
 
+import android.graphics.Paint;
+
 import java.util.*;
 import com.henninghall.date_picker.*;
 
@@ -34,6 +36,11 @@ public class DateWheel extends Wheel
     @Override
     public String getFormatTemplate() {
         return "d";
+    }
+
+    @Override
+    public Paint.Align getTextAlign() {
+        return Paint.Align.RIGHT;
     }
 
 }

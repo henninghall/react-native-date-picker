@@ -1,16 +1,10 @@
 package com.henninghall.date_picker;
 
 import android.os.Build;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.uimanager.events.RCTEventEmitter;
-import com.henninghall.date_picker.wheelFunctions.AnimateToDate;
 import com.henninghall.date_picker.wheelFunctions.Refresh;
 import com.henninghall.date_picker.wheelFunctions.SetDate;
 import com.henninghall.date_picker.wheelFunctions.UpdateVisibility;
@@ -24,13 +18,11 @@ import com.henninghall.date_picker.wheels.MonthWheel;
 import com.henninghall.date_picker.wheels.Wheel;
 import com.henninghall.date_picker.wheels.YearWheel;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -40,6 +32,7 @@ import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class PickerView extends RelativeLayout {
 
+    public LinearLayout wheelsWrapper;
     public SimpleDateFormat dateFormat;
     private HourWheel hourWheel;
     private DayWheel dayWheel;
@@ -53,6 +46,7 @@ public class PickerView extends RelativeLayout {
     public MonthWheel monthWheel;
     public YearWheel yearWheel;
     private WheelOrderUpdater wheelOrderUpdater;
+    private EmptyWheelUpdater emptyWheelUpdater;
     public boolean requireDisplayValueUpdate = true;
     public TimeZone timeZone = TimeZone.getDefault();
     private DateBoundary minDate;
@@ -61,11 +55,13 @@ public class PickerView extends RelativeLayout {
 
     public PickerView() {
         super(DatePickerManager.context);
+
         View rootView = inflate(getContext(), R.layout.datepicker_view, this);
         this.style = new Style(this);
         this.wheelOrderUpdater = new WheelOrderUpdater(this);
+        this.emptyWheelUpdater = new EmptyWheelUpdater(this);
 
-        LinearLayout wheelsWrapper = (LinearLayout) rootView.findViewById(R.id.wheelsWrapper);
+        wheelsWrapper = (LinearLayout) rootView.findViewById(R.id.wheelsWrapper);
         wheelsWrapper.setWillNotDraw(false);
 
         locale = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? Locale.forLanguageTag("en") : Locale.getDefault();
@@ -106,6 +102,7 @@ public class PickerView extends RelativeLayout {
         });
     }
 
+
     public void setMinimumDate(String date) {
         minDate = new DateBoundary(this, date);
         requireDisplayValueUpdate = true;
@@ -126,6 +123,7 @@ public class PickerView extends RelativeLayout {
         this.locale = locale;
         setDateFormat();
         wheelOrderUpdater.update(locale, mode);
+        emptyWheelUpdater.update(mode);
         requireDisplayValueUpdate = true;
     }
 
@@ -177,6 +175,7 @@ public class PickerView extends RelativeLayout {
         setDateFormat();
         applyOnAllWheels(new UpdateVisibility());
         wheelOrderUpdater.update(locale, mode);
+        emptyWheelUpdater.update(mode);
     }
 
     public Collection<Wheel> getVisibleWheels() {
@@ -228,13 +227,32 @@ public class PickerView extends RelativeLayout {
         if (maxDate == null) return null;
         return maxDate.get();
     }
+
     public void setDateFormat(){
         dateFormat = new SimpleDateFormat(getDateFormatTemplate(), Locale.US);
     }
+
     public void update2DigitYearStart(Calendar selectedDate){
         Calendar cal = (Calendar) selectedDate.clone();
         cal.add(Calendar.YEAR, -50); // subtract 50 years to hit the middle of the century
         dateFormat.set2DigitYearStart(cal.getTime());
     }
 
+    public void setShownCountOnEmptyWheels(int shownCount) {
+        int[] ids = {
+                R.id.emptyStart,
+                R.id.empty1,
+                R.id.empty2,
+                R.id.empty3,
+                R.id.emptyEnd
+        };
+
+        for (int id : ids) {
+            NumberPickerView view = (NumberPickerView) findViewById(id);
+           if(view != null) view.setShownCount(shownCount);
+        }
+
+
+
+    }
 }

@@ -1,14 +1,11 @@
 package com.henninghall.date_picker.wheels;
 
+import android.graphics.Paint;
+
 import com.henninghall.date_picker.Mode;
 import com.henninghall.date_picker.PickerView;
 import com.henninghall.date_picker.Settings;
-import com.henninghall.date_picker.Utils;
 import java.util.Calendar;
-
-
-import cn.carbswang.android.numberpickerview.library.NumberPickerView;
-
 
 public class HourWheel extends Wheel {
 
@@ -39,6 +36,11 @@ public class HourWheel extends Wheel {
     @Override
     public String getFormatTemplate() {
         return Settings.usesAmPm() ? "h": "HH";
+    }
+
+    @Override
+    public Paint.Align getTextAlign() {
+        return Paint.Align.RIGHT;
     }
 
 }

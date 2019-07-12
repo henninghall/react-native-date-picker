@@ -1,5 +1,7 @@
 package com.henninghall.date_picker.wheels;
 
+import android.graphics.Paint;
+
 import com.henninghall.date_picker.Mode;
 import com.henninghall.date_picker.PickerView;
 import com.henninghall.date_picker.Utils;
@@ -111,12 +113,19 @@ public class DayWheel extends Wheel {
     @Override
     public String getFormatTemplate() {
         String locale = pickerView.locale.getLanguage();
-        if(locale == "ko")
+        if(locale.equals("ko"))
             return "yy MMM d일 (EEE)";
-        if(locale == "ja" || locale.contains("zh"))
+        if(locale.equals("ja") || locale.contains("zh"))
             return "yy MMMd日 EEE";
-        
-        return "yy EEE d MMM";
+        if(Utils.monthNameBeforeMonthDate(pickerView.locale)){
+            return "yy EEE MMM d";
+        }
+        else return "yy EEE d MMM";
+    }
+
+    @Override
+    public Paint.Align getTextAlign() {
+        return Paint.Align.RIGHT;
     }
 
 }
