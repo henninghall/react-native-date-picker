@@ -9,7 +9,7 @@
   "dependencies": {
     "react": "16.8.3",
     "react-native": "0.59.9",
-    "react-native-date-picker": "henninghall/react-native-date-picker#master"
+    "react-native-date-picker": "^2.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

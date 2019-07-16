@@ -4863,9 +4863,10 @@ react-is@^16.8.1, react-is@^16.8.3, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
 
-react-native-date-picker@henninghall/react-native-date-picker#master:
-  version "2.4.2"
-  resolved "https://codeload.github.com/henninghall/react-native-date-picker/tar.gz/99191b037bf2e8cb172551f5c3c29b552fce04ac"
+react-native-date-picker@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-2.5.0.tgz#6dc89e9c7fdf61de708fc444594dcc16a20a7070"
+  integrity sha512-l7nzA6J2q45mmBZE2CgsO+YGm8ZaFiAuXdXIxFx/M0J9wWH2Th0RMnBssDx4nbHrk020bl5lzeCZKQHtiS58wA==
   dependencies:
     moment "^2.22.1"
 
