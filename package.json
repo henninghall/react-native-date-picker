@@ -1,6 +1,6 @@
 {
   "name": "react-native-date-picker",
-  "version": "2.4.2",
+  "version": "2.5.0",
   "description": "A Cross Platform React Native Picker",
   "main": "index.js",
   "scripts": {
