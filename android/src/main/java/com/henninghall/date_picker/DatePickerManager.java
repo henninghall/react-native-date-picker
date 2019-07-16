@@ -1,7 +1,7 @@
 package com.henninghall.date_picker;
 
 import android.content.res.Resources;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.util.TypedValue;
 
