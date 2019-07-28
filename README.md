@@ -97,6 +97,14 @@ The order is determined by the `locale` prop. Set for instance `locale='fr'`to g
 ### How do i change the 12/24h or AM/PM format?
 On iOS the 12/24h preference is determined by the `locale` prop. Set for instance `locale='fr'`to get the France preference. On Android the 12/24h format is determined by the device setting. When using 12h mode the AM/PM part of the picker will be displayed. 
 
+### Why is the Android app crashing in production?
+If you have enabled <a href="https://facebook.github.io/react-native/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional">Proguard</a> for Android you might need to ignore some classes to get the the picker to work propery in android production/release mode. Add these lines to you proguard file (often called `proguard-rules.pro`): 
+```
+-keep public class net.time4j.android.ApplicationStarter
+-keep public class net.time4j.PrettyTime
+```
+
+
 ## Roadmap
 - [x] Mode: datetime
 - [x] Mode: date
