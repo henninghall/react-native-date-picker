@@ -27,12 +27,12 @@ public class WheelOrderUpdater
     private ArrayList<Wheel> localeToWheelOrder(final Locale locale) {
         final ArrayList<Wheel> wheelList = new ArrayList<Wheel>();
         if (Utils.monthNameBeforeMonthDate(locale)) {
-            wheelList.add(this.pickerView.dateWheel);
             wheelList.add(this.pickerView.monthWheel);
+            wheelList.add(this.pickerView.dateWheel);
         }
         else {
-            wheelList.add(this.pickerView.monthWheel);
             wheelList.add(this.pickerView.dateWheel);
+            wheelList.add(this.pickerView.monthWheel);
         }
         return wheelList;
     }
