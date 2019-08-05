@@ -1,7 +1,6 @@
 package com.henninghall.date_picker;
 
 import android.content.res.Resources;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.TypedValue;
 
@@ -36,7 +35,7 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
   }
 
   @ReactProp(name = "mode")
-  public void setMode(PickerView view, @Nullable String mode) {
+  public void setMode(PickerView view, String mode) {
     Mode m;
     try {
       m = Mode.valueOf(mode);
@@ -47,43 +46,43 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
   }
 
   @ReactProp(name = "date")
-  public void setDate(PickerView view, @Nullable String date) {
+  public void setDate(PickerView view, String date) {
     this.date = date;
   }
 
   @ReactProp(name = "locale")
-  public void setLocale(PickerView view, @Nullable String locale) {
+  public void setLocale(PickerView view, String locale) {
     view.setLocale(LocaleUtils.toLocale(locale.replace('-','_')));
   }
 
   @ReactProp(name = "minimumDate")
-  public void setMinimumDate(PickerView view, @Nullable String date) {
+  public void setMinimumDate(PickerView view, String date) {
     view.setMinimumDate(date);
   }
 
   @ReactProp(name = "maximumDate")
-  public void setMaximumDate(PickerView view, @Nullable String date) {
+  public void setMaximumDate(PickerView view, String date) {
     view.setMaximumDate(date);
   }
 
   @ReactProp(name = "fadeToColor")
-  public void setFadeToColor(PickerView view, @Nullable String color) {
+  public void setFadeToColor(PickerView view, String color) {
     view.style.setFadeToColor(color);
   }
 
   @ReactProp(name = "textColor")
-  public void setTextColor(PickerView view, @Nullable String color) {
+  public void setTextColor(PickerView view, String color) {
     view.style.setTextColor(color);
   }
 
   @ReactProp(name = "minuteInterval")
-  public void setMinuteInterval(PickerView view, @Nullable int interval) throws Exception {
+  public void setMinuteInterval(PickerView view,  int interval) throws Exception {
     if (interval < 0 || interval > 59) throw new Exception("Minute interval out of bounds");
     view.setMinuteInterval(interval);
   }
 
   @ReactProp(name = "utc")
-  public void setUtc(PickerView view, @Nullable boolean utc) throws Exception {
+  public void setUtc(PickerView view,  boolean utc) throws Exception {
     TimeZone timeZone = utc ? TimeZone.getTimeZone("UTC") : TimeZone.getDefault();
     view.setTimeZone(timeZone);
   }
