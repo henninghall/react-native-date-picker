@@ -85,6 +85,7 @@ public abstract class Wheel {
     }
 
     public void refresh() {
+        if (!this.visible()) return;
         clearValues();
         init();
     }

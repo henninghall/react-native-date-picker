@@ -176,6 +176,7 @@ public class PickerView extends RelativeLayout {
         applyOnAllWheels(new UpdateVisibility());
         wheelOrderUpdater.update(locale, mode);
         emptyWheelUpdater.update(mode);
+        requireDisplayValueUpdate = true;
     }
 
     public Collection<Wheel> getVisibleWheels() {
