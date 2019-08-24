@@ -72,14 +72,14 @@ interface Props extends ViewProps {
    * instance, to show times in Pacific Standard Time, pass -7 * 60.
    */
   timeZoneOffsetInMinutes?: number
-   
+
   /**
    * Android picker is fading towords this background color. { color, 'none' }
-   */ 
+   */
   fadeToColor?: string
-  
+
   /**
-   * Changes the text color.	
+   * Changes the text color.
    */
   textColor?: string
 }

@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
-import { Button } from 'react-native';
+import React, { Component } from 'react'
+import { Button } from 'react-native'
 
 export default class extends Component {
-
-    render() {
-        return (
-            <Button title={'Change color'} onPress={this.props.onChange} />
-        );
-    }
-
+  render() {
+    return <Button title={'Change color'} onPress={this.props.onChange} />
+  }
 }

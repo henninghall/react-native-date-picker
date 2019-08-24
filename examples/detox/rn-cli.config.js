@@ -1,12 +1,12 @@
-let metroBundler;
+let metroBundler
 try {
-  metroBundler = require('metro');
+  metroBundler = require('metro')
 } catch (ex) {
-  metroBundler = require('metro-bundler');
+  metroBundler = require('metro-bundler')
 }
 
 module.exports = {
   getBlacklistRE: function() {
-    return metroBundler.createBlacklist([/test\/.*/, /detox\/node_modules\/.*/]);
-  }
-};
+    return metroBundler.createBlacklist([/test\/.*/, /detox\/node_modules\/.*/])
+  },
+}

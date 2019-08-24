@@ -6,8 +6,8 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react'
+import { Platform, StyleSheet, Text, View } from 'react-native'
 import DatePicker from 'react-native-date-picker'
 
 const instructions = Platform.select({
@@ -15,11 +15,10 @@ const instructions = Platform.select({
   android:
     'Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
-});
+})
 
-type Props = {};
+type Props = {}
 export default class App extends Component<Props> {
-
   state = { date: new Date() }
 
   render() {
@@ -30,9 +29,10 @@ export default class App extends Component<Props> {
         <Text style={styles.instructions}>{instructions}</Text>
         <DatePicker
           date={this.state.date}
-          onDateChange={date => this.setState({ date })} />
+          onDateChange={date => this.setState({ date })}
+        />
       </View>
-    );
+    )
   }
 }
 
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
-});
+})
