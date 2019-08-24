@@ -15,6 +15,7 @@
 
 import React from 'react';
 import { StyleSheet, View, requireNativeComponent } from 'react-native';
+import { throwIfInvalidProps } from "./propChecker"
 const invariant = require('fbjs/lib/invariant');
 
 import type { ViewProps } from 'ViewPropTypes';
@@ -133,6 +134,7 @@ export default class DatePickerIOS extends React.Component<Props> {
 
   render() {
     const props = this.props;
+    if (__DEV__) throwIfInvalidProps(props)
     invariant(
       props.date || props.initialDate,
       'A selected date or initial date should be specified.',
