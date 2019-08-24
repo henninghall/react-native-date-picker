@@ -1,32 +1,40 @@
-import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import examples from './examples';
+import React, { Component } from 'react'
+import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import examples from './examples'
 
 export default class App extends Component {
-
   state = {
     picker: undefined,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   }
 
   render() {
     return (
       <ScrollView
-        style={[styles.container, { backgroundColor: this.state.backgroundColor }]}
-        contentContainerStyle={styles.content}>
+        style={[
+          styles.container,
+          { backgroundColor: this.state.backgroundColor },
+        ]}
+        contentContainerStyle={styles.content}
+      >
         <Text style={styles.header}>{!this.state.picker && 'Examples'}</Text>
         {!this.state.picker && this.renderButtons()}
         {!!this.state.picker && this.renderBackButton()}
         {!!this.state.picker && this.renderPicker()}
       </ScrollView>
-    );
+    )
   }
 
   setBackgroundColor = backgroundColor => this.setState({ backgroundColor })
 
   renderPicker = () => {
-    const Picker = examples[this.state.picker].component;
-    return <Picker backgroundColor={this.state.backgroundColor} setBackground={this.setBackgroundColor} />
+    const Picker = examples[this.state.picker].component
+    return (
+      <Picker
+        backgroundColor={this.state.backgroundColor}
+        setBackground={this.setBackgroundColor}
+      />
+    )
   }
 
   renderButtons = () =>
@@ -34,7 +42,7 @@ export default class App extends Component {
       .filter(key => key !== this.state.picker)
       .map(this.renderButton)
 
-  renderButton = (key) => (
+  renderButton = key => (
     <TouchableOpacity
       key={key}
       onPress={() => this.setState({ picker: key })}
@@ -44,21 +52,20 @@ export default class App extends Component {
     </TouchableOpacity>
   )
 
-  renderBackButton = (key) => (
+  renderBackButton = key => (
     <TouchableOpacity
       onPress={() => this.setState({ picker: undefined })}
-      style={{ margin: 10, position: 'absolute', top: 0, left: 10, }}
+      style={{ margin: 10, position: 'absolute', top: 0, left: 10 }}
     >
       <Text style={styles.text}>Back</Text>
     </TouchableOpacity>
   )
-
 }
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: 15,
-    borderWidth:1,
+    borderWidth: 1,
   },
   content: {
     alignItems: 'center',
@@ -71,5 +78,5 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 22,
     margin: 20,
-  }
+  },
 })

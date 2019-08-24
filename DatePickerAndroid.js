@@ -1,16 +1,19 @@
-import React from 'react';
-import { DatePickerIOS, requireNativeComponent, StyleSheet } from 'react-native';
+import React from 'react'
+import { DatePickerIOS, requireNativeComponent, StyleSheet } from 'react-native'
 import moment from 'moment'
-import { throwIfInvalidProps } from "./propChecker"
+import { throwIfInvalidProps } from './propChecker'
 
-const NativeDatePicker = requireNativeComponent(`DatePickerManager`, DatePickerAndroid, { nativeOnly: { onChange: true } });
+const NativeDatePicker = requireNativeComponent(
+  `DatePickerManager`,
+  DatePickerAndroid,
+  { nativeOnly: { onChange: true } }
+)
 
 class DatePickerAndroid extends React.PureComponent {
-
   static defaultProps = {
     mode: 'datetime',
     minuteInterval: 1,
-  };
+  }
 
   render() {
     if (__DEV__) throwIfInvalidProps(this.props)
@@ -32,35 +35,42 @@ class DatePickerAndroid extends React.PureComponent {
     this.props.onDateChange(jsDate)
   }
 
-  _maximumDate = () => this.props.maximumDate && this._toIsoWithTimeZoneOffset(this.props.maximumDate);
+  _maximumDate = () =>
+    this.props.maximumDate &&
+    this._toIsoWithTimeZoneOffset(this.props.maximumDate)
 
-  _minimumDate = () => this.props.minimumDate && this._toIsoWithTimeZoneOffset(this.props.minimumDate);
+  _minimumDate = () =>
+    this.props.minimumDate &&
+    this._toIsoWithTimeZoneOffset(this.props.minimumDate)
 
-  _date = () => this._toIsoWithTimeZoneOffset(this.props.date);
+  _date = () => this._toIsoWithTimeZoneOffset(this.props.date)
 
   _fromIsoWithTimeZoneOffset = date => {
-    if (this.props.timeZoneOffsetInMinutes === undefined)
-      return moment(date)
+    if (this.props.timeZoneOffsetInMinutes === undefined) return moment(date)
 
-    return moment.utc(date).subtract(this.props.timeZoneOffsetInMinutes, 'minutes')
+    return moment
+      .utc(date)
+      .subtract(this.props.timeZoneOffsetInMinutes, 'minutes')
   }
 
   _toIsoWithTimeZoneOffset = date => {
     if (this.props.timeZoneOffsetInMinutes === undefined)
       return moment(date).toISOString()
 
-    return moment.utc(date).add(this.props.timeZoneOffsetInMinutes, 'minutes').toISOString()
+    return moment
+      .utc(date)
+      .add(this.props.timeZoneOffsetInMinutes, 'minutes')
+      .toISOString()
   }
-
 }
 
 const styles = StyleSheet.create({
   picker: {
     width: 310,
     height: 180,
-  }
+  },
 })
 
-DatePickerAndroid.propTypes = DatePickerIOS.propTypes;
+DatePickerAndroid.propTypes = DatePickerIOS.propTypes
 
-export default DatePickerAndroid;
+export default DatePickerAndroid
