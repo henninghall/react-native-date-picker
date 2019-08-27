@@ -91,13 +91,15 @@ The order is determined by the `locale` prop. Set for instance `locale='fr'`to g
 ### How do i change the 12/24h or AM/PM format?
 On iOS the 12/24h preference is determined by the `locale` prop. Set for instance `locale='fr'`to get the France preference. On Android the 12/24h format is determined by the device setting. When using 12h mode the AM/PM part of the picker will be displayed. 
 
-### Why is the Android app crashing in production?
+### Is it possible to show only month and year?
+This is unfortunately not possible due to the limitation in DatePickerIOS. You should be able to create your own month-year picker with for instance https://github.com/TronNatthakorn/react-native-wheel-pick.
+
+### Why does the Android app crash in production?
 If you have enabled <a href="https://facebook.github.io/react-native/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional">Proguard</a> for Android you might need to ignore some classes to get the the picker to work propery in android production/release mode. Add these lines to you proguard file (often called `proguard-rules.pro`): 
 ```
 -keep public class net.time4j.android.ApplicationStarter
 -keep public class net.time4j.PrettyTime
 ```
-
 
 ## Roadmap
 - [x] Mode: datetime
@@ -113,9 +115,9 @@ If you have enabled <a href="https://facebook.github.io/react-native/docs/signed
 - [x] Colored text support.
 
 ## Why another React Native date picker?
-One of the strongest reason to use react native is its cross platform compatibility. Most of the official components are working seemlessly on both platforms but there are some with single platform support only. The react native datepicker is one example where both <a href="https://facebook.github.io/react-native/docs/datepickerios">DatePickerIOS</a> and <a href="https://facebook.github.io/react-native/docs/datepickerandroid">DatePickerAndroid</a> are present. The reason for this is that the default date picker is implemented in seperate ways, iOS normally have an integrated view picker wheel where android has different pickers in a dialog format.
+One of the strongest reason to use react native is its cross platform compatibility. Most of the official components are working seamlessly on both platforms but there are some with single platform support only. The react native datepicker is one example where both <a href="https://facebook.github.io/react-native/docs/datepickerios">DatePickerIOS</a> and <a href="https://facebook.github.io/react-native/docs/datepickerandroid">DatePickerAndroid</a> are present. The reason for this is that the default date picker is implemented in seperate ways, iOS normally have an integrated view picker wheel where android has different pickers in a dialog format.
 
-If you want to use these pickers you can combile the official ones or a third party module that already done that for you. If you on the other hand want have a more unified design between your android and ios app, this module is for you. The datetime mode can be particular helpful to avoid 2 separate picker dialogs on android. 
+If you want to use these pickers you can combile the official ones or a third party module that already done that for you. If you on the other hand want have a more unified design between your android and ios app, this module is for you. The datetime mode can be particularly helpful to avoid 2 separate picker dialogs on android. 
 
 
 
