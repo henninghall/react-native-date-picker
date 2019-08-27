@@ -85,6 +85,10 @@ timeZoneOffsetInMinutes | Timezone offset in minutes (default: device's timezone
 
 ## FAQ
 
+### Can I use expo?
+Unfortunately, expo does not support this date picker at the moment. Upvote <a href="https://expo.canny.io/feature-requests/p/support-react-native-date-picker">this feature request</a> if you would like to have it included. 
+
+
 ### How do i change the date order? (To YYYY-MM-DD etc)
 The order is determined by the `locale` prop. Set for instance `locale='fr'`to get the France preference.
 
