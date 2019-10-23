@@ -1,5 +1,5 @@
 import React from 'react'
-import { DatePickerIOS, requireNativeComponent, StyleSheet } from 'react-native'
+import { StyleSheet, requireNativeComponent } from 'react-native'
 import moment from 'moment'
 import { throwIfInvalidProps } from './propChecker'
 
@@ -70,7 +70,5 @@ const styles = StyleSheet.create({
     height: 180,
   },
 })
-
-DatePickerAndroid.propTypes = DatePickerIOS.propTypes
 
 export default DatePickerAndroid
