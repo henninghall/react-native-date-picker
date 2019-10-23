@@ -26,9 +26,10 @@ const RCTDatePickerIOS = requireNativeComponent('RNDatePicker')
  * source of truth.
  */
 export default class DatePickerIOS extends React.Component {
-  static DefaultProps = {
+  static defaultProps = {
     mode: 'datetime',
-  }
+    highlightsToday: true,
+  };
 
   // $FlowFixMe How to type a native component to be able to call setNativeProps
   _picker = null
@@ -82,6 +83,7 @@ export default class DatePickerIOS extends React.Component {
         onStartShouldSetResponder={() => true}
         onResponderTerminationRequest={() => false}
         textColor={props.textColor}
+        highlightsToday={props.highlightsToday}
       />
     )
   }

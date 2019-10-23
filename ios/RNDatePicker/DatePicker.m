@@ -64,9 +64,14 @@
 
     // Setting picker text color
     [self setValue:UIColorFromRGB(intColor) forKeyPath:@"textColor"];
-    [self performSelector:@selector(setHighlightsToday:) withObject:NO];
 }
 
+- (void)setHighlightsTodayProp:(BOOL)highlightsToday
+{
+    if (highlightsToday == NO) {
+        [self performSelector:@selector(setHighlightsToday:) withObject:NO];
+    }
+}
 
 RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 

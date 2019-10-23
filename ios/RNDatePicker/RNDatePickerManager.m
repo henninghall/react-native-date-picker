@@ -39,11 +39,13 @@ RCT_EXPORT_VIEW_PROPERTY(minuteInterval, NSInteger)
 RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 RCT_REMAP_VIEW_PROPERTY(mode, datePickerMode, UIDatePickerMode)
 RCT_REMAP_VIEW_PROPERTY(timeZoneOffsetInMinutes, timeZone, NSTimeZone)
-
-
 RCT_CUSTOM_VIEW_PROPERTY(textColor, NSString, DatePicker)
 {
     [view setTextColorProp:[RCTConvert NSString:json]];
+}
+RCT_CUSTOM_VIEW_PROPERTY(highlightsToday, BOOL, DatePicker)
+{
+    [view setHighlightsTodayProp:[RCTConvert BOOL:json]];
 }
 
 @end
