@@ -56,6 +56,7 @@ export default class DatePickerIOS extends React.Component {
     if (__DEV__) throwIfInvalidProps(props)
     return (
       <RCTDatePickerIOS
+        testID={this.props.testID}
         key={this.props.textColor} // preventing "Today" string keep old text color when text color changes
         ref={picker => {
           this._picker = picker
