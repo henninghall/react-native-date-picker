@@ -84,6 +84,4 @@ interface Props extends ViewProps {
   textColor?: string
 }
 
-class DatePicker extends Component<Props> {}
-
-export default DatePicker
+export default class DatePicker extends Component<Props> {}
