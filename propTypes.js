@@ -14,7 +14,9 @@ export default {
   minimumDate: DateType,
   maximumDate: DateType,
   mode: PropTypes.oneOf(['date', 'time', 'datetime']),
-  minuteInterval: 1 | 2 | 3 | 4 | 5 | 6 | 10 | 12 | 15 | 20 | 30,
+  minuteInterval: PropTypes.oneOf(
+    1 | 2 | 3 | 4 | 5 | 6 | 10 | 12 | 15 | 20 | 30
+  ),  
   locale: PropTypes.string,
   textColor: PropTypes.string,
   timeZoneOffsetInMinutes: PropTypes.number,
