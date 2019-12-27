@@ -8,16 +8,6 @@ interface Props extends ViewProps {
   date?: Date
 
   /**
-   * Provides an initial value that will change when the user starts selecting
-   * a date. It is useful for simple use-cases where you do not want to deal
-   * with listening to events and updating the date prop to keep the
-   * controlled state in sync. The controlled state has known bugs which
-   * causes it to go out of sync with native. The initialDate prop is intended
-   * to allow you to have native be source of truth.
-   */
-  initialDate?: Date
-
-  /**
    * The date picker locale.
    */
   locale?: string
@@ -50,15 +40,6 @@ interface Props extends ViewProps {
    * Date change handler.
    *
    * This is called when the user changes the date or time in the UI.
-   * The first and only argument is an Event. For getting the date the picker
-   * was changed to, use onDateChange instead.
-   */
-  onChange?: (event: object) => void
-
-  /**
-   * Date change handler.
-   *
-   * This is called when the user changes the date or time in the UI.
    * The first and only argument is a Date object representing the new
    * date and time.
    */
@@ -74,7 +55,7 @@ interface Props extends ViewProps {
   timeZoneOffsetInMinutes?: number
 
   /**
-   * Android picker is fading towords this background color. { color, 'none' }
+   * Android picker is fading towards this background color. { color, 'none' }
    */
   fadeToColor?: string
 
