@@ -1,36 +1,10 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- *
- * This is a controlled component version of RCTDatePickerIOS
- *
- */
-
-'use strict'
-
 import React from 'react'
 import { StyleSheet, View, requireNativeComponent } from 'react-native'
 import { throwIfInvalidProps } from './propChecker'
-const invariant = require('fbjs/lib/invariant')
 
 const RCTDatePickerIOS = requireNativeComponent('RNDatePicker')
 
-/**
- * Use `DatePickerIOS` to render a date/time picker (selector) on iOS.  This is
- * a controlled component, so you must hook in to the `onDateChange` callback
- * and update the `date` prop in order for the component to update, otherwise
- * the user's change will be reverted immediately to reflect `props.date` as the
- * source of truth.
- */
 export default class DatePickerIOS extends React.Component {
-  static DefaultProps = {
-    mode: 'datetime',
-  }
-
-  // $FlowFixMe How to type a native component to be able to call setNativeProps
   _picker = null
 
   componentDidUpdate() {
@@ -48,7 +22,6 @@ export default class DatePickerIOS extends React.Component {
     const nativeTimeStamp = event.nativeEvent.timestamp
     this.props.onDateChange &&
       this.props.onDateChange(new Date(nativeTimeStamp))
-    this.props.onChange && this.props.onChange(event)
   }
 
   render() {
@@ -62,13 +35,7 @@ export default class DatePickerIOS extends React.Component {
           this._picker = picker
         }}
         style={[styles.datePickerIOS, props.style]}
-        date={
-          props.date
-            ? props.date.getTime()
-            : props.initialDate
-            ? props.initialDate.getTime()
-            : undefined
-        }
+        date={props.date ? props.date.getTime() : undefined}
         locale={props.locale ? props.locale : undefined}
         maximumDate={
           props.maximumDate ? props.maximumDate.getTime() : undefined

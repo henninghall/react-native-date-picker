@@ -1,5 +1,15 @@
 import { Platform } from 'react-native'
 import DatePickerIOS from './DatePickerIOS'
 import DatePickerAndroid from './DatePickerAndroid'
+import propTypes from './propTypes'
+import defaultProps from './defaultProps'
 
-export default Platform.OS === 'ios' ? DatePickerIOS : DatePickerAndroid
+const DatePicker = Platform.select({
+  android: DatePickerAndroid,
+  ios: DatePickerIOS,
+})
+
+DatePicker.defaultProps = defaultProps
+DatePicker.propTypes = propTypes
+
+export default DatePicker
