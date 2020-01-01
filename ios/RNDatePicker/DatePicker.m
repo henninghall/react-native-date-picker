@@ -50,20 +50,57 @@
     if ((self = [super initWithFrame:frame])) {
         [self addTarget:self action:@selector(didChange)
        forControlEvents:UIControlEventValueChanged];
+        if(@available(iOS 13, *)) {
+            self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+        }
     }
     return self;
 }
 
-- (void)setTextColorProp:(NSString *)hexColor
-{
+- (void)setColor:(NSString *)hexColor {
     // Hex to int color
     unsigned intColor = 0;
     NSScanner *scanner = [NSScanner scannerWithString:hexColor];
     [scanner setScanLocation:1]; // bypass '#' character
     [scanner scanHexInt:&intColor];
-    
+
     // Setting picker text color
     [self setValue:UIColorFromRGB(intColor) forKeyPath:@"textColor"];
+}
+
+- (void)removeTodayString {
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wundeclared-selector"
+    [self performSelector:@selector(setHighlightsToday:) withObject:[NSNumber numberWithBool:NO]];
+    #pragma clang diagnostic pop
+}
+
+
+- (void)setTextColorProp:(NSString *)hexColor
+{
+    
+    if(@available(iOS 13, *)) {
+
+        // black text -> set light mode
+        if([hexColor isEqualToString:@"#000000"]){
+            self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+        }
+
+        // white text -> set dark mode
+        else if([hexColor isEqualToString:@"#FFFFFF"] || [hexColor isEqualToString:@"#ffffff"]){
+            self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+        }
+        // other colors -> remove "Today" string since it cannot be colored from iOS 13.
+        else {
+            [self removeTodayString];
+            [self setColor:hexColor];
+        }
+    }
+
+    // if ios 12 and earlier -> no need to remove today string since it can be colored.
+    else {
+        [self setColor:hexColor];
+    }
 }
 
 
