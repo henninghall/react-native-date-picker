@@ -9,7 +9,7 @@
 
 
 #import "DatePicker.h"
-#import "UIView+React.h"
+#import <React/UIView+React.h>
 
 @implementation RCTConvert(UIDatePicker)
 
