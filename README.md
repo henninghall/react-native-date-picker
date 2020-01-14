@@ -40,6 +40,8 @@ This is a React Native Date Picker with following main features:
 1. `npm install react-native-date-picker --save`
 2. `react-native link react-native-date-picker` (Only needed for React Native <= 0.59)
 
+Xcode 11 is required to run the latest version of the date picker. Xcode 10 is supported up to version 2.7.2. 
+
 ## Minimal Example
 
 ```js
