@@ -97,6 +97,10 @@ On iOS the 12/24h preference is determined by the `locale` prop. Set for instanc
 
 This is unfortunately not possible due to the limitation in DatePickerIOS. You should be able to create your own month-year picker with for instance https://github.com/TronNatthakorn/react-native-wheel-pick.
 
+### Can I show non-date related data inside the picker?
+
+No, unfortunately this package only supports picking dates and times. If you need to render other types of list items inside a wheel picker, checkout <a href="https://github.com/adammcarth/react-native-segmented-picker">react-native-segmented-picker</a>.
+
 ### Why does the Android app crash in production?
 
 If you have enabled <a href="https://facebook.github.io/react-native/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional">Proguard</a> for Android you might need to ignore some classes to get the the picker to work propery in android production/release mode. Add these lines to you proguard file (often called `proguard-rules.pro`):
