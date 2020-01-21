@@ -1,4 +1,4 @@
-# React Native Date Picker [![npm](https://img.shields.io/npm/v/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) [![Build status](https://img.shields.io/bitrise/288d828c2f6731e6/master.svg?token=mGBI2QhCJBx18ffiS-MfpA&label=build)](https://app.bitrise.io/app/288d828c2f6731e6#/builds) [![npm](https://img.shields.io/npm/dm/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker)
+# React Native Date Picker [![npm](https://img.shields.io/npm/v/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) <!--[![Build status](https://img.shields.io/bitrise/288d828c2f6731e6/master.svg?token=mGBI2QhCJBx18ffiS-MfpA&label=build)](https://app.bitrise.io/app/288d828c2f6731e6#/builds)--> [![npm](https://img.shields.io/npm/dm/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker)
 
 <!--
  [![Foo](https://7pjewxutn7.execute-api.us-east-1.amazonaws.com/default/date-picker-badge)](https://app.bitrise.io/app/288d828c2f6731e6#/builds)
