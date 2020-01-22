@@ -13,6 +13,7 @@
 @interface DatePicker ()
 
 @property (nonatomic, copy) RCTBubblingEventBlock onChange;
+@property (nonatomic, assign) NSInteger reactMinuteInterval;
 
 @end
 
@@ -53,6 +54,7 @@
         if(@available(iOS 13, *)) {
             self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
         }
+         _reactMinuteInterval = 1;
     }
     return self;
 }
@@ -112,6 +114,20 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
         _onChange(@{ @"timestamp": @(self.date.timeIntervalSince1970 * 1000.0) });
     }
 }
+
+- (void)setDatePickerMode:(UIDatePickerMode)datePickerMode
+{
+  [super setDatePickerMode:datePickerMode];
+  // We need to set minuteInterval after setting datePickerMode, otherwise minuteInterval is invalid in time mode.
+  self.minuteInterval = _reactMinuteInterval;
+}
+
+- (void)setMinuteInterval:(NSInteger)minuteInterval
+{
+  [super setMinuteInterval:minuteInterval];
+  _reactMinuteInterval = minuteInterval;
+}
+
 
 @end
 
