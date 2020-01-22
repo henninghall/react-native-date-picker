@@ -111,7 +111,7 @@ public class DayWheel extends Wheel {
     }
 
     @Override
-    public String getDisplayFormatTemplate() {
+    public String getFormatTemplate() {
         String locale = pickerView.locale.getLanguage();
         if(locale.equals("ko"))
             return "yy MMM d일 (EEE)";
@@ -121,11 +121,6 @@ public class DayWheel extends Wheel {
             return "yy EEE MMM d";
         }
         else return "yy EEE d MMM";
-    }
-
-    @Override
-    public String getFormatTemplate() {
-        return "yy EEE MMM d";
     }
 
     @Override

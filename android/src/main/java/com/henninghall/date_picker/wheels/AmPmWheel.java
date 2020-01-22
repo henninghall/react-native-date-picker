@@ -41,13 +41,8 @@ public class AmPmWheel extends Wheel {
     }
 
     @Override
-    public String getDisplayFormatTemplate() {
-        return Settings.usesAmPm() ? " a " : "";
-    }
-
-    @Override
     public String getFormatTemplate() {
-        return  " a ";
+        return Settings.usesAmPm() ? " a " : "";
     }
 
     @Override

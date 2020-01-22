@@ -33,11 +33,6 @@ public class MonthWheel extends Wheel
     }
 
     @Override
-    public String getDisplayFormatTemplate() {
-        return "LLLL";
-    }
-
-    @Override
     public String getFormatTemplate() {
         return "LLLL";
     }
@@ -60,6 +55,6 @@ public class MonthWheel extends Wheel
     }
 
     private SimpleDateFormat getFormat(Locale locale) {
-        return new SimpleDateFormat(this.getDisplayFormatTemplate(), locale);
+        return new SimpleDateFormat(this.getFormatTemplate(), locale);
     }
 }

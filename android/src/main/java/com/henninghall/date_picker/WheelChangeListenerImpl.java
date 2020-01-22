@@ -30,8 +30,7 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
         try {
             dateFormat.setTimeZone(timeZone);
             Calendar date = Calendar.getInstance(timeZone);
-            String toParse = this.pickerView.getDateString();
-            date.setTime(dateFormat.parse(toParse));
+            date.setTime(dateFormat.parse(this.pickerView.getDateString()));
 
             if (minDate != null && date.before(minDate)) pickerView.applyOnVisibleWheels(
                     new AnimateToDate(minDate)
