@@ -20,6 +20,7 @@ public abstract class Wheel {
     abstract void init();
     public abstract boolean visible();
     public abstract Paint.Align getTextAlign();
+    public abstract String getDisplayFormatTemplate();
     public abstract String getFormatTemplate();
 
     ArrayList<String> values;
@@ -44,7 +45,7 @@ public abstract class Wheel {
     }
 
     private void clearValues(){
-        this.displayFormat = new SimpleDateFormat(getFormatTemplate(), pickerView.locale);
+        this.displayFormat = new SimpleDateFormat(getDisplayFormatTemplate(), pickerView.locale);
         this.format = new SimpleDateFormat(getFormatTemplate(), LocaleUtils.toLocale("en_US"));
         this.values = new ArrayList<>();
         this.displayValues= new ArrayList<>();

@@ -155,7 +155,7 @@ public class PickerView extends RelativeLayout {
         return dateTemplate + " "
                 + hourWheel.getFormatTemplate() + " "
                 + minutesWheel.getFormatTemplate()
-                +  ampmWheel.getFormatTemplate();
+                + ampmWheel.getFormatTemplate();
     }
 
     public String getDateString() {

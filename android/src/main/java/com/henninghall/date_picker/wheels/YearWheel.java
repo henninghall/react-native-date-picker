@@ -60,9 +60,15 @@ public class YearWheel extends Wheel
     }
 
     @Override
+    public String getDisplayFormatTemplate() {
+        return "y";
+    }
+
+    @Override
     public String getFormatTemplate() {
         return "y";
     }
+
 
 }
 
