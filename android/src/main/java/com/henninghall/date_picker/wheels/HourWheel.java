@@ -20,7 +20,7 @@ public class HourWheel extends Wheel {
 
         for(int i=0; i<numberOfHours; i++) {
             values.add(format.format(cal.getTime()));
-            displayValues.add(format.format(cal.getTime()));
+            displayValues.add(displayFormat.format(cal.getTime()));
             cal.add(Calendar.HOUR_OF_DAY, 1);
         }
         picker.setDisplayedValues(values.toArray(new String[0]),true);
@@ -34,8 +34,13 @@ public class HourWheel extends Wheel {
     }
 
     @Override
-    public String getFormatTemplate() {
+    public String getDisplayFormatTemplate() {
         return Settings.usesAmPm() ? "h": "HH";
+    }
+
+    @Override
+    public String getFormatTemplate() {
+        return "h";
     }
 
     @Override

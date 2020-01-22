@@ -34,6 +34,11 @@ public class DateWheel extends Wheel
     }
 
     @Override
+    public String getDisplayFormatTemplate() {
+        return "d";
+    }
+
+    @Override
     public String getFormatTemplate() {
         return "d";
     }
