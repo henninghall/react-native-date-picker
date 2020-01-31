@@ -1,3 +1,4 @@
 rootProject.name = 'rn602'
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+project(':react-native-date-picker').projectDir = new File(rootProject.projectDir, '../../../android')
 include ':app'

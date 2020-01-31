@@ -8,12 +8,6 @@ public class EmptyWheelUpdater {
     private final PickerView pickerView;
     private final HashMap<Integer, NumberPickerView> views;
 
-    private int[] ids = {
-            R.id.empty1,
-            R.id.empty2,
-            R.id.empty3
-    };
-
     EmptyWheelUpdater(PickerView pickerView) {
         this.pickerView = pickerView;
         this.views = getViews();
@@ -21,30 +15,22 @@ public class EmptyWheelUpdater {
 
     private HashMap<Integer, NumberPickerView> getViews() {
         HashMap<Integer, NumberPickerView> views = new HashMap<>();
-        for (int id: ids) {
+        for (int id: Utils.emptyWheelIds) {
             NumberPickerView view = (NumberPickerView) pickerView.findViewById(id);
             views.put(id, view);
         }
         return views;
     }
 
-    void update(Mode mode) {
+    void update() {
         hideAll();
         int numberOfVisibleWheels = pickerView.getVisibleWheels().size();
-        int emptyViewsToAdd = numberOfVisibleWheels - 1;
-        int numberOfPickerWheelsBeforeMode = getNumberOfPickerWheelsBeforeMode(mode);
+        int emptyViewsToAdd = numberOfVisibleWheels + 1;
 
         for (int i = 0; i < emptyViewsToAdd; i++) {
-            int index = numberOfPickerWheelsBeforeMode + 1 + i * 2;
-            pickerView.wheelsWrapper.addView(views.get(ids[i]), index);
+            int index = i * 2;
+            pickerView.wheelsWrapper.addView(views.get(Utils.emptyWheelIds[i]), index);
         }
-    }
-
-    private int getNumberOfPickerWheelsBeforeMode(Mode mode) {
-        if(mode == Mode.date) return 1;
-        if(mode == Mode.datetime) return 4;
-        if(mode == Mode.time) return 5;
-        return 0;
     }
 
     private void hideAll() {

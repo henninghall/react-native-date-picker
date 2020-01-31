@@ -5,8 +5,8 @@ import android.graphics.Paint;
 import com.henninghall.date_picker.Mode;
 import com.henninghall.date_picker.PickerView;
 import com.henninghall.date_picker.Settings;
-import com.henninghall.date_picker.WheelPosition;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -17,22 +17,16 @@ public class AmPmWheel extends Wheel {
     }
 
     @Override
-    void init() {
-
-        Calendar cal = pickerView.getInitialDate();
+    public ArrayList<String> getValues() {
+        Calendar cal = Calendar.getInstance();
+        ArrayList<String> values = new ArrayList<>();
 
         cal.set(Calendar.HOUR_OF_DAY, 0);
-        displayValues.add(displayFormat.format(cal.getTime()));
         values.add(format.format(cal.getTime()));
 
         cal.add(Calendar.HOUR_OF_DAY, 12);
-        displayValues.add(displayFormat.format(cal.getTime()));
         values.add(format.format(cal.getTime()));
-
-        picker.setDisplayedValues(displayValues.toArray(new String[0]));
-
-        picker.setMinValue(0);
-        picker.setMaxValue(1);
+        return values;
     }
 
     @Override
@@ -41,7 +35,7 @@ public class AmPmWheel extends Wheel {
     }
 
     @Override
-    public String getFormatTemplate() {
+    public String getFormatPattern() {
         return Settings.usesAmPm() ? " a " : "";
     }
 

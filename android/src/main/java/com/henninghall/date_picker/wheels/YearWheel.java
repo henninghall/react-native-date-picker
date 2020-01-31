@@ -2,9 +2,11 @@ package com.henninghall.date_picker.wheels;
 
 import android.graphics.Paint;
 
+import com.henninghall.date_picker.LocaleUtils;
 import com.henninghall.date_picker.Mode;
 import com.henninghall.date_picker.PickerView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class YearWheel extends Wheel
@@ -19,20 +21,22 @@ public class YearWheel extends Wheel
     }
 
     @Override
-    void init() {
+    public ArrayList<String> getValues() {
+        ArrayList<String> values = new ArrayList<>();
+        Calendar cal = Calendar.getInstance();
+
         final int startYear = getStartYear();
-        final int endYear = getEndYear() ;
+        final int endYear = getEndYear();
         int max = endYear - startYear;
 
+        cal.set(Calendar.YEAR, startYear);
+
         for (int i = 0; i <= max; ++i) {
-            values.add(String.valueOf(startYear + i));
-            displayValues.add(String.valueOf(startYear + i));
+            values.add(getLocaleString(cal));
+            cal.add(Calendar.YEAR, 1);
         }
 
-        picker.setMaxValue(0);
-        picker.setDisplayedValues(displayValues.toArray(new String[0]));
-        picker.setMinValue(0);
-        picker.setMaxValue(max);
+        return values;
     }
 
     private int getEndYear() {
@@ -60,8 +64,8 @@ public class YearWheel extends Wheel
     }
 
     @Override
-    public String getFormatTemplate() {
-        return "y";
+    public String getFormatPattern() {
+        return LocaleUtils.getPatternIncluding("y", pickerView.locale);
     }
 
 }

@@ -6,13 +6,16 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.henninghall.date_picker.wheelFunctions.AnimateToDate;
 import com.henninghall.date_picker.wheels.Wheel;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class WheelChangeListenerImpl implements WheelChangeListener {
-
 
     private final PickerView pickerView;
 
@@ -24,13 +27,16 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
     public void onChange(Wheel picker) {
         WritableMap event = Arguments.createMap();
         TimeZone timeZone = pickerView.timeZone;
-        SimpleDateFormat dateFormat = pickerView.dateFormat;
+        SimpleDateFormat dateFormat = pickerView.getDateFormat();
         Calendar minDate = pickerView.getMinimumDate();
         Calendar maxDate = pickerView.getMaximumDate();
         try {
             dateFormat.setTimeZone(timeZone);
             Calendar date = Calendar.getInstance(timeZone);
-            date.setTime(dateFormat.parse(this.pickerView.getDateString()));
+            String toParse = this.pickerView.getDateString();
+            Date newDate = dateFormat.parse(toParse);
+            date.setTime(newDate);
+
 
             if (minDate != null && date.before(minDate)) pickerView.applyOnVisibleWheels(
                     new AnimateToDate(minDate)

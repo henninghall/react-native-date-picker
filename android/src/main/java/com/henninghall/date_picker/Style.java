@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import com.henninghall.date_picker.wheelFunctions.SetShowCount;
 import com.henninghall.date_picker.wheelFunctions.TextColor;
 
+import cn.carbswang.android.numberpickerview.library.NumberPickerView;
+
 
 class Style {
     private static int DP_PER_SHOW_SHOW_COUNT = 35;
@@ -44,7 +46,14 @@ class Style {
         int showCount = height / DP_PER_SHOW_SHOW_COUNT;
         int oddShowCount = showCount % 2 == 0 ? showCount + 1 : showCount;
         pickerView.applyOnAllWheels(new SetShowCount(oddShowCount));
-        pickerView.setShownCountOnEmptyWheels(oddShowCount);
+        setShownCountOnEmptyWheels(oddShowCount);
+    }
+
+    private void setShownCountOnEmptyWheels(int shownCount) {
+        for (int id : Utils.emptyWheelIds) {
+            NumberPickerView view = (NumberPickerView) pickerView.findViewById(id);
+            if(view != null) view.setShownCount(shownCount);
+        }
     }
 
     private boolean validColor(String color){
