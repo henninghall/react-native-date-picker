@@ -57,6 +57,8 @@ PODS:
     - React-cxxreact (= 0.60.3)
     - React-jsi (= 0.60.3)
   - React-jsinspector (0.60.3)
+  - react-native-date-picker (2.7.4):
+    - React
   - React-RCTActionSheet (0.60.3):
     - React-Core (= 0.60.3)
   - React-RCTAnimation (0.60.3):
@@ -95,6 +97,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -108,7 +111,7 @@ DEPENDENCIES:
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - boost-for-react-native
 
 EXTERNAL SOURCES:
@@ -134,6 +137,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-date-picker:
+    :path: "../node_modules/react-native-date-picker"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -170,6 +175,7 @@ SPEC CHECKSUMS:
   React-jsi: c2b6e57836bcae2677a036384111dc2c58e94369
   React-jsiexecutor: d9023c5c199114d2b6f38ec861a4d923c73d0735
   React-jsinspector: 817b64f3c8a807f09d78620f4f505868d89b26f3
+  react-native-date-picker: 9606a515f5b79db23f552ecb65ca9203e04c6f22
   React-RCTActionSheet: 9c42321fd5652515d706dd722c5a10b1970d7ec8
   React-RCTAnimation: fabb087dde8964c9a835a7fabd0e7e5701787913
   React-RCTBlob: 93f34281d9c9c9e216b25824309eed9fe22a5d41
@@ -182,6 +188,6 @@ SPEC CHECKSUMS:
   React-RCTWebSocket: 69d8565d66043f244b4129f3d7154c5689fb7d3e
   yoga: 843fe25849b56131275bf3e5da2c468e96f68aff
 
-PODFILE CHECKSUM: 90ebcccb1d96dad2ba49b779ee5aa4e5a38065db
+PODFILE CHECKSUM: cfa79c36c6126c429e0b57b924c3b791f75678dd
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.4

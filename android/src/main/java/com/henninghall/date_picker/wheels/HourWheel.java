@@ -5,6 +5,8 @@ import android.graphics.Paint;
 import com.henninghall.date_picker.Mode;
 import com.henninghall.date_picker.PickerView;
 import com.henninghall.date_picker.Settings;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class HourWheel extends Wheel {
@@ -13,19 +15,18 @@ public class HourWheel extends Wheel {
         super(pickerView, id);
     }
 
+
     @Override
-    void init() {
+    public ArrayList<String> getValues() {
+        Calendar cal = Calendar.getInstance();
+        ArrayList<String> values = new ArrayList<>();
         int numberOfHours = Settings.usesAmPm() ? 12 : 24;
-        Calendar cal = pickerView.getInitialDate();
 
         for(int i=0; i<numberOfHours; i++) {
             values.add(format.format(cal.getTime()));
-            displayValues.add(format.format(cal.getTime()));
             cal.add(Calendar.HOUR_OF_DAY, 1);
         }
-        picker.setDisplayedValues(values.toArray(new String[0]),true);
-        picker.setMinValue(0);
-        picker.setMaxValue(numberOfHours - 1);
+        return values;
     }
 
     @Override
@@ -34,7 +35,7 @@ public class HourWheel extends Wheel {
     }
 
     @Override
-    public String getFormatTemplate() {
+    public String getFormatPattern() {
         return Settings.usesAmPm() ? "h": "HH";
     }
 

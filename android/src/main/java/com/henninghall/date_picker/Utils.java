@@ -1,25 +1,27 @@
 package com.henninghall.date_picker;
 
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.text.format.DateUtils;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.View;
 
 import net.time4j.PrettyTime;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.Collections;
 import java.util.Locale;
 import java.util.TimeZone;
 
 public class Utils {
+
+    public static int[] emptyWheelIds = {
+            R.id.emptyStart,
+            R.id.empty1,
+            R.id.empty2,
+            R.id.empty3,
+            R.id.emptyEnd
+    };
 
     public static String printToday(Locale locale) {
         return PrettyTime.of(locale).printToday();
@@ -41,15 +43,6 @@ public class Utils {
         return getIsoUTCFormat().format(date.getTime());
     }
 
-    public static boolean monthNameBeforeMonthDate(Locale locale){
-            DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
-            GregorianCalendar calendar = new GregorianCalendar();
-            calendar.set(Calendar.DAY_OF_MONTH, 1);
-            calendar.set(Calendar.MONTH, 2);
-            String string = df.format(calendar.getTime());
-        return !string.startsWith("1") && !string.startsWith("01");
-    }
-
     public static boolean isToday(Calendar cal){
         return DateUtils.isToday(cal.getTimeInMillis());
     }
@@ -69,12 +62,30 @@ public class Utils {
         return format;
     }
 
-    public static float dpToPixels(int dp, Context context){
-        return TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                dp,
-                context.getResources().getDisplayMetrics()
-        );
+    public static ArrayList<String> splitOnSpace(String value){
+        String[] array = value.split(" ");
+        ArrayList<String> arrayList = new ArrayList<>();
+        Collections.addAll(arrayList, array);
+        return arrayList;
     }
+
+    public static String capitalize(String s){
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
+    }
+
+    public static WheelType patternCharToWheelType(char patternChar) throws Exception {
+        switch (patternChar){
+            case 'y': return WheelType.YEAR;
+            case 'M': return WheelType.MONTH;
+            case 'd': return WheelType.DATE;
+            case 'h':
+            case 'H':
+                return WheelType.HOUR;
+            case 'm': return WheelType.MINUTE;
+            case 'a': return WheelType.AM_PM;
+            default: throw new Exception("Invalid pattern char: " + patternChar);
+        }
+    }
+
 
 }
