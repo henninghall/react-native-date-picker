@@ -1,10 +1,5 @@
-# React Native Date Picker [![npm](https://img.shields.io/npm/v/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) <!--[![Build status](https://img.shields.io/bitrise/288d828c2f6731e6/master.svg?token=mGBI2QhCJBx18ffiS-MfpA&label=build)](https://app.bitrise.io/app/288d828c2f6731e6#/builds)--> [![npm](https://img.shields.io/npm/dm/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker)
+# React Native Date Picker [![npm](https://img.shields.io/npm/v/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) [![Build status](https://img.shields.io/github/workflow/status/henninghall/react-native-date-picker/Android:%20build%20&%20test?label=tests)](https://github.com/henninghall/react-native-date-picker/actions) [![npm](https://img.shields.io/npm/dm/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker)
 
-<!--
- [![Foo](https://7pjewxutn7.execute-api.us-east-1.amazonaws.com/default/date-picker-badge)](https://app.bitrise.io/app/288d828c2f6731e6#/builds)
-
- [![Foo](https://app.bitrise.io/app/288d828c2f6731e6/status.svg?token=mGBI2QhCJBx18ffiS-MfpA&branch=master)](https://app.bitrise.io/app/288d828c2f6731e6#/builds)
- -->
 
 This is a React Native Date Picker with following main features:
 
@@ -12,10 +7,6 @@ This is a React Native Date Picker with following main features:
 🕑 3 different modes: Time, Date, DateTime <br>
 🌍 Multiple languages<br>
 🎨 Customizable<br>
-
-<!--
-[![Monthly download](https://img.shields.io/npm/dm/react-native-date-picker.svg)](https://img.shields.io/npm/dm/react-native-date-picker.svg)
-[![Total downloads](https://img.shields.io/npm/dt/react-native-date-picker.svg)](https://img.shields.io/npm/dt/react-native-date- picker.svg) -->
 
 <table>
   <tr>

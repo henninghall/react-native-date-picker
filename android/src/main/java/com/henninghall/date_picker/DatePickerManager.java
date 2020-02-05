@@ -1,9 +1,6 @@
 package com.henninghall.date_picker;
 
-import android.content.res.Resources;
-import android.util.Log;
-import android.util.TypedValue;
-
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -19,6 +16,8 @@ import java.util.TimeZone;
 public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
   public static final String REACT_CLASS = "DatePickerManager";
+  private static final int SCROLL = 1;
+
   public static ThemedReactContext context;
   private String date;
 
@@ -90,6 +89,21 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
   @ReactPropGroup(names = {"height", "width"}, customType = "Style")
   public void setStyle(PickerView view, int index, Integer style) {
     if(index == 0) view.style.setHeight(style);
+  }
+
+  @Override
+  public Map<String, Integer> getCommandsMap() {
+    return MapBuilder.of(
+            "scroll", SCROLL
+    );
+  }
+
+  public void receiveCommand(final PickerView view, int command, final ReadableArray args) {
+    if (command == SCROLL) {
+      int wheelIndex = args.getInt(0);
+      int scrollTimes = args.getInt(1);
+      view.scroll(wheelIndex, scrollTimes);
+    }
   }
 
   @Override
