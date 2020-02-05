@@ -1,1 +1,1 @@
-require('./app')
+require('./src/App')

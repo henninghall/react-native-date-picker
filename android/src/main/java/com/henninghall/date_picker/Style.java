@@ -2,8 +2,6 @@ package com.henninghall.date_picker;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.henninghall.date_picker.wheelFunctions.SetShowCount;
 import com.henninghall.date_picker.wheelFunctions.TextColor;

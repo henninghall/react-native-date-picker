@@ -27,7 +27,7 @@ public class WheelOrder
         }};
     }
 
-    private void updateValueWheels(final Locale locale) {
+    private void updateAllWheels(final Locale locale) {
         try {
             this.orderedWheels = getOrderedWheels(locale);
             pickerView.wheelsWrapper.removeAllViews();
@@ -45,7 +45,7 @@ public class WheelOrder
 
 
     void update(final Locale locale) {
-        updateValueWheels(locale);
+        updateAllWheels(locale);
         pickerView.emptyWheelUpdater.update();
     }
 
