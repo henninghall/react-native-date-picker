@@ -3,19 +3,22 @@ package com.henninghall.date_picker.wheels;
 import android.graphics.Paint;
 
 import com.henninghall.date_picker.LocaleUtils;
-import com.henninghall.date_picker.Mode;
+import com.henninghall.date_picker.State;
+import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.PickerView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class YearWheel extends Wheel
 {
     private int defaultStartYear;
     private int defaultEndYear;
 
-    public YearWheel(final PickerView pickerView, final int id) {
-        super(pickerView, id);
+    public YearWheel(final NumberPickerView picker, final State id) {
+        super(picker, id);
         this.defaultStartYear = 1900;
         this.defaultEndYear = 2100;
     }
@@ -40,22 +43,22 @@ public class YearWheel extends Wheel
     }
 
     private int getEndYear() {
-        if (this.pickerView.getMaximumDate() == null) {
+        if (state.getMaximumDate() == null) {
             return this.defaultEndYear;
         }
-        return this.pickerView.getMaximumDate().get(Calendar.YEAR);
+        return state.getMaximumDate().get(Calendar.YEAR);
     }
 
     private int getStartYear() {
-        if (this.pickerView.getMinimumDate() == null) {
+        if (state.getMinimumDate() == null) {
             return this.defaultStartYear;
         }
-        return this.pickerView.getMinimumDate().get(Calendar.YEAR);
+        return state.getMinimumDate().get(Calendar.YEAR);
     }
 
     @Override
     public boolean visible() {
-        return this.pickerView.mode == Mode.date;
+        return state.getMode() == Mode.date;
     }
 
     @Override
@@ -65,7 +68,7 @@ public class YearWheel extends Wheel
 
     @Override
     public String getFormatPattern() {
-        return LocaleUtils.getPatternIncluding("y", pickerView.locale);
+        return LocaleUtils.getPatternIncluding("y", state.getLocale());
     }
 
 }

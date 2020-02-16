@@ -4,10 +4,13 @@ import android.graphics.Paint;
 
 import java.util.*;
 import com.henninghall.date_picker.*;
+import com.henninghall.date_picker.models.Mode;
+
+import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class MonthWheel extends Wheel
 {
-    public MonthWheel(final PickerView pickerView, final int id) {
+    public MonthWheel(final NumberPickerView pickerView, final State id) {
         super(pickerView, id);
     }
 
@@ -27,7 +30,7 @@ public class MonthWheel extends Wheel
 
     @Override
     public boolean visible() {
-        return this.pickerView.mode == Mode.date;
+        return state.getMode() == Mode.date;
     }
 
     @Override

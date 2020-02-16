@@ -2,17 +2,19 @@ package com.henninghall.date_picker.wheels;
 
 import android.graphics.Paint;
 
-import com.henninghall.date_picker.Mode;
-import com.henninghall.date_picker.PickerView;
-import com.henninghall.date_picker.Settings;
+import com.henninghall.date_picker.State;
+import com.henninghall.date_picker.Utils;
+import com.henninghall.date_picker.models.Mode;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import cn.carbswang.android.numberpickerview.library.NumberPickerView;
+
 public class MinutesWheel extends Wheel {
 
-    public MinutesWheel(PickerView pickerView, int id) {
-        super(pickerView, id);
+    public MinutesWheel(NumberPickerView picker, State id) {
+        super(picker, id);
     }
 
     @Override
@@ -21,9 +23,9 @@ public class MinutesWheel extends Wheel {
         ArrayList<String> values = new ArrayList<>();
 
         cal.set(Calendar.MINUTE, 0);
-        for(int i=0; i<60; i = i + pickerView.minuteInterval) {
+        for(int i=0; i<60; i = i + state.getMinuteInterval()) {
             values.add(format.format(cal.getTime()));
-            cal.add(Calendar.MINUTE, pickerView.minuteInterval);
+            cal.add(Calendar.MINUTE, state.getMinuteInterval());
         }
 
         return values;
@@ -31,7 +33,7 @@ public class MinutesWheel extends Wheel {
 
     @Override
     public boolean visible() {
-        return pickerView.mode != Mode.date;
+        return state.getMode() != Mode.date;
     }
 
     @Override
@@ -41,7 +43,7 @@ public class MinutesWheel extends Wheel {
 
     @Override
     public Paint.Align getTextAlign() {
-        return Settings.usesAmPm() ? Paint.Align.RIGHT: Paint.Align.LEFT;
+        return Utils.usesAmPm() ? Paint.Align.RIGHT: Paint.Align.LEFT;
     }
 
 }

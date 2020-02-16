@@ -1,17 +1,17 @@
 package com.henninghall.date_picker.wheels;
 
 import android.graphics.Paint;
-import android.text.format.DateUtils;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import com.henninghall.date_picker.*;
+import com.henninghall.date_picker.models.Mode;
+
+import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class DateWheel extends Wheel
 {
-    public DateWheel(final PickerView pickerView, final int id) {
-        super(pickerView, id);
+    public DateWheel(final NumberPickerView picker, final State id) {
+        super(picker, id);
     }
 
 
@@ -32,12 +32,12 @@ public class DateWheel extends Wheel
 
     @Override
     public boolean visible() {
-        return this.pickerView.mode == Mode.date;
+        return state.getMode() == Mode.date;
     }
 
     @Override
     public String getFormatPattern() {
-        return LocaleUtils.getPatternIncluding("d", pickerView.locale);
+        return LocaleUtils.getPatternIncluding("d", state.getLocale());
     }
 
     @Override

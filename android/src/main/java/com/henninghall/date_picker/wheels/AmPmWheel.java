@@ -2,18 +2,20 @@ package com.henninghall.date_picker.wheels;
 
 import android.graphics.Paint;
 
-import com.henninghall.date_picker.Mode;
-import com.henninghall.date_picker.PickerView;
-import com.henninghall.date_picker.Settings;
+import com.henninghall.date_picker.State;
+import com.henninghall.date_picker.Utils;
+import com.henninghall.date_picker.models.Mode;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import cn.carbswang.android.numberpickerview.library.NumberPickerView;
+
 
 public class AmPmWheel extends Wheel {
 
-    public AmPmWheel(PickerView pickerView, int id) {
-        super(pickerView, id);
+    public AmPmWheel(final NumberPickerView picker, State state) {
+        super(picker, state);
     }
 
     @Override
@@ -31,12 +33,12 @@ public class AmPmWheel extends Wheel {
 
     @Override
     public boolean visible() {
-        return Settings.usesAmPm() && pickerView.mode != Mode.date;
+        return Utils.usesAmPm() && state.getMode() != Mode.date;
     }
 
     @Override
     public String getFormatPattern() {
-        return Settings.usesAmPm() ? " a " : "";
+        return Utils.usesAmPm() ? " a " : "";
     }
 
     @Override
