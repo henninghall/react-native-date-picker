@@ -1,7 +1,10 @@
 package com.henninghall.date_picker;
 
 
+import android.text.format.DateFormat;
 import android.text.format.DateUtils;
+
+import com.henninghall.date_picker.models.WheelType;
 
 import net.time4j.PrettyTime;
 
@@ -14,6 +17,10 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class Utils {
+
+    public static boolean usesAmPm(){
+        return !DateFormat.is24HourFormat(DatePickerManager.context);
+    }
 
     public static int[] emptyWheelIds = {
             R.id.emptyStart,
