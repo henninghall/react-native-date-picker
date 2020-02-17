@@ -14,7 +14,7 @@ public class FadingOverlay {
     private final GradientDrawable gradientBottom;
     private final State state;
 
-    public FadingOverlay(State state, View rootView) {
+    FadingOverlay(State state, View rootView) {
         this.state = state;
         ImageView overlayTop = (ImageView) rootView.findViewById(R.id.overlay_top);
         ImageView overlayBottom = (ImageView) rootView.findViewById(R.id.overlay_bottom);
@@ -22,7 +22,7 @@ public class FadingOverlay {
         gradientBottom =  (GradientDrawable) overlayBottom.getDrawable();
     }
 
-    public void updateColor(){
+    void updateColor(){
         String color = state.getFadeToColor();
         int alpha = validColor(color) ? 255 : 0;
         gradientTop.setAlpha(alpha);

@@ -49,12 +49,12 @@ public class PickerView extends RelativeLayout {
             uiManager.updateWheelOrder();
         }
 
-        ArrayList<String> nonRefreshingProps = new ArrayList<String>(){{
+        ArrayList<String> noDisplayValueChangeProps = new ArrayList<String>(){{
             add(DateProp.name);
             add(FadeToColorProp.name);
             add(TextColorProp.name);
         }};
-        updatedProps.removeAll(nonRefreshingProps);
+        updatedProps.removeAll(noDisplayValueChangeProps);
 
         if(updatedProps.size() != 0) {
             uiManager.updateDisplayValues();

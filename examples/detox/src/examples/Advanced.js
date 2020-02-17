@@ -12,34 +12,17 @@ import PropSlider from '../PropSlider'
 import MinuteInterval from '../propPickers/MinuteInterval'
 import Scroll from '../propPickers/Scroll'
 import CustomPropValue from '../CustomPropValue'
+import { readableDate } from '../utils'
 
-Date.prototype.addHours = function (h) {
+Date.prototype.addHours = function(h) {
   this.setTime(this.getTime() + h * 60 * 60 * 1000)
   return this
 }
 
-const getInitialDate = () => new Date(2000, 0, 1, 0, 0);
+const getInitialDate = () => new Date(2000, 0, 1, 0, 0)
 
 export const defaultMinDate = getInitialDate().addHours(-24 * 5)
 export const defaultMaxDate = getInitialDate().addHours(24 * 5)
-
-export const readableUtcDate = date =>
-  date
-    ? date
-      .toISOString()
-      .substr(0, 19)
-      .replace('T', ' ')
-    : 'undefined'
-
-export const readableDate = (d) => {
-  if (!d) return undefined
-  return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())} ${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}`
-}
-
-
-function pad2(string) {
-  return (`0${string}`).slice(-2)
-}
 
 export default class Advanced extends Component {
   state = {
@@ -59,10 +42,12 @@ export default class Advanced extends Component {
     return (
       <View style={styles.container}>
         <CustomPropValue
-          changeProp={({ propName, propValue }) => this.setState({ [propName]: propValue })}
+          changeProp={({ propName, propValue }) =>
+            this.setState({ [propName]: propValue })
+          }
         />
         <DatePicker
-          ref={ref => this.ref = ref}
+          ref={ref => (this.ref = ref)}
           date={this.state.date}
           onDateChange={this.setDate}
           locale={this.state.locale}
@@ -74,12 +59,12 @@ export default class Advanced extends Component {
           mode={this.state.mode}
           timeZoneOffsetInMinutes={this.state.timeZoneOffsetInMinutes}
         />
-        <Text testID={"dateOutput"}>{readableDate(this.state.date)}</Text>
+        <Text testID={'dateOutput'}>{readableDate(this.state.date)}</Text>
         <Text />
         <Text>Change prop: </Text>
         <Text />
         <PropSlider
-          testID={"props"}
+          testID={'props'}
           selectedProp={this.state.selectedProp}
           onSelect={this.onSelect}
           data={this.propertyList()}
@@ -94,7 +79,10 @@ export default class Advanced extends Component {
     {
       name: 'scroll',
       component: (
-        <Scroll scroll={this.scroll} reset={() => this.setState({ date: getInitialDate() })} />
+        <Scroll
+          scroll={this.scroll}
+          reset={() => this.setState({ date: getInitialDate() })}
+        />
       ),
     },
     {
@@ -148,7 +136,7 @@ export default class Advanced extends Component {
       component: (
         <MinMaxDateChange
           value={this.state.minimumDate}
-          onChange={minDate => this.setState({ minDate })}
+          onChange={minimumDate => this.setState({ minimumDate })}
           defaultDate={defaultMinDate}
         />
       ),
@@ -158,7 +146,11 @@ export default class Advanced extends Component {
       component: (
         <MinMaxDateChange
           value={this.state.maximumDate}
-          onChange={maxDate => this.setState({ maxDate })}
+          onChange={maximumDate => {
+            console.log({ maximumDate })
+
+            this.setState({ maximumDate })
+          }}
           defaultDate={defaultMaxDate}
         />
       ),
@@ -191,13 +183,11 @@ export default class Advanced extends Component {
     if (!this.ref) return
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.ref),
-      UIManager.getViewManagerConfig("DatePickerManager").Commands.scroll,
-      [wheelIndex, scrollTimes],
-    );
+      UIManager.getViewManagerConfig('DatePickerManager').Commands.scroll,
+      [wheelIndex, scrollTimes]
+    )
   }
 }
-
-
 
 const styles = StyleSheet.create({
   container: {

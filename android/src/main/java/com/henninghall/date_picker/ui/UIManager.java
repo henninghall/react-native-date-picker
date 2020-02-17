@@ -3,19 +3,16 @@ package com.henninghall.date_picker.ui;
 import android.view.View;
 
 import com.henninghall.date_picker.State;
-import com.henninghall.date_picker.Utils;
+import com.henninghall.date_picker.wheelFunctions.AddOnChangeListener;
 import com.henninghall.date_picker.wheelFunctions.AnimateToDate;
 import com.henninghall.date_picker.wheelFunctions.Refresh;
 import com.henninghall.date_picker.wheelFunctions.SetDate;
-import com.henninghall.date_picker.wheelFunctions.SetShowCount;
 import com.henninghall.date_picker.wheelFunctions.TextColor;
 import com.henninghall.date_picker.wheelFunctions.UpdateVisibility;
 import com.henninghall.date_picker.wheels.Wheel;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class UIManager {
     private final State state;
@@ -25,10 +22,11 @@ public class UIManager {
     private WheelScroller wheelScroller = new WheelScroller();
 
     public UIManager(State state, View rootView){
-        this.rootView = rootView;
         this.state = state;
-        wheels = new Wheels(state, rootView, this);
+        this.rootView = rootView;
+        wheels = new Wheels(state, rootView);
         fadingOverlay = new FadingOverlay(state, rootView);
+        addOnChangeListener();
     }
 
     public void updateWheelVisibility(){
@@ -44,15 +42,11 @@ public class UIManager {
     }
 
     public void updateHeight(){
-        int shownCount = state.getShownCount();
-        wheels.applyOnAll(new SetShowCount(shownCount));
-        setShownCountOnEmptyWheels(shownCount);
+        wheels.updateHeight();
     }
 
     public void updateWheelOrder() {
-        wheels.removeAll();
-        wheels.addInOrder();
-        wheels.addEmpty();
+        wheels.updateWheelOrder();
     }
 
     public void updateDisplayValues(){
@@ -64,8 +58,8 @@ public class UIManager {
     }
 
     public void scroll(int wheelIndex, int scrollTimes) {
-        Wheel wheel = wheels.getWheel(state.getOrderedVisibleWheels().get(wheelIndex));
-        wheelScroller.scroll(wheel,scrollTimes);
+        Wheel wheel = wheels.getWheel(state.derived.getOrderedVisibleWheels().get(wheelIndex));
+        wheelScroller.scroll(wheel, scrollTimes);
     }
 
     SimpleDateFormat getDateFormat() {
@@ -76,11 +70,9 @@ public class UIManager {
         wheels.applyOnVisible(new AnimateToDate(date));
     }
 
-    private void setShownCountOnEmptyWheels(int shownCount) {
-        for (int id : Utils.emptyWheelIds) {
-            NumberPickerView view = (NumberPickerView) rootView.findViewById(id);
-            if(view != null) view.setShownCount(shownCount);
-        }
+    private void addOnChangeListener(){
+        WheelChangeListener onWheelChangeListener = new WheelChangeListenerImpl(wheels, state, this, rootView);
+        wheels.applyOnAll(new AddOnChangeListener(onWheelChangeListener));
     }
 
 

@@ -24,7 +24,7 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
     private final UIManager uiManager;
     private final View rootView;
 
-    public WheelChangeListenerImpl(Wheels wheels, State state, UIManager uiManager, View rootView) {
+    WheelChangeListenerImpl(Wheels wheels, State state, UIManager uiManager, View rootView) {
         this.wheels = wheels;
         this.uiManager = uiManager;
         this.state = state;

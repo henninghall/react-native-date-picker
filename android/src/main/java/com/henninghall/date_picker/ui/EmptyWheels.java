@@ -2,42 +2,57 @@ package com.henninghall.date_picker.ui;
 
 import android.view.View;
 
-import com.henninghall.date_picker.PickerView;
+import com.henninghall.date_picker.R;
 import com.henninghall.date_picker.State;
-import com.henninghall.date_picker.Utils;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
-public class EmptyWheels {
+class EmptyWheels {
 
-    private final HashMap<Integer, NumberPickerView> views;
-    private final Wheels wheels;
+    private final ArrayList<NumberPickerView> views;
+    private final PickerWrapper pickerWrapper;
     private View rootView;
     private State state;
 
-    EmptyWheels(View rootView, Wheels wheels, State state) {
-        this.wheels = wheels;
+    private int[] emptyWheelIds = {
+            R.id.emptyStart,
+            R.id.empty1,
+            R.id.empty2,
+            R.id.empty3,
+            R.id.emptyEnd
+    };
+
+    EmptyWheels(View rootView, PickerWrapper pickerWrapper, State state) {
+        this.pickerWrapper = pickerWrapper;
         this.rootView = rootView;
         this.state = state;
-        this.views = getViews();
+        this.views = getAll();
     }
 
-    private HashMap<Integer, NumberPickerView> getViews() {
-        HashMap<Integer, NumberPickerView> views = new HashMap<>();
-        for (int id: Utils.emptyWheelIds) {
+    private ArrayList<NumberPickerView> getAll() {
+        ArrayList<NumberPickerView> wheels = new ArrayList<>();
+        for (int id: emptyWheelIds) {
             NumberPickerView view = (NumberPickerView) rootView.findViewById(id);
-            views.put(id, view);
+            wheels.add(view);
         }
-        return views;
+        return wheels;
     }
 
     void add() {
-        int numberOfVisibleWheels = state.getVisibleWheels().size();
+        int numberOfVisibleWheels = state.derived.getVisibleWheels().size();
         int emptyViewsToAdd = numberOfVisibleWheels + 1;
         for (int i = 0; i < emptyViewsToAdd; i++) {
             int index = i * 2;
-            wheels.addWheel(views.get(Utils.emptyWheelIds[i]), index);
+            pickerWrapper.addPicker(views.get(i), index);
+        }
+    }
+
+    void setShownCount(int shownCount) {
+        for (int id : emptyWheelIds) {
+            NumberPickerView view = (NumberPickerView) rootView.findViewById(id);
+            if(view != null) view.setShownCount(shownCount);
         }
     }
 
