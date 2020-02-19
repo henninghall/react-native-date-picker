@@ -22,14 +22,6 @@ public class Utils {
         return !DateFormat.is24HourFormat(DatePickerManager.context);
     }
 
-    public static int[] emptyWheelIds = {
-            R.id.emptyStart,
-            R.id.empty1,
-            R.id.empty2,
-            R.id.empty3,
-            R.id.emptyEnd
-    };
-
     public static String printToday(Locale locale) {
         return PrettyTime.of(locale).printToday();
     }

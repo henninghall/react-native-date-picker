@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, Button, View, StyleSheet } from 'react-native'
-import { readableDate } from '../examples/Advanced'
 import { PropButton } from '../PropButton'
+import { readableDate } from '../utils'
 
 export default class extends Component {
   render() {

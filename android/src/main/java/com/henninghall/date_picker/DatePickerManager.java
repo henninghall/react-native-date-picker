@@ -43,17 +43,12 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
   @ReactPropGroup(names = { DateProp.name, ModeProp.name, LocaleProp.name, MaximumDateProp.name,
           MinimumDateProp.name, FadeToColorProp.name, TextColorProp.name, UtcProp.name, MinuteIntervalProp.name})
   public void setProps(PickerView view, int index, Dynamic value) {
-    String[] propNames = getMethodAnnotation("setProps").names();
-    String propName = propNames[index];
-    view.updateProp(propName, value);
-
+    updateProp("setProps", view, index, value);
   }
 
-  @ReactPropGroup(names = {}, customType = "Style")
-  public void setStyle(PickerView view, int index, Integer style) {
-    if(index == 0) {
-      view.updateProp("height", null);
-    }
+  @ReactPropGroup(names = {"height"}, customType = "Style")
+  public void setStyle(PickerView view, int index, Dynamic value) {
+    updateProp("setStyle", view, index, value);
   }
 
   @Override
@@ -86,6 +81,12 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
                     MapBuilder.of("bubbled", "onChange")
                     )
             ).build();
+  }
+
+  private void updateProp(String methodName, PickerView view, int index, Dynamic value){
+    String[] propNames = getMethodAnnotation(methodName).names();
+    String propName = propNames[index];
+    view.updateProp(propName, value);
   }
 
   private ReactPropGroup getMethodAnnotation(String methodName) {

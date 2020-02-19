@@ -9,6 +9,7 @@ import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.PickerView;
 import com.henninghall.date_picker.Utils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -53,7 +54,7 @@ public class DayWheel extends Wheel {
             resetToMidnight(cal);
             cal.add(Calendar.DATE, -cal.getActualMaximum(Calendar.DAY_OF_YEAR) / 2);
         } else {
-            cal = (Calendar) state.getInitialDate().clone();
+            cal = (Calendar) getInitialDate().clone();
             cal.add(Calendar.DATE, -defaultNumberOfDays / 2);
         }
         return cal;
@@ -71,7 +72,7 @@ public class DayWheel extends Wheel {
             resetToMidnight(cal);
             cal.add(Calendar.DATE, cal.getActualMaximum(Calendar.DAY_OF_YEAR) / 2);
         } else {
-            cal = (Calendar) state.getInitialDate().clone();
+            cal = (Calendar) getInitialDate().clone();
             cal.setTime(new Date());
             cal.add(Calendar.DATE, defaultNumberOfDays / 2);
         }
@@ -127,6 +128,22 @@ public class DayWheel extends Wheel {
         ArrayList<String> pieces = Utils.splitOnSpace(value);
         pieces.remove(LocaleUtils.getFullPatternPos("y", state.getLocale()));
         return TextUtils.join(" ", pieces);
+    }
+
+    // Rounding cal to closest minute interval
+    private Calendar getInitialDate() {
+        Calendar cal = Calendar.getInstance();
+        int minuteInterval = state.getMinuteInterval();
+        if(minuteInterval <= 1) return cal;
+        SimpleDateFormat minuteFormat = new SimpleDateFormat("mm", state.getLocale());
+        int exactMinute = Integer.valueOf(minuteFormat.format(cal.getTime()));
+        int diffSinceLastInterval = exactMinute % minuteInterval;
+        int diffAhead = minuteInterval - diffSinceLastInterval;
+        int diffBehind= -diffSinceLastInterval;
+        boolean closerToPrevious = minuteInterval / 2 > diffSinceLastInterval;
+        int diffToExactValue = closerToPrevious ? diffBehind : diffAhead;
+        cal.add(Calendar.MINUTE, diffToExactValue);
+        return (Calendar) cal.clone();
     }
 
 }
