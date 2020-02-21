@@ -36,19 +36,21 @@ Xcode 11 is required to run the latest version of the date picker. Xcode 10 is s
 ## Minimal Example
 
 ```js
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import DatePicker from 'react-native-date-picker'
 
-export default class App extends Component {
-  state = { date: new Date() }
+export default () => {
 
-  render = () => (
+  const [date, setDate] = useState(new Date())
+
+  return (
     <DatePicker
-      date={this.state.date}
-      onDateChange={date => this.setState({ date })}
+      date={date}
+      onDateChange={setDate}
     />
   )
 }
+
 ```
 
 ## Properties
