@@ -36,6 +36,7 @@ export default class Advanced extends Component {
     maximumDate: defaultMaxDate,
     timeZoneOffsetInMinutes: undefined,
     minuteInterval: 1,
+    dateString: '',
   }
 
   render() {
@@ -50,6 +51,7 @@ export default class Advanced extends Component {
           ref={ref => (this.ref = ref)}
           date={this.state.date}
           onDateChange={this.setDate}
+          onDateStringChange={this.setDateString}
           locale={this.state.locale}
           minuteInterval={this.state.minuteInterval}
           minimumDate={this.state.minimumDate}
@@ -60,6 +62,7 @@ export default class Advanced extends Component {
           timeZoneOffsetInMinutes={this.state.timeZoneOffsetInMinutes}
         />
         <Text testID={'dateOutput'}>{readableDate(this.state.date)}</Text>
+        <Text testID={'dateStringOutput'}>{this.state.dateString}</Text>
         <Text />
         <Text>Change prop: </Text>
         <Text />
@@ -178,6 +181,7 @@ export default class Advanced extends Component {
   onSelect = selectedProp => this.setState({ selectedProp })
 
   setDate = date => this.setState({ date })
+  setDateString = dateString => this.setState({ dateString })
 
   scroll = ({ wheelIndex, scrollTimes }) => {
     if (!this.ref) return

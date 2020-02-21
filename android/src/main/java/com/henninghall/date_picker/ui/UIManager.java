@@ -66,6 +66,10 @@ public class UIManager {
         return new SimpleDateFormat(wheels.getFormatPattern(), state.getLocale());
     }
 
+    String getDateString() {
+        return wheels.getDisplayValue();
+    }
+
     void animateToDate(Calendar date) {
         wheels.applyOnVisible(new AnimateToDate(date));
     }

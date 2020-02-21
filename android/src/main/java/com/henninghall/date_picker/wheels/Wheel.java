@@ -76,6 +76,10 @@ public abstract class Wheel {
         init();
     }
 
+    public String getDisplayValue(){
+        return toDisplayValue(getValueAtIndex(getIndex()));
+    }
+
     private String[] getDisplayValues(ArrayList<String> values){
         ArrayList<String> displayValues = new ArrayList<>();
         for (String value: values) {

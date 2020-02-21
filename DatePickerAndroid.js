@@ -10,7 +10,6 @@ const NativeDatePicker = requireNativeComponent(
 )
 
 class DatePickerAndroid extends React.PureComponent {
-
   render() {
     if (__DEV__) throwIfInvalidProps(this.props)
     return (
@@ -29,6 +28,9 @@ class DatePickerAndroid extends React.PureComponent {
   _onChange = e => {
     const jsDate = this._fromIsoWithTimeZoneOffset(e.nativeEvent.date).toDate()
     this.props.onDateChange && this.props.onDateChange(jsDate)
+    if (this.props.onDateStringChange) {
+      this.props.onDateStringChange(e.nativeEvent.dateString)
+    }
   }
 
   _maximumDate = () =>

@@ -21,16 +21,16 @@ import java.util.TimeZone;
 
 public class State {
 
-    private final Prop dateProp = new DateProp();
+    private final DateProp dateProp = new DateProp();
     private final Prop modeProp = new ModeProp();
-    private final Prop localeProp = new LocaleProp();
-    private final Prop fadeToColorProp = new FadeToColorProp();
-    private final Prop textColorProp = new TextColorProp();
-    private final Prop minuteIntervalProp = new MinuteIntervalProp();
-    private final Prop minimumDateProp = new MinimumDateProp();
-    private final Prop maximumDateProp = new MaximumDateProp();
-    private final Prop utcProp = new UtcProp();
-    private final Prop heightProp = new HeightProp();
+    private final LocaleProp localeProp = new LocaleProp();
+    private final FadeToColorProp fadeToColorProp = new FadeToColorProp();
+    private final TextColorProp textColorProp = new TextColorProp();
+    private final MinuteIntervalProp minuteIntervalProp = new MinuteIntervalProp();
+    private final MinimumDateProp minimumDateProp = new MinimumDateProp();
+    private final MaximumDateProp maximumDateProp = new MaximumDateProp();
+    private final UtcProp utcProp = new UtcProp();
+    private final HeightProp heightProp = new HeightProp();
 
     private final HashMap props = new HashMap<String, Prop>() {{
         put(DateProp.name, dateProp);
@@ -100,6 +100,10 @@ public class State {
 
     public Integer getHeight() {
         return (Integer) heightProp.getValue();
+    }
+
+    public String getLocaleLanguageTag(){
+        return localeProp.getLanguageTag();
     }
 
 

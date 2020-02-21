@@ -110,6 +110,14 @@ public class Wheels {
                 + ampmWheel.getValue();
     }
 
+    String getDisplayValue() {
+        StringBuilder sb = new StringBuilder();
+        for (Wheel wheel: getOrderedVisibleWheels()) {
+            sb.append(wheel.getDisplayValue());
+        }
+        return sb.toString();
+    }
+
     private void addInOrder(){
         ArrayList<WheelType> wheels = state.derived.getOrderedVisibleWheels();
         for (WheelType wheelType : wheels) {
