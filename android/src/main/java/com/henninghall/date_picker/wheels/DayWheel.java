@@ -3,16 +3,18 @@ package com.henninghall.date_picker.wheels;
 import android.graphics.Paint;
 import android.text.TextUtils;
 
+import com.henninghall.date_picker.DayFormats;
 import com.henninghall.date_picker.LocaleUtils;
 import com.henninghall.date_picker.State;
 import com.henninghall.date_picker.models.Mode;
-import com.henninghall.date_picker.PickerView;
 import com.henninghall.date_picker.Utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
@@ -21,6 +23,7 @@ public class DayWheel extends Wheel {
 
     private String todayValue;
     private static int defaultNumberOfDays = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_YEAR);
+    private HashMap<String, String> displayValues;
 
     public DayWheel(NumberPickerView picker, State state) {
         super(picker, state);
@@ -29,12 +32,15 @@ public class DayWheel extends Wheel {
     @Override
     public ArrayList<String> getValues() {
         ArrayList<String> values = new ArrayList<>();
+        displayValues = new HashMap<>();
+
         Calendar cal = getStartCal();
         Calendar endCal = getEndCal();
 
         while (!cal.after(endCal)){
-            String value = getValueFormat(cal);
+            String value = getValue(cal);
             values.add(value);
+            displayValues.put(value, getDisplayValue(cal));
             if(Utils.isToday(cal)) todayValue = value;
             cal.add(Calendar.DATE, 1);
         }
@@ -86,8 +92,20 @@ public class DayWheel extends Wheel {
         cal.set(Calendar.MILLISECOND, 0);
     }
 
-    private String getValueFormat(Calendar cal){
+    private String getValue(Calendar cal){
         return format.format(cal.getTime());
+    }
+
+    private String getDisplayValue(Calendar cal){
+        return getDisplayValueFormat().format(cal.getTime());
+    }
+
+    private String getDisplayValueFormatPattern(){
+        return DayFormats.get(state.getLocaleLanguageTag());
+    }
+
+    private SimpleDateFormat getDisplayValueFormat(){
+        return new SimpleDateFormat(getDisplayValueFormatPattern(), state.getLocale());
     }
 
     @Override
@@ -108,7 +126,7 @@ public class DayWheel extends Wheel {
         if (value.equals(todayValue)) {
             return toTodayString(value);
         }
-        return removeYear(value);
+        return displayValues.get(value);
     }
 
     @Override
@@ -122,12 +140,6 @@ public class DayWheel extends Wheel {
         return shouldBeCapitalized
                 ? Utils.capitalize(todayString)
                 : todayString;
-    }
-
-    private String removeYear(String value) {
-        ArrayList<String> pieces = Utils.splitOnSpace(value);
-        pieces.remove(LocaleUtils.getFullPatternPos("y", state.getLocale()));
-        return TextUtils.join(" ", pieces);
     }
 
     // Rounding cal to closest minute interval

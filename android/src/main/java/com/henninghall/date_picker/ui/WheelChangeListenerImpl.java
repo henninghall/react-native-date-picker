@@ -49,6 +49,7 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
             else if (maxDate != null && date.after(maxDate)) uiManager.animateToDate(maxDate);
             else {
                 event.putString("date", Utils.dateToIso(date));
+                event.putString("dateString", uiManager.getDateString());
                 DatePickerManager.context.getJSModule(RCTEventEmitter.class)
                         .receiveEvent(rootView.getId(), "dateChange", event);
             }

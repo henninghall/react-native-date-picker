@@ -10,18 +10,31 @@ import java.util.Locale;
 
 public class LocaleProp extends Prop<Locale> {
     public static final String name = "locale";
+    private String languageTag = getDefaultLanguageTag();
+
 
     public LocaleProp(){
-        super(
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
-                ? Locale.forLanguageTag("en")
-                : Locale.getDefault()
-        );
+        super(getDefaultLocale());
+    }
+
+    static private Locale getDefaultLocale(){
+        return LocaleUtils.toLocale(getDefaultLanguageTag());
+    }
+
+    static private String getDefaultLanguageTag(){
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+                ? Locale.getDefault().toLanguageTag().replace('-', '_')
+                : "en";
+    }
+
+    public String getLanguageTag(){
+        return languageTag;
     }
 
     @Override
     public Locale toValue(Dynamic value){
-        return LocaleUtils.toLocale(value.asString().replace('-','_'));
+        this.languageTag = value.asString().replace('-','_');
+        return LocaleUtils.toLocale(languageTag);
     }
 
 }

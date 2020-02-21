@@ -1,8 +1,12 @@
 package com.henninghall.date_picker;
 
+import android.os.Build;
+import android.util.Log;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 public class LocaleUtils {
@@ -22,16 +26,6 @@ public class LocaleUtils {
             }
         }
         return null;
-    }
-
-    public static int getFullPatternPos(String format, Locale locale) {
-        ArrayList<String> pieces = getFullPatternPieces(locale);
-        for (String piece: pieces){
-            if(piece.contains(format)) {
-                return pieces.indexOf(piece);
-            }
-        }
-        return -1;
     }
 
     public static String getDatePattern(Locale locale){
