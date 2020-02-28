@@ -63,7 +63,7 @@ export default () => {
 | maximumDate             | Maximum selectable date.                                                                                                                                                                                                                                                                                              |
 | minimumDate             | Minimum selectable date                                                                                                                                                                                                                                                                                               |
 | minuteInterval          | The interval at which minutes can be selected.                                                                                                                                                                                                                                                                        | <img src="docs/minute-interval-ios.png" alt="Date picker minute interval IOS" height="120px" />                                                                                                                                          | <img src="docs/minute-interval-android.png" alt="Date picker minute interval Android" height="120px" />                                                                                                                                                            |
-| mode                    | The date picker mode. {'datetime', 'date', 'time'}                                                                                                                                                                                                                                                                    | <img src="docs/datetime-mode-ios.png" alt="Datepicker datetime mode ios" height="120px" /><img src="docs/date-mode-ios.png" alt="date mode ios" height="120px" /><img src="docs/time-mode-ios.png" alt="time mode ios" height="120px" /> | <img src="docs/datetime-mode-android.png" alt="react native datetime mode android" height="120px" /><img src="docs/date-mode-android.png" alt="date mode android" height="120px" /><img src="docs/time-mode-android.png" alt="time mode android" height="120px" /> |
+| mode                    | The date picker mode. {'datetime', 'date', 'time'}                                                                                                                                                                                                                                                                    | <img src="docs/datetime-mode-ios.png" alt="React native date time picker" height="120px" /><img src="docs/date-mode-ios.png" alt="React native datepicker" height="120px" /><img src="docs/time-mode-ios.png" alt="React native time picker" height="120px" /> | <img src="docs/datetime-mode-android.png" alt="react native date time picker android" height="120px" /><img src="docs/date-mode-android.png" alt="react native datepicker android" height="120px" /><img src="docs/time-mode-android.png" alt="react native time picker android" height="120px" /> |
 | locale                  | The locale for the date picker. Changes language, date order and am/pm preferences. Value needs to be a <a title="react native datepicker locale id" href="https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html">Locale ID.</a> | <img src="docs/locale-ios.png" alt="React Native Date picker locale language ios" height="120px" />                                                                                                                                      | <img src="docs/locale-android.png" alt="React Native Date picker locale language android" height="120px" />                                                                                                                                                        |
 | textColor               | Changes the text color. ⚠ Colors other than black (#000000) or white (#ffffff) will replace the "Today" string with a date on iOS 13.                                                                                                                                                                                 | <img src="docs/colors-ios.png" alt="react native datepicker text color background color ios" height="120px" />                                                                                                                           | <img src="docs/colors-android.png" alt="Text color background color android" height="120px" />                                                                                                                                                                     |
 | timeZoneOffsetInMinutes | Timezone offset in minutes (default: device's timezone)                                                                                                                                                                                                                                                               |
@@ -99,30 +99,71 @@ If you have enabled <a href="https://facebook.github.io/react-native/docs/signed
 -keep public class net.time4j.PrettyTime
 ```
 
-## Roadmap
+## Three different modes
+Here are some more info about the three different picker modes that are available.
 
-- [x] Mode: datetime
-- [x] Mode: date
-- [x] Mode: time
-- [x] Locale support. (AM/PM, 12h/24h toggled and strings translated)
-- [x] Replace todays date with the string "Today" (considering locale)
-- [x] Animate to date when state change occur.
-- [x] Switch between AM/PM when scrolling between forenoon and afternoon.
-- [x] Support maximumDate/minimumDate.
-- [x] Minute interval prop.
-- [x] Colored background support.
-- [x] Colored text support.
+### Date time picker
+Using the datetime mode gives you a react native date time picker where both date and time can be selected at the same time. The todays date will be replays with the string "Today" translated to the desired language. This is the default mode and look like this.
 
-## Why another React Native date picker?
+<table><tr><td align="center"><b>iOS</b></td><td align="center"><b>Android</b></td>  
+  </tr><tr><td>
+    <img src="docs/datetime-mode-ios.png" alt="date time picker" height="120px" 
+/>
+</td><td>
+    <img src="docs/datetime-mode-android.png" alt="date time picker" height="120px" />
+</td></tr></table>
+
+Add the optional `datetime` mode property to use this mode. Since datetime is default this could also be exclude. 
+
+```jsx
+<DatePicker
+  ...
+  mode="datetime"
+/>
+```
+
+### Datepicker
+The date mode displays a react native datepicker with year month and date where the year-month-date order will be adjusted to the locale. If will look similar to this: 
+<table><tr><td align="center"><b>iOS</b></td><td align="center"><b>Android</b></td>  
+  </tr><tr><td>
+    <img src="docs/date-mode-ios.png" alt="datepicker ios" height="120px" 
+/>
+</td><td>
+    <img src="docs/date-mode-android.png" alt="datepicker" height="120px" />
+</td></tr></table>
+
+Just add the value `date` to mode property: 
+
+```jsx
+<DatePicker
+  ...
+  mode="date"
+/>
+```
+
+### Time picker
+The time  mode can be used when only the time matters. AM/PM will be added depending on locale and user setting. It can be useful to add the `timeInterval` to only display the time with for instance 15min intervals. The react native time picker look like this:
+<table><tr><td align="center"><b>iOS</b></td><td align="center"><b>Android</b></td>  
+  </tr><tr><td>
+    <img src="docs/time-mode-ios.png" alt="react native time picker" height="120px" 
+/>
+</td><td>
+    <img src="docs/time-mode-android.png" alt="react native time picker android" height="120px" />
+</td></tr></table>
+
+Set mode property to `time` to show the time picker: 
+
+```jsx
+<DatePicker
+  ...
+  mode="time"
+/>
+```
+
+
+## Why another React Native datepicker?
 
 One of the strongest reason to use react native is its cross platform compatibility. Most of the official components are working seamlessly on both platforms but there are some with single platform support only. The react native datepicker is one example where both <a href="https://facebook.github.io/react-native/docs/datepickerios">DatePickerIOS</a> and <a href="https://facebook.github.io/react-native/docs/datepickerandroid">DatePickerAndroid</a> are present. The reason for this is that the default date picker is implemented in seperate ways, iOS normally have an integrated view picker wheel where android has different pickers in a dialog format.
 
 If you want to use these pickers you can combile the official ones or a third party module that already done that for you. If you on the other hand want have a more unified design between your android and ios app, this module is for you. The datetime mode can be particularly helpful to avoid 2 separate picker dialogs on android.
 
-<!--
-## TODO EXTRA
-- [ ] Transparent background support. (Probably need to include transparent gradient).
-- [ ] Screen recordings
-- [ ] Gray out max/min values.
-- [ ] Align text to right.
--->
