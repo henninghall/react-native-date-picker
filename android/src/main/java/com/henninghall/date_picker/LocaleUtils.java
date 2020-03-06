@@ -1,12 +1,8 @@
 package com.henninghall.date_picker;
 
-import android.os.Build;
-import android.util.Log;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 
 public class LocaleUtils {
@@ -36,6 +32,18 @@ public class LocaleUtils {
     static String getDateTimePattern(Locale locale){
         DateFormat format = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.FULL, locale);
         return ((SimpleDateFormat)format).toLocalizedPattern().replace(",", "");
+    }
+
+     public static Locale getLocale(String languageTag){
+        Locale locale;
+        try{
+            locale = org.apache.commons.lang3.LocaleUtils.toLocale(languageTag);
+        } catch (Exception e ){
+            // Some locales can only be interpreted from country string (for instance zh_Hans_CN )
+            String firstPartOfLanguageTag = languageTag.substring(0, languageTag.indexOf(""));
+            locale = org.apache.commons.lang3.LocaleUtils.toLocale(firstPartOfLanguageTag);
+        }
+        return locale;
     }
 
 }
