@@ -736,6 +736,15 @@ public class DayFormats {
         put("zh_HK","M月d日EEE");
         put("zh_MO","M月d日EEE");
         put("zh_SG","M月d日EEE");
+        put("zh_Hans","M月d日EEE");
+        put("zh_Hans_CN","M月d日EEE");
+        put("zh_Hans_HK","M月d日EEE");
+        put("zh_Hans_MO","M月d日EEE");
+        put("zh_Hans_SG","M月d日EEE");
+        put("zh_Hant", "M月d日EEE");
+        put("zh_Hant_HK","M月d日EEE");
+        put("zh_Hant_MO","M月d日EEE");
+        put("zh_Hant_TW","M月d日EEE");
         put("zu","EEE MMM d");
         put("zu_ZA","EEE MMM d");
     }};
