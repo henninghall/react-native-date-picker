@@ -3,8 +3,8 @@ package com.henninghall.date_picker.props;
 import android.os.Build;
 
 import com.facebook.react.bridge.Dynamic;
+import com.henninghall.date_picker.LocaleUtils;
 
-import org.apache.commons.lang3.LocaleUtils;
 
 import java.util.Locale;
 
@@ -18,7 +18,7 @@ public class LocaleProp extends Prop<Locale> {
     }
 
     static private Locale getDefaultLocale(){
-        return LocaleUtils.toLocale(getDefaultLanguageTag());
+        return LocaleUtils.getLocale(getDefaultLanguageTag());
     }
 
     static private String getDefaultLanguageTag(){
@@ -34,7 +34,7 @@ public class LocaleProp extends Prop<Locale> {
     @Override
     public Locale toValue(Dynamic value){
         this.languageTag = value.asString().replace('-','_');
-        return LocaleUtils.toLocale(languageTag);
+        return LocaleUtils.getLocale(languageTag);
     }
 
 }
