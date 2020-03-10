@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { ViewProps } from 'react-native'
 
-interface Props extends ViewProps {
+export interface DatePickerProps extends ViewProps {
   /**
    * The currently selected date.
    */
@@ -65,4 +65,4 @@ interface Props extends ViewProps {
   textColor?: string
 }
 
-export default class DatePicker extends Component<Props> {}
+export default class DatePicker extends Component<DatePickerProps> {}
