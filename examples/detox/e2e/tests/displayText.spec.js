@@ -1,4 +1,11 @@
-const { setLocale, expectDateString, scrollWheel } = require('../utils')
+const {
+  setMode,
+  setLocale,
+  expectDateString,
+  scrollWheel,
+  setMinimumDate,
+  setMaximumDate,
+} = require('../utils')
 
 describe('Display text', () => {
   before(async () => {
@@ -29,6 +36,40 @@ describe('Display text', () => {
 
     it('zh-CH', async () => {
       await expectLocaleDateString('zh-CH', '1月2日周日 上午 1200')
+    })
+  })
+
+  describe('date', () => {
+    before(async () => {
+      await device.reloadReactNative()
+      await element(by.text('Advanced')).tap()
+      await setMinimumDate(undefined)
+      await setMaximumDate(undefined)
+      await setMode('date')
+    })
+
+    it('en-US', async () => {
+      await expectLocaleDateString('en-US', 'February' + '1' + '2000')
+    })
+
+    it('pt-BR', async () => {
+      await expectLocaleDateString('pt-BR', '2janeiro' + '2000')
+    })
+
+    it('sv-SE', async () => {
+      await expectLocaleDateString('sv-SE', '2' + 'januari' + '2000')
+    })
+
+    it('ko', async () => {
+      await expectLocaleDateString('ko', '2001년' + '1월' + '1일')
+    })
+
+    it('ja', async () => {
+      await expectLocaleDateString('ja', '2001年' + '1月' + '1日')
+    })
+
+    it('zh-CH', async () => {
+      await expectLocaleDateString('zh-CH', '2001年' + '1月' + '1日')
     })
   })
 
