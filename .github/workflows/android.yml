@@ -1,6 +1,6 @@
 name: "Android: build & test"
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build_and_test:
