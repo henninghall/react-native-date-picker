@@ -69,7 +69,7 @@ describe('Display text', () => {
     })
 
     it('zh-CH', async () => {
-      await expectLocaleDateString('zh-CH', '2001年' + '1月' + '1日')
+      await expectLocaleDateString('zh-CH', '2001年' + '一月' + '1日')
     })
   })
 
