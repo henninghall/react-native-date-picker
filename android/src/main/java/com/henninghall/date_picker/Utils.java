@@ -62,7 +62,7 @@ public class Utils {
     }
 
     public static ArrayList<String> splitOnSpace(String value){
-        String[] array = value.split(" ");
+        String[] array = value.split("\\s+");
         ArrayList<String> arrayList = new ArrayList<>();
         Collections.addAll(arrayList, array);
         return arrayList;

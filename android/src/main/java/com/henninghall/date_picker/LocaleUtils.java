@@ -26,7 +26,10 @@ public class LocaleUtils {
 
     public static String getDatePattern(Locale locale){
         DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, locale);
-        return ((SimpleDateFormat)df).toLocalizedPattern().replace(",", "");
+        return ((SimpleDateFormat) df).toLocalizedPattern()
+                .replaceAll(",", "")
+                .replaceAll("([a-zA-Z]+)", " $1")
+                .trim();
     }
 
     static String getDateTimePattern(Locale locale){
