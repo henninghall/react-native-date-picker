@@ -732,6 +732,7 @@ public class DayFormats {
         put("zgh","EEE d MMM");
         put("zgh_MA","EEE d MMM");
         put("zh","M月d日EEE");
+        put("zh_CN","M月d日EEE");
         put("zh_CH","M月d日EEE");
         put("zh_HK","M月d日EEE");
         put("zh_MO","M月d日EEE");
