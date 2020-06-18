@@ -17,7 +17,7 @@ public class LocaleUtils {
     */
     public static String getPatternIncluding(String format, Locale locale) {
         for (String piece: getFullPatternPieces(locale)){
-            if(piece.contains(format)) {
+            if(piece.contains(format) && !piece.contains("'")) {
                 return piece;
             }
         }
@@ -50,5 +50,3 @@ public class LocaleUtils {
     }
 
 }
-
-
