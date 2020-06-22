@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+#import "React/RCTViewManager.h"
 #import "DatePicker.h"
 
 #import "RCTUtils.h"
@@ -34,15 +34,15 @@
     if([cleanString length] == 6) {
         cleanString = [cleanString stringByAppendingString:@"ff"];
     }
-    
+
     unsigned int baseValue;
     [[NSScanner scannerWithString:cleanString] scanHexInt:&baseValue];
-    
+
     float red = ((baseValue >> 24) & 0xFF)/255.0f;
     float green = ((baseValue >> 16) & 0xFF)/255.0f;
     float blue = ((baseValue >> 8) & 0xFF)/255.0f;
     float alpha = ((baseValue >> 0) & 0xFF)/255.0f;
-    
+
     return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 }
 
@@ -80,7 +80,7 @@
 
 - (void)setTextColorProp:(NSString *)hexColor
 {
-    
+
     if(@available(iOS 13, *)) {
 
         // black text -> set light mode
