@@ -43,7 +43,7 @@ public class LocaleUtils {
             locale = org.apache.commons.lang3.LocaleUtils.toLocale(languageTag);
         } catch (Exception e ){
             // Some locales can only be interpreted from country string (for instance zh_Hans_CN )
-            String firstPartOfLanguageTag = languageTag.substring(0, languageTag.indexOf(""));
+            String firstPartOfLanguageTag = languageTag.substring(0, languageTag.indexOf("_"));
             locale = org.apache.commons.lang3.LocaleUtils.toLocale(firstPartOfLanguageTag);
         }
         return locale;
