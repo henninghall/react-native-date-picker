@@ -33,6 +33,7 @@ class EmptyWheels {
 
     private ArrayList<NumberPickerView> getAll() {
         ArrayList<NumberPickerView> wheels = new ArrayList<>();
+        if(!state.derived.isIosClone()) return wheels;
         for (int id: emptyWheelIds) {
             NumberPickerView view = (NumberPickerView) rootView.findViewById(id);
             wheels.add(view);
@@ -41,6 +42,7 @@ class EmptyWheels {
     }
 
     void add() {
+        if(!state.derived.isIosClone()) return;
         int numberOfVisibleWheels = state.derived.getVisibleWheels().size();
         int emptyViewsToAdd = numberOfVisibleWheels + 1;
         for (int i = 0; i < emptyViewsToAdd; i++) {

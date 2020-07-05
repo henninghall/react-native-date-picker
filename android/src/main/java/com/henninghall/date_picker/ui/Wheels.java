@@ -2,6 +2,7 @@ package com.henninghall.date_picker.ui;
 
 import android.view.View;
 
+import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.R;
 import com.henninghall.date_picker.State;
 import com.henninghall.date_picker.Utils;
@@ -23,8 +24,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-
-import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class Wheels {
 
@@ -60,8 +59,8 @@ public class Wheels {
         changeAmPmWhenPassingMidnightOrNoon();
     }
 
-    private NumberPickerView getPickerWithId(int id){
-        return (NumberPickerView) rootView.findViewById(id);
+    private Picker getPickerWithId(int id){
+        return (Picker) rootView.findViewById(id);
     }
 
     private Collection<Wheel> getVisible() {
@@ -122,7 +121,7 @@ public class Wheels {
         ArrayList<WheelType> wheels = state.derived.getOrderedVisibleWheels();
         for (WheelType wheelType : wheels) {
             Wheel wheel = getWheel(wheelType);
-            pickerWrapper.addPicker(wheel.picker);
+                pickerWrapper.addPicker(wheel.picker.getView());
         }
     }
 
@@ -135,9 +134,9 @@ public class Wheels {
     }
 
     private void changeAmPmWhenPassingMidnightOrNoon() {
-        hourWheel.picker.setOnValueChangeListenerInScrolling(new NumberPickerView.OnValueChangeListenerInScrolling() {
+        hourWheel.picker.setOnValueChangeListenerInScrolling(new Picker.OnValueChangeListenerInScrolling() {
             @Override
-            public void onValueChangeInScrolling(NumberPickerView picker, int oldVal, int newVal) {
+            public void onValueChangeInScrolling(Picker picker, int oldVal, int newVal) {
                 if(Utils.usesAmPm()){
                     String oldValue = hourWheel.getValueAtIndex(oldVal);
                     String newValue = hourWheel.getValueAtIndex(newVal);

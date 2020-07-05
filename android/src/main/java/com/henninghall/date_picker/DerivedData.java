@@ -3,6 +3,7 @@ package com.henninghall.date_picker;
 import android.util.Log;
 
 import com.henninghall.date_picker.models.Mode;
+import com.henninghall.date_picker.models.Variant;
 import com.henninghall.date_picker.models.WheelType;
 
 import java.util.ArrayList;
@@ -94,6 +95,10 @@ public class DerivedData {
         int showCount = state.getHeight() / DP_PER_SHOW_SHOW_COUNT;
         int oddShowCount = showCount % 2 == 0 ? showCount + 1 : showCount;
         return oddShowCount;
+    }
+
+    public boolean isIosClone() {
+        return state.getVariant() == Variant.iosClone;
     }
 
 }

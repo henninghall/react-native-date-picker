@@ -1,9 +1,12 @@
 package com.henninghall.date_picker;
 
+import android.util.Log;
 import android.view.View;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Dynamic;
+import com.henninghall.date_picker.props.VariantProp;
 import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.FadeToColorProp;
 import com.henninghall.date_picker.props.HeightProp;
@@ -16,7 +19,8 @@ import java.util.ArrayList;
 
 public class PickerView extends RelativeLayout {
 
-    private final View rootView = inflate(getContext(), R.layout.datepicker_view, this);
+//    private final View rootView = inflate(getContext(), R.layout.datepicker_view, this);
+    private View rootView = inflate(getContext(), R.layout.native_picker, this);
     private final UIManager uiManager;
     private State state;
     private ArrayList<String> updatedProps = new ArrayList<>();
@@ -28,6 +32,21 @@ public class PickerView extends RelativeLayout {
     }
 
     public void update() {
+
+        if(updatedProps.contains(VariantProp.name)) {
+            uiManager.setVariant();
+//            rootView = inflate(getContext(), R.layout.native_picker, this);
+//            NumberPicker np = findViewById(R.id.numberPicker);
+//            np.setMinValue(0);
+//            np.setMaxValue(1);
+//            np.setDisplayedValues(new String[]{"Today", "Tomorrow"});
+//            np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+//                @Override
+//                public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+//                    Log.d("onValueChange", String.valueOf(i));
+//                }
+//            });
+        }
 
         if(updatedProps.contains(FadeToColorProp.name)) {
             uiManager.updateFadeToColor();

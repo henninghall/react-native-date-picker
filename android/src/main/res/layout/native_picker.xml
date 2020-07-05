@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout android:id="@+id/container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:id="@+id/pickerWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/year"
+            android:tag="year"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/month"
+            android:tag="month"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/date"
+            android:tag="date"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/day"
+            android:tag="day"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/hour"
+            android:tag="hour"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/minutes"
+            android:tag="minutes"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/ampm"
+            android:tag="ampm"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</RelativeLayout>
