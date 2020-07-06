@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const androidProptypes = {
   fadeToColor: PropTypes.string,
-  dateFormat: PropsTypes.string,
+  dateFormat: PropTypes.string,
 }
 
 const DateType = PropTypes.instanceOf(Date)
