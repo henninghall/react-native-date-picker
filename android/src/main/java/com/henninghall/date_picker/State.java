@@ -39,7 +39,7 @@ public class State {
         put(ModeProp.name, modeProp);
         put(LocaleProp.name, localeProp);
         put(FadeToColorProp.name, fadeToColorProp);
-        put(DateFormatProp.name, dateFormatProp)
+        put(DateFormatProp.name, dateFormatProp);
         put(TextColorProp.name, textColorProp);
         put(MinuteIntervalProp.name, minuteIntervalProp);
         put(MinimumDateProp.name, minimumDateProp);
