@@ -26,7 +26,7 @@ public class State {
     private final Prop modeProp = new ModeProp();
     private final LocaleProp localeProp = new LocaleProp();
     private final FadeToColorProp fadeToColorProp = new FadeToColorProp();
-    private final DateFormatProp dateFormat = new DateFormatProp();
+    private final DateFormatProp dateFormatProp = new DateFormatProp();
     private final TextColorProp textColorProp = new TextColorProp();
     private final MinuteIntervalProp minuteIntervalProp = new MinuteIntervalProp();
     private final MinimumDateProp minimumDateProp = new MinimumDateProp();
