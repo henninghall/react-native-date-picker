@@ -4,6 +4,7 @@ import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.FadeToColorProp;
+import com.henninghall.date_picker.props.DateFormatProp;
 import com.henninghall.date_picker.props.HeightProp;
 import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
@@ -25,6 +26,7 @@ public class State {
     private final Prop modeProp = new ModeProp();
     private final LocaleProp localeProp = new LocaleProp();
     private final FadeToColorProp fadeToColorProp = new FadeToColorProp();
+    private final DateFormatProp dateFormat = new DateFormatProp();
     private final TextColorProp textColorProp = new TextColorProp();
     private final MinuteIntervalProp minuteIntervalProp = new MinuteIntervalProp();
     private final MinimumDateProp minimumDateProp = new MinimumDateProp();
@@ -37,6 +39,7 @@ public class State {
         put(ModeProp.name, modeProp);
         put(LocaleProp.name, localeProp);
         put(FadeToColorProp.name, fadeToColorProp);
+        put(DateFormatProp.name, dateFormatProp)
         put(TextColorProp.name, textColorProp);
         put(MinuteIntervalProp.name, minuteIntervalProp);
         put(MinimumDateProp.name, minimumDateProp);
@@ -64,6 +67,10 @@ public class State {
 
     public String getFadeToColor() {
         return (String) fadeToColorProp.getValue();
+    }
+
+    public String getDateFormat() {
+        return (String) dateFormatProp.getValue();
     }
 
     public String getTextColor() {

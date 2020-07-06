@@ -60,6 +60,11 @@ export interface DatePickerProps extends ViewProps {
   fadeToColor?: string
 
   /**
+   * Custom date format for android
+   */
+  dateFormat?: string
+
+  /**
    * Changes the text color.
    */
   textColor?: string

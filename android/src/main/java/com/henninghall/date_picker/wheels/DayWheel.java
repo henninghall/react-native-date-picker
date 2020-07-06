@@ -101,6 +101,9 @@ public class DayWheel extends Wheel {
     }
 
     private String getDisplayValueFormatPattern(){
+        if (state.getDateFormat() != null && state.getDateFormat() != "") {
+            return state.getDateFormat();
+        }
         return DayFormats.get(state.getLocaleLanguageTag());
     }
 
