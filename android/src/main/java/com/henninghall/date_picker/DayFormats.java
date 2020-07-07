@@ -623,8 +623,8 @@ public class DayFormats {
         put("sk_SK","EEE d. MMM");
         put("sl","EEE dd. MMM");
         put("sl_SI","EEE dd. MMM");
-        put("smn","cccc MMM d.");
-        put("smn_FI","cccc MMM d.");
+        put("smn","EEE MMM d.");
+        put("smn_FI","EEE MMM d.");
         put("sn","MMM d EEE");
         put("sn_ZW","MMM d EEE");
         put("so","EEE MMM dd");
