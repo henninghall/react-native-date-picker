@@ -285,8 +285,8 @@ public class DayFormats {
         put("fa_AF","EEE d MMM");
         put("fa_IR","EEE d MMM");
         put("ff","EEE d MMM");
-        put("fi","cccc d. MMM");
-        put("fi_FI","cccc d. MMM");
+        put("fi","EEE d. MMM");
+        put("fi_FI","EEE d. MMM");
         put("fil","EEE MMM d");
         put("fil_PH","EEE MMM d");
         put("fo","EEE d. MMM");
@@ -623,8 +623,8 @@ public class DayFormats {
         put("sk_SK","EEE d. MMM");
         put("sl","EEE dd. MMM");
         put("sl_SI","EEE dd. MMM");
-        put("smn","cccc MMM d.");
-        put("smn_FI","cccc MMM d.");
+        put("smn","EEE MMM d.");
+        put("smn_FI","EEE MMM d.");
         put("sn","MMM d EEE");
         put("sn_ZW","MMM d EEE");
         put("so","EEE MMM dd");
