@@ -11,19 +11,24 @@ This is a React Native Date Picker with following main features:
 <table>
   <tr>
     <td align="center"><b>iOS</b></td>
-    <td align="center"><b>Android</b></td>  
   </tr>
    <tr>
     <td><img src="docs/react-native-date-picker.gif" alt="React Native Date Picker" title="React Native Date Picker" height="150px" />
     </td>
+  </tr>
+
+  <tr>
+    <td align="center" colspan="2"><b>Android</b></td>
+  </tr>
+   <tr>
     <td><img src="docs/react-native-date-picker-android.gif" alt="React Native Date Picker Android" height="150px" style="margin-left:10px" />
-    </td>  
+    </td>
+        <td><img src="docs/react-native-date-picker-android.png" alt="React Native Date Picker Android" height="150px" style="margin-left:10px" />
+        </td>  
   </tr>
       <tr>
-    <td align="center">A slightly improved DatePickerIOS.</td>
-    <td align="center">A custom made native component.</td>  
+    <td align="center" colspan="2">Choose from 2 different styles</td>
   </tr>
-  
   </table>
   
 ## Installation
