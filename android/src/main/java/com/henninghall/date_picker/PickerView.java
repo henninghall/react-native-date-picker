@@ -19,33 +19,21 @@ import java.util.ArrayList;
 
 public class PickerView extends RelativeLayout {
 
-//    private final View rootView = inflate(getContext(), R.layout.datepicker_view, this);
-    private View rootView = inflate(getContext(), R.layout.native_picker, this);
-    private final UIManager uiManager;
-    private State state;
+    private UIManager uiManager;
+    private State state = new State();
     private ArrayList<String> updatedProps = new ArrayList<>();
+    private boolean initialized = false;
 
     public PickerView() {
         super(DatePickerManager.context);
-        state = new State();
-        uiManager = new UIManager(state, this);
     }
 
     public void update() {
 
-        if(updatedProps.contains(VariantProp.name)) {
-            uiManager.setVariant();
-//            rootView = inflate(getContext(), R.layout.native_picker, this);
-//            NumberPicker np = findViewById(R.id.numberPicker);
-//            np.setMinValue(0);
-//            np.setMaxValue(1);
-//            np.setDisplayedValues(new String[]{"Today", "Tomorrow"});
-//            np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-//                @Override
-//                public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-//                    Log.d("onValueChange", String.valueOf(i));
-//                }
-//            });
+        if(!initialized){
+            inflate(getContext(), state.derived.getRootLayout(), this);
+            uiManager = new UIManager(state, this);
+            initialized = true;
         }
 
         if(updatedProps.contains(FadeToColorProp.name)) {
@@ -91,10 +79,6 @@ public class PickerView extends RelativeLayout {
 
     public void scroll(int wheelIndex, int scrollTimes) {
         uiManager.scroll(wheelIndex, scrollTimes);
-    }
-
-    public View getRootView(){
-        return rootView;
     }
 
     private final Runnable measureAndLayout = new Runnable() {

@@ -38,7 +38,7 @@ public class UIManager {
     }
 
     public void updateFadeToColor(){
-        if(!state.derived.isIosClone()) return;
+        if(state.derived.hasNativeStyle()) return;
         fadingOverlay.updateColor();
     }
 
@@ -78,10 +78,5 @@ public class UIManager {
     private void addOnChangeListener(){
         WheelChangeListener onWheelChangeListener = new WheelChangeListenerImpl(wheels, state, this, rootView);
         wheels.applyOnAll(new AddOnChangeListener(onWheelChangeListener));
-    }
-
-
-    public void setVariant() {
-
     }
 }

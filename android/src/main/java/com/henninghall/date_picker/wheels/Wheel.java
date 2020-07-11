@@ -17,6 +17,7 @@ public abstract class Wheel {
     private Calendar userSetValue;
 
     public abstract boolean visible();
+    public abstract boolean wrapSelectorWheel();
     public abstract Paint.Align getTextAlign();
     public abstract String getFormatPattern();
     public abstract ArrayList<String> getValues();
@@ -34,6 +35,7 @@ public abstract class Wheel {
         this.picker = picker;
         this.format = new SimpleDateFormat(getFormatPattern(), state.getLocale());
         picker.setTextAlign(getTextAlign());
+        picker.setWrapSelectorWheel(wrapSelectorWheel());
     }
 
     private int getIndexOfDate(Calendar date){

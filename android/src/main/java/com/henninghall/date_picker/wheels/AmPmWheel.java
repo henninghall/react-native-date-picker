@@ -36,6 +36,11 @@ public class AmPmWheel extends Wheel {
     }
 
     @Override
+    public boolean wrapSelectorWheel() {
+        return false;
+    }
+
+    @Override
     public String getFormatPattern() {
         return Utils.usesAmPm() ? " a " : "";
     }

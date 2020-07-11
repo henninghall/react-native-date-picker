@@ -35,6 +35,11 @@ public class HourWheel extends Wheel {
     }
 
     @Override
+    public boolean wrapSelectorWheel() {
+        return true;
+    }
+
+    @Override
     public String getFormatPattern() {
         return Utils.usesAmPm() ? "h": "HH";
     }

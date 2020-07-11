@@ -35,6 +35,11 @@ public class DateWheel extends Wheel
     }
 
     @Override
+    public boolean wrapSelectorWheel() {
+        return true;
+    }
+
+    @Override
     public String getFormatPattern() {
         return LocaleUtils.getPatternIncluding("d", state.getLocale());
     }

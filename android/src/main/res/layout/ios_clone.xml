@@ -24,7 +24,6 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            custom:npv_WrapSelectorWheel="true"
             custom:npv_ItemPaddingHorizontal="0dp"
             />
         <com.henninghall.date_picker.pickers.IosClone
@@ -36,7 +35,6 @@
             custom:npv_RespondChangeOnDetached="false"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            custom:npv_WrapSelectorWheel="false"
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
@@ -54,7 +52,6 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            custom:npv_WrapSelectorWheel="true"
             custom:npv_ItemPaddingHorizontal="0dp"
             />
         <com.henninghall.date_picker.pickers.IosClone
@@ -66,7 +63,6 @@
             custom:npv_RespondChangeOnDetached="false"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            custom:npv_WrapSelectorWheel="true"
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
@@ -84,7 +80,6 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            custom:npv_WrapSelectorWheel="true"
             custom:npv_ItemPaddingHorizontal="0dp"
             />
         <com.henninghall.date_picker.pickers.IosClone
@@ -96,7 +91,6 @@
             custom:npv_RespondChangeOnDetached="false"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            custom:npv_WrapSelectorWheel="true"
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
@@ -114,7 +108,6 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            custom:npv_WrapSelectorWheel="true"
             custom:npv_ItemPaddingHorizontal="0dp"
             />
         <com.henninghall.date_picker.pickers.IosClone
@@ -129,7 +122,6 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            custom:npv_WrapSelectorWheel="true"
             custom:npv_ItemPaddingHorizontal="3dp"
             />
         <com.henninghall.date_picker.pickers.IosClone
@@ -141,7 +133,6 @@
             custom:npv_RespondChangeOnDetached="false"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            custom:npv_WrapSelectorWheel="false"
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
@@ -160,7 +151,6 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            custom:npv_WrapSelectorWheel="true"
             custom:npv_ItemPaddingHorizontal="3dp"
             />
 
@@ -176,7 +166,6 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            custom:npv_WrapSelectorWheel="true"
             custom:npv_ItemPaddingHorizontal="3dp"
             />
         <com.henninghall.date_picker.pickers.IosClone
@@ -191,7 +180,6 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            custom:npv_WrapSelectorWheel="true"
             custom:npv_ItemPaddingHorizontal="0dp"
             />
 

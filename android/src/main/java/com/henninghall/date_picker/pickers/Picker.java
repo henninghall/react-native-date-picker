@@ -18,10 +18,10 @@ public interface Picker {
     void setSelectedTextColor(int value);
     void setOnValueChangeListenerInScrolling(Picker.OnValueChangeListenerInScrolling listener);
     void setOnValueChangedListener(Picker.OnValueChangeListener onValueChangeListener);
-
     void setShownCount(int count);
     View getView();
     void setVisibility(int visibility);
+    void setWrapSelectorWheel(boolean wrapSelectorWheel);
 
     interface OnValueChangeListenerInScrolling {
         void onValueChangeInScrolling(Picker picker, int oldVal, int newVal);

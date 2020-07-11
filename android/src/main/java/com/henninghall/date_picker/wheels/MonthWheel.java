@@ -32,6 +32,11 @@ public class MonthWheel extends Wheel
     }
 
     @Override
+    public boolean wrapSelectorWheel() {
+        return true;
+    }
+
+    @Override
     public String getFormatPattern() {
         return "LLLL";
     }

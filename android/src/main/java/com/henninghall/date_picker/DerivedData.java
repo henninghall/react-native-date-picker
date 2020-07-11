@@ -97,8 +97,17 @@ public class DerivedData {
         return oddShowCount;
     }
 
-    public boolean isIosClone() {
-        return state.getVariant() == Variant.iosClone;
+    public boolean hasNativeStyle() {
+        return state.getVariant() == Variant.nativeAndroid;
+    }
+
+    public int getRootLayout() {
+        switch (state.getVariant()){
+            case nativeAndroid: return R.layout.native_picker;
+            case iosClone: return R.layout.ios_clone;
+            default: return R.layout.ios_clone;
+        }
+
     }
 
 }

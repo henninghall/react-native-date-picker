@@ -110,6 +110,11 @@ public class DayWheel extends Wheel {
         return state.getMode() == Mode.datetime;
     }
 
+    @Override
+    public boolean wrapSelectorWheel() {
+        return false;
+    }
+
 
     @Override
     public String getFormatPattern() {

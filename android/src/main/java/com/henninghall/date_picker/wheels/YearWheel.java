@@ -60,6 +60,11 @@ public class YearWheel extends Wheel
     }
 
     @Override
+    public boolean wrapSelectorWheel() {
+        return false;
+    }
+
+    @Override
     public Paint.Align getTextAlign() {
         return Paint.Align.RIGHT;
     }

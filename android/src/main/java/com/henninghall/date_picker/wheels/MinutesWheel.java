@@ -36,6 +36,11 @@ public class MinutesWheel extends Wheel {
     }
 
     @Override
+    public boolean wrapSelectorWheel() {
+        return true;
+    }
+
+    @Override
     public String getFormatPattern() {
         return "mm";
     }

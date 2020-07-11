@@ -5,10 +5,16 @@ import android.graphics.Paint;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.NumberPicker;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
+
+import static android.widget.NumberPicker.OnScrollListener.SCROLL_STATE_IDLE;
 
 public class AndroidNative extends NumberPicker implements Picker {
 
@@ -31,7 +37,6 @@ public class AndroidNative extends NumberPicker implements Picker {
 
     @Override
     public void smoothScrollToValue(int value) {
-        // TODO
         setValue(value);
     }
 
@@ -51,16 +56,25 @@ public class AndroidNative extends NumberPicker implements Picker {
     }
 
     @Override
-    public void setOnValueChangeListenerInScrolling(OnValueChangeListenerInScrolling listener) {
-
+    public void setOnValueChangeListenerInScrolling(final OnValueChangeListenerInScrolling listener) {
+        final Picker self = this;
+        super.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int from, int to) {
+                listener.onValueChangeInScrolling(self, from, to);
+            }
+        });
     }
 
     @Override
     public void setOnValueChangedListener(final Picker.OnValueChangeListener listener) {
-        super.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+        super.setOnScrollListener(new OnScrollListener() {
+            int previousState = SCROLL_STATE_IDLE;
             @Override
-            public void onValueChange(NumberPicker numberPicker, int from, int to) {
-                listener.onValueChange();
+            public void onScrollStateChange(NumberPicker numberPicker, int state) {
+                boolean stoppedScrolling = previousState != SCROLL_STATE_IDLE && state == SCROLL_STATE_IDLE;
+                if (stoppedScrolling) listener.onValueChange();
+                previousState = state;
             }
         });
     }
@@ -68,6 +82,7 @@ public class AndroidNative extends NumberPicker implements Picker {
 
     @Override
     public void setShownCount(int count) {
+        // always 3 date rows -> nothing needs to be done here
     }
 
     @Override
