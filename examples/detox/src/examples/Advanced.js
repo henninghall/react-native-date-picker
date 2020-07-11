@@ -38,7 +38,7 @@ export default class Advanced extends Component {
     timeZoneOffsetInMinutes: undefined,
     minuteInterval: 1,
     dateString: '',
-    androidVariant: 'nativeAndroid',
+    androidVariant: 'iosClone',
   }
 
   render() {
