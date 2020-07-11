@@ -15,38 +15,44 @@
 
         <com.henninghall.date_picker.pickers.AndroidNative
             android:id="@+id/year"
+            android:theme="@style/android_native_theme"
             style="@style/android_native"
             android:tag="year" />
 
         <com.henninghall.date_picker.pickers.AndroidNative
             android:id="@+id/month"
+            android:theme="@style/android_native_theme"
             style="@style/android_native"
             android:tag="month" />
 
         <com.henninghall.date_picker.pickers.AndroidNative
             android:id="@+id/date"
+            android:theme="@style/android_native_theme"
             style="@style/android_native_small"
             android:tag="date" />
 
         <com.henninghall.date_picker.pickers.AndroidNative
             android:id="@+id/day"
+            android:theme="@style/android_native_theme"
             style="@style/android_native"
             android:tag="day" />
 
         <com.henninghall.date_picker.pickers.AndroidNative
             android:id="@+id/hour"
+            android:theme="@style/android_native_theme"
             style="@style/android_native_small"
             android:tag="hour" />
 
         <com.henninghall.date_picker.pickers.AndroidNative
             android:id="@+id/minutes"
+            android:theme="@style/android_native_theme"
             style="@style/android_native_small"
             android:tag="minutes" />
 
         <com.henninghall.date_picker.pickers.AndroidNative
             android:id="@+id/ampm"
+            android:theme="@style/android_native_theme"
             style="@style/android_native_small"
-            android:layout_width="40dp"
             android:tag="ampm" />
     </LinearLayout>
 
