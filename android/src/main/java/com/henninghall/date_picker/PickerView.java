@@ -42,7 +42,7 @@ public class PickerView extends RelativeLayout {
             uiManager.updateFadeToColor();
         }
 
-        if (didUpdate(TextColorProp.name, VariantProp.name)) {
+        if (didUpdate(TextColorProp.name)) {
             uiManager.updateTextColor();
         }
 
