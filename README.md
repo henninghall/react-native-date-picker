@@ -81,6 +81,12 @@ export default () => {
 
 ## FAQ
 
+### How do I change the divider color?
+The color of the divider, separator (or whatever you choose to call it) can only be changed on android for the androidNative variant. To change it, add the following to your android AppTheme. The theme is often found in styles.xml. 
+```xml
+<item name="colorControlNormal">#ff0000</item>
+```
+
 ### Can I use expo?
 
 Unfortunately, expo does not support this date picker at the moment. Upvote <a href="https://expo.canny.io/feature-requests/p/support-react-native-date-picker">this feature request</a> if you would like to have it included.
@@ -105,6 +111,37 @@ If you have enabled <a href="https://facebook.github.io/react-native/docs/signed
 -keep public class net.time4j.android.ApplicationStarter
 -keep public class net.time4j.PrettyTime
 ```
+
+## Two different Android variants
+Here are some more info about the three different picker modes that are available.
+
+
+<table>
+<tr><td align="center"><b>iOS clone</b></td><td align="center"><b>Native Android</b></td>  
+  </tr><tr><td align="center">
+ <img src="docs/react-native-date-picker-android.gif" alt="date time picker" height="120px" />
+</td><td align="center">
+ <img src="docs/react-native-date-picker-android-native.gif" alt="date time picker" height="120px" />
+</td></tr>
+
+<tr><td>The so called "iOS clone" looks and works similar to the ios version. It shows normaly 5 lines of dates. It is enabled by default.</td><td>
+This version looks more like a standard native implementation on Android. The divider color can be changed by adding the following to you Android theme. 
+<code><item name="colorControlNormal">#03b6fc</item></code>
+</td></tr>
+<tr><td>
+
+```js
+androidVariant="nativeAndroid"
+```
+</td><td>
+
+```js
+androidVariant="iosClone"
+```
+</td></tr>
+</table>
+
+
 
 ## Three different modes
 Here are some more info about the three different picker modes that are available.
