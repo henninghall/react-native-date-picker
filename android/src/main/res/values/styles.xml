@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-	<style name="Dialog_Full_Screen">
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:background">@android:color/transparent</item>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="android_native_theme">
+        <item name="android:textSize" tools:ignore="SpUsage">17sp</item>
+    </style>
+    <style name="android_native">
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:descendantFocusability">blocksDescendants</item>
+
+    </style>
+    <style name="android_native_small" parent="android_native">
+        <item name="android:layout_width">40dp</item>
     </style>
 </resources>

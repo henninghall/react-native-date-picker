@@ -2,6 +2,8 @@ package com.henninghall.date_picker;
 
 import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.models.Mode;
+import com.henninghall.date_picker.models.Variant;
+import com.henninghall.date_picker.props.VariantProp;
 import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.FadeToColorProp;
 import com.henninghall.date_picker.props.HeightProp;
@@ -22,7 +24,7 @@ import java.util.TimeZone;
 public class State {
 
     private final DateProp dateProp = new DateProp();
-    private final Prop modeProp = new ModeProp();
+    private final ModeProp modeProp = new ModeProp();
     private final LocaleProp localeProp = new LocaleProp();
     private final FadeToColorProp fadeToColorProp = new FadeToColorProp();
     private final TextColorProp textColorProp = new TextColorProp();
@@ -31,6 +33,7 @@ public class State {
     private final MaximumDateProp maximumDateProp = new MaximumDateProp();
     private final UtcProp utcProp = new UtcProp();
     private final HeightProp heightProp = new HeightProp();
+    private final VariantProp variantProp = new VariantProp();
 
     private final HashMap props = new HashMap<String, Prop>() {{
         put(DateProp.name, dateProp);
@@ -43,6 +46,7 @@ public class State {
         put(MaximumDateProp.name, maximumDateProp);
         put(UtcProp.name, utcProp);
         put(HeightProp.name, heightProp);
+        put(VariantProp.name, variantProp);
     }};
     public DerivedData derived;
 
@@ -106,5 +110,8 @@ public class State {
         return localeProp.getLanguageTag();
     }
 
+    public Variant getVariant(){
+        return variantProp.getValue();
+    }
 
 }

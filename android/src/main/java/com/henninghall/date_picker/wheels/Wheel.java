@@ -3,7 +3,7 @@ package com.henninghall.date_picker.wheels;
 import android.graphics.Paint;
 import android.view.View;
 
-import cn.carbswang.android.numberpickerview.library.NumberPickerView;
+import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.State;
 
 import java.text.SimpleDateFormat;
@@ -17,6 +17,7 @@ public abstract class Wheel {
     private Calendar userSetValue;
 
     public abstract boolean visible();
+    public abstract boolean wrapSelectorWheel();
     public abstract Paint.Align getTextAlign();
     public abstract String getFormatPattern();
     public abstract ArrayList<String> getValues();
@@ -26,14 +27,15 @@ public abstract class Wheel {
     }
 
     private ArrayList<String> values = new ArrayList<>();
-    public NumberPickerView picker;
+    public Picker picker;
     public SimpleDateFormat format;
 
-    public Wheel(NumberPickerView picker, State state) {
+    public Wheel(Picker picker, State state) {
         this.state = state;
         this.picker = picker;
         this.format = new SimpleDateFormat(getFormatPattern(), state.getLocale());
         picker.setTextAlign(getTextAlign());
+        picker.setWrapSelectorWheel(wrapSelectorWheel());
     }
 
     private int getIndexOfDate(Calendar date){

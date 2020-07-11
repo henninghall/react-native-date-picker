@@ -5,12 +5,11 @@ import android.graphics.Paint;
 import java.util.*;
 import com.henninghall.date_picker.*;
 import com.henninghall.date_picker.models.Mode;
-
-import cn.carbswang.android.numberpickerview.library.NumberPickerView;
+import com.henninghall.date_picker.pickers.Picker;
 
 public class DateWheel extends Wheel
 {
-    public DateWheel(final NumberPickerView picker, final State id) {
+    public DateWheel(final Picker picker, final State id) {
         super(picker, id);
     }
 
@@ -33,6 +32,11 @@ public class DateWheel extends Wheel
     @Override
     public boolean visible() {
         return state.getMode() == Mode.date;
+    }
+
+    @Override
+    public boolean wrapSelectorWheel() {
+        return true;
     }
 
     @Override

@@ -1,13 +1,5 @@
 import React, { Component } from 'react'
-import {
-  Dimensions,
-  Button,
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-} from 'react-native'
+import { Button, Text } from 'react-native'
 
 export default class extends Component {
   render() {

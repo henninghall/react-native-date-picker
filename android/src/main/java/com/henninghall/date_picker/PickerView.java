@@ -1,9 +1,13 @@
 package com.henninghall.date_picker;
 
-import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Dynamic;
+import com.henninghall.date_picker.props.MaximumDateProp;
+import com.henninghall.date_picker.props.MinimumDateProp;
+import com.henninghall.date_picker.props.MinuteIntervalProp;
+import com.henninghall.date_picker.props.UtcProp;
+import com.henninghall.date_picker.props.VariantProp;
 import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.FadeToColorProp;
 import com.henninghall.date_picker.props.HeightProp;
@@ -11,58 +15,66 @@ import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.TextColorProp;
 import com.henninghall.date_picker.ui.UIManager;
+import com.henninghall.date_picker.wheels.AmPmWheel;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class PickerView extends RelativeLayout {
 
-    private final View rootView = inflate(getContext(), R.layout.datepicker_view, this);
-    private final UIManager uiManager;
-    private State state;
+    private UIManager uiManager;
+    private State state = new State();
     private ArrayList<String> updatedProps = new ArrayList<>();
 
     public PickerView() {
         super(DatePickerManager.context);
-        state = new State();
-        uiManager = new UIManager(state, this);
     }
 
     public void update() {
 
-        if(updatedProps.contains(FadeToColorProp.name)) {
+        if (didUpdate(VariantProp.name)) {
+            this.removeAllViewsInLayout();
+            inflate(getContext(), state.derived.getRootLayout(), this);
+            uiManager = new UIManager(state, this);
+        }
+
+        if (didUpdate(FadeToColorProp.name)) {
             uiManager.updateFadeToColor();
         }
 
-        if(updatedProps.contains(TextColorProp.name)) {
+        if (didUpdate(TextColorProp.name)) {
             uiManager.updateTextColor();
         }
 
-        if(updatedProps.contains(ModeProp.name)) {
+        if (didUpdate(ModeProp.name, VariantProp.name)) {
             uiManager.updateWheelVisibility();
         }
 
-        if(updatedProps.contains(HeightProp.name)) {
+        if (didUpdate(HeightProp.name)) {
             uiManager.updateHeight();
         }
 
-        if(updatedProps.contains(ModeProp.name) || updatedProps.contains(LocaleProp.name)) {
+        if (didUpdate(ModeProp.name, LocaleProp.name, VariantProp.name)) {
             uiManager.updateWheelOrder();
         }
 
-        ArrayList<String> noDisplayValueChangeProps = new ArrayList<String>(){{
-            add(DateProp.name);
-            add(FadeToColorProp.name);
-            add(TextColorProp.name);
-        }};
-        updatedProps.removeAll(noDisplayValueChangeProps);
-
-        if(updatedProps.size() != 0) {
+        if (didUpdate(DateProp.name, HeightProp.name, LocaleProp.name,
+                MaximumDateProp.name, MinimumDateProp.name, MinuteIntervalProp.name, ModeProp.name,
+                UtcProp.name, VariantProp.name
+        )) {
             uiManager.updateDisplayValues();
         }
 
         uiManager.setWheelsToDate();
 
         updatedProps = new ArrayList<>();
+    }
+
+    private boolean didUpdate(String... propNames) {
+        for (String propName : propNames) {
+            if (updatedProps.contains(propName)) return true;
+        }
+        return false;
     }
 
     public void updateProp(String propName, Dynamic value) {
@@ -72,10 +84,6 @@ public class PickerView extends RelativeLayout {
 
     public void scroll(int wheelIndex, int scrollTimes) {
         uiManager.scroll(wheelIndex, scrollTimes);
-    }
-
-    public View getRootView(){
-        return rootView;
     }
 
     private final Runnable measureAndLayout = new Runnable() {
@@ -93,7 +101,6 @@ public class PickerView extends RelativeLayout {
         super.requestLayout();
         post(measureAndLayout);
     }
-
 
 
 }

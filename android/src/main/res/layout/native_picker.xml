@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/pickerWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        >
+
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/year"
+            android:theme="@style/android_native_theme"
+            style="@style/android_native"
+            android:tag="year" />
+
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/month"
+            android:theme="@style/android_native_theme"
+            style="@style/android_native"
+            android:tag="month" />
+
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/date"
+            android:theme="@style/android_native_theme"
+            style="@style/android_native_small"
+            android:tag="date" />
+
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/day"
+            android:theme="@style/android_native_theme"
+            style="@style/android_native"
+            android:tag="day" />
+
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/hour"
+            android:theme="@style/android_native_theme"
+            style="@style/android_native_small"
+            android:tag="hour" />
+
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/minutes"
+            android:theme="@style/android_native_theme"
+            style="@style/android_native_small"
+            android:tag="minutes" />
+
+        <com.henninghall.date_picker.pickers.AndroidNative
+            android:id="@+id/ampm"
+            android:theme="@style/android_native_theme"
+            style="@style/android_native_small"
+            android:tag="ampm" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,22 +1,19 @@
 package com.henninghall.date_picker.wheels;
 
 import android.graphics.Paint;
-import android.text.TextUtils;
 
 import com.henninghall.date_picker.DayFormats;
 import com.henninghall.date_picker.LocaleUtils;
+import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.State;
 import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.Utils;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-
-import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 
 public class DayWheel extends Wheel {
@@ -25,7 +22,7 @@ public class DayWheel extends Wheel {
     private static int defaultNumberOfDays = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_YEAR);
     private HashMap<String, String> displayValues;
 
-    public DayWheel(NumberPickerView picker, State state) {
+    public DayWheel(Picker picker, State state) {
         super(picker, state);
     }
 
@@ -111,6 +108,11 @@ public class DayWheel extends Wheel {
     @Override
     public boolean visible() {
         return state.getMode() == Mode.datetime;
+    }
+
+    @Override
+    public boolean wrapSelectorWheel() {
+        return false;
     }
 
 

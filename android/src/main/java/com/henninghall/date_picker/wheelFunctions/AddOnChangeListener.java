@@ -1,5 +1,6 @@
 package com.henninghall.date_picker.wheelFunctions;
 
+import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.ui.WheelChangeListener;
 import com.henninghall.date_picker.wheels.Wheel;
 
@@ -15,9 +16,9 @@ public class AddOnChangeListener implements WheelFunction {
 
     @Override
     public void apply(final Wheel wheel) {
-        wheel.picker.setOnValueChangedListener(new NumberPickerView.OnValueChangeListener() {
+        wheel.picker.setOnValueChangedListener(new Picker.OnValueChangeListener() {
             @Override
-            public void onValueChange(NumberPickerView picker, int oldVal, int newVal) {
+            public void onValueChange() {
                 onChangeListener.onChange(wheel);
             }
         });

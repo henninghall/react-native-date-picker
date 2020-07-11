@@ -25,7 +25,6 @@ public class UIManager {
         this.state = state;
         this.rootView = rootView;
         wheels = new Wheels(state, rootView);
-        fadingOverlay = new FadingOverlay(state, rootView);
         addOnChangeListener();
     }
 
@@ -38,6 +37,8 @@ public class UIManager {
     }
 
     public void updateFadeToColor(){
+        if(state.derived.hasNativeStyle()) return;
+        fadingOverlay = new FadingOverlay(state, rootView);
         fadingOverlay.updateColor();
     }
 
@@ -78,6 +79,4 @@ public class UIManager {
         WheelChangeListener onWheelChangeListener = new WheelChangeListenerImpl(wheels, state, this, rootView);
         wheels.applyOnAll(new AddOnChangeListener(onWheelChangeListener));
     }
-
-
 }
