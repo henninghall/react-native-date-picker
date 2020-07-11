@@ -1,4 +1,4 @@
-# React Native Date Picker [![npm](https://img.shields.io/npm/v/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) [![Build status](https://img.shields.io/github/workflow/status/henninghall/react-native-date-picker/Android:%20build%20&%20test?label=tests)](https://github.com/henninghall/react-native-date-picker/actions) [![npm](https://img.shields.io/npm/dm/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker)
+# React Native Date Picker [![npm](https://img.shields.io/npm/v/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) [![npm](https://img.shields.io/npm/dm/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker)
 
 
 This is a React Native Date Picker with following main features:
@@ -125,8 +125,8 @@ Here are some more info about the three different picker modes that are availabl
 </td></tr>
 
 <tr><td>The so called "iOS clone" looks and works similar to the ios version. It shows normaly 5 lines of dates. It is enabled by default.</td><td>
-This version looks more like a standard native implementation on Android. The divider color can be changed by adding the following to you Android theme. 
-<code>&lt;item name=&quot;colorControlNormal&quot;&gt;#03b6fc&lt;/item&gt;</code>
+The "Android Native" version looks more like a standard native implementation on Android. The divider color can be changed by adding the following to you Android theme:
+<br><code>&lt;item name=&quot;colorControlNormal&quot;&gt;#03b6fc&lt;/item&gt;</code>
 </td></tr>
 <tr><td>
 
