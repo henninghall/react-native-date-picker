@@ -126,7 +126,7 @@ Here are some more info about the three different picker modes that are availabl
 
 <tr><td>The so called "iOS clone" looks and works similar to the ios version. It shows normaly 5 lines of dates. It is enabled by default.</td><td>
 This version looks more like a standard native implementation on Android. The divider color can be changed by adding the following to you Android theme. 
-<code><item name="colorControlNormal">#03b6fc</item></code>
+<code>&lt;item name=&quot;colorControlNormal&quot;&gt;#03b6fc&lt;/item&gt;</code>
 </td></tr>
 <tr><td>
 
