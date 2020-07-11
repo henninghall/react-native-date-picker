@@ -8,6 +8,8 @@
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
+        <item name="android:descendantFocusability">blocksDescendants</item>
+
     </style>
     <style name="android_native_small" parent="android_native">
         <item name="android:layout_width">40dp</item>
