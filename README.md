@@ -23,11 +23,11 @@ This is a React Native Date Picker with following main features:
    <tr>
     <td><img src="docs/react-native-date-picker-android.gif" alt="React Native Date Picker Android" height="150px" style="margin-left:10px" />
     </td>
-        <td><img src="docs/react-native-date-picker-android.png" alt="React Native Date Picker Android" height="150px" style="margin-left:10px" />
+        <td><img src="docs/react-native-date-picker-android-native.gif" alt="React Native Datepicker" height="150px" style="margin-left:10px" />
         </td>  
   </tr>
       <tr>
-    <td align="center" colspan="2">Choose from 2 different styles</td>
+    <td align="center" colspan="2">Choose from 2 different variants</td>
   </tr>
   </table>
   
