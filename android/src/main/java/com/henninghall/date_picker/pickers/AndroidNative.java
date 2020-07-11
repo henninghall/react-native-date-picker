@@ -1,13 +1,17 @@
 package com.henninghall.date_picker.pickers;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class AndroidNative extends NumberPicker implements Picker {
@@ -36,13 +40,32 @@ public class AndroidNative extends NumberPicker implements Picker {
     }
 
     @Override
-    public void setNormalTextColor(int value) {
-
+    public void setNormalTextColor(int color) {
+        // Not needed for this picker. It auto fades the color
     }
 
     @Override
-    public void setSelectedTextColor(int value) {
+    public void setSelectedTextColor(int color) {
+        try {
+            Field selectorWheelPaintField = getClass().getSuperclass()
+                    .getDeclaredField("mSelectorWheelPaint");
+            selectorWheelPaintField.setAccessible(true);
+            ((Paint) selectorWheelPaintField.get(this)).setColor(color);
+        } catch (NoSuchFieldException e) {
+            Log.w("setSelectedTextColor", e);
+        } catch (IllegalAccessException e) {
+            Log.w("setSelectedTextColor", e);
+        } catch (IllegalArgumentException e) {
+            Log.w("setSelectedTextColor", e);
+        }
 
+        final int count = getChildCount();
+        for (int i = 0; i < count; i++) {
+            View child = getChildAt(i);
+            if (child instanceof EditText)
+                ((EditText) child).setTextColor(color);
+        }
+        invalidate();
     }
 
     @Override
@@ -88,22 +111,32 @@ public class AndroidNative extends NumberPicker implements Picker {
         return option1;
     }
 
-    @SuppressLint("PrivateApi")
     private void changeValueByOne(final NumberPicker higherPicker, final boolean increment) {
+        boolean success = false;
         try {
             Method method = getClass().getSuperclass().getDeclaredMethod("changeValueByOne", boolean.class);
             method.setAccessible(true);
             method.invoke(higherPicker, increment);
-        } catch (Exception e) {
-            e.printStackTrace();
-            // make step without animation if failed to use reflection method
-            setValue((getValue() + (increment ? 1 : -1)) % getMaxValue());
+            success = true;
+        } catch (final NoSuchMethodException e) {
+            Log.w("changeValueByOne", e);
+        } catch (final IllegalArgumentException e) {
+            Log.w("changeValueByOne", e);
+        } catch (final IllegalAccessException e) {
+            Log.w("changeValueByOne", e);
+        } catch (final InvocationTargetException e) {
+            Log.w("changeValueByOne", e);
+        } finally {
+            if (!success) {
+                // make step without animation if failed to use reflection method
+                setValue((getValue() + (increment ? 1 : -1)) % getMaxValue());
+            }
         }
     }
 
     private void changeValueByOne(final boolean increment, final int ms, final boolean isLast) {
         final AndroidNative self = this;
-        new Handler().handler.postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 changeValueByOne(self, increment);
