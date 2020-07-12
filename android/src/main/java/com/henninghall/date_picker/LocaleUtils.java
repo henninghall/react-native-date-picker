@@ -18,7 +18,7 @@ public class LocaleUtils {
         return getFormat(locale, Formats.Formatz.d);
     }
 
-    private static String getFormat (String languageTag, Formats.Formatz format) {
+    private static String getFormat(String languageTag, Formats.Formatz format) {
         try {
             return Formats.get(languageTag, format);
         } catch (Formats.FormatNotFoundException e) {
@@ -30,40 +30,6 @@ public class LocaleUtils {
             }
         }
     }
-
-//    /**
-//     * @return Full pattern including special char. Example: Year pattern char be "y" for most
-//     * locales but "y년" for korean.
-//     */
-//    public static String getPatternIncluding(String format, Locale locale) {
-////        Set<String> locales = Formats.getKeys();
-//
-//
-////        for(String l : locales){
-////            Locale loc = Locale.forLanguageTag(l);
-////            String datepattern = getDatePattern(loc);
-////            ArrayList<String> full = getFullPatternPieces(loc);
-////            String piecestring = Arrays.toString(new ArrayList[]{full});
-////            if(piecestring.contains("'")
-////                    && !piecestring.contains(", y]")
-////                    && !piecestring.contains(", y,")
-////                    && !piecestring.contains("[y,")
-////            ){
-////                Log.d("========== ", l);
-////
-////                Log.d("henning", datepattern);
-////                Log.d("henning", piecestring);
-////            }
-////        }
-//
-//
-//        for (String piece : getFullPatternPieces(locale)) {
-//            if (piece.contains(format) && !piece.contains("'")) {
-//                return piece;
-//            }
-//        }
-//        return null;
-//    }
 
     public static String getDatePattern(Locale locale) {
         DateFormat df = DateFormat.getDateInstance(DateFormat.FULL, locale);

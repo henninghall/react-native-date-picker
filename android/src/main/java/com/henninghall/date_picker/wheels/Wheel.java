@@ -33,8 +33,6 @@ public abstract class Wheel {
     public Wheel(Picker picker, State state) {
         this.state = state;
         this.picker = picker;
-        String pattern = getFormatPattern();
-        Locale locale = state.getLocale();
         this.format = new SimpleDateFormat(getFormatPattern(), state.getLocale());
         picker.setTextAlign(getTextAlign());
         picker.setWrapSelectorWheel(wrapSelectorWheel());

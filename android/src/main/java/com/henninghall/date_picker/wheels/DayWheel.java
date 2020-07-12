@@ -2,7 +2,6 @@ package com.henninghall.date_picker.wheels;
 
 import android.graphics.Paint;
 
-import com.henninghall.date_picker.DayFormats;
 import com.henninghall.date_picker.LocaleUtils;
 import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.State;
