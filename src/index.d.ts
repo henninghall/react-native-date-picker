@@ -32,6 +32,11 @@ export interface DatePickerProps extends ViewProps {
   minuteInterval?: 1 | 2 | 3 | 4 | 5 | 6 | 10 | 12 | 15 | 20 | 30
 
   /**
+   * The Android style variant. 
+   */
+  androidVariant?: 'iosClone' | 'nativeAndroid'
+  
+  /**
    * The date picker mode.
    */
   mode?: 'date' | 'time' | 'datetime'
