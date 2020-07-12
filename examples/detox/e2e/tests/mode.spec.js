@@ -1,14 +1,13 @@
-const { setMode } = require("../utils")
+const { setMode } = require('../utils')
 
 describe('Modes', () => {
-
   before(async () => {
     await device.reloadReactNative()
     await element(by.text('Advanced')).tap()
   })
 
   it('datetime', async () => {
-    await setMode("datetime")
+    await setMode('datetime')
 
     await expect(element(by.id('day'))).toBeVisible()
     await expect(element(by.id('minutes'))).toBeVisible()
@@ -21,7 +20,7 @@ describe('Modes', () => {
   })
 
   it('date', async () => {
-    await setMode("date")
+    await setMode('date')
 
     await expect(element(by.id('month'))).toBeVisible()
     await expect(element(by.id('date'))).toBeVisible()
@@ -34,7 +33,7 @@ describe('Modes', () => {
   })
 
   it('time', async () => {
-    await setMode("time")
+    await setMode('time')
 
     await expect(element(by.id('minutes'))).toBeVisible()
     await expect(element(by.id('hour'))).toBeVisible()
@@ -45,5 +44,4 @@ describe('Modes', () => {
     await expect(element(by.id('date'))).toNotExist()
     await expect(element(by.id('year'))).toNotExist()
   })
-
 })
