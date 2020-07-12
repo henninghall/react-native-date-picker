@@ -113,8 +113,7 @@ If you have enabled <a href="https://facebook.github.io/react-native/docs/signed
 ```
 
 ## Two different Android variants
-Here are some more info about the three different picker modes that are available.
-
+On Android there are two design variants to choose from:
 
 <table>
 <tr><td align="center"><b>iOS clone</b></td><td align="center"><b>Native Android</b></td>  
