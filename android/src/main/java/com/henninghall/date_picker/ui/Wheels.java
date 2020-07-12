@@ -63,21 +63,20 @@ public class Wheels {
         return (Picker) rootView.findViewById(id);
     }
 
-    private Collection<Wheel> getVisible() {
-        ArrayList<WheelType> wheelTypes = state.derived.getVisibleWheels();
-        Collection<Wheel> wheels = new ArrayList<>();
-        for (WheelType type: wheelTypes){
-            wheels.add(getWheel(type));
-        }
-        return wheels;
-    }
-
     void applyOnAll(WheelFunction function) {
         for (Wheel wheel: getAll()) function.apply(wheel);
     }
 
     void applyOnVisible(WheelFunction function) {
-        for (Wheel wheel: getVisible()) function.apply(wheel);
+        for(Wheel wheel: getAll()) {
+            if(wheel.visible()) function.apply(wheel);
+        }
+    }
+
+    void applyOnInVisible(WheelFunction function) {
+        for(Wheel wheel: getAll()) {
+            if(!wheel.visible()) function.apply(wheel);
+        }
     }
 
     void updateHeight() {

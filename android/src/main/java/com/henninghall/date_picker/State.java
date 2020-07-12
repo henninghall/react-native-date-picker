@@ -97,9 +97,12 @@ public class State {
         return utc ? TimeZone.getTimeZone("UTC") : TimeZone.getDefault();
     }
 
+    public String getDateString() {
+        return (String) dateProp.getValue();
+    }
+
     public Calendar getDate() {
-        String date = (String) dateProp.getValue();
-        return Utils.isoToCalendar(date, getTimeZone());
+        return Utils.isoToCalendar(getDateString(), getTimeZone());
     }
 
     public Integer getHeight() {
