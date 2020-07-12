@@ -7,14 +7,14 @@ const {
   setMaximumDate,
 } = require('../utils')
 
-describe.only('Display text', () => {
+describe('Display text', () => {
   before(async () => {
     await device.reloadReactNative()
     await element(by.text('Advanced')).tap()
   })
 
   describe.only('datetime', () => {
-    it.only('en-US', async () => {
+    it('en-US', async () => {
       await expectLocaleDateString('en-US', 'Sun Jan 2' + '1200 AM ')
     })
 
@@ -30,16 +30,20 @@ describe.only('Display text', () => {
       await expectLocaleDateString('ru-RU', 'вс 2 янв.' + '1200 AM ')
     })
 
-    it.only('ko', async () => {
+    it('ko', async () => {
       await expectLocaleDateString('ko', '1월 2일 일 오전 1200')
     })
 
-    it.only('zh-CH', async () => {
+    it('ja', async () => {
+      await expectLocaleDateString('ja', '1月2日 日' + '1200 午前 ')
+    })
+
+    it('zh-CH', async () => {
       await expectLocaleDateString('zh-CH', '1月2日周日 上午 1200')
     })
 
-    it.only('eu', async () => {
-      await expectLocaleDateString('eu', 'urt. 2 ig.' + '1200')
+    it('eu', async () => {
+      await expectLocaleDateString('eu', 'urt. 2 ig.' + ' AM 1200')
     })
   })
 
@@ -74,6 +78,10 @@ describe.only('Display text', () => {
 
     it('zh-CH', async () => {
       await expectLocaleDateString('zh-CH', '2001年' + '一月' + '1日')
+    })
+
+    it('eu', async () => {
+      await expectLocaleDateString('eu', '2001' + 'urtarrila' + '1')
     })
   })
 

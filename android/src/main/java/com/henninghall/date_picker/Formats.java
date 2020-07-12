@@ -77,12 +77,12 @@ public class Formats {
         put("is", mapOf("EEE, d. MMM", "d", "y"));
         put("it", mapOf("EEE d MMM", "d", "y"));
         put("iw", mapOf("EEE, d בMMM", "d", "y"));
-        put("ja", mapOf("M月d日(EEE)", "d日", "y年"));
+        put("ja", mapOf("M月d日 EEE", "d日", "y年"));
         put("ka", mapOf("EEE, d MMM", "d", "y"));
         put("kk", mapOf("d MMM, EEE", "d", "y"));
         put("km", mapOf("EEE d MMM", "d", "y"));
         put("kn", mapOf("EEE, d MMM", "d", "y"));
-        put("ko", mapOf("MMM d일 (EEE)", "d일", "y년"));
+        put("ko", mapOf("MMM d일 EEE", "d일", "y년"));
         put("ky", mapOf("d-MMM, EEE", "d", "y"));
         put("ln", mapOf("EEE d MMM", "d", "y"));
         put("lo", mapOf("EEE d MMM", "d", "y"));
