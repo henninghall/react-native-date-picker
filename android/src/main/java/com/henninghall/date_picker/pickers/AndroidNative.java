@@ -1,7 +1,6 @@
 package com.henninghall.date_picker.pickers;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -174,7 +173,13 @@ public class AndroidNative extends NumberPicker implements Picker {
             public void onScrollStateChange(NumberPicker numberPicker, int state) {
                 boolean stoppedScrolling = previousState != SCROLL_STATE_IDLE && state == SCROLL_STATE_IDLE;
                 if (stoppedScrolling) {
-                    listener.onValueChange();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            listener.onValueChange();
+                        }
+                        // the delay make sure the wheel has stopped before sending the value change event
+                    }, 500);
                 }
                 previousState = state;
             }
