@@ -13,7 +13,7 @@ describe('Display text', () => {
     await element(by.text('Advanced')).tap()
   })
 
-  describe.only('datetime', () => {
+  describe('datetime', () => {
     it('en-US', async () => {
       await expectLocaleDateString('en-US', 'Sun Jan 2' + '1200 AM ')
     })
