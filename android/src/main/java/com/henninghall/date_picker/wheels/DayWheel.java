@@ -2,7 +2,6 @@ package com.henninghall.date_picker.wheels;
 
 import android.graphics.Paint;
 
-import com.henninghall.date_picker.DayFormats;
 import com.henninghall.date_picker.LocaleUtils;
 import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.State;
@@ -98,7 +97,7 @@ public class DayWheel extends Wheel {
     }
 
     private String getDisplayValueFormatPattern(){
-        return DayFormats.get(state.getLocaleLanguageTag());
+        return LocaleUtils.getDay(state.getLocaleLanguageTag());
     }
 
     private SimpleDateFormat getDisplayValueFormat(){
@@ -118,9 +117,9 @@ public class DayWheel extends Wheel {
 
     @Override
     public String getFormatPattern() {
-        return LocaleUtils.getDatePattern(state.getLocale())
-                .replace("EEEE", "EEE")
-                .replace("MMMM", "MMM");
+       return LocaleUtils.getDatePattern(state.getLocale())
+               .replace("EEEE", "EEE")
+               .replace("MMMM", "MMM");
     }
 
     @Override

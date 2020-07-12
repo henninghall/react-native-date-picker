@@ -12,7 +12,6 @@ public class LocaleProp extends Prop<Locale> {
     public static final String name = "locale";
     private String languageTag = getDefaultLanguageTag();
 
-
     public LocaleProp(){
         super(getDefaultLocale());
     }

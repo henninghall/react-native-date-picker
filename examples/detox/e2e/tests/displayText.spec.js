@@ -34,8 +34,16 @@ describe('Display text', () => {
       await expectLocaleDateString('ko', '1월 2일 일 오전 1200')
     })
 
+    it('ja', async () => {
+      await expectLocaleDateString('ja', '1月2日 日' + '1200 午前 ')
+    })
+
     it('zh-CH', async () => {
       await expectLocaleDateString('zh-CH', '1月2日周日 上午 1200')
+    })
+
+    it('eu', async () => {
+      await expectLocaleDateString('eu', 'urt. 2 ig.' + ' AM 1200')
     })
   })
 
@@ -70,6 +78,10 @@ describe('Display text', () => {
 
     it('zh-CH', async () => {
       await expectLocaleDateString('zh-CH', '2001年' + '一月' + '1日')
+    })
+
+    it('eu', async () => {
+      await expectLocaleDateString('eu', '2001' + 'urtarrila' + '1')
     })
   })
 

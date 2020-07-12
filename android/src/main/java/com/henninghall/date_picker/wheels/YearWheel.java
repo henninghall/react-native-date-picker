@@ -71,7 +71,7 @@ public class YearWheel extends Wheel
 
     @Override
     public String getFormatPattern() {
-        return LocaleUtils.getPatternIncluding("y", state.getLocale());
+        return LocaleUtils.getYear(state.getLocaleLanguageTag());
     }
 
 }
