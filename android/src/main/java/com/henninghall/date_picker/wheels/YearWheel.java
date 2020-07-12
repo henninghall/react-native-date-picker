@@ -2,6 +2,7 @@ package com.henninghall.date_picker.wheels;
 
 import android.graphics.Paint;
 
+import com.henninghall.date_picker.Formats;
 import com.henninghall.date_picker.LocaleUtils;
 import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.State;
@@ -9,6 +10,7 @@ import com.henninghall.date_picker.models.Mode;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class YearWheel extends Wheel
 {
@@ -71,7 +73,7 @@ public class YearWheel extends Wheel
 
     @Override
     public String getFormatPattern() {
-        return LocaleUtils.getPatternIncluding("y", state.getLocale());
+        return LocaleUtils.getYear(state.getLocaleLanguageTag());
     }
 
 }

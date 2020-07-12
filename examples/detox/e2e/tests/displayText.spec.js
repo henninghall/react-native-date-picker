@@ -7,14 +7,14 @@ const {
   setMaximumDate,
 } = require('../utils')
 
-describe('Display text', () => {
+describe.only('Display text', () => {
   before(async () => {
     await device.reloadReactNative()
     await element(by.text('Advanced')).tap()
   })
 
-  describe('datetime', () => {
-    it('en-US', async () => {
+  describe.only('datetime', () => {
+    it.only('en-US', async () => {
       await expectLocaleDateString('en-US', 'Sun Jan 2' + '1200 AM ')
     })
 
@@ -30,12 +30,16 @@ describe('Display text', () => {
       await expectLocaleDateString('ru-RU', 'вс 2 янв.' + '1200 AM ')
     })
 
-    it('ko', async () => {
+    it.only('ko', async () => {
       await expectLocaleDateString('ko', '1월 2일 일 오전 1200')
     })
 
-    it('zh-CH', async () => {
+    it.only('zh-CH', async () => {
       await expectLocaleDateString('zh-CH', '1月2日周日 上午 1200')
+    })
+
+    it.only('eu', async () => {
+      await expectLocaleDateString('eu', 'urt. 2 ig.' + '1200')
     })
   })
 

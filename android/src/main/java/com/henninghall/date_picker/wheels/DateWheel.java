@@ -41,7 +41,7 @@ public class DateWheel extends Wheel
 
     @Override
     public String getFormatPattern() {
-        return LocaleUtils.getPatternIncluding("d", state.getLocale());
+        return LocaleUtils.getDate(state.getLocaleLanguageTag());
     }
 
     @Override
