@@ -1,4 +1,4 @@
-# React Native Date Picker [![npm](https://img.shields.io/npm/v/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) [![Build status](https://img.shields.io/github/workflow/status/henninghall/react-native-date-picker/Android:%20build%20&%20test?label=tests)](https://github.com/henninghall/react-native-date-picker/actions) [![npm](https://img.shields.io/npm/dm/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker)
+# React Native Date Picker [![npm](https://img.shields.io/npm/v/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) [![npm](https://img.shields.io/npm/dm/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker)
 
 
 This is a React Native Date Picker with following main features:
@@ -18,7 +18,7 @@ This is a React Native Date Picker with following main features:
   </tr>
 
   <tr>
-    <td align="center" colspan="2"><b>Android</b></td>
+    <td align="center" colspan="2"><b>Android</b><br>Choose from 2 different variants</td>
   </tr>
    <tr>
     <td><img src="docs/react-native-date-picker-android.gif" alt="React Native Date Picker Android" height="150px" style="margin-left:10px" />
@@ -27,7 +27,7 @@ This is a React Native Date Picker with following main features:
         </td>  
   </tr>
       <tr>
-    <td align="center" colspan="2">Choose from 2 different variants</td>
+  <td align="center"><code>androidVariant="iosClone"</code></td><td align="center"><code>androidVariant="nativeAndroid"</code></td>
   </tr>
   </table>
   
@@ -68,6 +68,7 @@ export default () => {
 | fadeToColor             | Android picker is fading towards this background color. {color, 'none'}                                                                                                                                                                                                                                               |
 | maximumDate             | Maximum selectable date.                                                                                                                                                                                                                                                                                              |
 | minimumDate             | Minimum selectable date                                                                                                                                                                                                                                                                                               |
+| androidVariant          | Choose from 2 android style variants. {'iosClone', 'nativeAndroid'}                                                                                                                                                                                                                                                                         |                                                                                                                                           | <img src="docs/datetime-mode-android.png" alt="Datepicker ios clone variant" height="120px" /><img src="docs/react-native-date-picker-android.png" alt="Datepicker android native variant"/>                                                                                                                                                            |
 | minuteInterval          | The interval at which minutes can be selected.                                                                                                                                                                                                                                                                        | <img src="docs/minute-interval-ios.png" alt="Date picker minute interval IOS" height="120px" />                                                                                                                                          | <img src="docs/minute-interval-android.png" alt="Date picker minute interval Android" height="120px" />                                                                                                                                                            |
 | mode                    | The date picker mode. {'datetime', 'date', 'time'}                                                                                                                                                                                                                                                                    | <img src="docs/datetime-mode-ios.png" alt="React native date time picker" height="120px" /><img src="docs/date-mode-ios.png" alt="React native datepicker" height="120px" /><img src="docs/time-mode-ios.png" alt="React native time picker" height="120px" /> | <img src="docs/datetime-mode-android.png" alt="react native date time picker android" height="120px" /><img src="docs/date-mode-android.png" alt="react native datepicker android" height="120px" /><img src="docs/time-mode-android.png" alt="react native time picker android" height="120px" /> |
 | locale                  | The locale for the date picker. Changes language, date order and am/pm preferences. Value needs to be a <a title="react native datepicker locale id" href="https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html">Locale ID.</a> | <img src="docs/locale-ios.png" alt="React Native Date picker locale language ios" height="120px" />                                                                                                                                      | <img src="docs/locale-android.png" alt="React Native Date picker locale language android" height="120px" />                                                                                                                                                        |
@@ -79,6 +80,12 @@ export default () => {
 📅 &nbsp; React Native Date Picker is a cross platform component working on both iOS and Android. It uses the slightly improved DatePickerIOS on iOS and a custom picker on Android which has similar look and feel. The datetime mode might be particulary interesting if you looking for a way to avoid two different popup pickers on android.
 
 ## FAQ
+
+### How do I change the divider color?
+The color of the divider, separator (or whatever you choose to call it) can only be changed on android for the androidNative variant. To change it, add the following to your android AppTheme. The theme is often found in styles.xml. 
+```xml
+<item name="colorControlNormal">#ff0000</item>
+```
 
 ### Can I use expo?
 
@@ -104,6 +111,37 @@ If you have enabled <a href="https://facebook.github.io/react-native/docs/signed
 -keep public class net.time4j.android.ApplicationStarter
 -keep public class net.time4j.PrettyTime
 ```
+
+## Two different Android variants
+Here are some more info about the three different picker modes that are available.
+
+
+<table>
+<tr><td align="center"><b>iOS clone</b></td><td align="center"><b>Native Android</b></td>  
+  </tr><tr><td align="center">
+ <img src="docs/react-native-date-picker-android.gif" alt="date time picker" height="120px" />
+</td><td align="center">
+ <img src="docs/react-native-date-picker-android-native.gif" alt="date time picker" height="120px" />
+</td></tr>
+
+<tr><td>The so called "iOS clone" looks and works similar to the ios version. It shows normaly 5 lines of dates. It is enabled by default.</td><td>
+The "Android Native" version looks more like a standard native implementation on Android. The divider color can be changed by adding the following to you Android theme:
+<br><code>&lt;item name=&quot;colorControlNormal&quot;&gt;#03b6fc&lt;/item&gt;</code>
+</td></tr>
+<tr><td>
+
+```js
+androidVariant="nativeAndroid"
+```
+</td><td>
+
+```js
+androidVariant="iosClone"
+```
+</td></tr>
+</table>
+
+
 
 ## Three different modes
 Here are some more info about the three different picker modes that are available.
