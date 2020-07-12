@@ -7,18 +7,18 @@ import java.util.Locale;
 public class LocaleUtils {
 
     public static String getDay(String locale) {
-        return getFormat(locale, Formats.Formatz.MMMEd);
+        return getFormat(locale, Formats.Format.MMMEd);
     }
 
     public static String getYear(String locale) {
-        return getFormat(locale, Formats.Formatz.y);
+        return getFormat(locale, Formats.Format.y);
     }
 
     public static String getDate(String locale) {
-        return getFormat(locale, Formats.Formatz.d);
+        return getFormat(locale, Formats.Format.d);
     }
 
-    private static String getFormat(String languageTag, Formats.Formatz format) {
+    private static String getFormat(String languageTag, Formats.Format format) {
         try {
             return Formats.get(languageTag, format);
         } catch (Formats.FormatNotFoundException e) {

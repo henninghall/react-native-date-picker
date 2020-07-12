@@ -5,13 +5,13 @@ import java.util.HashMap;
 
 public class Formats {
 
-    public static EnumMap<Formatz, String> defaultFormat = mapOf("EEE, MMM d", "d", "y");
+    public static EnumMap<Format, String> defaultFormat = mapOf("EEE, MMM d", "d", "y");
 
-    public enum Formatz {
+    public enum Format {
         MMMEd, d, y
     }
 
-    public static String get(String locale, Formatz format) throws FormatNotFoundException {
+    public static String get(String locale, Format format) throws FormatNotFoundException {
         try {
             return map.get(locale).get(format)
                     .replaceAll(",", "");
@@ -20,7 +20,7 @@ public class Formats {
         }
     }
 
-    private static HashMap<String, EnumMap<Formatz, String>> map = new HashMap<String, EnumMap<Formatz, String>>() {{
+    private static HashMap<String, EnumMap<Format, String>> map = new HashMap<String, EnumMap<Format, String>>() {{
         put("af", mapOf("EEE d MMM", "d", "y"));
         put("am", mapOf("EEE፣ MMM d", "d", "y"));
         put("ar", mapOf("EEE، d MMM", "d", "y"));
@@ -139,11 +139,11 @@ public class Formats {
         put("ps", mapOf("MMM d, EEE", "d", "y"));
     }};
 
-    private static EnumMap<Formatz, String> mapOf(final String MMMed, final String d, final String y) {
-        return new EnumMap<Formatz, String>(Formatz.class) {{
-            put(Formatz.MMMEd, MMMed);
-            put(Formatz.d, d);
-            put(Formatz.y, y);
+    private static EnumMap<Format, String> mapOf(final String MMMed, final String d, final String y) {
+        return new EnumMap<Format, String>(Format.class) {{
+            put(Format.MMMEd, MMMed);
+            put(Format.d, d);
+            put(Format.y, y);
         }};
     }
 
