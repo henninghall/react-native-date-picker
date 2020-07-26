@@ -54,6 +54,9 @@
         if(@available(iOS 13, *)) {
             self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
         }
+        if(@available(iOS 14, *)) {
+            self.preferredDatePickerStyle = UIDatePickerStyleWheels;
+        }
          _reactMinuteInterval = 1;
     }
     return self;
