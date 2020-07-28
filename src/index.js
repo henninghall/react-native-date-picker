@@ -15,14 +15,17 @@ const DatePicker = Platform.select({
 DatePicker.defaultProps = defaultProps
 DatePicker.propTypes = propTypes
 
-export default props => {
-  const { textColor, fadeToColor, ...rest } = props
+const DatePickerWrapper = props => {
+  const { textColor, fadeToColor, innerRef, ...rest } = props
   if (__DEV__) throwIfInvalidProps(props)
   return (
     <DatePicker
+      ref={innerRef}
       textColor={colorToHex(textColor)}
       fadeToColor={colorToHex(fadeToColor)}
       {...rest}
     />
   )
 }
+
+export default React.memo(DatePickerWrapper)
