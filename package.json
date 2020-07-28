@@ -4,7 +4,7 @@
   "description": "A Cross Platform React Native Picker",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest src"
+    "test": "yarn jest src"
   },
   "repository": {
     "type": "git",
