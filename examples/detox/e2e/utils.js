@@ -35,6 +35,7 @@ exports.setLocale = changeProp('locale')
 exports.setMinimumDate = changeProp('minimumDate')
 exports.setMaximumDate = changeProp('maximumDate')
 exports.setMinuteInterval = changeProp('minuteInterval')
+exports.setTimeZoneOffsetInMinutes = changeProp('timeZoneOffsetInMinutes')
 exports.setMode = changeProp('mode')
 exports.scrollWheel = scrollWheel
 exports.expectDate = expectDate

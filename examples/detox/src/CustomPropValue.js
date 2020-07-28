@@ -8,6 +8,7 @@ export default function CustomPropValue(props) {
     const getPropValue = () => {
         if (propValue === "undefined") return undefined
         if (propName === "minuteInterval") return parseInt(propValue)
+        if (propName === "timeZoneOffsetInMinutes") return parseInt(propValue)
         if (["date", "maximumDate", "minimumDate"].includes(propName)) return new Date(propValue)
         return propValue
     }
