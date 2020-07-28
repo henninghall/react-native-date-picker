@@ -58,5 +58,10 @@ class EmptyWheels {
         }
     }
 
-
+    public void setDividerHeight(int height) {
+        for (int id : emptyWheelIds) {
+            NumberPickerView view = (NumberPickerView) rootView.findViewById(id);
+            if(view != null) view.setDividerHeight(height);
+        }
+    }
 }

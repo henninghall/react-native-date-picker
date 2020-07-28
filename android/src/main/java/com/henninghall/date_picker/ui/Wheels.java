@@ -8,6 +8,7 @@ import com.henninghall.date_picker.State;
 import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.models.WheelType;
 import com.henninghall.date_picker.models.Mode;
+import com.henninghall.date_picker.wheelFunctions.SetDividerHeight;
 import com.henninghall.date_picker.wheelFunctions.SetShowCount;
 import com.henninghall.date_picker.wheelFunctions.WheelFunction;
 import com.henninghall.date_picker.wheels.AmPmWheel;
@@ -21,7 +22,6 @@ import com.henninghall.date_picker.wheels.YearWheel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -83,6 +83,12 @@ public class Wheels {
         int shownCount = state.derived.getShownCount();
         applyOnAll(new SetShowCount(shownCount));
         emptyWheels.setShownCount(shownCount);
+    }
+
+    void updateDividerHeight() {
+        int height = state.getDividerHeightProp();
+        applyOnAll(new SetDividerHeight(height));
+        emptyWheels.setDividerHeight(height);
     }
 
     void updateWheelOrder() {

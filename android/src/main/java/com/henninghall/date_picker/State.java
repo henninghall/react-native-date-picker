@@ -3,6 +3,7 @@ package com.henninghall.date_picker;
 import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.models.Variant;
+import com.henninghall.date_picker.props.DividerHeightProp;
 import com.henninghall.date_picker.props.VariantProp;
 import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.FadeToColorProp;
@@ -34,6 +35,7 @@ public class State {
     private final UtcProp utcProp = new UtcProp();
     private final HeightProp heightProp = new HeightProp();
     private final VariantProp variantProp = new VariantProp();
+    private final DividerHeightProp dividerHeightProp = new DividerHeightProp();
 
     private final HashMap props = new HashMap<String, Prop>() {{
         put(DateProp.name, dateProp);
@@ -47,6 +49,7 @@ public class State {
         put(UtcProp.name, utcProp);
         put(HeightProp.name, heightProp);
         put(VariantProp.name, variantProp);
+        put(DividerHeightProp.name, dividerHeightProp);
     }};
     public DerivedData derived;
 
@@ -117,4 +120,7 @@ public class State {
         return variantProp.getValue();
     }
 
+    public int getDividerHeightProp() {
+        return dividerHeightProp.getValue();
+    }
 }

@@ -7,6 +7,7 @@ import com.henninghall.date_picker.wheelFunctions.AddOnChangeListener;
 import com.henninghall.date_picker.wheelFunctions.AnimateToDate;
 import com.henninghall.date_picker.wheelFunctions.Refresh;
 import com.henninghall.date_picker.wheelFunctions.SetDate;
+import com.henninghall.date_picker.wheelFunctions.SetDividerHeight;
 import com.henninghall.date_picker.wheelFunctions.TextColor;
 import com.henninghall.date_picker.wheelFunctions.UpdateVisibility;
 import com.henninghall.date_picker.wheels.Wheel;
@@ -79,5 +80,9 @@ public class UIManager {
     private void addOnChangeListener(){
         WheelChangeListener onWheelChangeListener = new WheelChangeListenerImpl(wheels, state, this, rootView);
         wheels.applyOnAll(new AddOnChangeListener(onWheelChangeListener));
+    }
+
+    public void updateDividerHeight() {
+        wheels.updateDividerHeight();
     }
 }
