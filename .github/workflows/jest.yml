@@ -3,8 +3,8 @@ name: 'Unit tests'
 on: [push, pull_request]
 
 jobs:
-  build_and_test:
-    name: Build & test
+  unit_tests:
+    name: Unit tests
     runs-on: macos-latest
     timeout-minutes: 5
 

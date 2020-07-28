@@ -3,8 +3,8 @@ name: 'Android: End-to-end tests'
 on: [push, pull_request]
 
 jobs:
-  build_and_test:
-    name: Build & test
+  end_to_end_tests:
+    name: End to end tests
     runs-on: macos-latest
     timeout-minutes: 60
 
