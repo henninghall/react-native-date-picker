@@ -4,14 +4,11 @@
   "description": "A Cross Platform React Native Picker",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest src"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:henninghall/react-native-date-picker.git"
-  },
-  "dependencies": {
-    "moment": "^2.22.1"
   },
   "author": "henninghall",
   "license": "MIT",
@@ -20,12 +17,22 @@
     "datepicker",
     "date-picker",
     "date picker",
+    "datepicker",
     "react native",
     "react native date picker",
+    "react native datepicker",
+    "react native datetimepicker",
+    "react native date time picker",
     "react-native",
     "react-native-date-picker"
   ],
+  "dependencies": {
+    "moment": "^2.22.1"
+  },
   "devDependencies": {
+    "@babel/preset-env": "^7.10.4",
+    "babel-jest": "^26.1.0",
+    "jest": "^26.1.0",
     "prettier": "^1.18.2"
   }
 }

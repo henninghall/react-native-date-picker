@@ -1,4 +1,4 @@
-name: "Android: build & test"
+name: 'Android: build & test'
 
 on: [push, pull_request]
 
@@ -23,16 +23,20 @@ jobs:
           java-version: 'openjdk8'
           architecture: 'x64'
 
+      - name: Install npm dependencies
+        working-directory: ./examples/detox
+        run: |
+          yarn install --frozen-lockfile
+
+      - name: Run unit tests
+        run: |
+          yarn test
+
       - name: Download Android Emulator Image
         run: |
           echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-29;google_apis;x86"
           echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "Nexus 5X" -k 'system-images;android-29;google_apis;x86'
           $ANDROID_HOME/emulator/emulator -list-avds
-
-      - name: Install npm dependencies
-        working-directory: ./examples/detox
-        run: |
-          yarn install --frozen-lockfile
 
       - name: Build
         working-directory: ./examples/detox
@@ -48,11 +52,11 @@ jobs:
           $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
           $ANDROID_HOME/platform-tools/adb devices
           echo "Emulator started"
-  
-      - name: Run tests
+
+      - name: Run e2e tests
         working-directory: ./examples/detox
         run: yarn start & yarn test:android-ci
-        
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
         if: failure()

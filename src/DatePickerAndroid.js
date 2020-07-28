@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, requireNativeComponent } from 'react-native'
 import moment from 'moment'
-import { throwIfInvalidProps } from './propChecker'
 
 const NativeDatePicker = requireNativeComponent(
   `DatePickerManager`,
@@ -11,7 +10,6 @@ const NativeDatePicker = requireNativeComponent(
 
 class DatePickerAndroid extends React.PureComponent {
   render() {
-    if (__DEV__) throwIfInvalidProps(this.props)
     return (
       <NativeDatePicker
         {...this.props}

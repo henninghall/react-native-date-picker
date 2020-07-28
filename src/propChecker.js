@@ -40,11 +40,4 @@ const modeCheck = new PropCheck(
   "Invalid mode. Valid modes: 'datetime', 'date', 'time'"
 )
 
-const colorCheck = new PropCheck(
-  props => 
-    props && props.textColor && !props.textColor.startsWith("#"),
-  "Invalid text color. Must be a hex string."
-)
-
-
-const checks = [widthCheck, heightCheck, modeCheck, colorCheck]
+const checks = [widthCheck, heightCheck, modeCheck]
