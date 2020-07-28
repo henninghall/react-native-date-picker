@@ -1,12 +1,12 @@
-name: "Android: build & test"
+name: 'Android: End-to-end tests'
 
 on: [push, pull_request]
 
 jobs:
-  build_and_test:
-    name: Build & test
+  end_to_end_tests:
+    name: End to end tests
     runs-on: macos-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
 
     steps:
       - name: Checkout
@@ -23,16 +23,17 @@ jobs:
           java-version: 'openjdk8'
           architecture: 'x64'
 
-      - name: Download Android Emulator Image
-        run: |
-          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-29;google_apis;x86"
-          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "Nexus 5X" -k 'system-images;android-29;google_apis;x86'
-          $ANDROID_HOME/emulator/emulator -list-avds
-
       - name: Install npm dependencies
         working-directory: ./examples/detox
         run: |
           yarn install --frozen-lockfile
+
+      - name: Download Android Emulator Image
+        timeout-minutes: 15
+        run: |
+          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-29;google_apis;x86"
+          echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "Nexus 5X" -k 'system-images;android-29;google_apis;x86'
+          $ANDROID_HOME/emulator/emulator -list-avds
 
       - name: Build
         working-directory: ./examples/detox
@@ -40,6 +41,7 @@ jobs:
           yarn build:android-ci
 
       - name: Start android emulator
+        timeout-minutes: 5
         working-directory: ./examples/detox
         continue-on-error: true
         run: |
@@ -48,11 +50,12 @@ jobs:
           $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
           $ANDROID_HOME/platform-tools/adb devices
           echo "Emulator started"
-  
-      - name: Run tests
+
+      - name: Run e2e tests
+        timeout-minutes: 30
         working-directory: ./examples/detox
         run: yarn start & yarn test:android-ci
-        
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
         if: failure()

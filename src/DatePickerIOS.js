@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, View, requireNativeComponent } from 'react-native'
-import { throwIfInvalidProps } from './propChecker'
 
 const RCTDatePickerIOS = requireNativeComponent('RNDatePicker')
 
@@ -25,12 +24,11 @@ export default class DatePickerIOS extends React.Component {
   }
 
   render() {
-    const props = this.props
-    if (__DEV__) throwIfInvalidProps(props)
+    const { props } = this
     return (
       <RCTDatePickerIOS
-        testID={this.props.testID}
-        key={this.props.textColor} // preventing "Today" string keep old text color when text color changes
+        testID={props.testID}
+        key={props.textColor} // preventing "Today" string keep old text color when text color changes
         ref={picker => {
           this._picker = picker
         }}

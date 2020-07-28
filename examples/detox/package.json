@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-native start",
     "postinstall": "yarn make-example-runnable",
-    "make-example-runnable": "(cd ../../ && npm i react react-native --no-save)",
+    "make-example-runnable": "(cd ../../ && npm i react react-native moment --no-save)",
     "build:ios": "detox build --configuration ios.debug",
     "build:android-debug": "detox build --configuration android.debug",
     "build:android-ci": "detox build --configuration android.ci",
