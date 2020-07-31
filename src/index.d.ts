@@ -32,10 +32,10 @@ export interface DatePickerProps extends ViewProps {
   minuteInterval?: 1 | 2 | 3 | 4 | 5 | 6 | 10 | 12 | 15 | 20 | 30
 
   /**
-   * The Android style variant. 
+   * The Android style variant.
    */
   androidVariant?: 'iosClone' | 'nativeAndroid'
-  
+
   /**
    * The date picker mode.
    */
@@ -68,6 +68,11 @@ export interface DatePickerProps extends ViewProps {
    * Changes the text color.
    */
   textColor?: string
+
+  /**
+   * Changes the divider height of the android variant iosClone
+   */
+  dividerHeight?: number
 }
 
 export default class DatePicker extends Component<DatePickerProps> {}

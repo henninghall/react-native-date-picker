@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 const androidProptypes = {
   fadeToColor: PropTypes.string,
   androidVariant: PropTypes.oneOf(['iosClone', 'nativeAndroid']),
+  dividerHeight: PropTypes.number,
 }
 
 const DateType = PropTypes.instanceOf(Date)
