@@ -22,6 +22,7 @@ public interface Picker {
     View getView();
     void setVisibility(int visibility);
     void setWrapSelectorWheel(boolean wrapSelectorWheel);
+    void setItemPaddingHorizontal(int padding);
 
     interface OnValueChangeListenerInScrolling {
         void onValueChangeInScrolling(Picker picker, int oldVal, int newVal);
