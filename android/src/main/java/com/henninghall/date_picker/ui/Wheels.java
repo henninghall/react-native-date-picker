@@ -85,7 +85,6 @@ public class Wheels {
     void updateDividerHeight() {
         int height = state.getDividerHeightProp();
         applyOnAll(new SetDividerHeight(height));
-        emptyWheels.setDividerHeight(height);
     }
 
     void updateWheelOrder() {
