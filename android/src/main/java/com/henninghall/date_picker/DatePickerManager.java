@@ -7,6 +7,7 @@ import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactPropGroup;
+import com.henninghall.date_picker.props.DividerHeightProp;
 import com.henninghall.date_picker.props.VariantProp;
 import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.FadeToColorProp;
@@ -43,7 +44,7 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
   @ReactPropGroup(names = { DateProp.name, ModeProp.name, LocaleProp.name, MaximumDateProp.name,
           MinimumDateProp.name, FadeToColorProp.name, TextColorProp.name, UtcProp.name, MinuteIntervalProp.name,
-          VariantProp.name
+          VariantProp.name, DividerHeightProp.name
   })
   public void setProps(PickerView view, int index, Dynamic value) {
     updateProp("setProps", view, index, value);

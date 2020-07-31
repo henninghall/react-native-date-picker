@@ -8,6 +8,7 @@ import com.henninghall.date_picker.State;
 import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.models.WheelType;
 import com.henninghall.date_picker.models.Mode;
+import com.henninghall.date_picker.wheelFunctions.SetDividerHeight;
 import com.henninghall.date_picker.wheelFunctions.SetShowCount;
 import com.henninghall.date_picker.wheelFunctions.WheelFunction;
 import com.henninghall.date_picker.wheels.AmPmWheel;
@@ -79,6 +80,11 @@ public class Wheels {
     void updateHeight() {
         int shownCount = state.derived.getShownCount();
         applyOnAll(new SetShowCount(shownCount));
+    }
+
+    void updateDividerHeight() {
+        int height = state.getDividerHeightProp();
+        applyOnAll(new SetDividerHeight(height));
     }
 
     void updateWheelOrder() {
