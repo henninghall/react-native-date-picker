@@ -25,8 +25,7 @@
             custom:npv_TextSizeSelected="21dp"
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
-            custom:npv_DividerColor="#cccccc"
-            custom:npv_ItemPaddingHorizontal="5dp" />
+            custom:npv_DividerColor="#cccccc" />
 
         <com.henninghall.date_picker.pickers.IosClone
             android:id="@+id/month"
@@ -40,7 +39,7 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
-            custom:npv_ItemPaddingHorizontal="5dp" />
+            />
 
         <com.henninghall.date_picker.pickers.IosClone
             android:id="@+id/date"
@@ -54,21 +53,7 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
-            custom:npv_ItemPaddingHorizontal="5dp" />
-
-        <com.henninghall.date_picker.pickers.IosClone
-            android:id="@+id/hour"
-            android:tag="hour"
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content"
-            custom:npv_DividerColor="#cccccc"
-            custom:npv_RespondChangeOnDetached="false"
-            custom:npv_ShownCount="5"
-            custom:npv_TextColorNormal="#aaaaaa"
-            custom:npv_TextColorSelected="#000000"
-            custom:npv_TextSizeNormal="18dp"
-            custom:npv_TextSizeSelected="21dp"
-            custom:npv_ItemPaddingHorizontal="5dp"            />
+            />
         <com.henninghall.date_picker.pickers.IosClone
             android:id="@+id/day"
             android:tag="day"
@@ -81,9 +66,20 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
-            custom:npv_ItemPaddingHorizontal="5dp"
             />
-
+        <com.henninghall.date_picker.pickers.IosClone
+            android:id="@+id/hour"
+            android:tag="hour"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            custom:npv_DividerColor="#cccccc"
+            custom:npv_RespondChangeOnDetached="false"
+            custom:npv_ShownCount="5"
+            custom:npv_TextColorNormal="#aaaaaa"
+            custom:npv_TextColorSelected="#000000"
+            custom:npv_TextSizeNormal="18dp"
+            custom:npv_TextSizeSelected="21dp"
+            />
         <com.henninghall.date_picker.pickers.IosClone
             android:id="@+id/minutes"
             android:tag="minutes"
@@ -96,7 +92,7 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            custom:npv_ItemPaddingHorizontal="5dp"            />
+        />
 
         <com.henninghall.date_picker.pickers.IosClone
             android:id="@+id/ampm"
@@ -110,9 +106,7 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            custom:npv_ItemPaddingHorizontal="5dp"            />
-
-
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

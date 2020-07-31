@@ -15,10 +15,7 @@ import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.TextColorProp;
 import com.henninghall.date_picker.ui.UIManager;
-import com.henninghall.date_picker.wheels.AmPmWheel;
-
 import java.util.ArrayList;
-import java.util.Date;
 
 public class PickerView extends RelativeLayout {
 
@@ -56,6 +53,10 @@ public class PickerView extends RelativeLayout {
 
         if (didUpdate(ModeProp.name, LocaleProp.name, VariantProp.name)) {
             uiManager.updateWheelOrder();
+        }
+
+        if (didUpdate(ModeProp.name)) {
+            uiManager.updateWheelPadding();
         }
 
         if (didUpdate(DateProp.name, HeightProp.name, LocaleProp.name,

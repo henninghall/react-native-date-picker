@@ -3,6 +3,7 @@ package com.henninghall.date_picker.wheels;
 import android.graphics.Paint;
 import android.view.View;
 
+import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.State;
 
@@ -115,4 +116,17 @@ public abstract class Wheel {
         return getFormat(locale).format(cal.getTime());
     }
 
+    public void setHorizontalPadding(){
+        picker.setItemPaddingHorizontal(getHorizontalPadding());
+    }
+
+    public int getHorizontalPadding() {
+        Mode mode = state.getMode();
+        switch (mode){
+            case time: return 15;
+            case date: return 10;
+            case datetime:
+            default: return 5;
+        }
+    }
 }

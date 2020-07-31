@@ -6,6 +6,7 @@ import java.util.*;
 import com.henninghall.date_picker.*;
 import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.pickers.Picker;
+import com.henninghall.date_picker.wheelFunctions.HorizontalPadding;
 
 public class MonthWheel extends Wheel
 {
@@ -44,6 +45,11 @@ public class MonthWheel extends Wheel
     @Override
     public Paint.Align getTextAlign() {
         return Paint.Align.LEFT;
+    }
+
+    @Override
+    public int getHorizontalPadding() {
+        return 1;
     }
 
 
