@@ -37,7 +37,6 @@ public class Wheels {
     private YearWheel yearWheel;
     private View rootView;
     private final PickerWrapper pickerWrapper;
-    private final EmptyWheels emptyWheels;
 
     private HashMap<WheelType, Wheel> wheelPerWheelType;
 
@@ -55,7 +54,6 @@ public class Wheels {
         hourWheel = new HourWheel(getPickerWithId(R.id.hour), state);
         wheelPerWheelType = getWheelPerType();
 
-        emptyWheels = new EmptyWheels(rootView, pickerWrapper, state);
         changeAmPmWhenPassingMidnightOrNoon();
     }
 
@@ -82,7 +80,6 @@ public class Wheels {
     void updateHeight() {
         int shownCount = state.derived.getShownCount();
         applyOnAll(new SetShowCount(shownCount));
-        emptyWheels.setShownCount(shownCount);
     }
 
     void updateDividerHeight() {
@@ -94,7 +91,6 @@ public class Wheels {
     void updateWheelOrder() {
         pickerWrapper.removeAll();
         addInOrder();
-        addEmpty();
     }
 
     Wheel getWheel(WheelType type){
@@ -183,10 +179,6 @@ public class Wheels {
             put(WheelType.MINUTE, minutesWheel);
             put(WheelType.AM_PM, ampmWheel);
         }};
-    }
-
-    private void addEmpty() {
-        emptyWheels.add();
     }
 
 }

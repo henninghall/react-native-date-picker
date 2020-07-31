@@ -10,6 +10,7 @@ import com.henninghall.date_picker.wheelFunctions.SetDate;
 import com.henninghall.date_picker.wheelFunctions.SetDividerHeight;
 import com.henninghall.date_picker.wheelFunctions.TextColor;
 import com.henninghall.date_picker.wheelFunctions.UpdateVisibility;
+import com.henninghall.date_picker.wheelFunctions.HorizontalPadding;
 import com.henninghall.date_picker.wheels.Wheel;
 
 import java.text.SimpleDateFormat;
@@ -84,5 +85,9 @@ public class UIManager {
 
     public void updateDividerHeight() {
         wheels.updateDividerHeight();
+    }
+
+    public void updateWheelPadding() {
+        wheels.applyOnVisible(new HorizontalPadding());
     }
 }

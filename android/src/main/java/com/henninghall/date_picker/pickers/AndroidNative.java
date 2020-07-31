@@ -81,6 +81,11 @@ public class AndroidNative extends NumberPicker implements Picker {
     public void setDividerHeight(int height) {
         // not supported
     }
+    
+    @Override
+    public void setItemPaddingHorizontal(int padding) {
+        // Not needed for this picker
+    }
 
     @Override
     public void smoothScrollToValue(final int value) {
