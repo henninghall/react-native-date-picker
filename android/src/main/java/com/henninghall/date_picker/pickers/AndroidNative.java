@@ -13,9 +13,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import static android.widget.NumberPicker.OnScrollListener.SCROLL_STATE_FLING;
+import static android.widget.NumberPicker.OnScrollListener.SCROLL_STATE_IDLE;
+
 public class AndroidNative extends NumberPicker implements Picker {
 
     private Picker.OnValueChangeListener onValueChangedListener;
+    private int state = SCROLL_STATE_IDLE;
 
     public AndroidNative(Context context) {
         super(context);
@@ -85,6 +89,11 @@ public class AndroidNative extends NumberPicker implements Picker {
     @Override
     public void setItemPaddingHorizontal(int padding) {
         // Not needed for this picker
+    }
+
+    @Override
+    public boolean isSpinning() {
+        return state == SCROLL_STATE_FLING;
     }
 
     @Override
@@ -176,11 +185,9 @@ public class AndroidNative extends NumberPicker implements Picker {
     public void setOnValueChangedListener(final Picker.OnValueChangeListener listener) {
         this.onValueChangedListener = listener;
         super.setOnScrollListener(new OnScrollListener() {
-            int previousState = SCROLL_STATE_IDLE;
-
             @Override
-            public void onScrollStateChange(NumberPicker numberPicker, int state) {
-                boolean stoppedScrolling = previousState != SCROLL_STATE_IDLE && state == SCROLL_STATE_IDLE;
+            public void onScrollStateChange(NumberPicker numberPicker, int nextState) {
+                boolean stoppedScrolling = state != SCROLL_STATE_IDLE && nextState == SCROLL_STATE_IDLE;
                 if (stoppedScrolling) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -190,7 +197,7 @@ public class AndroidNative extends NumberPicker implements Picker {
                         // the delay make sure the wheel has stopped before sending the value change event
                     }, 500);
                 }
-                previousState = state;
+                state = nextState;
             }
         });
     }

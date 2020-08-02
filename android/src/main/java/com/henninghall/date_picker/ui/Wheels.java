@@ -180,4 +180,10 @@ public class Wheels {
         }};
     }
 
+    public boolean hasSpinningWheel() {
+        for(Wheel wheel: getAll()) {
+            if(wheel.picker.isSpinning()) return true;
+        }
+        return false;
+    }
 }
