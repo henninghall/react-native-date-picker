@@ -32,6 +32,8 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
 
     @Override
     public void onChange(Wheel picker) {
+        if(wheels.hasSpinningWheel()) return;
+
         WritableMap event = Arguments.createMap();
         TimeZone timeZone = state.getTimeZone();
         SimpleDateFormat dateFormat = uiManager.getDateFormat();

@@ -44,4 +44,9 @@ public class IosClone extends NumberPickerView implements Picker {
     public View getView() {
         return this;
     }
+
+    @Override
+    public boolean isSpinning() {
+        return super.isScrolling();
+    }
 }

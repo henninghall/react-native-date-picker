@@ -24,6 +24,7 @@ public interface Picker {
     void setWrapSelectorWheel(boolean wrapSelectorWheel);
     void setDividerHeight(int height);
     void setItemPaddingHorizontal(int padding);
+    boolean isSpinning();
 
     interface OnValueChangeListenerInScrolling {
         void onValueChangeInScrolling(Picker picker, int oldVal, int newVal);
