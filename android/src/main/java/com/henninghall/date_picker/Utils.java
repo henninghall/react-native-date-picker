@@ -85,20 +85,4 @@ public class Utils {
             default: throw new Exception("Invalid pattern char: " + patternChar);
         }
     }
-
-    public static WheelType patternStringToWheelType(String patternString) throws Exception {
-        if(patternString.matches("^y+$"))
-            return  WheelType.YEAR;
-        if(patternString.matches("^M+$"))
-            return  WheelType.MONTH;
-        if(patternString.matches("^d+$"))
-            return  WheelType.DATE;
-        if(patternString.matches("^[h|H]+$"))
-            return  WheelType.HOUR;
-        if(patternString.matches("^m+$"))
-            return  WheelType.MINUTE;
-        if(patternString.matches("^a+$"))
-            return  WheelType.AM_PM;
-        throw new Exception("Invalid pattern string: "+patternString);
-    }
 }

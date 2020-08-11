@@ -14,6 +14,9 @@ describe('Display text', () => {
   })
 
   describe('datetime', () => {
+    it('vi-VN', async () => {
+      await expectLocaleDateString('vi-VN', 'CN 2 thg 1' + '1200 SA ')
+    })
     it('en-US', async () => {
       await expectLocaleDateString('en-US', 'Sun Jan 2' + '1200 AM ')
     })
