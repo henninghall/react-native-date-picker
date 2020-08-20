@@ -356,5 +356,3 @@ Temporary Items
 
 
 # End of https://www.gitignore.io/api/xcode,android,reactnative,androidstudio
-.idea
-android/gradle/wrapper/gradle-wrapper.jar
