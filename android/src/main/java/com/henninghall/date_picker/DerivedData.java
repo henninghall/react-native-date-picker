@@ -55,7 +55,10 @@ public class DerivedData {
     }
 
     private ArrayList<WheelType> getOrderedWheels() {
-        String dateTimePattern = LocaleUtils.getDateTimePattern(state.getLocale());
+        String dateTimePatternOld = LocaleUtils.getDateTimePattern(state.getLocale());
+        String dateTimePattern = dateTimePatternOld.replaceAll("\\('(.+?)'\\)","\\${$1}")
+                .replaceAll("'.+?'","")
+                .replaceAll("\\$\\{(.+?)\\}","('$1')");
         ArrayList<WheelType> unorderedTypes = new ArrayList(Arrays.asList(WheelType.values()));
         ArrayList<WheelType> orderedWheels = new ArrayList<>();
 
@@ -63,9 +66,9 @@ public class DerivedData {
         unorderedTypes.remove(WheelType.DAY);
         orderedWheels.add(WheelType.DAY);
 
-        for (char ch : dateTimePattern.toCharArray()){
+        for (char c: dateTimePattern.toCharArray()){
             try {
-                WheelType wheelType = Utils.patternCharToWheelType(ch);
+                WheelType wheelType = Utils.patternCharToWheelType(c);
                 if (unorderedTypes.contains(wheelType)) {
                     unorderedTypes.remove(wheelType);
                     orderedWheels.add(wheelType);

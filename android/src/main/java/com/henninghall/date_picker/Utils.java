@@ -85,6 +85,4 @@ public class Utils {
             default: throw new Exception("Invalid pattern char: " + patternChar);
         }
     }
-
-
 }
