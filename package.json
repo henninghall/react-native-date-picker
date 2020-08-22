@@ -4,6 +4,8 @@
   "description": "A Cross Platform React Native Picker",
   "main": "src/index.js",
   "scripts": {
+    "prepublishOnly": "mv README.md githubREADME.md && mv npmREADME.md README.md",
+    "postpublish": "mv README.md npmREADME.md && mv githubREADME.md README.md",
     "test": "jest src"
   },
   "repository": {
