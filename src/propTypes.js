@@ -5,6 +5,7 @@ const androidProptypes = {
   fadeToColor: PropTypes.string,
   androidVariant: PropTypes.oneOf(['iosClone', 'nativeAndroid']),
   dividerHeight: PropTypes.number,
+  is24hourSource: PropTypes.oneOf(['locale', 'device']),
 }
 
 const DateType = PropTypes.instanceOf(Date)

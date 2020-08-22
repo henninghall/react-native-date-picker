@@ -20,7 +20,7 @@ public class HourWheel extends Wheel {
     public ArrayList<String> getValues() {
         Calendar cal = Calendar.getInstance();
         ArrayList<String> values = new ArrayList<>();
-        int numberOfHours = Utils.usesAmPm() ? 12 : 24;
+        int numberOfHours = state.derived.usesAmPm() ? 12 : 24;
 
         for(int i=0; i<numberOfHours; i++) {
             values.add(format.format(cal.getTime()));
@@ -41,7 +41,7 @@ public class HourWheel extends Wheel {
 
     @Override
     public String getFormatPattern() {
-        return Utils.usesAmPm() ? "h": "HH";
+        return state.derived.usesAmPm() ? "h": "HH";
     }
 
     @Override

@@ -18,7 +18,7 @@ import java.util.TimeZone;
 
 public class Utils {
 
-    public static boolean usesAmPm(){
+    public static boolean deviceUsesAmPm(){
         return !DateFormat.is24HourFormat(DatePickerManager.context);
     }
 

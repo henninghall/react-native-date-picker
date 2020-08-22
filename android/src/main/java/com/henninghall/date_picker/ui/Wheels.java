@@ -83,7 +83,7 @@ public class Wheels {
     }
 
     void updateDividerHeight() {
-        int height = state.getDividerHeightProp();
+        int height = state.getDividerHeight();
         applyOnAll(new SetDividerHeight(height));
     }
 
@@ -137,7 +137,7 @@ public class Wheels {
         hourWheel.picker.setOnValueChangeListenerInScrolling(new Picker.OnValueChangeListenerInScrolling() {
             @Override
             public void onValueChangeInScrolling(Picker picker, int oldVal, int newVal) {
-                if(Utils.usesAmPm()){
+                if(state.derived.usesAmPm()){
                     String oldValue = hourWheel.getValueAtIndex(oldVal);
                     String newValue = hourWheel.getValueAtIndex(newVal);
                     boolean passingNoonOrMidnight = (oldValue.equals("12") && newValue.equals("11")) || oldValue.equals("11") && newValue.equals("12");

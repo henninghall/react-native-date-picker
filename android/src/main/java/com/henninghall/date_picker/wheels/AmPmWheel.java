@@ -32,7 +32,7 @@ public class AmPmWheel extends Wheel {
 
     @Override
     public boolean visible() {
-        return Utils.usesAmPm() && state.getMode() != Mode.date;
+        return state.derived.usesAmPm() && state.getMode() != Mode.date;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class AmPmWheel extends Wheel {
 
     @Override
     public String getFormatPattern() {
-        return Utils.usesAmPm() ? " a " : "";
+        return state.derived.usesAmPm() ? " a " : "";
     }
 
     @Override
