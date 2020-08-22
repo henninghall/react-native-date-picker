@@ -76,7 +76,7 @@ export default () => {
 | textColor               | Changes the text color. ⚠ Colors other than black (#000000) or white (#ffffff) will replace the "Today" string with a date on iOS 13 or higher.                                                                                                                                                                                 | <img src="docs/colors-ios.png" alt="react native datepicker text color background color ios" height="120px" />                                                                                                                           | <img src="docs/colors-android.png" alt="Text color background color android" height="120px" />                                                                                                                                                                     |
 | timeZoneOffsetInMinutes | Timezone offset in minutes (default: device's timezone)                                                                                                                                                                                                                                                               |
 | dividerHeight | Change the divider height (only supported for iosClone)                                                                                                                                                                                                                                                               |
-
+| is24hourSource | Change how the 24h mode (am/pm) should be determined, by device settings or by locale. {'locale', 'device'} (android only, default: 'device')                                                                                                                                                                                                                                                   |
 
 ## About
 
@@ -96,11 +96,11 @@ Unfortunately, expo does not support this date picker at the moment. Upvote <a h
 
 ### How do i change the date order? (To YYYY-MM-DD etc)
 
-The order is determined by the `locale` prop. Set for instance `locale='fr'`to get the France preference.
+The order is determined by the `locale` prop. Set for instance `locale='fr'`to get the french preference.
 
 ### How do i change the 12/24h or AM/PM format?
 
-On iOS the 12/24h preference is determined by the `locale` prop. Set for instance `locale='fr'`to get the France preference. On Android the 12/24h format is determined by the device setting. When using 12h mode the AM/PM part of the picker will be displayed.
+On iOS the 12/24h preference is determined by the `locale` prop. Set for instance `locale='fr'`to get the french preference. On Android the 12/24h format is determined by the device setting by default. Add `is24hourSource="locale"` to let the locale determine the device setting on android as well. When using 12h mode the AM/PM part of the picker will be displayed. It is NOT recommended to force any specific 12/24h format, but this can be achieved by, choosing a locale which has the desired 24h preference and add `is24hourSource="locale"`.
 
 ### Is it possible to show only month and year?
 
