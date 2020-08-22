@@ -36,7 +36,9 @@ This is a React Native Date Picker with following main features:
 2. `react-native link react-native-date-picker` (Only needed for React Native <= 0.59)
 3. `(cd ios && pod install)` (If you're using CocoaPods)
 
-Xcode 11 is required to run the latest version of the date picker. Xcode 10 is supported up to version 2.7.2. 
+## Requirements
+
+- Xcode >= 11.6
 
 ## Minimal Example
 
