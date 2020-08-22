@@ -8,6 +8,10 @@ export default class MinimalExample extends Component {
     <DatePicker
       date={this.state.date}
       onDateChange={date => this.setState({ date })}
+      androidVariant="nativeAndroid"
+      mode="datetime"
+      is24hourSource="locale"
+      locale="en-US"
     />
   )
 }
