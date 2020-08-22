@@ -4,6 +4,7 @@ import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.props.DividerHeightProp;
+import com.henninghall.date_picker.props.Is24hourSourceProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
 import com.henninghall.date_picker.props.MinimumDateProp;
 import com.henninghall.date_picker.props.MinuteIntervalProp;
@@ -44,7 +45,7 @@ public class PickerView extends RelativeLayout {
             uiManager.updateTextColor();
         }
 
-        if (didUpdate(ModeProp.name, VariantProp.name)) {
+        if (didUpdate(ModeProp.name, VariantProp.name, Is24hourSourceProp.name)) {
             uiManager.updateWheelVisibility();
         }
 
@@ -56,7 +57,7 @@ public class PickerView extends RelativeLayout {
             uiManager.updateDividerHeight();
         }
 
-        if (didUpdate(ModeProp.name, LocaleProp.name, VariantProp.name)) {
+        if (didUpdate(ModeProp.name, LocaleProp.name, VariantProp.name, Is24hourSourceProp.name)) {
             uiManager.updateWheelOrder();
         }
 

@@ -73,6 +73,12 @@ export interface DatePickerProps extends ViewProps {
    * Changes the divider height of the android variant iosClone
    */
   dividerHeight?: number
+
+  /**
+   * Changes if 24/12-hour format should be determined from the locale or device setting.
+   * "device" is default on android and "locale" on iOS. On iOS this cannot be changed.
+   */
+  is24hourSource?: 'locale' | 'device'
 }
 
 export default class DatePicker extends Component<DatePickerProps> {}

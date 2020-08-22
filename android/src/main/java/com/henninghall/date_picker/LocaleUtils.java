@@ -56,4 +56,9 @@ public class LocaleUtils {
         return locale;
     }
 
+    public static boolean localeUsesAmPm(Locale locale){
+        DateFormat df = DateFormat.getTimeInstance(DateFormat.FULL, locale);
+        return df instanceof SimpleDateFormat && ((SimpleDateFormat) df).toPattern().contains("a");
+    }
+
 }

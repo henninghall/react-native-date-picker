@@ -1,13 +1,17 @@
 package com.henninghall.date_picker;
 
+import android.text.format.DateFormat;
 import android.util.Log;
 
 import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.models.Variant;
 import com.henninghall.date_picker.models.WheelType;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static com.henninghall.date_picker.models.Is24HourSource.*;
 
 public class DerivedData {
     private final State state;
@@ -38,7 +42,7 @@ public class DerivedData {
                 break;
             }
         }
-        if((mode == Mode.time || mode == Mode.datetime) && Utils.usesAmPm()){
+        if((mode == Mode.time || mode == Mode.datetime) && state.derived.usesAmPm()){
             visibleWheels.add(WheelType.AM_PM);
         }
         return visibleWheels;
@@ -110,7 +114,11 @@ public class DerivedData {
             case iosClone: return R.layout.ios_clone;
             default: return R.layout.ios_clone;
         }
+    }
 
+    public boolean usesAmPm(){
+        if(state.getIs24HourSource() == locale) return LocaleUtils.localeUsesAmPm(state.getLocale());
+        return Utils.deviceUsesAmPm();
     }
 
 }
