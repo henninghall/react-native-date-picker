@@ -47,7 +47,7 @@ public class AmPmWheel extends Wheel {
 
     @Override
     public Paint.Align getTextAlign() {
-        return Paint.Align.LEFT;
+        return Paint.Align.RIGHT;
     }
 
 }

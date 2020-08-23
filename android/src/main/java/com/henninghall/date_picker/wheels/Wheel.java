@@ -123,10 +123,11 @@ public abstract class Wheel {
     public int getHorizontalPadding() {
         Mode mode = state.getMode();
         switch (mode){
-            case time: return 15;
-            case date: return 10;
+            case date: return 15;
+            case time:
             case datetime:
-            default: return 5;
+            default:
+                return 5;
         }
     }
 }
