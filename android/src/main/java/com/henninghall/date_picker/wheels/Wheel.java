@@ -122,6 +122,7 @@ public abstract class Wheel {
 
     public int getHorizontalPadding() {
         Mode mode = state.getMode();
+        if(state.derived.hasOnly2Wheels()) return 10;
         switch (mode){
             case date: return 15;
             case time:

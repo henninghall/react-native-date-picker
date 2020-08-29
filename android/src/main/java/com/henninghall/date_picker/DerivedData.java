@@ -121,4 +121,8 @@ public class DerivedData {
         return Utils.deviceUsesAmPm();
     }
 
+    public boolean hasOnly2Wheels(){
+        return state.getMode() == Mode.time && !usesAmPm();
+    }
+
 }
