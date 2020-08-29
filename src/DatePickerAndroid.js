@@ -8,6 +8,10 @@ const NativeDatePicker = requireNativeComponent(
   { nativeOnly: { onChange: true } }
 )
 
+const height = 180
+const timeModeWidth = 240
+const defaultWidth = 310
+
 class DatePickerAndroid extends React.PureComponent {
   render() {
     return (
@@ -17,10 +21,15 @@ class DatePickerAndroid extends React.PureComponent {
         minimumDate={this._minimumDate()}
         maximumDate={this._maximumDate()}
         onChange={this._onChange}
-        style={[styles.picker, this.props.style]}
+        style={this.getStyle()}
         utc={this.props.timeZoneOffsetInMinutes !== undefined}
       />
     )
+  }
+
+  getStyle = () => {
+    const width = this.props.mode === 'time' ? timeModeWidth : defaultWidth
+    return [{ width, height }, this.props.style]
   }
 
   _onChange = e => {
@@ -59,12 +68,5 @@ class DatePickerAndroid extends React.PureComponent {
       .toISOString()
   }
 }
-
-const styles = StyleSheet.create({
-  picker: {
-    width: 310,
-    height: 180,
-  },
-})
 
 export default DatePickerAndroid

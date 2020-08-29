@@ -47,7 +47,7 @@ public class MinutesWheel extends Wheel {
 
     @Override
     public Paint.Align getTextAlign() {
-        return Paint.Align.RIGHT;
+        return state.derived.hasOnly2Wheels() ? Paint.Align.LEFT : Paint.Align.RIGHT;
     }
 
 }
