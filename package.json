@@ -29,7 +29,6 @@
     "react-native-date-picker"
   ],
   "dependencies": {
-    "moment": "^2.22.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.10.4",
