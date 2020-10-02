@@ -99,6 +99,7 @@ public class Formats {
         put("nb", mapOf("EEE d. MMM", "d.", "y"));
         put("ne", mapOf("MMM d, EEE", "d", "y"));
         put("nl", mapOf("EEE d MMM", "d", "y"));
+        put("nn", mapOf("EEE d. MMM", "d.", "y"));
         put("no", mapOf("EEE d. MMM", "d.", "y"));
         put("no_NO", mapOf("EEE d. MMM", "d.", "y"));
         put("or", mapOf("EEE, MMM d", "d", "y"));
