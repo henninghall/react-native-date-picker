@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/henninghall/react-native-date-picker.git" }
   s.source_files  = "ios/RNDatePicker/*.{h,m}"
 
-  s.dependency 'React'
+  s.dependency 'React-Core'
 end
