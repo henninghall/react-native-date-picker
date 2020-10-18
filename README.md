@@ -133,12 +133,12 @@ The "Android Native" version looks more like a standard native implementation on
 <tr><td>
 
 ```js
-androidVariant="nativeAndroid"
+androidVariant="iosClone"
 ```
 </td><td>
 
 ```js
-androidVariant="iosClone"
+androidVariant="nativeAndroid"
 ```
 </td></tr>
 </table>
