@@ -57,8 +57,8 @@ public class Wheels {
         minutesWheel = new MinutesWheel(getPickerWithId(R.id.minutes), state);
         ampmWheel = new AmPmWheel(getPickerWithId(R.id.ampm), state);
         hourWheel = new HourWheel(getPickerWithId(R.id.hour), state);
-        emptyStart = rootView.findViewById(R.id.empty_start);
-        emptyEnd = rootView.findViewById(R.id.empty_end);
+        emptyStart = (NumberPickerView) rootView.findViewById(R.id.empty_start);
+        emptyEnd = (NumberPickerView) rootView.findViewById(R.id.empty_end);
         wheelPerWheelType = getWheelPerType();
         changeAmPmWhenPassingMidnightOrNoon();
     }
