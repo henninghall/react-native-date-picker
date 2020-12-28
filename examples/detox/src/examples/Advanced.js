@@ -173,7 +173,10 @@ export default class Advanced extends Component {
     {
       name: 'fadeToColor',
       component: (
-        <FadeToColor onChange={() => this.props.setBackground(randomColor())} />
+        <FadeToColor 
+          onChange={() => this.props.setBackground(randomColor())} 
+          setNone={() => this.props.setBackground("none")} 
+        />
       ),
     },
     {

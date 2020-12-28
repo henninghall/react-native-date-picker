@@ -1,5 +1,6 @@
 export function colorToHex(c) {
   if (c === undefined) return c
+  if (c === "none") return c
   if (c.includes('rgb')) return rgb2hex(c)
   if (c.includes('#')) {
     if (!isValidHex(c)) throw Error('Invalid color: ' + c)
