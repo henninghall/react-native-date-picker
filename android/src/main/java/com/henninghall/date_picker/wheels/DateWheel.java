@@ -19,7 +19,7 @@ public class DateWheel extends Wheel
         Calendar cal = Calendar.getInstance();
         ArrayList<String> values = new ArrayList<>();
         cal.set(Calendar.MONTH, 0);
-        cal.set(Calendar.DATE, 0);
+        cal.set(Calendar.DATE, 1);
         final int maxDate = 31;
         final int minDate = 1;
         for (int i = minDate; i <= maxDate; ++i) {
