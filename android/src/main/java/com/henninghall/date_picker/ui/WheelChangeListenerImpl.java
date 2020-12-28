@@ -13,7 +13,6 @@ import com.henninghall.date_picker.wheels.Wheel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.TimeZone;
 
 public class WheelChangeListenerImpl implements WheelChangeListener {
@@ -30,33 +29,96 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
         this.rootView = rootView;
     }
 
+    private SimpleDateFormat getDateFormat(){
+        TimeZone timeZone = state.getTimeZone();
+        SimpleDateFormat dateFormat = uiManager.getDateFormat();
+        dateFormat.setTimeZone(timeZone);
+        return dateFormat;
+    }
+
     @Override
     public void onChange(Wheel picker) {
         if(wheels.hasSpinningWheel()) return;
 
-        WritableMap event = Arguments.createMap();
-        TimeZone timeZone = state.getTimeZone();
-        SimpleDateFormat dateFormat = uiManager.getDateFormat();
-        Calendar minDate = state.getMinimumDate();
-        Calendar maxDate = state.getMaximumDate();
-        try {
-            dateFormat.setTimeZone(timeZone);
-            Calendar date = Calendar.getInstance(timeZone);
-            String toParse = wheels.getDateString();
-            Date newDate = dateFormat.parse(toParse);
-            date.setTime(newDate);
-            String dateString = Utils.dateToIso(date);
-            if (minDate != null && date.before(minDate)) uiManager.animateToDate(minDate);
-            else if (maxDate != null && date.after(maxDate)) uiManager.animateToDate(maxDate);
-            else {
-                event.putString("date", dateString);
-                event.putString("dateString", uiManager.getDisplayValueString());
-                DatePickerManager.context.getJSModule(RCTEventEmitter.class)
-                        .receiveEvent(rootView.getId(), "dateChange", event);
+        if(!exists()){
+            Calendar closestExistingDate = getClosestExistingDateInPast();
+            if(closestExistingDate != null) {
+                uiManager.animateToDate(closestExistingDate);
             }
+            return;
+        }
+
+        Calendar selectedDate = getSelectedDate();
+        if(selectedDate == null) return;
+
+        Calendar minDate = state.getMinimumDate();
+        if (minDate != null && selectedDate.before(minDate)) {
+            uiManager.animateToDate(minDate);
+            return;
+        }
+
+        Calendar maxDate = state.getMaximumDate();
+        if (maxDate != null && selectedDate.after(maxDate)) {
+            uiManager.animateToDate(maxDate);
+            return;
+        }
+
+        emitDateChangeEvent(selectedDate);
+    }
+
+    // Example: Jan 1 returns true, April 31 returns false.
+    private boolean exists(){
+        SimpleDateFormat dateFormat = getDateFormat();
+        String toParse = wheels.getDateTimeString();
+        try {
+            dateFormat.setLenient(false); // disallow parsing invalid dates
+            dateFormat.parse(toParse);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    private Calendar getSelectedDate(){
+        SimpleDateFormat dateFormat = getDateFormat();
+        String toParse = wheels.getDateTimeString();
+        TimeZone timeZone = state.getTimeZone();
+        Calendar date = Calendar.getInstance(timeZone);
+        try {
+            dateFormat.setLenient(true); // allow parsing invalid dates
+            date.setTime(dateFormat.parse(toParse));
+            return date;
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    private Calendar getClosestExistingDateInPast(){
+        SimpleDateFormat dateFormat = getDateFormat();
+        dateFormat.setLenient(false); // disallow parsing invalid dates
+
+        int maxDaysInPastToCheck = 10;
+        for (int i = 0; i < maxDaysInPastToCheck; i++){
+            try {
+                String toParse = wheels.getDateTimeString(i);
+                Calendar calendar = Calendar.getInstance(state.getTimeZone());
+                calendar.setTime(dateFormat.parse(toParse));
+                return calendar;
+            } catch (ParseException ignored) {
+                // continue checking if exception (which means invalid date)
+            }
+        }
+        return null;
+    }
+
+    private void emitDateChangeEvent(Calendar date) {
+        WritableMap event = Arguments.createMap();
+        String dateString = Utils.dateToIso(date);
+        event.putString("date", dateString);
+        event.putString("dateString", uiManager.getDisplayValueString());
+        DatePickerManager.context.getJSModule(RCTEventEmitter.class)
+                .receiveEvent(rootView.getId(), "dateChange", event);
     }
 
 }
