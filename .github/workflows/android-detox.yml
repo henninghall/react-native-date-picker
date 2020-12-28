@@ -38,15 +38,15 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           fetch-depth: 1
 
       - name: Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
 
       - name: Use specific Java version for sdkmanager to work
-        uses: joschi/setup-jdk@v1
+        uses: joschi/setup-jdk@v2
         with:
           java-version: 'openjdk8'
           architecture: 'x64'
@@ -85,7 +85,7 @@ jobs:
         run: yarn start & yarn test:android-ci
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: Failing tests
