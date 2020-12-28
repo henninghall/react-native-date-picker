@@ -54,7 +54,7 @@ jobs:
       - name: Install npm dependencies
         working-directory: ./examples/detox
         run: |
-          yarn install --frozen-lockfile
+          yarn install --frozen-lockfile --network-timeout 60000
 
       - name: Download Android Emulator Image
         timeout-minutes: 15
