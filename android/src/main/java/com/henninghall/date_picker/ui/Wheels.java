@@ -6,7 +6,6 @@ import com.henninghall.date_picker.models.Variant;
 import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.R;
 import com.henninghall.date_picker.State;
-import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.models.WheelType;
 import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.wheelFunctions.SetDividerHeight;
@@ -112,17 +111,39 @@ public class Wheels {
         return wheelPerWheelType.get(type);
     }
 
-    String getDateString() {
+    String getDateTimeString(int daysToSubtract) {
+        return getDateString(daysToSubtract) + " " + getTimeString();
+    }
+
+    private String getDateModeString(int daysToSubtract) {
         ArrayList<Wheel> wheels = getOrderedVisibleWheels();
-        String dateString = (state.getMode() == Mode.date)
-                ? wheels.get(0).getValue() + " "
-                + wheels.get(1).getValue() + " "
-                + wheels.get(2).getValue()
-                : dayWheel.getValue();
-        return dateString
-                + " " + hourWheel.getValue()
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 3; i++) {
+            if (i != 0) sb.append(" ");
+            Wheel w = wheels.get(i);
+            if (w instanceof DateWheel) {
+                sb.append(w.getPastValue(daysToSubtract));
+            }
+            else sb.append(w.getValue());
+        }
+        return sb.toString();
+    }
+
+    private String getDateString(int daysToSubtract){
+        if(state.getMode() == Mode.date ){
+            return getDateModeString(daysToSubtract);
+        }
+        return dayWheel.getValue();
+    }
+
+    private String getTimeString(){
+        return hourWheel.getValue()
                 + " " + minutesWheel.getValue()
                 + ampmWheel.getValue();
+    }
+
+    String getDateTimeString() {
+        return getDateTimeString(0);
     }
 
     String getDisplayValue() {
@@ -137,7 +158,7 @@ public class Wheels {
         ArrayList<WheelType> wheels = state.derived.getOrderedVisibleWheels();
         for (WheelType wheelType : wheels) {
             Wheel wheel = getWheel(wheelType);
-                pickerWrapper.addPicker(wheel.picker.getView());
+            pickerWrapper.addPicker(wheel.picker.getView());
         }
     }
 

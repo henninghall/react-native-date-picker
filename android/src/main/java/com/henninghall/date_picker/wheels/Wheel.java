@@ -53,6 +53,14 @@ public abstract class Wheel {
         return getValueAtIndex(getIndex());
     }
 
+    public String getPastValue(int subtractIndex) {
+        if(!visible()) return format.format(userSetValue.getTime());
+        int size = values.size();
+        int pastValueIndex = (getIndex() + size - subtractIndex) % size;
+        return getValueAtIndex(pastValueIndex);
+    }
+
+
     private int getIndex() {
         return picker.getValue();
     }
