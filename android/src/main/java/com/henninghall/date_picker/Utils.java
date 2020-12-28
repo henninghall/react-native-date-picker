@@ -54,12 +54,8 @@ public class Utils {
         }
     }
 
-    public static SimpleDateFormat getIsoFormat() {
-        return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
-    }
-
     private static SimpleDateFormat getIsoUTCFormat(){
-        SimpleDateFormat format = getIsoFormat();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
         format.setTimeZone(TimeZone.getTimeZone("UTC"));
         return format;
     }

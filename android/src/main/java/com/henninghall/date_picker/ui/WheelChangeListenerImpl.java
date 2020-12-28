@@ -7,15 +7,13 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.henninghall.date_picker.DatePickerManager;
 import com.henninghall.date_picker.State;
+import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.wheels.Wheel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.TimeZone;
-
-import static com.henninghall.date_picker.Utils.dateToIso;
 
 public class WheelChangeListenerImpl implements WheelChangeListener {
 
@@ -68,7 +66,7 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
         emitDateChangeEvent(selectedDate);
     }
 
-    // Example: 1 jan returns true, 31 april returns false.
+    // Example: Jan 1 returns true, April 31 returns false.
     private boolean exists(){
         SimpleDateFormat dateFormat = getDateFormat();
         String toParse = wheels.getDateTimeString();
@@ -116,7 +114,7 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
 
     private void emitDateChangeEvent(Calendar date) {
         WritableMap event = Arguments.createMap();
-        String dateString = dateToIso(date);
+        String dateString = Utils.dateToIso(date);
         event.putString("date", dateString);
         event.putString("dateString", uiManager.getDisplayValueString());
         DatePickerManager.context.getJSModule(RCTEventEmitter.class)
