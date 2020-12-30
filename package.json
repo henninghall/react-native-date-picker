@@ -28,12 +28,12 @@
     "react-native",
     "react-native-date-picker"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@babel/preset-env": "^7.10.4",
-    "babel-jest": "^26.1.0",
-    "jest": "^26.1.0",
-    "prettier": "^1.18.2"
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1"
   }
 }
