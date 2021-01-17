@@ -40,7 +40,7 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
     public void onChange(Wheel picker) {
         if(wheels.hasSpinningWheel()) return;
 
-        if(!exists()){
+        if(!dateExists()){
             Calendar closestExistingDate = getClosestExistingDateInPast();
             if(closestExistingDate != null) {
                 uiManager.animateToDate(closestExistingDate);
@@ -67,7 +67,7 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
     }
 
     // Example: Jan 1 returns true, April 31 returns false.
-    private boolean exists(){
+    private boolean dateExists(){
         SimpleDateFormat dateFormat = getDateFormat();
         String toParse = wheels.getDateTimeString();
         try {
