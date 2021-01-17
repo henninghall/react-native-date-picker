@@ -23,6 +23,7 @@ public class AndroidNative extends NumberPicker implements Picker {
     private Picker.OnValueChangeListener onValueChangedListener;
     private int state = SCROLL_STATE_IDLE;
     private OnValueChangeListenerInScrolling listenerInScrolling;
+    private boolean isAnimating;
 
     public AndroidNative(Context context) {
         super(context);
@@ -88,7 +89,7 @@ public class AndroidNative extends NumberPicker implements Picker {
     public void setDividerHeight(int height) {
         // not supported
     }
-    
+
     @Override
     public void setItemPaddingHorizontal(int padding) {
         // Not needed for this picker
@@ -96,29 +97,32 @@ public class AndroidNative extends NumberPicker implements Picker {
 
     @Override
     public boolean isSpinning() {
-        return state == SCROLL_STATE_FLING;
+        return state == SCROLL_STATE_FLING || isAnimating;
     }
 
     @Override
     public void smoothScrollToValue(final int value) {
         final AndroidNative self = this;
 
+        int currentValue = self.getValue();
+        if (value == currentValue) return;
+        int shortestScrollOption = Utils.getShortestScrollOption(currentValue, value, getMaxValue(), getWrapSelectorWheel());
+        final int moves = Math.abs(shortestScrollOption);
+        int timeBetweenScrollsMs = 100;
+        int willStopScrollingInMs = timeBetweenScrollsMs * moves;
+        isAnimating = true;
         new Handler().postDelayed(new Runnable() {
+            @Override
             public void run() {
-                int currentValue = self.getValue();
-                if (value == currentValue) return;
-                int shortestScrollOption = Utils.getShortestScrollOption(currentValue, value, getMaxValue(), getWrapSelectorWheel());
-                final int moves = Math.abs(shortestScrollOption);
-                for (int i = 0; i < moves; i++) {
-                    // need some delay between each scroll step to make sure it scrolls to correct value
-                    changeValueByOne(shortestScrollOption > 0, i * 100, i == moves - 1);
-                }
+                isAnimating = false;
             }
-            // since the SCROLL_STATE_IDLE event is dispatched before the wheel actually has stopped
-            // an extra delay has to be added before starting to scroll to correct value
-        }, 500);
-    }
+        }, willStopScrollingInMs);
 
+        for (int i = 0; i < moves; i++) {
+            // need some delay between each scroll step to make sure it scrolls to correct value
+            changeValueByOne(shortestScrollOption > 0, i * timeBetweenScrollsMs, i == moves - 1);
+        }
+    }
 
     private void changeValueByOne(final NumberPicker higherPicker, final boolean increment) {
         boolean success = false;
@@ -176,7 +180,7 @@ public class AndroidNative extends NumberPicker implements Picker {
                 // to send event during scrolling we make sure wheel is still. This particular
                 // case happens when wheel is tapped, not scrolled.
                 if(state == SCROLL_STATE_IDLE) {
-                  sendEventIn500ms();
+                    sendEventIn500ms();
                 }
             }
         });
@@ -184,8 +188,8 @@ public class AndroidNative extends NumberPicker implements Picker {
         super.setOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChange(NumberPicker numberPicker, int nextState) {
-               sendEventIfStopped(nextState);
-               state = nextState;
+                sendEventIfStopped(nextState);
+                state = nextState;
             }
         });
     }
