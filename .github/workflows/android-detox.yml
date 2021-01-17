@@ -43,6 +43,7 @@ jobs:
           java-version: 1.8
 
       - name: Install npm dependencies
+        working-directory: ./examples/detox
         run: |
           yarn install --frozen-lockfile
 
