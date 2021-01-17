@@ -85,4 +85,17 @@ public class Utils {
             default: throw new Exception("Invalid pattern char: " + patternChar);
         }
     }
+
+
+    public static int getShortestScrollOption(int from, int to, final int maxValue, boolean isWrapping) {
+        int size = maxValue + 1;
+        int option1 = to - from;
+        int option2 = option1 > 0 ? option1 - size : option1 + size;
+        if (isWrapping) {
+            return Math.abs(option1) < Math.abs(option2) ? option1 : option2;
+        }
+        if (from + option1 > maxValue) return option2;
+        if (from + option1 < 0) return option2;
+        return option1;
+    }
 }

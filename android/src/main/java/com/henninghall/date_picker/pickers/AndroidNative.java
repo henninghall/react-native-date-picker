@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 
+import com.henninghall.date_picker.Utils;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -105,7 +107,7 @@ public class AndroidNative extends NumberPicker implements Picker {
             public void run() {
                 int currentValue = self.getValue();
                 if (value == currentValue) return;
-                int shortestScrollOption = getShortestScrollOption(currentValue, value);
+                int shortestScrollOption = Utils.getShortestScrollOption(currentValue, value, getMaxValue(), getWrapSelectorWheel());
                 final int moves = Math.abs(shortestScrollOption);
                 for (int i = 0; i < moves; i++) {
                     // need some delay between each scroll step to make sure it scrolls to correct value
@@ -117,17 +119,6 @@ public class AndroidNative extends NumberPicker implements Picker {
         }, 500);
     }
 
-    private int getShortestScrollOption(int currentValue, int value) {
-        final int maxValue = getMaxValue();
-        int option1 = value - currentValue;
-        int option2 = maxValue + 1 - Math.abs(option1);
-        if (getWrapSelectorWheel()) {
-            return Math.abs(option1) < Math.abs(option2) ? option1 : option2;
-        }
-        if (currentValue + option1 > maxValue) return option2;
-        if (currentValue + option1 < 0) return option2;
-        return option1;
-    }
 
     private void changeValueByOne(final NumberPicker higherPicker, final boolean increment) {
         boolean success = false;
