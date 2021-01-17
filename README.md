@@ -36,7 +36,7 @@ This is a React Native Date Picker with following main features:
 1. `(cd ios && pod install)` (If you're using CocoaPods)
 1. Rebuild the project (e.g. `react-native run-android` or `react-native run-ios`)
 
-If you're having troubles after following these steps, there might be a <a href="/#user-content-linking">linking issue</a>
+If you're having troubles after following these steps, there might be a <a href="https://github.com/henninghall/react-native-date-picker/#user-content-linking">linking issue</a>
 
 ## Requirements
 
