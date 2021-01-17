@@ -36,7 +36,7 @@ This is a React Native Date Picker with following main features:
 1. `(cd ios && pod install)` (If you're using CocoaPods)
 1. Rebuild the project (e.g. `react-native run-android` or `react-native run-ios`)
 
-If you're having troubles after following these steps, there might be a <a href="https://github.com/henninghall/react-native-date-picker/#user-content-linking">linking issue</a>
+If you're having troubles after following these steps, there might be a <a href="https://github.com/henninghall/react-native-date-picker/#user-content-linking">linking issue</a> or you're <a href="https://github.com/henninghall/react-native-date-picker/#user-content-can-i-use-expo">using Expo</a>. 
 
 ## Requirements
 
@@ -80,7 +80,7 @@ export default () => {
 | dividerHeight | Change the divider height (only supported for iosClone)                                                                                                                                                                                                                                                               |
 | is24hourSource | Change how the 24h mode (am/pm) should be determined, by device settings or by locale. {'locale', 'device'} (android only, default: 'device')                                                                                                                                                                                                                                       |
 ## Linking
-This package supports automatic linking. Usually, the only thing you need to do is to install cocoapods dependencies as descripted above and rebuild the project by running `react-native run-ios`, `react-native run-android` or start the build from within Xcode/Android Studio. If you'running a React Native version below 0.60 or your settup are having issues with automatic linking, you can run `npx react-native link react-native-date-picker` and rebuild. In some occations you even have to manually link the package. Instructions in <a href="https://github.com/henninghall/react-native-date-picker/issues/40">this issue</a>.           
+This package supports automatic linking. Usually, the only thing you need to do is to install the package, the cocoapods dependencies (as descripted above). Then rebuild the project by running `react-native run-ios`, `react-native run-android` or start the build from within Xcode/Android Studio. If you'running a React Native version below 0.60 or your setup is having issues with automatic linking, you can run `npx react-native link react-native-date-picker` and rebuild. In some occations you'll have to manually link the package. Instructions in <a href="https://github.com/henninghall/react-native-date-picker/issues/40">this issue</a>.       
 
 ## About
 
