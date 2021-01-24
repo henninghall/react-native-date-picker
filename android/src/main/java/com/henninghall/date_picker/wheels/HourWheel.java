@@ -19,6 +19,10 @@ public class HourWheel extends Wheel {
     @Override
     public ArrayList<String> getValues() {
         Calendar cal = Calendar.getInstance();
+        // Getting the hours from a date that doesn't have daylight saving to be sure
+        // cal.add() will work properly.
+        cal.set(2000,0,0,0,0,0);
+
         ArrayList<String> values = new ArrayList<>();
         int numberOfHours = state.derived.usesAmPm() ? 12 : 24;
 
