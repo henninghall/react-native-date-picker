@@ -22,7 +22,7 @@ public class AmPmWheel extends Wheel {
         Calendar cal = Calendar.getInstance();
         ArrayList<String> values = new ArrayList<>();
 
-        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.HOUR_OF_DAY, 6);
         values.add(format.format(cal.getTime()));
 
         cal.add(Calendar.HOUR_OF_DAY, 12);
