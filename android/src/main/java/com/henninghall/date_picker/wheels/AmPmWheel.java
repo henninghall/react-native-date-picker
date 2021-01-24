@@ -20,9 +20,12 @@ public class AmPmWheel extends Wheel {
     @Override
     public ArrayList<String> getValues() {
         Calendar cal = Calendar.getInstance();
+        // Getting the hours from a date that will never have daylight saving to be sure
+        // cal.add() will work properly.
+        cal.set(2000,0,0,0,0,0);
         ArrayList<String> values = new ArrayList<>();
 
-        cal.set(Calendar.HOUR_OF_DAY, 6);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
         values.add(format.format(cal.getTime()));
 
         cal.add(Calendar.HOUR_OF_DAY, 12);
