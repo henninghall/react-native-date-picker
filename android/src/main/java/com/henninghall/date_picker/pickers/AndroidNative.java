@@ -24,6 +24,7 @@ public class AndroidNative extends NumberPicker implements Picker {
     private int state = SCROLL_STATE_IDLE;
     private OnValueChangeListenerInScrolling listenerInScrolling;
     private boolean isAnimating;
+    private final Handler handler = new Handler();
 
     public AndroidNative(Context context) {
         super(context);
@@ -111,7 +112,7 @@ public class AndroidNative extends NumberPicker implements Picker {
         int timeBetweenScrollsMs = 100;
         int willStopScrollingInMs = timeBetweenScrollsMs * moves;
         isAnimating = true;
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 isAnimating = false;
@@ -149,7 +150,7 @@ public class AndroidNative extends NumberPicker implements Picker {
 
     private void changeValueByOne(final boolean increment, final int ms, final boolean isLast) {
         final AndroidNative self = this;
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 changeValueByOne(self, increment);
@@ -202,7 +203,7 @@ public class AndroidNative extends NumberPicker implements Picker {
     }
 
     private void sendEventIn500ms(){
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 onValueChangedListener.onValueChange();
@@ -211,4 +212,9 @@ public class AndroidNative extends NumberPicker implements Picker {
         }, 500);
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        handler.removeCallbacksAndMessages(null);
+    }
 }
