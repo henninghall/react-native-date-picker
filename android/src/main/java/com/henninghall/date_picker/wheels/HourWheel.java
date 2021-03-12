@@ -25,7 +25,7 @@ public class HourWheel extends Wheel {
 
         ArrayList<String> values = new ArrayList<>();
         int numberOfHours = state.derived.usesAmPm() ? 12 : 24;
-
+        cal.add(Calendar.HOUR_OF_DAY, 1);
         for(int i=0; i<numberOfHours; i++) {
             values.add(format.format(cal.getTime()));
             cal.add(Calendar.HOUR_OF_DAY, 1);
