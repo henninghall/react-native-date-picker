@@ -36,6 +36,24 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
         return dateFormat;
     }
 
+    
+    private String getAccessibleTextForSelectedDate() {
+        String accessibleText;
+        switch(state.getMode()) {
+            case date:
+                accessibleText = wheels.getDateString();
+                break;
+            case time:
+                accessibleText = wheels.getTimeString();
+                break;
+            default:
+                // default is dateTime
+                accessibleText = wheels.getDateTimeString();
+                break;
+        }
+        return accessibleText;
+    }
+
     @Override
     public void onChange(Wheel picker) {
         if(wheels.hasSpinningWheel()) return;
@@ -63,8 +81,9 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
             return;
         }
 
-        String tagName = picker.picker.getTag().toString();
-        picker.picker.setContentDescription("Selected"+ tagName + ", Value is: "+ selectedDate);
+        String tagName = picker.picker.getView().getTag().toString();
+        String selectedDateString = getAccessibleTextForSelectedDate();
+        picker.picker.getView().setContentDescription("Selected"+ tagName + ", Value is: "+ selectedDateString);
         emitDateChangeEvent(selectedDate);
     }
 

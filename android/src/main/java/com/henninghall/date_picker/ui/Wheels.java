@@ -136,7 +136,7 @@ public class Wheels {
         return dayWheel.getValue();
     }
 
-    private String getTimeString(){
+    String getTimeString(){
         return hourWheel.getValue()
                 + " " + minutesWheel.getValue()
                 + ampmWheel.getValue();
@@ -146,6 +146,10 @@ public class Wheels {
         return getDateTimeString(0);
     }
 
+    String getDateString() {
+        return getDateString(0);
+    }
+    
     String getDisplayValue() {
         StringBuilder sb = new StringBuilder();
         for (Wheel wheel: getOrderedVisibleWheels()) {
