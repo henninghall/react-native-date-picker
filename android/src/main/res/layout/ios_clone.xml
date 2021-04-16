@@ -179,7 +179,6 @@
             android:id="@+id/overlay_bottom"
             android:src="@drawable/overlay"
             android:layout_width="match_parent"
-            android:contentDescription="@string/overlay"
             android:layout_height="0dp"
             android:layout_weight=".15"
         />
