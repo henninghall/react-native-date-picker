@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="overlay">Överlagring av datumväljare</string>
+    <string name="year_description">Välj år</string>
+    <string name="month_description">Välj månad</string>
+    <string name="date_description">Välj datum</string>
+    <string name="day_description">Välj dag</string>
+    <string name="hour_description">Välj timme</string>
+    <string name="minute_description">Välj minuter</string>
+    <string name="am_pm_description">Välj am/pm</string>
+</resources>

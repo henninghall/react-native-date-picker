@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="overlay">Päivämääränvalitsimen peite</string>
+    <string name="year_description">Valitse Vuosi</string>
+    <string name="month_description">Valitse Kuukausi</string>
+    <string name="date_description">Valitse Päivämäärä</string>
+    <string name="day_description">Valitse Päivä</string>
+    <string name="hour_description">Valitse Tunti</string>
+    <string name="minute_description">Valitse Minuutit</string>
+    <string name="am_pm_description">Valitse am/pm</string>
+</resources>

@@ -35,7 +35,7 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
-            android:contentDescription="Select Year"
+            android:contentDescription="@string/year_description"
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
@@ -52,7 +52,7 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
-            android:contentDescription="Select Month"
+            android:contentDescription="@string/month_description"
             android:focusable="true"
             android:focusableInTouchMode="true"
             />
@@ -70,7 +70,7 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
-            android:contentDescription="Select Date"
+            android:contentDescription="@string/date_description"
             android:focusable="true"
             android:focusableInTouchMode="true"
             />
@@ -86,7 +86,7 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
-            android:contentDescription="Select Day"
+            android:contentDescription="@string/day_description"
             android:focusable="true"
             android:focusableInTouchMode="true"
             />
@@ -103,7 +103,7 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            android:contentDescription="Select Hour"
+            android:contentDescription="@string/hour_description"
             android:focusable="true"
             android:focusableInTouchMode="true"
             />
@@ -120,7 +120,7 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            android:contentDescription="Select Minutes"
+            android:contentDescription="@string/minute_description"
             android:focusable="true"
             android:focusableInTouchMode="true"
         />
@@ -138,7 +138,7 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
-            android:contentDescription="Select AM/PM"
+            android:contentDescription="@string/am_pm_description"
             android:focusable="true"
             android:focusableInTouchMode="true"
             />

@@ -18,7 +18,7 @@
             android:theme="@style/android_native_theme"
             style="@style/android_native"
             android:tag="year"
-            android:contentDescription="Select Year"
+            android:contentDescription="@string/year_description"
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
@@ -27,7 +27,7 @@
             android:theme="@style/android_native_theme"
             style="@style/android_native"
             android:tag="month"
-            android:contentDescription="Select Month"
+            android:contentDescription="@string/month_description"
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
@@ -36,7 +36,7 @@
             android:theme="@style/android_native_theme"
             style="@style/android_native_small"
             android:tag="date"
-            android:contentDescription="Select Date"
+            android:contentDescription="@string/date_description"
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
@@ -45,7 +45,7 @@
             android:theme="@style/android_native_theme"
             style="@style/android_native"
             android:tag="day"
-            android:contentDescription="Select Day"
+            android:contentDescription="@string/day_description"
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
@@ -54,7 +54,7 @@
             android:theme="@style/android_native_theme"
             style="@style/android_native_small"
             android:tag="hour"
-            android:contentDescription="Select Hour"
+            android:contentDescription="@string/hour_description"
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
@@ -63,7 +63,7 @@
             android:theme="@style/android_native_theme"
             style="@style/android_native_small"
             android:tag="minutes"
-            android:contentDescription="Select Minutes"
+            android:contentDescription="@string/minute_description"
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
@@ -72,7 +72,7 @@
             android:theme="@style/android_native_theme"
             style="@style/android_native"
             android:tag="ampm"
-            android:contentDescription="Select AM/PM"
+            android:contentDescription="@string/am_pm_description"
             android:focusable="true"
             android:focusableInTouchMode="true" />
     </LinearLayout>
