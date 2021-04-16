@@ -63,6 +63,8 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
             return;
         }
 
+        String tagName = picker.picker.getTag().toString();
+        picker.picker.setContentDescription("Selected"+ tagName + ", Value is: "+ selectedDate);
         emitDateChangeEvent(selectedDate);
     }
 
