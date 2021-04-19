@@ -2,6 +2,7 @@ package com.henninghall.date_picker.ui;
 
 import android.view.View;
 
+import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.models.Variant;
 import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.R;
@@ -63,6 +64,10 @@ public class Wheels {
     }
 
     private Picker getPickerWithId(int id){
+        String resourceKey =  rootView.findViewById(id).getTag().toString()+"_description";
+        String localeTag =  Utils.getLocalisedStringFromResources(state.getLocale(), resourceKey);
+        // Screen reader reads the content description when focused on each picker wheel
+        rootView.findViewById(id).setContentDescription(localeTag);
         return (Picker) rootView.findViewById(id);
     }
 
