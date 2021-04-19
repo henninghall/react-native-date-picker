@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">react-native-date-picker</string>
     <string name="overlay">Date Picker Overlay</string>
+    <string name="year_description">Select Year</string>
+    <string name="month_description">Select Month</string>
+    <string name="date_description">Select Date</string>
+    <string name="day_description">Select Day</string>
+    <string name="hour_description">Select Hour</string>
+    <string name="minute_description">Select Minutes</string>
+    <string name="am_pm_description">Select AM/PM</string>
 </resources>
