@@ -6,6 +6,14 @@
     <string name="date_description">Valitse Päivämäärä</string>
     <string name="day_description">Valitse Päivä</string>
     <string name="hour_description">Valitse Tunti</string>
-    <string name="minute_description">Valitse Minuutit</string>
-    <string name="am_pm_description">Valitse am/pm</string>
+    <string name="minutes_description">Valitse Minuutit</string>
+    <string name="ampm_description">Valitse am/pm</string>
+    <string name="selected_year_description">Valittu Vuosi</string>
+    <string name="selected_month_description">Valittu Kuukausi</string>
+    <string name="selected_date_description">Valittu Päivämäärä</string>
+    <string name="selected_day_description">Valittu Päivä</string>
+    <string name="selected_hour_description">Valittu Tunti</string>
+    <string name="selected_minutes_description">Valittu Minuutit</string>
+    <string name="selected_ampm_description">Valittu am/pm</string>
+    <string name="selected_value_description">Arvo on</string>
 </resources>

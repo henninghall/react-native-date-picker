@@ -63,7 +63,7 @@
             android:theme="@style/android_native_theme"
             style="@style/android_native_small"
             android:tag="minutes"
-            android:contentDescription="@string/minute_description"
+            android:contentDescription="@string/minutes_description"
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
@@ -72,7 +72,7 @@
             android:theme="@style/android_native_theme"
             style="@style/android_native"
             android:tag="ampm"
-            android:contentDescription="@string/am_pm_description"
+            android:contentDescription="@string/ampm_description"
             android:focusable="true"
             android:focusableInTouchMode="true" />
     </LinearLayout>

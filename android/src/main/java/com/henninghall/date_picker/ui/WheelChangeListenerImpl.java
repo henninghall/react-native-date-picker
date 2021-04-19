@@ -83,7 +83,10 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
 
         String tagName = picker.picker.getView().getTag().toString();
         String selectedDateString = getAccessibleTextForSelectedDate();
-        picker.picker.getView().setContentDescription("Selected"+ tagName + ", Value is: "+ selectedDateString);
+        String descriptionPrefix = Utils.getLocalisedStringFromResources(state.getLocale(), "selected_"+tagName+"_description");
+        String descriptionPostFix = Utils.getLocalisedStringFromResources(state.getLocale(), "selected_value_description");
+
+        picker.picker.getView().setContentDescription(descriptionPrefix + ", "+ descriptionPostFix + " "+ selectedDateString);
         emitDateChangeEvent(selectedDate);
     }
 
