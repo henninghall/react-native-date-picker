@@ -16,4 +16,7 @@
     <string name="selected_minutes_description">Valittu Minuutit</string>
     <string name="selected_ampm_description">Valittu am/pm</string>
     <string name="selected_value_description">Arvo on</string>
+    <string name="time_tag">Kello on</string>
+    <string name="hour_tag">Tunnin :</string>
+    <string name="minutes_tag">Pöytäkirja</string>
 </resources>

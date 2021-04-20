@@ -16,4 +16,7 @@
     <string name="selected_minutes_description">Valt minuter</string>
     <string name="selected_ampm_description">Valt am/pm</string>
     <string name="selected_value_description">Värde är</string>
+    <string name="time_tag">Tiden är</string>
+    <string name="hour_tag">Timme :</string>
+    <string name="minutes_tag">Minuter</string>
 </resources>

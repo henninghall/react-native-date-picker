@@ -48,7 +48,10 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
                 break;
             default:
                 // default is dateTime
-                accessibleText = wheels.getDateTimeString();
+                String timePrefix = Utils.getLocalisedStringFromResources(state.getLocale(), "time_tag");
+                String hourPrefix = Utils.getLocalisedStringFromResources(state.getLocale(), "hour_tag");
+                String minutesPrefix = Utils.getLocalisedStringFromResources(state.getLocale(), "minutes_tag");
+                accessibleText = wheels.getAccessibleDateTimeString(timePrefix, hourPrefix, minutesPrefix);
                 break;
         }
         return accessibleText;

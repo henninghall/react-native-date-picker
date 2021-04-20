@@ -1,6 +1,7 @@
 package com.henninghall.date_picker.ui;
 
 import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 
 import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.models.Variant;
@@ -63,11 +64,19 @@ public class Wheels {
         changeAmPmWhenPassingMidnightOrNoon();
     }
 
-    private Picker getPickerWithId(int id){
-        String resourceKey =  rootView.findViewById(id).getTag().toString()+"_description";
-        String localeTag =  Utils.getLocalisedStringFromResources(state.getLocale(), resourceKey);
-        // Screen reader reads the content description when focused on each picker wheel
-        rootView.findViewById(id).setContentDescription(localeTag);
+    private Picker getPickerWithId(final int id){
+        rootView.findViewById(id).setAccessibilityDelegate(new View.AccessibilityDelegate(){
+            @Override
+            public void onPopulateAccessibilityEvent(View host, AccessibilityEvent event) {
+                super.onPopulateAccessibilityEvent(host, event);
+                if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
+                    String resourceKey =  rootView.findViewById(id).getTag().toString()+"_description";
+                    String localeTag =  Utils.getLocalisedStringFromResources(state.getLocale(), resourceKey);
+                    // Screen reader reads the content description when focused on each picker wheel
+                    rootView.findViewById(id).setContentDescription(localeTag);
+                }
+            }
+        });
         return (Picker) rootView.findViewById(id);
     }
 
@@ -149,6 +158,15 @@ public class Wheels {
 
     String getDateTimeString() {
         return getDateTimeString(0);
+    }
+
+    String getAccessibleDateTimeString(String timePrefix, String hourTag, String minutesTag) {
+        String date = getDateString(0);
+        String hour = hourWheel.getValue();
+        String minutes = minutesWheel.getValue();
+        String ampm = ampmWheel.getValue();
+        String time = timePrefix+ " "+ hour + hourTag + minutes + minutesTag + ampm;
+        return date+", "+ time;
     }
 
     String getDateString() {
