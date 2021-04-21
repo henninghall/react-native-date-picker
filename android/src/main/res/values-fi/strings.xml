@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="overlay">Päivämääränvalitsimen peite</string>
+    <string name="overlay">Päivämääränvalitsimen päällekkäin</string>
     <string name="year_description">Valitse Vuosi</string>
     <string name="month_description">Valitse Kuukausi</string>
     <string name="date_description">Valitse Päivämäärä</string>
@@ -13,10 +13,10 @@
     <string name="selected_date_description">Valittu Päivämäärä</string>
     <string name="selected_day_description">Valittu Päivä</string>
     <string name="selected_hour_description">Valittu Tunti</string>
-    <string name="selected_minutes_description">Valittu Minuutit</string>
+    <string name="selected_minutes_description">Valitut Minuutit</string>
     <string name="selected_ampm_description">Valittu am/pm</string>
     <string name="selected_value_description">Arvo on</string>
     <string name="time_tag">Kello on</string>
-    <string name="hour_tag">Tunnin :</string>
-    <string name="minutes_tag">Pöytäkirja</string>
+    <string name="hour_tag">Tunti:</string>
+    <string name="minutes_tag">Minuutit</string>
 </resources>
