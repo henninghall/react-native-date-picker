@@ -36,27 +36,6 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
         return dateFormat;
     }
 
-    
-    private String getAccessibleTextForSelectedDate() {
-        String accessibleText;
-        switch(state.getMode()) {
-            case date:
-                accessibleText = wheels.getDateString();
-                break;
-            case time:
-                accessibleText = wheels.getTimeString();
-                break;
-            default:
-                // default is dateTime
-                String timePrefix = Utils.getLocalisedStringFromResources(state.getLocale(), "time_tag");
-                String hourPrefix = Utils.getLocalisedStringFromResources(state.getLocale(), "hour_tag");
-                String minutesPrefix = Utils.getLocalisedStringFromResources(state.getLocale(), "minutes_tag");
-                accessibleText = wheels.getAccessibleDateTimeString(timePrefix, hourPrefix, minutesPrefix);
-                break;
-        }
-        return accessibleText;
-    }
-
     @Override
     public void onChange(Wheel picker) {
         if(wheels.hasSpinningWheel()) return;
@@ -84,12 +63,8 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
             return;
         }
 
-        String tagName = picker.picker.getView().getTag().toString();
-        String selectedDateString = getAccessibleTextForSelectedDate();
-        String descriptionPrefix = Utils.getLocalisedStringFromResources(state.getLocale(), "selected_"+tagName+"_description");
-        String descriptionPostFix = Utils.getLocalisedStringFromResources(state.getLocale(), "selected_value_description");
+        uiManager.updateContentDescription(picker);
 
-        picker.picker.getView().setContentDescription(descriptionPrefix + ", "+ descriptionPostFix + " "+ selectedDateString);
         emitDateChangeEvent(selectedDate);
     }
 
