@@ -7,7 +7,6 @@ import com.henninghall.date_picker.wheelFunctions.AddOnChangeListener;
 import com.henninghall.date_picker.wheelFunctions.AnimateToDate;
 import com.henninghall.date_picker.wheelFunctions.Refresh;
 import com.henninghall.date_picker.wheelFunctions.SetDate;
-import com.henninghall.date_picker.wheelFunctions.SetDividerHeight;
 import com.henninghall.date_picker.wheelFunctions.TextColor;
 import com.henninghall.date_picker.wheelFunctions.UpdateVisibility;
 import com.henninghall.date_picker.wheelFunctions.HorizontalPadding;
@@ -22,11 +21,13 @@ public class UIManager {
     private Wheels wheels;
     private FadingOverlay fadingOverlay;
     private WheelScroller wheelScroller = new WheelScroller();
+    private Accessibility accessibility;
 
     public UIManager(State state, View rootView){
         this.state = state;
         this.rootView = rootView;
         wheels = new Wheels(state, rootView);
+        accessibility = new Accessibility(state, wheels);
         addOnChangeListener();
     }
 
@@ -89,5 +90,13 @@ public class UIManager {
 
     public void updateWheelPadding() {
         wheels.applyOnVisible(new HorizontalPadding());
+    }
+
+    public void updateContentDescription(Wheel picker) {
+        accessibility.update(picker);
+    }
+
+    public void updateAccessibilityValues() {
+        wheels.applyOnAll(new Accessibility.SetAccessibilityDelegate(state.getLocale()));
     }
 }
