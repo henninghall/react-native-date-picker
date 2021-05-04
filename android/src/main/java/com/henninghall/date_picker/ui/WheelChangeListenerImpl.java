@@ -63,6 +63,8 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
             return;
         }
 
+        uiManager.updateContentDescription(picker);
+
         emitDateChangeEvent(selectedDate);
     }
 

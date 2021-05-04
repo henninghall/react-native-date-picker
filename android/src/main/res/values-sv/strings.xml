@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="overlay">Datumväljare på</string>
+    <string name="year_description">Välj ett år</string>
+    <string name="month_description">Välj en månad</string>
+    <string name="date_description">Välj ett datum</string>
+    <string name="day_description">Välj en dag</string>
+    <string name="hour_description">Välj en timme</string>
+    <string name="minutes_description">Välj minuter</string>
+    <string name="ampm_description">Välj am/pm</string>
+    <string name="selected_year_description">Valt år</string>
+    <string name="selected_month_description">Valt månad</string>
+    <string name="selected_date_description">Valt datum</string>
+    <string name="selected_day_description">Vald dag</string>
+    <string name="selected_hour_description">Vald timme</string>
+    <string name="selected_minutes_description">Valda minuter</string>
+    <string name="selected_ampm_description">Vald am/pm</string>
+    <string name="selected_value_description">Värdet är</string>
+    <string name="time_tag">Tiden är</string>
+    <string name="hour_tag">Timme:</string>
+    <string name="minutes_tag">Minuter</string>
+</resources>

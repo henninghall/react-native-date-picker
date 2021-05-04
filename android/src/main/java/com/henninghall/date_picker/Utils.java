@@ -98,4 +98,10 @@ public class Utils {
         if (from + option1 < 0) return option2;
         return option1;
     }
+
+    public static String getLocalisedStringFromResources(Locale locale, String tagName) {
+        int selectedKey = DatePickerManager.context.getResources().getIdentifier(tagName,"string",DatePickerManager.context.getPackageName());
+        String localisedText = LocaleUtils.getLocaleStringResource(locale, selectedKey, DatePickerManager.context);
+        return localisedText;
+    }
 }

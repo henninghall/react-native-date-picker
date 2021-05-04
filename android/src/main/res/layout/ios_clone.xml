@@ -34,7 +34,10 @@
             custom:npv_TextSizeSelected="21dp"
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
-            custom:npv_DividerColor="#cccccc" />
+            custom:npv_DividerColor="#cccccc"
+            android:contentDescription="@string/year_description"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
         <com.henninghall.date_picker.pickers.IosClone
             android:id="@+id/month"
@@ -49,6 +52,9 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
+            android:contentDescription="@string/month_description"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             />
 
         <com.henninghall.date_picker.pickers.IosClone
@@ -64,6 +70,9 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
+            android:contentDescription="@string/date_description"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             />
         <com.henninghall.date_picker.pickers.IosClone
             android:id="@+id/day"
@@ -77,6 +86,9 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextColorNormal="#aaaaaa"
             custom:npv_DividerColor="#cccccc"
+            android:contentDescription="@string/day_description"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             />
         <com.henninghall.date_picker.pickers.IosClone
             android:id="@+id/hour"
@@ -91,6 +103,9 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
+            android:contentDescription="@string/hour_description"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             />
         <com.henninghall.date_picker.pickers.IosClone
             android:id="@+id/minutes"
@@ -105,6 +120,9 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
+            android:contentDescription="@string/minutes_description"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
         />
 
         <com.henninghall.date_picker.pickers.IosClone
@@ -120,6 +138,9 @@
             custom:npv_TextColorSelected="#000000"
             custom:npv_TextSizeNormal="18dp"
             custom:npv_TextSizeSelected="21dp"
+            android:contentDescription="@string/ampm_description"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             />
             
         <com.henninghall.date_picker.pickers.IosClone
@@ -158,7 +179,6 @@
             android:id="@+id/overlay_bottom"
             android:src="@drawable/overlay"
             android:layout_width="match_parent"
-            android:contentDescription="@string/overlay"
             android:layout_height="0dp"
             android:layout_weight=".15"
         />

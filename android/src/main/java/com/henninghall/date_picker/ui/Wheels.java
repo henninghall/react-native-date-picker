@@ -62,7 +62,7 @@ public class Wheels {
         changeAmPmWhenPassingMidnightOrNoon();
     }
 
-    private Picker getPickerWithId(int id){
+    private Picker getPickerWithId(final int id){
         return (Picker) rootView.findViewById(id);
     }
 
@@ -136,7 +136,7 @@ public class Wheels {
         return dayWheel.getValue();
     }
 
-    private String getTimeString(){
+    String getTimeString(){
         return hourWheel.getValue()
                 + " " + minutesWheel.getValue()
                 + ampmWheel.getValue();
@@ -144,6 +144,19 @@ public class Wheels {
 
     String getDateTimeString() {
         return getDateTimeString(0);
+    }
+
+    String getDateString() {
+        return getDateString(0);
+    }
+
+    String getAccessibleDateTimeString(String timePrefix, String hourTag, String minutesTag) {
+        String date = getDateString();
+        String hour = hourWheel.getValue();
+        String minutes = minutesWheel.getValue();
+        String ampm = ampmWheel.getValue();
+        String time = timePrefix+ " "+ hour + hourTag + minutes + minutesTag + ampm;
+        return date+", "+ time;
     }
 
     String getDisplayValue() {
