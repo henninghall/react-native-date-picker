@@ -41,6 +41,7 @@ If you're having troubles after following these steps, there might be a <a href=
 ## Requirements
 
 - Xcode >= 11.6
+- When using React Native v0.64, `0.64.2` or later should be used.
 
 ## Minimal Example
 
