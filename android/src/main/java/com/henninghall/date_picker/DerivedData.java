@@ -63,6 +63,13 @@ public class DerivedData {
         String dateTimePattern = dateTimePatternOld.replaceAll("\\('(.+?)'\\)","\\${$1}")
                 .replaceAll("'.+?'","")
                 .replaceAll("\\$\\{(.+?)\\}","('$1')");
+        
+        boolean isRTL = TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
+
+        if (isRTL) {
+            String rtlDateTimePattern = dateTimePattern.replaceAll("(.+\\s)([Hh]{1,2}):(mm)(:.+)","$1$3:$2$4");
+            dateTimePattern = rtlDateTimePattern;
+        }
         ArrayList<WheelType> unorderedTypes = new ArrayList(Arrays.asList(WheelType.values()));
         ArrayList<WheelType> orderedWheels = new ArrayList<>();
 
