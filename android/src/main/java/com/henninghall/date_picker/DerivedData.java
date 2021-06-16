@@ -11,6 +11,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import java.util.Locale;
+
+import android.text.TextUtils;
+import android.view.View;
+
+
 import static com.henninghall.date_picker.models.Is24HourSource.*;
 
 public class DerivedData {
