@@ -11,6 +11,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import java.util.Locale;
+
+import android.text.TextUtils;
+import android.view.View;
+
+
 import static com.henninghall.date_picker.models.Is24HourSource.*;
 
 public class DerivedData {
@@ -63,6 +69,13 @@ public class DerivedData {
         String dateTimePattern = dateTimePatternOld.replaceAll("\\('(.+?)'\\)","\\${$1}")
                 .replaceAll("'.+?'","")
                 .replaceAll("\\$\\{(.+?)\\}","('$1')");
+        
+        boolean isRTL = TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
+
+        if (isRTL) {
+            String rtlDateTimePattern = dateTimePattern.replaceAll("(.+\\s)([Hh]{1,2}):(mm)(:.+)","$1$3:$2$4");
+            dateTimePattern = rtlDateTimePattern;
+        }
         ArrayList<WheelType> unorderedTypes = new ArrayList(Arrays.asList(WheelType.values()));
         ArrayList<WheelType> orderedWheels = new ArrayList<>();
 
