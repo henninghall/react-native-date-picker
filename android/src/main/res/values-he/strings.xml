@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">react-native-date-picker</string>
+    <string name="overlay">בוחר תאריכים צף</string>
+    <string name="year_description">בחירת שנה</string>
+    <string name="month_description">בחירת חודש</string>
+    <string name="date_description">בחירת תאריך</string>
+    <string name="day_description">בחירת יום</string>
+    <string name="hour_description">בחירת שעה</string>
+    <string name="minutes_description">בחירת דקות</string>
+    <string name="ampm_description">בחירה ב־AM/PM</string>
+    <string name="selected_year_description">השנה הנבחרת</string>
+    <string name="selected_month_description">החודש הנבחר</string>
+    <string name="selected_date_description">התאריך הנבחר</string>
+    <string name="selected_day_description">היום הנבחר</string>
+    <string name="selected_hour_description">השעה הנבחרת</string>
+    <string name="selected_minutes_description">הדקות שנבחרו</string>
+    <string name="selected_ampm_description">מה נבחר מבחינת AM/PM</string>
+    <string name="selected_value_description">הערך הוא</string>
+    <string name="time_tag">השעה היא</string>
+    <string name="hour_tag">שעה :</string>
+    <string name="minutes_tag">דקות </string>
+</resources>
