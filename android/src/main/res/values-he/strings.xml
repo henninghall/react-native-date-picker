@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">react-native-date-picker</string>
     <string name="overlay">בוחר תאריכים צף</string>
     <string name="year_description">בחירת שנה</string>
     <string name="month_description">בחירת חודש</string>
