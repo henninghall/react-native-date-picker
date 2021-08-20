@@ -75,11 +75,18 @@ If you're having troubles after following these steps, there might be a <a href=
 expo install react-native-date-picker expo-dev-client
 ```
 
-2. Build the app (locally or in cloud)
+2. Build the app
+
+Locally
 
 ```
 expo run:ios
 expo run:android
+```
+
+Or in the cloud
+
+```
 eas build -p all --profile development
 ```
 
