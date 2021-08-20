@@ -58,6 +58,9 @@
             self.preferredDatePickerStyle = UIDatePickerStyleWheels;
         }
          _reactMinuteInterval = 1;
+         
+        // only allow gregorian calendar
+        self.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     }
     return self;
 }
