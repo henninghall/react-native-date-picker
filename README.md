@@ -30,7 +30,6 @@ This is a React Native Date Picker with following main features:
   </tr>
   </table>
 
-
 ## Requirements
 
 - Xcode >= 11.6
@@ -39,9 +38,9 @@ This is a React Native Date Picker with following main features:
 
 ## Installation
 
-If you're using expo, follow <a>these steps instead.</a>
+If you're using expo, follow <a href="#using-expo">these steps instead.</a>
 
-Download package with npm or yarn
+1. Download package with npm or yarn
 
 ```
 npm install react-native-date-picker
@@ -51,13 +50,13 @@ npm install react-native-date-picker
 yarn add react-native-date-picker
 ```
 
-Install pods
+2. Install pods
 
 ```
 cd ios && pod install
 ```
 
-Rebuild the project
+3. Rebuild the project
 
 ```
 npx react-native run-android
@@ -97,7 +96,7 @@ export default () => {
 }
 ```
 
-## Properties
+## Props
 
 | Prop                    | Description                                                                                                                                                                                                                                                                                                           | Screenshots iOS                                                                                                                                                                                                                                                | Screenshot Android                                                                                                                                                                                                                                                                                 |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -117,11 +116,11 @@ export default () => {
 
 ## Linking
 
-This package supports automatic linking. Usually, the only thing you need to do is to install the package, the cocoapods dependencies (as descripted above). Then rebuild the project by running `react-native run-ios`, `react-native run-android` or start the build from within Xcode/Android Studio. If you'running a React Native version below 0.60 or your setup is having issues with automatic linking, you can run `npx react-native link react-native-date-picker` and rebuild. In some occations you'll have to manually link the package. Instructions in <a href="https://github.com/henninghall/react-native-date-picker/issues/40">this issue</a>.
+This package supports automatic linking. Usually, the only thing you need to do is to install the package, the cocoapods dependencies (as described above). Then rebuild the project by running `react-native run-ios`, `react-native run-android` or start the build from within Xcode/Android Studio. If you're running a React Native version below 0.60 or your setup is having issues with automatic linking, you can run `npx react-native link react-native-date-picker` and rebuild. In some occations you'll have to manually link the package. Instructions in <a href="https://github.com/henninghall/react-native-date-picker/issues/40">this issue</a>.
 
 ## About
 
-📅 &nbsp; React Native Date Picker is a cross platform component working on both iOS and Android. It uses the slightly improved DatePickerIOS on iOS and a custom picker on Android which has similar look and feel. The datetime mode might be particulary interesting if you looking for a way to avoid two different popup pickers on android.
+📅 &nbsp; React Native Date Picker is a cross platform component working on both iOS and Android. It uses the slightly improved DatePickerIOS on iOS and a custom picker on Android which has similar look and feel. The datetime mode might be particularly interesting if you looking for a way to avoid two different popup pickers on android.
 
 ## FAQ
 
@@ -147,7 +146,7 @@ This is unfortunately not possible due to the limitation in DatePickerIOS. You s
 
 ### Why does the Android app crash in production?
 
-If you have enabled <a href="https://facebook.github.io/react-native/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional">Proguard</a> for Android you might need to ignore some classes to get the the picker to work propery in android production/release mode. Add these lines to you proguard file (often called `proguard-rules.pro`):
+If you have enabled <a href="https://facebook.github.io/react-native/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional">Proguard</a> for Android you might need to ignore some classes to get the the picker to work properly in android production/release mode. Add these lines to you proguard file (often called `proguard-rules.pro`):
 
 ```
 -keep public class net.time4j.android.ApplicationStarter
@@ -166,7 +165,7 @@ On Android there are two design variants to choose from:
  <img src="docs/react-native-date-picker-android-native.gif" alt="date time picker" height="120px" />
 </td></tr>
 
-<tr><td>The so called "iOS clone" looks and works similar to the ios version. It shows normaly 5 lines of dates. It is enabled by default.</td><td>
+<tr><td>The so called "iOS clone" looks and works similar to the ios version. It shows normally 5 lines of dates. It is enabled by default.</td><td>
 The "Android Native" version looks more like a standard native implementation on Android. The divider color can be changed by adding the following to you Android theme:
 <br><code>&lt;item name=&quot;colorControlNormal&quot;&gt;#03b6fc&lt;/item&gt;</code>
 </td></tr>
@@ -254,6 +253,6 @@ Set mode property to `time` to show the time picker:
 
 ## Why another React Native datepicker?
 
-One of the strongest reason to use react native is its cross platform compatibility. Most of the official components are working seamlessly on both platforms but there are some with single platform support only. The react native datepicker is one example where both <a href="https://facebook.github.io/react-native/docs/datepickerios">DatePickerIOS</a> and <a href="https://facebook.github.io/react-native/docs/datepickerandroid">DatePickerAndroid</a> are present. The reason for this is that the default date picker is implemented in seperate ways, iOS normally have an integrated view picker wheel where android has different pickers in a dialog format.
+One of the strongest reason to use react native is its cross platform compatibility. Most of the official components are working seamlessly on both platforms but there are some with single platform support only. The react native datepicker is one example where both <a href="https://facebook.github.io/react-native/docs/datepickerios">DatePickerIOS</a> and <a href="https://facebook.github.io/react-native/docs/datepickerandroid">DatePickerAndroid</a> are present. The reason for this is that the default date picker is implemented in separate ways, iOS normally have an integrated view picker wheel where android has different pickers in a dialog format.
 
-If you want to use these pickers you can combile the official ones or a third party module that already done that for you. If you on the other hand want have a more unified design between your android and ios app, this module is for you. The datetime mode can be particularly helpful to avoid 2 separate picker dialogs on android.
+If you want to use these pickers you can combine the official ones or a third party module that already done that for you. If you on the other hand want have a more unified design between your android and ios app, this module is for you. The datetime mode can be particularly helpful to avoid 2 separate picker dialogs on android.
