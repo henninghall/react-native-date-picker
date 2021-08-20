@@ -25,7 +25,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.facebook.react:react-native:+'
-    implementation 'com.henninghall.android:NumberPickerView:1.1.5'
-    implementation 'org.apache.commons:commons-lang3:3.7'
-    implementation group: 'net.time4j', name: 'time4j-android', version: '4.2-2018i'
+    implementation 'com.github.henninghall:numberpickerview:v1.1.5'
+    implementation 'org.apache.commons:commons-lang3:3.8'
+    implementation group: 'net.time4j', name: 'time4j-android', version: '4.8-2021a'
 }
