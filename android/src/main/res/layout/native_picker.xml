@@ -4,7 +4,9 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layoutDirection="ltr"
+>
 
     <LinearLayout
         android:id="@+id/pickerWrapper"

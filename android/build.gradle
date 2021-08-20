@@ -9,7 +9,7 @@ android {
     buildToolsVersion safeExtGet('buildToolsVersion', "25.0.3")
 
     defaultConfig {
-        minSdkVersion safeExtGet('minSdkVersion', 16)
+        minSdkVersion safeExtGet('minSdkVersion', 17)
         targetSdkVersion safeExtGet('targetSdkVersion', 25)
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
