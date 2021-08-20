@@ -67,21 +67,23 @@ If you're having troubles after following these steps, there might be a <a href=
 
 ## Using Expo
 
-<a href="https://expo.dev/">Expo</a> is supported when using <a href="https://docs.expo.dev/clients/introduction/">a custom client</a>. Requires Expo SDK 42 or later.
+<a href="https://expo.dev/">Expo</a> is supported by creating <a href="https://docs.expo.dev/clients/introduction/">a custom client</a>.
 
-Create the custom client:
+1. Create the custom client:
 
 ```
 expo install react-native-date-picker expo-dev-client
 ```
 
-Build the app (locally or in cloud)
+2. Build the app (locally or in cloud)
 
 ```
 expo run:ios
 expo run:android
 eas build -p all --profile development
 ```
+
+If you're having troubles, read the <a href="https://expo.canny.io/feature-requests/p/react-native-date-picker">pinned comment here. </a>
 
 ## Minimal Example
 
