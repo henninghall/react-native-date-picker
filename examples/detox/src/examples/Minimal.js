@@ -7,7 +7,7 @@ export default class MinimalExample extends Component {
   render = () => (
     <DatePicker
       date={this.state.date}
-      onDateChange={date => this.setState({ date })}
+      onDateChange={(date) => this.setState({ date })}
     />
   )
 }

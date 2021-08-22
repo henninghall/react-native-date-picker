@@ -1,6 +1,7 @@
 package com.henninghall.date_picker.pickers;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
@@ -17,6 +18,14 @@ public class IosClone extends NumberPickerView implements Picker {
 
     public IosClone(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    @Override
+    public void setTextColor(String color) {
+        int fullColor= Color.parseColor(color);
+        int fadedColor = Color.parseColor("#70"+ color.substring(1));
+        setNormalTextColor(fadedColor);
+        setSelectedTextColor(fullColor);
     }
 
     @Override

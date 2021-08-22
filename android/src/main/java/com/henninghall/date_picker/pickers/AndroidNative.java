@@ -1,7 +1,9 @@
 package com.henninghall.date_picker.pickers;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -48,12 +50,14 @@ public class AndroidNative extends NumberPicker implements Picker {
     }
 
     @Override
-    public void setNormalTextColor(int color) {
-        // Not needed for this picker. It auto fades the color
-    }
+    public void setTextColor(String stringColor) {
+        int color = Color.parseColor(stringColor);
 
-    @Override
-    public void setSelectedTextColor(int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            setTextColor(color);
+            return;
+        }
+
         try {
             Field selectorWheelPaintField = getClass().getSuperclass()
                     .getDeclaredField("mSelectorWheelPaint");

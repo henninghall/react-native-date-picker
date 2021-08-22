@@ -14,8 +14,7 @@ public interface Picker {
     void setDisplayedValues(String[] value);
     int getValue();
     void setValue(int value);
-    void setNormalTextColor(int value);
-    void setSelectedTextColor(int value);
+    void setTextColor(String value);
     void setOnValueChangeListenerInScrolling(Picker.OnValueChangeListenerInScrolling listener);
     void setOnValueChangedListener(Picker.OnValueChangeListener onValueChangeListener);
     void setShownCount(int count);
