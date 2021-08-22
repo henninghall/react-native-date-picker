@@ -7,7 +7,12 @@ export default class MinimalExample extends Component {
   render = () => (
     <DatePicker
       date={this.state.date}
-      onDateChange={date => this.setState({ date })}
+      onDateChange={(date) => this.setState({ date })}
+      androidVariant="nativeAndroid"
+      textColor="red"
+      locale="en"
+      mode={'date'}
+      fadeToColor={'none'}
     />
   )
 }

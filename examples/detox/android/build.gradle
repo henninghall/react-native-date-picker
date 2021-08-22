@@ -1,6 +1,6 @@
 buildscript {
     ext.kotlinVersion = '1.3.10'
-    ext.compileSdkVersion = 28
+    ext.compileSdkVersion = 30
     ext.buildToolsVersion = '28.0.3'
 
     ext.detoxKotlinVersion = ext.kotlinVersion

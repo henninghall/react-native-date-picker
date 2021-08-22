@@ -35,7 +35,7 @@ class DatePickerAndroid extends React.PureComponent {
     return [{ width, height }, this.props.style]
   }
 
-  _onChange = e => {
+  _onChange = (e) => {
     const jsDate = this._fromIsoWithTimeZoneOffset(e.nativeEvent.date)
     this.props.onDateChange && this.props.onDateChange(jsDate)
     if (this.props.onDateStringChange) {
@@ -53,13 +53,13 @@ class DatePickerAndroid extends React.PureComponent {
 
   _date = () => this._toIsoWithTimeZoneOffset(this.props.date)
 
-  _fromIsoWithTimeZoneOffset = timestamp => {
+  _fromIsoWithTimeZoneOffset = (timestamp) => {
     const date = new Date(timestamp)
     if (this.props.timeZoneOffsetInMinutes === undefined) return date
     return addMinutes(date, -this.props.timeZoneOffsetInMinutes)
   }
 
-  _toIsoWithTimeZoneOffset = date => {
+  _toIsoWithTimeZoneOffset = (date) => {
     if (this.props.timeZoneOffsetInMinutes === undefined)
       return date.toISOString()
 

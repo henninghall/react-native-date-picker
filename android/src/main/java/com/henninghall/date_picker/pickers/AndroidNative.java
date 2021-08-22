@@ -2,6 +2,7 @@ package com.henninghall.date_picker.pickers;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -54,6 +55,10 @@ public class AndroidNative extends NumberPicker implements Picker {
 
     @Override
     public void setSelectedTextColor(int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            setTextColor(color);
+            return;
+        }
         try {
             Field selectorWheelPaintField = getClass().getSuperclass()
                     .getDeclaredField("mSelectorWheelPaint");
