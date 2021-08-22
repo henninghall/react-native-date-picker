@@ -3,6 +3,7 @@ package com.henninghall.date_picker;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,33 +33,45 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
     public void openPicker(ReadableMap props){
         PickerView picker = createPicker(props);
         AlertDialog dialog = createDialog(picker);
-        dialog.show();
+
     }
 
     private AlertDialog createDialog (View view) {
-        return new AlertDialog.Builder(context.getCurrentActivity())
-                .setTitle("Your title")
-                .setMessage("Click yes to exit!")
+        AlertDialog dialog = new AlertDialog.Builder(context.getCurrentActivity())
+                .setTitle("Select date")
+//                .setMessage("Click yes to exit!")
                 .setCancelable(true)
                 .setView(view)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 //                        MainActivity.this.finish();
+                        dialog.dismiss();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
+                        dialog.dismiss();
+//                        dialog.cancel();
                     }
-                }).create();
+                })
+                .create();
+
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+//        dialog.getWindow().setWindowAnimations(R.style.PauseDialog);
+
+//        dialog.getWindow().setWindowAnimations(R.style.SlidingDialogAnimation);
+
+        dialog.show();
+
+        return dialog;
     }
 
     private PickerView createPicker(ReadableMap props){
-        PickerView picker = new PickerView();
-        picker.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        ));
+        LinearLayout.LayoutParams rootLayoutParams = new LinearLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                400
+        );
+        PickerView picker = new PickerView(rootLayoutParams);
         ReadableMapKeySetIterator iterator = props.keySetIterator();
         while(iterator.hasNextKey()){
             String key = iterator.nextKey();

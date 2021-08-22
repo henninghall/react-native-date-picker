@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Dynamic;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -44,7 +46,10 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
   @Override
   public PickerView createViewInstance(ThemedReactContext context) {
-    return new PickerView();
+    return new PickerView(new LinearLayout.LayoutParams(
+            RelativeLayout.LayoutParams.MATCH_PARENT,
+            RelativeLayout.LayoutParams.MATCH_PARENT
+    ));
   }
 
   @ReactPropGroup(names = { DateProp.name, ModeProp.name, LocaleProp.name, MaximumDateProp.name,

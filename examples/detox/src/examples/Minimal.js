@@ -20,9 +20,9 @@ export default class MinimalExample extends Component {
         <DatePicker
           open={this.state.open}
           date={this.state.date}
-          onDateChange={(date) => this.setState({ date })}
+          // onDateChange={(date) => this.setState({ date })}
           androidVariant="nativeAndroid"
-          fadeToColor={'none'}
+          // fadeToColor={'none'}
         />
       </>
     )

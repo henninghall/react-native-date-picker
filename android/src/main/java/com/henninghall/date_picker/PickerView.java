@@ -1,5 +1,9 @@
 package com.henninghall.date_picker;
 
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Dynamic;
@@ -23,19 +27,23 @@ import java.util.ArrayList;
 
 public class PickerView extends RelativeLayout {
 
+    private final ViewGroup.LayoutParams layoutParams;
     private UIManager uiManager;
     private State state = new State();
     private ArrayList<String> updatedProps = new ArrayList<>();
 
-    public PickerView() {
+    public PickerView(ViewGroup.LayoutParams layoutParams) {
         super(DatePickerModule.context);
+        this.layoutParams = layoutParams;
     }
 
     public void update() {
 
         if (didUpdate(VariantProp.name)) {
             this.removeAllViewsInLayout();
-            inflate(getContext(), state.derived.getRootLayout(), this);
+            LinearLayout layout = new LinearLayout(getContext());
+            LayoutInflater.from(getContext()).inflate(state.derived.getRootLayout(), layout);
+            this.addView(layout, layoutParams);
             uiManager = new UIManager(state, this);
         }
 
@@ -99,21 +107,21 @@ public class PickerView extends RelativeLayout {
         uiManager.scroll(wheelIndex, scrollTimes);
     }
 
-    private final Runnable measureAndLayout = new Runnable() {
-        @Override
-        public void run() {
-            measure(
-                    MeasureSpec.makeMeasureSpec(getWidth(), MeasureSpec.EXACTLY),
-                    MeasureSpec.makeMeasureSpec(getHeight(), MeasureSpec.EXACTLY));
-            layout(getLeft(), getTop(), getRight(), getBottom());
-        }
-    };
+   private final Runnable measureAndLayout = new Runnable() {
+       @Override
+       public void run() {
+           measure(
+                   MeasureSpec.makeMeasureSpec(getWidth(), MeasureSpec.EXACTLY),
+                   MeasureSpec.makeMeasureSpec(getHeight(), MeasureSpec.EXACTLY));
+           layout(getLeft(), getTop(), getRight(), getBottom());
+       }
+   };
 
-    @Override
-    public void requestLayout() {
-        super.requestLayout();
-        post(measureAndLayout);
-    }
+   @Override
+   public void requestLayout() {
+       super.requestLayout();
+       post(measureAndLayout);
+   }
 
 
 }
