@@ -14,10 +14,7 @@ public class TextColor implements WheelFunction {
 
     @Override
     public void apply(Wheel wheel) {
-        int fullColor= Color.parseColor(color);
-        int fadedColor = Color.parseColor("#70"+ color.substring(1));
-        wheel.picker.setNormalTextColor(fadedColor);
-        wheel.picker.setSelectedTextColor(fullColor);
+        wheel.picker.setTextColor(color);
     }
 }
 
