@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, requireNativeComponent } from 'react-native'
+import { StyleSheet, requireNativeComponent,NativeModules } from 'react-native'
 
 function addMinutes(date, minutesToAdd) {
   return new Date(date.valueOf() + minutesToAdd * 60 * 1000)
@@ -16,19 +16,29 @@ const timeModeWidth = 240
 const defaultWidth = 310
 
 class DatePickerAndroid extends React.PureComponent {
+
   render() {
+    
+    const props = this.getProps();
+    if(props.open){
+      NativeModules.RNDatePicker.openPicker({...props, open: undefined})
+      return null
+    }
+    
     return (
-      <NativeDatePicker
-        {...this.props}
-        date={this._date()}
-        minimumDate={this._minimumDate()}
-        maximumDate={this._maximumDate()}
-        onChange={this._onChange}
-        style={this.getStyle()}
-        utc={this.props.timeZoneOffsetInMinutes !== undefined}
-      />
+      <NativeDatePicker {...props} />
     )
   }
+
+  getProps = () => ({
+     ...this.props,
+     date: this._date(),
+     minimumDate: this._minimumDate(),
+     maximumDate: this._maximumDate(),
+     onChange: this._onChange,
+     utc: this.props.timeZoneOffsetInMinutes !== undefined,
+     style: this.getStyle()
+  })  
 
   getStyle = () => {
     const width = this.props.mode === 'time' ? timeModeWidth : defaultWidth

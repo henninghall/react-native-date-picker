@@ -6,6 +6,7 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.henninghall.date_picker.DatePickerManager;
+import com.henninghall.date_picker.DatePickerModule;
 import com.henninghall.date_picker.State;
 import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.wheels.Wheel;
@@ -119,7 +120,7 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
         String dateString = Utils.dateToIso(date);
         event.putString("date", dateString);
         event.putString("dateString", uiManager.getDisplayValueString());
-        DatePickerManager.context.getJSModule(RCTEventEmitter.class)
+        DatePickerModule.context.getJSModule(RCTEventEmitter.class)
                 .receiveEvent(rootView.getId(), "dateChange", event);
     }
 

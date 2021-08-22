@@ -11,7 +11,6 @@ import examples from './examples'
 class App extends Component {
   state = {
     picker: undefined,
-    backgroundColor: 'black',
   }
 
   render() {

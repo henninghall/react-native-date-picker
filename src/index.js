@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform } from 'react-native'
+import { Platform, NativeModules } from 'react-native'
 import DatePickerIOS from './DatePickerIOS'
 import DatePickerAndroid from './DatePickerAndroid'
 import propTypes from './propTypes'
@@ -15,7 +15,7 @@ const DatePicker = Platform.select({
 DatePicker.defaultProps = defaultProps
 DatePicker.propTypes = propTypes
 
-const DatePickerWrapper = props => {
+const DatePickerWrapper = (props) => {
   const { textColor, fadeToColor, innerRef, ...rest } = props
   if (__DEV__) throwIfInvalidProps(props)
   return (

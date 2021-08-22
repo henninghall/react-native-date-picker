@@ -3,6 +3,8 @@ package com.henninghall.date_picker;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Dynamic;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.uimanager.ThemedReactContext;
 import com.henninghall.date_picker.props.DividerHeightProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
@@ -26,7 +28,7 @@ public class PickerView extends RelativeLayout {
     private ArrayList<String> updatedProps = new ArrayList<>();
 
     public PickerView() {
-        super(DatePickerManager.context);
+        super(DatePickerModule.context);
     }
 
     public void update() {

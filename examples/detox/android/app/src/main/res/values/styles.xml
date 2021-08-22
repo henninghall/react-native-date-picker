@@ -1,7 +1,4 @@
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorControlNormal">#ffffff</item>
-        <item name="android:textColorPrimary">#ffffff</item>
-        <item name="android:textColor">#ffffff</item>
     </style>
 </resources>
