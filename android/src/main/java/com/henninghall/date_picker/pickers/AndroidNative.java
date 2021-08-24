@@ -53,7 +53,7 @@ public class AndroidNative extends NumberPicker implements Picker {
     public void setTextColor(String stringColor) {
         int color = Color.parseColor(stringColor);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= 29) {
             setTextColor(color);
             return;
         }
