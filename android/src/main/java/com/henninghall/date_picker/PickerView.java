@@ -1,14 +1,11 @@
 package com.henninghall.date_picker;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Dynamic;
-import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.uimanager.ThemedReactContext;
 import com.henninghall.date_picker.props.DividerHeightProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
@@ -27,13 +24,14 @@ import java.util.ArrayList;
 
 public class PickerView extends RelativeLayout {
 
+
     private final ViewGroup.LayoutParams layoutParams;
     private UIManager uiManager;
     private State state = new State();
     private ArrayList<String> updatedProps = new ArrayList<>();
 
     public PickerView(ViewGroup.LayoutParams layoutParams) {
-        super(DatePickerModule.context);
+        super(DatePickerPackage.context);
         this.layoutParams = layoutParams;
     }
 
@@ -116,6 +114,10 @@ public class PickerView extends RelativeLayout {
            layout(getLeft(), getTop(), getRight(), getBottom());
        }
    };
+
+    public String getDate() {
+        return state.derived.getLastDate();
+    }
 
    @Override
    public void requestLayout() {

@@ -1,5 +1,10 @@
 import React from 'react'
-import { StyleSheet, requireNativeComponent, NativeModules } from 'react-native'
+import {
+  StyleSheet,
+  requireNativeComponent,
+  NativeModules,
+  NativeEventEmitter,
+} from 'react-native'
 
 function addMinutes(date, minutesToAdd) {
   return new Date(date.valueOf() + minutesToAdd * 60 * 1000)
@@ -16,14 +21,41 @@ const timeModeWidth = 240
 const defaultWidth = 310
 
 class DatePickerAndroid extends React.PureComponent {
+  componentDidMount() {
+    const { onConfirm, onCancel } = this.props
+    const eventEmitter = new NativeEventEmitter(NativeModules.RNDatePicker)
+    this.confirmListener = eventEmitter.addListener(
+      'onConfirm',
+      ({ date: isoDate }) => {
+        if (onConfirm) {
+          onConfirm(this._fromIsoWithTimeZoneOffset(isoDate))
+        }
+      }
+    )
+    this.cancelListener = eventEmitter.addListener('onCancel', () => {
+      if (onCancel) onCancel()
+    })
+  }
+
+  componentWillUnmount() {
+    this.confirmListener.remove()
+    this.cancelListener.remove()
+  }
+
   render() {
     const props = this.getProps()
-    if (props.open) {
-      NativeModules.RNDatePicker.openPicker({ ...props, open: undefined })
+    if (props.modal) {
+      if (props.open) {
+        NativeModules.RNDatePicker.openPicker({
+          ...props,
+          open: undefined,
+          modal: undefined,
+        })
+      }
       return null
     }
 
-    return <NativeDatePicker {...props} onChange={this.onChange} />
+    return <NativeDatePicker {...props} onChange={this._onChange} />
   }
 
   getProps = () => ({

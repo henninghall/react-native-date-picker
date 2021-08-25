@@ -3,11 +3,7 @@ package com.henninghall.date_picker;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -21,56 +17,54 @@ import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import net.time4j.android.ApplicationStarter;
 
 public class DatePickerModule extends ReactContextBaseJavaModule {
-    public static ReactApplicationContext context;
+
+    private String lastDate;
 
     DatePickerModule(ReactApplicationContext context) {
         super(context);
         ApplicationStarter.initialize(context,   false); // false = no need to prefetch on time data background tread
-        DatePickerModule.context = context;
     }
 
     @ReactMethod
     public void openPicker(ReadableMap props){
         PickerView picker = createPicker(props);
         AlertDialog dialog = createDialog(picker);
-
+        dialog.show();
     }
 
-    private AlertDialog createDialog (View view) {
-        AlertDialog dialog = new AlertDialog.Builder(context.getCurrentActivity())
+    private AlertDialog createDialog (final PickerView view) {
+        AlertDialog dialog = new AlertDialog.Builder(DatePickerPackage.context.getCurrentActivity())
                 .setTitle("Select date")
-//                .setMessage("Click yes to exit!")
                 .setCancelable(true)
                 .setView(view)
                 .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-//                        MainActivity.this.finish();
+                        Emitter.onConfirm(view.getDate());
                         dialog.dismiss();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        Emitter.onCancel();
                         dialog.dismiss();
-//                        dialog.cancel();
+                    }
+                })
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        Emitter.onCancel();
                     }
                 })
                 .create();
-
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
-//        dialog.getWindow().setWindowAnimations(R.style.PauseDialog);
-
-//        dialog.getWindow().setWindowAnimations(R.style.SlidingDialogAnimation);
-
-        dialog.show();
-
         return dialog;
     }
 
     private PickerView createPicker(ReadableMap props){
+        int height = 180;
+        int heightPx = (int) (height * DatePickerPackage.context.getResources().getDisplayMetrics().density);
         LinearLayout.LayoutParams rootLayoutParams = new LinearLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
-                400
-        );
+                heightPx);
         PickerView picker = new PickerView(rootLayoutParams);
         ReadableMapKeySetIterator iterator = props.keySetIterator();
         while(iterator.hasNextKey()){

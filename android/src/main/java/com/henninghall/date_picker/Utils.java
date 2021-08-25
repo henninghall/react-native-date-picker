@@ -20,7 +20,7 @@ import java.util.TimeZone;
 public class Utils {
 
     public static boolean deviceUsesAmPm(){
-        return !DateFormat.is24HourFormat(DatePickerModule.context);
+        return !DateFormat.is24HourFormat(DatePickerPackage.context);
     }
 
     public static String printToday(Locale locale) {
@@ -101,7 +101,7 @@ public class Utils {
     }
 
     public static String getLocalisedStringFromResources(Locale locale, String tagName) {
-        ReactApplicationContext context = DatePickerModule.context;
+        ReactApplicationContext context = DatePickerPackage.context;
         int selectedKey = context.getResources().getIdentifier(tagName,"string", context.getPackageName());
         String localisedText = LocaleUtils.getLocaleStringResource(locale, selectedKey, context);
         return localisedText;

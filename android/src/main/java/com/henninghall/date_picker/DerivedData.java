@@ -2,6 +2,7 @@ package com.henninghall.date_picker;
 
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.util.TimeUtils;
 
 import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.models.Variant;
@@ -10,6 +11,7 @@ import com.henninghall.date_picker.models.WheelType;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 
 import static com.henninghall.date_picker.models.Is24HourSource.*;
 
@@ -125,4 +127,11 @@ public class DerivedData {
         return state.getMode() == Mode.time && !usesAmPm();
     }
 
+
+    public String getLastDate() {
+        Calendar lastSelectedDate = state.getLastSelectedDate();
+        String initialDate = state.getIsoDate();
+        if(lastSelectedDate != null) return Utils.dateToIso(lastSelectedDate);
+        return initialDate;
+    }
 }

@@ -11,20 +11,19 @@ import java.util.Collections;
 import java.util.List;
 
 public class DatePickerPackage implements ReactPackage {
+    public static ReactApplicationContext context;
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
+        context = reactContext;
         return Arrays.<NativeModule>asList(
                 new DatePickerModule(reactContext)
         );
     }
 
-    public List<Class<? extends JavaScriptModule>> createJSModules() {
-        return Collections.emptyList();
-    }
-
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+        context = reactContext;
         return Arrays.<ViewManager> asList(
                 new DatePickerManager()
         );

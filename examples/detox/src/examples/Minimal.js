@@ -1,29 +1,35 @@
 import React, { Component } from 'react'
-import { Button, NativeModules } from 'react-native'
+import { Button, NativeModules, Text } from 'react-native'
 import DatePicker, { openPicker } from 'react-native-date-picker'
 
 export default class MinimalExample extends Component {
-  state = { date: new Date(), open: 1 }
+  state = { date: new Date(), open: false }
 
   render() {
-    console.log(
-      Object.keys(NativeModules).filter((k) =>
-        k.toLocaleLowerCase().includes('date')
-      )
-    )
     return (
       <>
         <Button
-          onPress={() => this.setState({ open: this.state.open + 1 })}
+          onPress={() => this.setState({ open: true })}
           title="Open picker"
         />
         <DatePicker
+          modal
           open={this.state.open}
           date={this.state.date}
-          // onDateChange={(date) => this.setState({ date })}
+          onConfirm={(date) => {
+            console.log({ confirm: date })
+            this.setState({ open: false })
+          }}
+          onCancel={() => this.setState({ open: false })}
+          textColor={'white'}
+          onDateChange={(date) => {
+            console.log('onDateChange', date)
+            this.setState({ date })
+          }}
           androidVariant="nativeAndroid"
           // fadeToColor={'none'}
         />
+        <Text>Open: {this.state.open.toString()}</Text>
       </>
     )
   }
