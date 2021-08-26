@@ -2,35 +2,29 @@ package com.henninghall.date_picker.pickers;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.MotionEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.content.Context;
+
+import com.henninghall.date_picker.ui.Accessibility;
+
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class IosClone extends NumberPickerView implements Picker {
 
-    private AccessibilityManager mAccessibilityManager;
-
-    private void initAccessibilityManager(Context context) {
-        Context appContext = context.getApplicationContext();
-        mAccessibilityManager = (AccessibilityManager) appContext.getSystemService(Context.ACCESSIBILITY_SERVICE);
-    }
-
     public IosClone(Context context) {
         super(context);
-        initAccessibilityManager(context);
     }
 
     public IosClone(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initAccessibilityManager(context);
     }
 
     public IosClone(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initAccessibilityManager(context);
     }
 
     @Override
@@ -74,26 +68,10 @@ public class IosClone extends NumberPickerView implements Picker {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        /*
-            When TalkBack is active, user can use one finger to explore the screen
-            and set focus to elements. Then user can proceed to use second finger
-            to scroll contents of focused element.
-            When there's multiple pickers next to each other horizontally,
-            it's easy to accidentally scroll more than one picker at a time.
-            Following code aims to fix this issue.
-        */
-
-        // If TalkBack isn't active, always proceed without suppressing touch events
-        if (!mAccessibilityManager.isTouchExplorationEnabled()) {
+        if(Accessibility.shouldAllowScroll(this)){
             super.onTouchEvent(event);
             return true;
         }
-
-        if (this.isAccessibilityFocused()) {
-            super.onTouchEvent(event);
-            return true;
-        }
-
         return false;
     }
 }
