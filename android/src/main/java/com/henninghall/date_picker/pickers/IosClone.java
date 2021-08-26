@@ -2,12 +2,9 @@ package com.henninghall.date_picker.pickers;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.MotionEvent;
-import android.view.accessibility.AccessibilityManager;
-import android.content.Context;
 
 import com.henninghall.date_picker.ui.Accessibility;
 
