@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, NativeModules, Text } from 'react-native'
-import DatePicker, { openPicker } from 'react-native-date-picker'
+import DatePicker from 'react-native-date-picker'
 
 export default class MinimalExample extends Component {
   state = { date: new Date(), open: false }
@@ -17,19 +17,22 @@ export default class MinimalExample extends Component {
           open={this.state.open}
           date={this.state.date}
           onConfirm={(date) => {
-            console.log({ confirm: date })
-            this.setState({ open: false })
+            this.setState({ open: false, date })
           }}
           onCancel={() => this.setState({ open: false })}
-          textColor={'white'}
+          confirmText="Okej då"
+          cancelText="Nej tack"
+          title="Välj tid är du gullig!"
+          androidVariant="nativeAndroid"
           onDateChange={(date) => {
-            console.log('onDateChange', date)
             this.setState({ date })
           }}
-          androidVariant="nativeAndroid"
-          // fadeToColor={'none'}
         />
+        <Text />
         <Text>Open: {this.state.open.toString()}</Text>
+        <Text />
+        <Text>Confirmed date: {this.state.date?.toISOString()}</Text>
+        <Text />
       </>
     )
   }

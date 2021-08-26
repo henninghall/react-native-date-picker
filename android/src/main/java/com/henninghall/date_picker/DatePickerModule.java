@@ -18,8 +18,6 @@ import net.time4j.android.ApplicationStarter;
 
 public class DatePickerModule extends ReactContextBaseJavaModule {
 
-    private String lastDate;
-
     DatePickerModule(ReactApplicationContext context) {
         super(context);
         ApplicationStarter.initialize(context,   false); // false = no need to prefetch on time data background tread
@@ -28,25 +26,30 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void openPicker(ReadableMap props){
         PickerView picker = createPicker(props);
-        AlertDialog dialog = createDialog(picker);
+        AlertDialog dialog = createDialog(props, picker);
         dialog.show();
     }
 
-    private AlertDialog createDialog (final PickerView view) {
-        AlertDialog dialog = new AlertDialog.Builder(DatePickerPackage.context.getCurrentActivity())
-                .setTitle("Select date")
+    private AlertDialog createDialog (ReadableMap props, final PickerView picker) {
+        String title = props.getString("title");
+        String confirmText = props.getString("confirmText");
+        final String cancelText = props.getString("cancelText");
+        final View pickerWithMargin = withTopMargin(picker);
+
+        return new AlertDialog.Builder(DatePickerPackage.context.getCurrentActivity())
+                .setTitle(title)
                 .setCancelable(true)
-                .setView(view)
-                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Emitter.onConfirm(view.getDate());
-                        dialog.dismiss();
+                .setView(pickerWithMargin)
+                .setPositiveButton(confirmText, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog1, int id) {
+                        Emitter.onConfirm(picker.getDate());
+                        dialog1.dismiss();
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                .setNegativeButton(cancelText, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog1, int id) {
                         Emitter.onCancel();
-                        dialog.dismiss();
+                        dialog1.dismiss();
                     }
                 })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -56,26 +59,39 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
                     }
                 })
                 .create();
-        return dialog;
     }
 
     private PickerView createPicker(ReadableMap props){
         int height = 180;
-        int heightPx = (int) (height * DatePickerPackage.context.getResources().getDisplayMetrics().density);
         LinearLayout.LayoutParams rootLayoutParams = new LinearLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
-                heightPx);
+                Utils.toDp(height));
         PickerView picker = new PickerView(rootLayoutParams);
         ReadableMapKeySetIterator iterator = props.keySetIterator();
         while(iterator.hasNextKey()){
             String key = iterator.nextKey();
             Dynamic value = props.getDynamic(key);
             if(!key.equals("style")){
-                picker.updateProp(key, value);
+                try{
+                    picker.updateProp(key, value);
+                } catch (Exception e){
+                    // ignore invalid prop
+                }
             }
         }
         picker.update();
         return picker;
+    }
+
+    private View withTopMargin(PickerView view) {
+        LinearLayout linearLayout = new LinearLayout(DatePickerPackage.context);
+        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+        linearLayout.addView(view);
+        linearLayout.setPadding(0, Utils.toDp(20),0,0);
+        return linearLayout;
     }
 
     @Override

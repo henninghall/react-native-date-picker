@@ -48,8 +48,9 @@ class DatePickerAndroid extends React.PureComponent {
       if (props.open) {
         NativeModules.RNDatePicker.openPicker({
           ...props,
-          open: undefined,
-          modal: undefined,
+          title: this._getTitle(),
+          confirmText: this.props.confirmText ?? 'Confirm',
+          cancelText: this.props.cancelText ?? 'Cancel',
         })
       }
       return null
@@ -64,10 +65,17 @@ class DatePickerAndroid extends React.PureComponent {
     minimumDate: this._minimumDate(),
     maximumDate: this._maximumDate(),
     utc: this.props.timeZoneOffsetInMinutes !== undefined,
-    style: this.getStyle(),
+    style: this._getStyle(),
   })
 
-  getStyle = () => {
+  _getTitle = () => {
+    const { title, mode } = this.props
+    if (title) return title
+    if (mode === 'time') return 'Select time'
+    return 'Select date'
+  }
+
+  _getStyle = () => {
     const width = this.props.mode === 'time' ? timeModeWidth : defaultWidth
     return [{ width, height }, this.props.style]
   }

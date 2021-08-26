@@ -1,5 +1,5 @@
 export function throwIfInvalidProps(props) {
-  checks.forEach(check => check.validate(props))
+  checks.forEach((check) => check.validate(props))
 }
 
 class PropCheck {
@@ -7,7 +7,7 @@ class PropCheck {
     this.isInvalid = isInvalid
     this.errorText = errorText
   }
-  validate = props => {
+  validate = (props) => {
     if (this.isInvalid(props)) {
       throw new Error(
         `${this.errorText} Check usage of react-native-date-picker.`
@@ -16,8 +16,13 @@ class PropCheck {
   }
 }
 
+const dateCheck = new PropCheck(
+  (props) => props && !(props.date instanceof Date),
+  'Invalid or missing Date prop. Must be a Date object.'
+)
+
 const widthCheck = new PropCheck(
-  props =>
+  (props) =>
     props &&
     props.style &&
     props.style.width &&
@@ -26,7 +31,7 @@ const widthCheck = new PropCheck(
 )
 
 const heightCheck = new PropCheck(
-  props =>
+  (props) =>
     props &&
     props.style &&
     props.style.height &&
@@ -35,15 +40,23 @@ const heightCheck = new PropCheck(
 )
 
 const modeCheck = new PropCheck(
-  props =>
+  (props) =>
     props && props.mode && !['datetime', 'date', 'time'].includes(props.mode),
   "Invalid mode. Valid modes: 'datetime', 'date', 'time'"
 )
 
 const androidVariantCheck = new PropCheck(
-  props =>
-    props && props.androidVariant && !['nativeAndroid', 'iosClone'].includes(props.androidVariant),
+  (props) =>
+    props &&
+    props.androidVariant &&
+    !['nativeAndroid', 'iosClone'].includes(props.androidVariant),
   "Invalid android variant. Valid modes: 'nativeAndroid', 'iosClone'"
 )
 
-const checks = [widthCheck, heightCheck, modeCheck, androidVariantCheck]
+const checks = [
+  dateCheck,
+  widthCheck,
+  heightCheck,
+  modeCheck,
+  androidVariantCheck,
+]

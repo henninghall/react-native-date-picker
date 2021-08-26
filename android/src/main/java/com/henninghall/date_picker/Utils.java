@@ -106,4 +106,8 @@ public class Utils {
         String localisedText = LocaleUtils.getLocaleStringResource(locale, selectedKey, context);
         return localisedText;
     }
+
+    public static int toDp(int pixels){
+        return (int) (pixels * DatePickerPackage.context.getResources().getDisplayMetrics().density);
+    }
 }
