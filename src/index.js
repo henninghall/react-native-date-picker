@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Platform, NativeModules, NativeEventEmitter } from 'react-native'
+import React from 'react'
+import { Platform } from 'react-native'
 import DatePickerIOS from './DatePickerIOS'
 import DatePickerAndroid from './DatePickerAndroid'
 import propTypes from './propTypes'
@@ -15,21 +15,34 @@ const DatePicker = Platform.select({
 DatePicker.defaultProps = defaultProps
 DatePicker.propTypes = propTypes
 
-class DatePickerWrapper extends React.PureComponent {
-  render() {
-    const { textColor, fadeToColor, innerRef, ...rest } = this.props
+const DatePickerWrapper = (props) => {
+  const {
+    textColor,
+    fadeToColor,
+    confirmText = 'Confirm',
+    cancelText = 'Cancel',
+    innerRef,
+    ...rest
+  } = props
+  if (__DEV__) throwIfInvalidProps(props)
+  return (
+    <DatePicker
+      ref={innerRef}
+      textColor={colorToHex(textColor)}
+      fadeToColor={colorToHex(fadeToColor)}
+      title={getTitle(props)}
+      confirmText={confirmText}
+      cancelText={cancelText}
+      {...rest}
+    />
+  )
+}
 
-    if (__DEV__) throwIfInvalidProps(this.props)
-
-    return (
-      <DatePicker
-        ref={innerRef}
-        textColor={colorToHex(textColor)}
-        fadeToColor={colorToHex(fadeToColor)}
-        {...rest}
-      />
-    )
-  }
+const getTitle = (props) => {
+  const { title, mode } = props
+  if (title) return title
+  if (mode === 'time') return 'Select time'
+  return 'Select date'
 }
 
 export default React.memo(DatePickerWrapper)

@@ -30,25 +30,22 @@ export default class DatePickerIOS extends React.Component {
 
   _toIosProps = (props) => {
     return {
-      testID: props.testID,
+      ...props,
       style: [styles.datePickerIOS, props.style],
       date: props.date ? props.date.getTime() : undefined,
       locale: props.locale ? props.locale : undefined,
       maximumDate: props.maximumDate ? props.maximumDate.getTime() : undefined,
       minimumDate: props.minimumDate ? props.minimumDate.getTime() : undefined,
-      mode: props.mode,
-      minuteInterval: props.minuteInterval,
-      timeZoneOffsetInMinutes: props.timeZoneOffsetInMinutes,
-      open: props.open,
-      textColor: props.textColor,
     }
   }
 
   render() {
     const props = this._toIosProps(this.props)
 
-    if (props.open !== undefined) {
-      if (props.open) NativeModules.RNDatePickerManager.openPicker(props)
+    if (props.modal) {
+      if (props.open) {
+        NativeModules.RNDatePickerManager.openPicker(props)
+      }
       return null
     }
 

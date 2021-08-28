@@ -66,6 +66,10 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props)
                     
         DatePicker* picker = [[DatePicker alloc] init];
         
+        NSString * title = [RCTConvert NSString:[props objectForKey:@"title"] ];
+        NSString * confirmText = [RCTConvert NSString:[props objectForKey:@"confirmText"] ];
+        NSString * cancelText = [RCTConvert NSString:[props objectForKey:@"cancelText"] ];
+        
         NSDate * _Nonnull date = [RCTConvert NSDate:[props objectForKey:@"date"]];
         [picker setDate:date];
 
@@ -91,12 +95,25 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props)
         [picker setTimeZone:timezone];
         
         [alertController.view addSubview:picker];
+        
+        // TODO: Add title
+        // TODO: Fix position
+        // TODO: onConfirm
+        // TODO: onCancel
 
-        UIAlertAction *somethingAction = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}];
+        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:confirmText style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelText style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}];
             
-        [alertController addAction:somethingAction];
+        
         [alertController addAction:cancelAction];
+        [alertController addAction:confirmAction];
+
+
+        if (@available(iOS 9.0, *)) {
+            alertController.preferredAction = confirmAction;
+            [alertController setPreferredAction:confirmAction];
+        }
+        
         UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
         [rootViewController presentViewController:alertController animated:YES completion:^{}];
     });
