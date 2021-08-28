@@ -4,6 +4,10 @@ import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.MotionEvent;
+
+import com.henninghall.date_picker.ui.Accessibility;
+
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class IosClone extends NumberPickerView implements Picker {
@@ -57,5 +61,14 @@ public class IosClone extends NumberPickerView implements Picker {
     @Override
     public boolean isSpinning() {
         return super.isScrolling();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(Accessibility.shouldAllowScroll(this)){
+            super.onTouchEvent(event);
+            return true;
+        }
+        return false;
     }
 }
