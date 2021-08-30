@@ -85,6 +85,23 @@ public class Accessibility {
         picker.picker.getView().setContentDescription(descriptionPrefix + ", "+ descriptionPostFix + " "+ selectedDateString);
     }
 
+    /**
+     * Read a message out loud with when TalkBack is enabled
+     */
+    public static void announce(String message) {
+        if (systemManager == null || !systemManager.isEnabled()) {
+            return;
+          }
+
+          AccessibilityEvent event = AccessibilityEvent.obtain(AccessibilityEvent.TYPE_ANNOUNCEMENT);
+          event.getText().add(message);
+          systemManager.sendAccessibilityEvent(event);
+    }
+
+    public static void setContentDescription(String text, Wheel wheel) {
+        wheel.picker.getView().setContentDescription(text);
+    }
+
     private String getAccessibleTextForSelectedDate() {
         String accessibleText;
         switch(state.getMode()) {
