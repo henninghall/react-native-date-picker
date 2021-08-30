@@ -6,9 +6,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.MotionEvent;
 
-import com.henninghall.date_picker.ui.Accessibility;
-
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
+
+import com.henninghall.date_picker.ui.Accessibility;
 
 public class IosClone extends NumberPickerView implements Picker {
     private Picker.OnValueChangeListenerInScrolling mOnValueChangeListenerInScrolling;
@@ -17,8 +17,10 @@ public class IosClone extends NumberPickerView implements Picker {
         final Picker self = this;
         super.setOnValueChangeListenerInScrolling(new NumberPickerView.OnValueChangeListenerInScrolling() {
             @Override
+
             public void onValueChangeInScrolling(NumberPickerView picker, int oldVal, int newVal) {
-                Accessibility.announce(String.valueOf(newVal));
+                Accessibility.announceNumberPickerViewValue(picker, newVal);
+
                 if (mOnValueChangeListenerInScrolling != null) {
                     mOnValueChangeListenerInScrolling.onValueChangeInScrolling(self, oldVal, newVal);
                 }
