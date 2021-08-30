@@ -39,12 +39,20 @@ export default class DatePickerIOS extends React.Component {
     }
   }
 
+  _onConfirm = ({ timestamp }) => {
+    this.props.onConfirm(new Date(timestamp))
+  }
+
   render() {
     const props = this._toIosProps(this.props)
 
     if (props.modal) {
       if (props.open) {
-        NativeModules.RNDatePickerManager.openPicker(props)
+        NativeModules.RNDatePickerManager.openPicker(
+          props,
+          this._onConfirm,
+          props.onCancel
+        )
       }
       return null
     }

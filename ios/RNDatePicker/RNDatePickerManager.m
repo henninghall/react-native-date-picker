@@ -47,29 +47,39 @@ RCT_CUSTOM_VIEW_PROPERTY(textColor, NSString, DatePicker)
     [view setTextColorProp:[RCTConvert NSString:json]];
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(open, BOOL, DatePicker)
+RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
+                  onConfirm:(RCTResponseSenderBlock) onConfirm
+                  onCancel:(RCTResponseSenderBlock) onCancel)
 {
-//    bool open = [RCTConvert BOOL:json];
-//    if(!open) return
-
-}
-
-RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props)
-{
-    
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-            
-        NSLayoutConstraint *heigth = [NSLayoutConstraint constraintWithItem:alertController.view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:400];
-
-        [alertController.view addConstraint:heigth];
-                    
+        
+        NSString * title = [RCTConvert NSString:[props objectForKey:@"title"]];
+        
+        title = nil;
+        NSString * confirmText = [RCTConvert NSString:[props objectForKey:@"confirmText"]];
+        NSString * cancelText = [RCTConvert NSString:[props objectForKey:@"cancelText"]];
+        
         DatePicker* picker = [[DatePicker alloc] init];
         
-        NSString * title = [RCTConvert NSString:[props objectForKey:@"title"] ];
-        NSString * confirmText = [RCTConvert NSString:[props objectForKey:@"confirmText"] ];
-        NSString * cancelText = [RCTConvert NSString:[props objectForKey:@"cancelText"] ];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        UIView * alertView = alertController.view;
+
+        // height
+        NSLayoutConstraint *heigth = [NSLayoutConstraint constraintWithItem:alertView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:340];
+        [alertView addConstraint:heigth];
         
+        CGRect bounds = picker.bounds;
+        
+        // picker width
+        bounds.size.width = alertController.view.bounds.size.width - 15;
+        
+        // top padding
+        bounds.origin.y += title ? 40 : 20;
+        
+        [picker setFrame: bounds];
+
+        picker.backgroundColor = UIColor.whiteColor;
+       
         NSDate * _Nonnull date = [RCTConvert NSDate:[props objectForKey:@"date"]];
         [picker setDate:date];
 
@@ -79,7 +89,7 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props)
         NSDate * maximumDate = [RCTConvert NSDate:[props objectForKey:@"maximumDate"]];
         if(maximumDate) [picker setMaximumDate:maximumDate];
         
-        NSString * textColor = [RCTConvert NSString:[props objectForKey:@"textColor"] ];
+        NSString * textColor = [RCTConvert NSString:[props objectForKey:@"textColor"]];
         if(textColor) [picker setTextColorProp:textColor];
         
         UIDatePickerMode mode = [RCTConvert UIDatePickerMode:[props objectForKey:@"mode"]];
@@ -94,28 +104,24 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props)
         NSTimeZone* timezone = [RCTConvert NSTimeZone:[props valueForKey:@"timeZoneOffsetInMinutes"]];
         [picker setTimeZone:timezone];
         
-        [alertController.view addSubview:picker];
+        [alertView addSubview:picker];
         
-        // TODO: Add title
-        // TODO: Fix position
-        // TODO: onConfirm
-        // TODO: onCancel
-
-        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:confirmText style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelText style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {}];
+        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:confirmText style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            onConfirm(@[@{ @"timestamp": @(date.timeIntervalSince1970 * 1000.0) }]);
+        }];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelText style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            onCancel(@[]);
+        }];
             
-        
         [alertController addAction:cancelAction];
         [alertController addAction:confirmAction];
 
-
         if (@available(iOS 9.0, *)) {
             alertController.preferredAction = confirmAction;
-            [alertController setPreferredAction:confirmAction];
         }
         
         UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
-        [rootViewController presentViewController:alertController animated:YES completion:^{}];
+        [rootViewController presentViewController:alertController animated:YES completion:nil];
     });
 
 }
