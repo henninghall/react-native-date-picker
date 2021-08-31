@@ -13,21 +13,6 @@ import com.henninghall.date_picker.ui.Accessibility;
 public class IosClone extends NumberPickerView implements Picker {
     private Picker.OnValueChangeListenerInScrolling mOnValueChangeListenerInScrolling;
 
-    private void initSetOnValueChangeListenerInScrolling() {
-        final Picker self = this;
-        super.setOnValueChangeListenerInScrolling(new NumberPickerView.OnValueChangeListenerInScrolling() {
-            @Override
-
-            public void onValueChangeInScrolling(NumberPickerView picker, int oldVal, int newVal) {
-                Accessibility.announceNumberPickerViewValue(picker, newVal);
-
-                if (mOnValueChangeListenerInScrolling != null) {
-                    mOnValueChangeListenerInScrolling.onValueChangeInScrolling(self, oldVal, newVal);
-                }
-            }
-        });
-    }
-
     public IosClone(Context context) {
         super(context);
         initSetOnValueChangeListenerInScrolling();
@@ -41,6 +26,21 @@ public class IosClone extends NumberPickerView implements Picker {
     public IosClone(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initSetOnValueChangeListenerInScrolling();
+    }
+
+    private void initSetOnValueChangeListenerInScrolling() {
+        final Picker self = this;
+        super.setOnValueChangeListenerInScrolling(new NumberPickerView.OnValueChangeListenerInScrolling() {
+            @Override
+
+            public void onValueChangeInScrolling(NumberPickerView picker, int oldVal, int newVal) {
+                Accessibility.announceNumberPickerViewValue(picker, newVal);
+
+                if (mOnValueChangeListenerInScrolling != null) {
+                    mOnValueChangeListenerInScrolling.onValueChangeInScrolling(self, oldVal, newVal);
+                }
+            }
+        });
     }
 
     @Override

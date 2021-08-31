@@ -89,10 +89,16 @@ public class Accessibility {
         picker.picker.getView().setContentDescription(descriptionPrefix + ", "+ descriptionPostFix + " "+ selectedDateString);
     }
 
+    /**
+     * Checks if the accessibility service responsible of spoken feedback is active
+     */
     public static boolean isSpokenFeedbackEnabled() {
         return hasAccessibilityFeatureTypeEnabled(AccessibilityServiceInfo.FEEDBACK_SPOKEN);
     }
 
+    /**
+     * Get a list of accessibility services currently active
+     */
     private static boolean hasAccessibilityFeatureTypeEnabled(int type) {
 
         List<AccessibilityServiceInfo> enabledServices =
@@ -102,7 +108,7 @@ public class Accessibility {
     }
 
     /**
-     * Read a message out loud with when TalkBack is enabled
+     * Read a message out loud when spoken feedback is active
      */
     public static void announce(String message) {
         if (systemManager == null || !isSpokenFeedbackEnabled()) {
@@ -115,7 +121,7 @@ public class Accessibility {
     }
 
     /**
-     * Get NumberPickerView displayed value from value.
+     * Get NumberPickerView displayValue from value.
      */
     private static String valueToString(NumberPickerView numberPicker, int value) {
         final String[] displayValues = numberPicker.getDisplayedValues();
