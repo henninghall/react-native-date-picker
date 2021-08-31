@@ -123,7 +123,7 @@ public class Accessibility {
     /**
      * Get NumberPickerView displayValue from value.
      */
-    private static String valueToString(NumberPickerView numberPicker, int value) {
+    private static String numberPickerValueToDisplayedValue(NumberPickerView numberPicker, int value) {
         final String[] displayValues = numberPicker.getDisplayedValues();
 
         final String displayValue = displayValues[value];
@@ -139,8 +139,8 @@ public class Accessibility {
      * Read NumberPickerView displayed value.
      * For TalkBack to read dates etc. correctly, make sure they are in localised format.
      */
-    public static void announceNumberPickerViewValue(NumberPickerView numberPicker, int newValue) {
-        announce(valueToString(numberPicker, newValue));
+    public static void announceNumberPickerValue(NumberPickerView numberPicker, int newValue) {
+        announce(numberPickerValueToDisplayedValue(numberPicker, newValue));
     }
 
     private String getAccessibleTextForSelectedDate() {
