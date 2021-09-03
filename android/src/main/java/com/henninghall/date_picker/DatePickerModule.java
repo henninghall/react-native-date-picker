@@ -41,15 +41,15 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
                 .setCancelable(true)
                 .setView(pickerWithMargin)
                 .setPositiveButton(confirmText, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog1, int id) {
+                    public void onClick(DialogInterface dialog, int id) {
                         Emitter.onConfirm(picker.getDate());
-                        dialog1.dismiss();
+                        dialog.dismiss();
                     }
                 })
                 .setNegativeButton(cancelText, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog1, int id) {
+                    public void onClick(DialogInterface dialog, int id) {
                         Emitter.onCancel();
-                        dialog1.dismiss();
+                        dialog.dismiss();
                     }
                 })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {

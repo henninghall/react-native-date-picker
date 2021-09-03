@@ -2,29 +2,7 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:colorAccent">#533565</item>
-        <item name="android:textColorPrimary">#078219</item>
         <item name="colorControlNormal">#03b6fc</item>
     </style>
 
 </resources>
-
-
-<!-- 
-
-    <resources>
-    <style name="AppTheme" parent="Theme.AppCompat">
- <item name="android:colorAccent">#f35555</item> 
-    <item name="android:textColor">#f35555</item>
-    <item name="android:textColorPrimary">#f35555</item>
-    <item name="colorControlNormal">#f35555</item>
-    </style>
-    <style name="AppThemeDialog" parent="Theme.AppCompat.Dialog">
-        <item name="android:colorAccent">#f35555</item>
-        <item name="android:textColor">#f35555</item>
-        <item name="android:textColorPrimary">#f35555</item>
-        <item name="colorControlNormal">#f35555</item>
-    </style>
-</resources>
-
- -->

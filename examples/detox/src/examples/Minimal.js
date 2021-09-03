@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Button, NativeModules, Text } from 'react-native'
 import DatePicker from 'react-native-date-picker'
 
 export default class MinimalExample extends Component {
-  state = { date: new Date(), open: false }
+  state = { date: new Date() }
 
   render = () => (
     <DatePicker
