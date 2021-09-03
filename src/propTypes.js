@@ -1,17 +1,27 @@
 import { Platform, ViewPropTypes } from 'react-native'
 import PropTypes from 'prop-types'
 
-const androidProptypes = {
+const androidPropTypes = {
   fadeToColor: PropTypes.string,
   androidVariant: PropTypes.oneOf(['iosClone', 'nativeAndroid']),
   dividerHeight: PropTypes.number,
   is24hourSource: PropTypes.oneOf(['locale', 'device']),
 }
 
+const modalPropTypes = {
+  modal: PropTypes.bool,
+  open: PropTypes.bool,
+  onConfirm: PropTypes.func,
+  onCancel: PropTypes.func,
+  confirmText: PropTypes.string,
+  cancelText: PropTypes.string,
+  title: PropTypes.string,
+}
+
 const DateType = PropTypes.instanceOf(Date)
 
 export default {
-  ...(Platform === 'android' ? androidProptypes : {}),
+  ...(Platform === 'android' ? androidPropTypes : {}),
   date: DateType.isRequired,
   onChange: PropTypes.func,
   minimumDate: DateType,
@@ -23,4 +33,5 @@ export default {
   timeZoneOffsetInMinutes: PropTypes.number,
   testID: ViewPropTypes.testID,
   style: ViewPropTypes.style,
+  ...modalPropTypes,
 }

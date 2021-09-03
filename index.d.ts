@@ -79,6 +79,27 @@ export interface DatePickerProps extends ViewProps {
    * "device" is default on android and "locale" on iOS. On iOS this cannot be changed.
    */
   is24hourSource?: 'locale' | 'device'
+
+  /** Enables the built-in modal */
+  modal?: boolean
+
+  /** Modal prop only. Set to true to open the modal */
+  open?: boolean
+
+  /** Modal callback invoked when the user presses the confirm button */
+  onConfirm?: (date: Date) => void
+
+  /** Modal callback invoked when user presses the cancel button or closes the modal by a press outside  */
+  onCancel?: () => void
+
+  /** Modal confirm button text */
+  confirmText?: string
+
+  /** Modal cancel button text */
+  cancelText?: string
+
+  /** Modal title. Set to null to remove */
+  title?: string | null
 }
 
 export default class DatePicker extends Component<DatePickerProps> {}
