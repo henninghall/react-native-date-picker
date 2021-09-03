@@ -48,7 +48,6 @@ class DatePickerAndroid extends React.PureComponent {
       if (props.open) {
         NativeModules.RNDatePicker.openPicker({
           ...props,
-          title: this._getTitle(),
           confirmText: this.props.confirmText ?? 'Confirm',
           cancelText: this.props.cancelText ?? 'Cancel',
         })
@@ -67,13 +66,6 @@ class DatePickerAndroid extends React.PureComponent {
     utc: this.props.timeZoneOffsetInMinutes !== undefined,
     style: this._getStyle(),
   })
-
-  _getTitle = () => {
-    const { title, mode } = this.props
-    if (title) return title
-    if (mode === 'time') return 'Select time'
-    return 'Select date'
-  }
 
   _getStyle = () => {
     const width = this.props.mode === 'time' ? timeModeWidth : defaultWidth
