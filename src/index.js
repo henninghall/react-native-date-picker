@@ -40,6 +40,7 @@ const DatePickerWrapper = (props) => {
 
 const getTitle = (props) => {
   const { title, mode } = props
+  if (title === null) return ''
   if (title) return title
   if (mode === 'time') return 'Select time'
   return 'Select date'
