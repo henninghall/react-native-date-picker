@@ -22,15 +22,19 @@ const DatePickerWrapper = (props) => {
       textColor={colorToHex(props.textColor)}
       fadeToColor={colorToHex(props.fadeToColor)}
       title={getTitle(props)}
-      confirmText={props.confirmText ?? 'Confirm'}
-      cancelText={props.cancelText ?? 'Cancel'}
-      androidVariant={
-        props.androidVariant ?? props.modal ? 'nativeAndroid' : 'iosClone'
-      }
-      minuteInterval={props.minuteInterval ?? 1}
-      mode={props.mode ?? 'datetime'}
+      confirmText={props.confirmText ? props.confirmText : 'Confirm'}
+      cancelText={props.cancelText ? props.cancelText : 'Cancel'}
+      androidVariant={getAndroidVariant(props)}
+      minuteInterval={props.minuteInterval ? props.minuteInterval : 1}
+      mode={props.mode ? props.mode : 'datetime'}
     />
   )
+}
+
+const getAndroidVariant = (props) => {
+  const { modal, androidVariant } = props
+  if (androidVariant) return androidVariant
+  return modal ? 'nativeAndroid' : 'iosClone'
 }
 
 const getTitle = (props) => {

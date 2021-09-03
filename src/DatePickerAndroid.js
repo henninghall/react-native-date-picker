@@ -46,12 +46,7 @@ class DatePickerAndroid extends React.PureComponent {
     const props = this.getProps()
     if (props.modal) {
       if (props.open) {
-        NativeModules.RNDatePicker.openPicker({
-          ...props,
-          confirmText: this.props.confirmText ?? 'Confirm',
-          cancelText: this.props.cancelText ?? 'Cancel',
-          androidVariant: this.props.androidVariant ?? 'nativeAndroid',
-        })
+        NativeModules.RNDatePicker.openPicker(props)
       }
       return null
     }

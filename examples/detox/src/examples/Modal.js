@@ -8,6 +8,7 @@ export default class ModalExample extends React.Component {
   render = () => (
     <View style={{ alignItems: 'center' }}>
       <Button
+        testID="openModal"
         title="Select date"
         onPress={() => this.setState({ open: true })}
       />
