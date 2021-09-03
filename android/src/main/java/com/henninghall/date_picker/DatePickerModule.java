@@ -24,6 +24,16 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void addListener(String eventName) {
+        // Keep: Required for RN built in Event Emitter Calls.
+    }
+
+    @ReactMethod
+    public void removeListeners(Integer count) {
+        // Keep: Required for RN built in Event Emitter Calls.
+    }
+
+    @ReactMethod
     public void openPicker(ReadableMap props){
         PickerView picker = createPicker(props);
         AlertDialog dialog = createDialog(props, picker);
