@@ -21,7 +21,7 @@ The first option is to use the built-in modal.
 <table>
    <tr>
   <td><img src="docs/react-native-datetime-picker-modal-ios.gif" alt="React Native DateTime Picker Modal iOS" height="350px" style="margin-left:10px" /></td>
-        <td><img src="docs/react-native-datetime-picker-modal-android.gif" alt="React Native DateTime Picker Modal Android" height="350px" width="100px" style="margin-left:10px" />
+        <td><img src="docs/react-native-datetime-picker-modal-android.gif" alt="React Native DateTime Picker Modal Android" height="350px" style="margin-left:10px" />
     </td>
   </tr>
       <tr>
