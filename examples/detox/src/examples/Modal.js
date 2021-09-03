@@ -6,8 +6,11 @@ export default class ModalExample extends React.Component {
   state = { date: new Date(), open: false }
 
   render = () => (
-    <View>
-      <Button title="Open" onPress={() => this.setState({ open: true })} />
+    <View style={{ alignItems: 'center' }}>
+      <Button
+        title="Select date"
+        onPress={() => this.setState({ open: true })}
+      />
       <DatePicker
         modal
         open={this.state.open}
@@ -16,7 +19,12 @@ export default class ModalExample extends React.Component {
         onCancel={() => this.setState({ open: false })}
         androidVariant="nativeAndroid"
       />
-      <Text>{this.state.date.toISOString()}</Text>
+      <Text style={{ marginTop: 20, fontSize: 26 }}>
+        {this.state.date.toISOString().substr(0, 10)}
+      </Text>
+      <Text style={{ marginTop: 20, fontSize: 26 }}>
+        {this.state.date.toLocaleTimeString()}
+      </Text>
     </View>
   )
 }

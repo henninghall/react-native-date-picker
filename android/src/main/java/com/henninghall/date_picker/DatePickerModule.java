@@ -20,7 +20,7 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
 
     DatePickerModule(ReactApplicationContext context) {
         super(context);
-        ApplicationStarter.initialize(context,   false); // false = no need to prefetch on time data background tread
+        ApplicationStarter.initialize(context, false); // false = no need to prefetch on time data background tread
     }
 
     @ReactMethod
