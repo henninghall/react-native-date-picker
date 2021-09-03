@@ -2,37 +2,56 @@
 
 This is a React Native Date Picker with following main features:
 
-📱 Supporting iOS and Android <br>
-🕑 3 different modes: Time, Date, DateTime <br>
-🌍 Multiple languages<br>
-🎨 Customizable<br>
+📱&nbsp; Supporting iOS and Android <br>
+🕑&nbsp; 3 different modes: Time, Date, DateTime <br>
+🌍&nbsp; Various languages<br>
+🎨&nbsp; Customizable<br>
+🖼&nbsp; Modal or stand-alone (inline)<br>
+
+<hr/>
+
+## Update 4.0.0
+
+- ✅&nbsp; No breaking changes
+
+- New feature: Modal mode
+
+<hr/>
+
+## Modal
+
+The first option is to use the built-in modal.
 
 <table>
-  <tr>
-    <td align="center"><b>iOS</b></td>
-  </tr>
    <tr>
-    <td><img src="docs/react-native-date-picker.gif" alt="React Native Date Picker" title="React Native Date Picker" height="150px" />
+  <td><img src="docs/react-native-datetime-picker-modal-ios.gif" alt="React Native DateTime Picker Modal iOS" height="350px" style="margin-left:10px" /></td>
+        <td><img src="docs/react-native-datetime-picker-modal-android.gif" alt="React Native DateTime Picker Modal Android" height="350px" style="margin-left:10px" />
     </td>
-  </tr>
-
-  <tr>
-    <td align="center" colspan="2"><b>Android</b><br>Choose from 2 different variants</td>
-  </tr>
-   <tr>
-    <td><img src="docs/react-native-date-picker-android.gif" alt="React Native Date Picker Android" height="150px" style="margin-left:10px" />
-    </td>
-        <td><img src="docs/react-native-date-picker-android-native.gif" alt="React Native Datepicker" height="150px" style="margin-left:10px" />
-        </td>  
   </tr>
       <tr>
-  <td align="center"><code>androidVariant="iosClone"</code></td><td align="center"><code>androidVariant="nativeAndroid"</code></td>
+  <td align="center">iOS</td><td align="center">Android</td>
+  </tr>
+  </table>
+
+## Stand-alone
+
+The second option is to use the picker stand-alone. Inlined in a view or a custom made modal.
+
+<table>
+   <tr>
+  <td><img src="docs/react-native-date-time-picker-ios-inline.gif" alt="React Native DateTime Picker" height="350px" style="margin-left:10px" /></td>
+        <td><img src="docs/react-native-date-time-picker-android-inline.gif" alt="React Native Date Time Picker" height="350px" style="margin-left:10px" />
+    </td>
+  </tr>
+      <tr>
+  <td align="center">iOS</td><td align="center">Android</td>
   </tr>
   </table>
 
 ## Requirements
 
 - Xcode >= 11.6
+- React Native >= 0.57.
 - If using React Native 0.64, 0.64.2 or later must be used.
 - If using Expo, SDK 42 or later must be used.
 
@@ -92,7 +111,38 @@ eas build -p all --profile development
 
 If you're having troubles, read the <a href="https://expo.canny.io/feature-requests/p/react-native-date-picker">pinned comment here. </a>
 
-## Minimal Example
+## Example 1: Modal
+
+```jsx
+import React, { useState } from 'react'
+import { Button } from 'react-native'
+import DatePicker from 'react-native-date-picker'
+
+export default () => {
+  const [date, setDate] = useState(new Date())
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <Button title="Open" onPress={() => setOpen(true)} />
+      <DatePicker
+        modal
+        open={open}
+        date={date}
+        onConfirm={(date) => {
+          setOpen(false)
+          setDate(date)
+        }}
+        onCancel={() => {
+          setOpen(false)
+        }}
+      />
+    </>
+  )
+}
+```
+
+## Example 2: Standalone
 
 ```jsx
 import React, { useState } from 'react'
@@ -104,6 +154,22 @@ export default () => {
   return <DatePicker date={date} onDateChange={setDate} />
 }
 ```
+
+## Android variants
+
+On Android there are 2 available picker options. One more similar to the iOS version, and the other more similar to a native android picker.
+
+<table>
+   <tr>
+    <td><img src="docs/react-native-date-picker-android.gif" alt="React Native Date Picker Android" height="150px" style="margin-left:10px" />
+    </td>
+        <td><img src="docs/react-native-date-picker-android-native.gif" alt="React Native Datepicker" height="150px" style="margin-left:10px" />
+        </td>  
+  </tr>
+      <tr>
+  <td align="center"><code>androidVariant="iosClone"</code></td><td align="center"><code>androidVariant="nativeAndroid"</code></td>
+  </tr>
+  </table>
 
 ## Props
 
@@ -260,8 +326,8 @@ Set mode property to `time` to show the time picker:
 />
 ```
 
-## Why another React Native datepicker?
+## Support this package
 
-One of the strongest reason to use react native is its cross platform compatibility. Most of the official components are working seamlessly on both platforms but there are some with single platform support only. The react native datepicker is one example where both <a href="https://facebook.github.io/react-native/docs/datepickerios">DatePickerIOS</a> and <a href="https://facebook.github.io/react-native/docs/datepickerandroid">DatePickerAndroid</a> are present. The reason for this is that the default date picker is implemented in separate ways, iOS normally have an integrated view picker wheel where android has different pickers in a dialog format.
+If you like this package and want to support it, you can give it <a href="https://openbase.com/js/react-native-date-picker" target="_blank">a review</a> or a github star ⭐
 
-If you want to use these pickers you can combine the official ones or a third party module that already done that for you. If you on the other hand want have a more unified design between your android and ios app, this module is for you. The datetime mode can be particularly helpful to avoid 2 separate picker dialogs on android.
+PR's are welcome!
