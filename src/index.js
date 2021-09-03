@@ -3,7 +3,6 @@ import { Platform } from 'react-native'
 import DatePickerIOS from './DatePickerIOS'
 import DatePickerAndroid from './DatePickerAndroid'
 import propTypes from './propTypes'
-import defaultProps from './defaultProps'
 import { colorToHex } from './colorToHex'
 import { throwIfInvalidProps } from './propChecker'
 
@@ -12,7 +11,6 @@ const DatePicker = Platform.select({
   ios: DatePickerIOS,
 })
 
-DatePicker.defaultProps = defaultProps
 DatePicker.propTypes = propTypes
 
 const DatePickerWrapper = (props) => {
@@ -21,6 +19,10 @@ const DatePickerWrapper = (props) => {
     fadeToColor,
     confirmText = 'Confirm',
     cancelText = 'Cancel',
+    is24hourSource = 'device',
+    minuteInterval = 1,
+    mode = 'datetime',
+    androidVariant = props.modal ? 'nativeAndroid' : 'iosClone',
     innerRef,
     ...rest
   } = props

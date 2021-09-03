@@ -50,6 +50,7 @@ class DatePickerAndroid extends React.PureComponent {
           ...props,
           confirmText: this.props.confirmText ?? 'Confirm',
           cancelText: this.props.cancelText ?? 'Cancel',
+          androidVariant: this.props.androidVariant ?? 'nativeAndroid',
         })
       }
       return null
