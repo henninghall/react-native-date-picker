@@ -218,9 +218,9 @@ On Android there are two design variants to choose from:
 <table>
 <tr><td align="center"><b>iOS clone</b></td><td align="center"><b>Native Android</b></td>  
   </tr><tr><td align="center">
- <img src="docs/react-native-date-picker-android.gif" alt="date time picker" height="120px" />
+ <img src="docs/react-native-date-picker-android.gif" alt="date time picker" height="150px" />
 </td><td align="center">
- <img src="docs/react-native-date-picker-android-native.gif" alt="date time picker" height="120px" />
+ <img src="docs/react-native-date-picker-android-native.gif" alt="date time picker" height="150px" />
 </td></tr>
 
 <tr><td>The so called "iOS clone" looks and works similar to the ios version. It shows normally 5 lines of dates. It is enabled by default.</td><td>
