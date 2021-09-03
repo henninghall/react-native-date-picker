@@ -17,9 +17,9 @@ The first option is to use the built-in modal.
   </tr>
   </table>
 
-## Stand-alone
+## Inlined
 
-The second option is to use the picker stand-alone. Inlined in a view or a custom made modal.
+The second option is to use the inlined picker. For instance in a view or a custom made modal.
 
 <table>
    <tr>

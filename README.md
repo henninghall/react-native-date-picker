@@ -6,7 +6,7 @@ This is a React Native Date Picker with following main features:
 🕑&nbsp; 3 different modes: Time, Date, DateTime <br>
 🌍&nbsp; Various languages<br>
 🎨&nbsp; Customizable<br>
-🖼&nbsp; Modal or stand-alone (inline)<br>
+🖼&nbsp; Modal or Inlined<br>
 
 ## Update 4.0.0
 
@@ -29,9 +29,9 @@ The first option is to use the built-in modal. <a href="#example-1-modal">See co
   </tr>
   </table>
 
-## Stand-alone
+## Inlined
 
-The second option is to use the picker stand-alone. Inlined in a view or a custom made modal. <a href="#example-2-standalone">See code</a>.
+The second option is to use the inlined picker. For instance in a view or a custom made modal. <a href="#example-2-inlined">See code</a>.
 
 <table>
    <tr>
@@ -138,7 +138,7 @@ export default () => {
 }
 ```
 
-## Example 2: Standalone
+## Example 2: Inlined
 
 ```jsx
 import React, { useState } from 'react'
