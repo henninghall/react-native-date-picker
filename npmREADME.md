@@ -2,23 +2,33 @@
 
 A cross platform <a href="https://github.com/henninghall/react-native-date-picker" title="React Native Date Pickers">react native date picker</a> component for android and ios. It includes 3 different modes: date, time, and datetime. The date picker is customizable and has multiple language support.
 
-<table >
-  <tr>
-    <td align="center"><b>iOS</b></td>
-  </tr>
-   <tr>
-    <td ><img src="https://github.com/henninghall/react-native-date-picker/raw/master/docs/react-native-date-picker.gif" alt="React Native Date Picker" title="React Native Date Picker" height="150px"/>
-    </td>
-  </tr>
+## Modal
 
-  <tr>
-    <td align="center" colspan="2"><b>Android</b><br>Choose from 2 different variants</td>
-  </tr>
+The first option is to use the built-in modal.
+
+<table>
    <tr>
-    <td><img src="https://github.com/henninghall/react-native-date-picker/raw/master/docs/react-native-date-picker-android.gif" alt="React Native Date Picker Android" height="150px" style="margin-left:10px" />
+  <td><img src="https://github.com/henninghall/react-native-date-picker/raw/master/docs/react-native-datetime-picker-modal-ios.gif" alt="React Native DateTime Picker Modal iOS" height="400px" style="margin-left:10px" /></td>
+        <td><img src="https://github.com/henninghall/react-native-date-picker/raw/master/docs/react-native-datetime-picker-modal-android.gif" alt="React Native DateTime Picker Modal Android" height="400px" style="margin-left:10px" />
     </td>
-        <td><img src="https://raw.githubusercontent.com/henninghall/react-native-date-picker/master/docs/react-native-date-picker-android-native.gif" alt="React Native Datepicker" height="150px" style="margin-left:10px" />
-        </td>  
+  </tr>
+      <tr>
+  <td align="center">iOS</td><td align="center">Android</td>
+  </tr>
+  </table>
+
+## Stand-alone
+
+The second option is to use the picker stand-alone. Inlined in a view or a custom made modal.
+
+<table>
+   <tr>
+  <td><img src="https://github.com/henninghall/react-native-date-picker/raw/master/docs/react-native-date-time-picker-ios-inline.gif" alt="React Native DateTime Picker" height="400px" style="margin-left:10px" /></td>
+        <td><img src="https://github.com/henninghall/react-native-date-picker/raw/master/docs/react-native-date-time-picker-android-inline.gif" alt="React Native Date Time Picker" height="400px" style="margin-left:10px" />
+    </td>
+  </tr>
+      <tr>
+  <td align="center">iOS</td><td align="center">Android</td>
   </tr>
   </table>
 

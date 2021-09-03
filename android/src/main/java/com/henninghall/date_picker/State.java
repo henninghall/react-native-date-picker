@@ -26,6 +26,7 @@ import java.util.TimeZone;
 
 public class State {
 
+    private Calendar lastSelectedDate = null;
     private final DateProp dateProp = new DateProp();
     private final ModeProp modeProp = new ModeProp();
     private final LocaleProp localeProp = new LocaleProp();
@@ -57,15 +58,15 @@ public class State {
     }};
     public DerivedData derived;
 
-    public State(){
+    public State() {
         derived = new DerivedData(this);
     }
 
-    private Prop getProp(String name){
+    private Prop getProp(String name) {
         return (Prop) props.get(name);
     }
 
-    void setProp(String propName, Dynamic value){
+    void setProp(String propName, Dynamic value) {
         getProp(propName).setValue(value);
     }
 
@@ -89,38 +90,38 @@ public class State {
         return (Locale) localeProp.getValue();
     }
 
-    public Calendar getMinimumDate(){
+    public Calendar getMinimumDate() {
         DateBoundary db = new DateBoundary(getTimeZone(), (String) minimumDateProp.getValue());
         return db.get();
     }
 
-    public Calendar getMaximumDate(){
+    public Calendar getMaximumDate() {
         DateBoundary db = new DateBoundary(getTimeZone(), (String) maximumDateProp.getValue());
         return db.get();
     }
 
-    public TimeZone getTimeZone(){
+    public TimeZone getTimeZone() {
         boolean utc = (boolean) utcProp.getValue();
         return utc ? TimeZone.getTimeZone("UTC") : TimeZone.getDefault();
     }
 
-    public String getDateString() {
+    public String getIsoDate() {
         return (String) dateProp.getValue();
     }
 
     public Calendar getDate() {
-        return Utils.isoToCalendar(getDateString(), getTimeZone());
+        return Utils.isoToCalendar(getIsoDate(), getTimeZone());
     }
 
     public Integer getHeight() {
         return (Integer) heightProp.getValue();
     }
 
-    public String getLocaleLanguageTag(){
+    public String getLocaleLanguageTag() {
         return localeProp.getLanguageTag();
     }
 
-    public Variant getVariant(){
+    public Variant getVariant() {
         return variantProp.getValue();
     }
 
@@ -132,4 +133,11 @@ public class State {
         return is24hourSourceProp.getValue();
     }
 
+    public Calendar getLastSelectedDate() {
+        return lastSelectedDate;
+    }
+
+    public void setLastSelectedDate(Calendar date) {
+        lastSelectedDate = date;
+    }
 }

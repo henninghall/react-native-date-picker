@@ -99,4 +99,8 @@ public class UIManager {
     public void updateAccessibilityValues() {
         wheels.applyOnAll(new Accessibility.SetAccessibilityDelegate(state.getLocale()));
     }
+
+    public void updateLastSelectedDate(Calendar date) {
+        state.setLastSelectedDate(date);
+    }
 }

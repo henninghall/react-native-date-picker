@@ -1,14 +1,18 @@
 const detox = require('detox')
 const config = require('../package.json').detox
 const adapter = require('detox/runners/mocha/adapter')
-const { reset } = require("./utils")
+const { reset } = require('./utils')
 
 before(async () => {
   await detox.init(config)
 })
 
 beforeEach(async function () {
-  await reset()
+  try {
+    await reset()
+  } catch (e) {
+    // some tests cannot reset, it's ok.
+  }
   await adapter.beforeEach(this)
 })
 

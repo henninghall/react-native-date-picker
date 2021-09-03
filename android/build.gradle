@@ -5,11 +5,11 @@ def safeExtGet(prop, fallback) {
 }
 
 android {
-    compileSdkVersion safeExtGet('compileSdkVersion', 25)
+    compileSdkVersion safeExtGet('compileSdkVersion', 29)
     buildToolsVersion safeExtGet('buildToolsVersion', "25.0.3")
 
     defaultConfig {
-        minSdkVersion safeExtGet('minSdkVersion', 17)
+        minSdkVersion safeExtGet('minSdkVersion', 18)
         targetSdkVersion safeExtGet('targetSdkVersion', 25)
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

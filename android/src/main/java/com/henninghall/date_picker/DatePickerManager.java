@@ -1,7 +1,18 @@
 package com.henninghall.date_picker;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+
 import com.facebook.react.bridge.Dynamic;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
@@ -20,7 +31,6 @@ import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.TextColorProp;
 import com.henninghall.date_picker.props.UtcProp;
 
-import net.time4j.android.ApplicationStarter;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -29,7 +39,6 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
   private static final String REACT_CLASS = "DatePickerManager";
   private static final int SCROLL = 1;
-  public static ThemedReactContext context;
 
   @Override
   public String getName() {
@@ -37,10 +46,11 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
   }
 
   @Override
-  public PickerView createViewInstance(ThemedReactContext reactContext) {
-    DatePickerManager.context = reactContext;
-    ApplicationStarter.initialize(reactContext, false); // false = no need to prefetch on time data background tread
-    return new PickerView();
+  public PickerView createViewInstance(ThemedReactContext context) {
+    return new PickerView(new LinearLayout.LayoutParams(
+            RelativeLayout.LayoutParams.MATCH_PARENT,
+            RelativeLayout.LayoutParams.MATCH_PARENT
+    ));
   }
 
   @ReactPropGroup(names = { DateProp.name, ModeProp.name, LocaleProp.name, MaximumDateProp.name,

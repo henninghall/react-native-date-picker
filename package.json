@@ -1,7 +1,7 @@
 {
   "name": "react-native-date-picker",
-  "version": "3.4.3",
-  "description": "A Cross Platform React Native Picker",
+  "version": "4.0.0-3",
+  "description": "A datetime picker for React Native. In-modal or stand-alone. Supports Android and iOS.",
   "main": "src/index.js",
   "scripts": {
     "prepublishOnly": "mv README.md githubREADME.md && mv npmREADME.md README.md",

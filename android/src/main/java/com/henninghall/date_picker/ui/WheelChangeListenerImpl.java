@@ -2,12 +2,8 @@ package com.henninghall.date_picker.ui;
 
 import android.view.View;
 
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.uimanager.events.RCTEventEmitter;
-import com.henninghall.date_picker.DatePickerManager;
+import com.henninghall.date_picker.Emitter;
 import com.henninghall.date_picker.State;
-import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.wheels.Wheel;
 
 import java.text.ParseException;
@@ -65,7 +61,10 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
 
         uiManager.updateContentDescription(picker);
 
-        emitDateChangeEvent(selectedDate);
+        String displayData = uiManager.getDisplayValueString();
+
+        uiManager.updateLastSelectedDate(selectedDate);
+        Emitter.onDateChange(selectedDate, displayData, rootView);
     }
 
     // Example: Jan 1 returns true, April 31 returns false.
@@ -112,15 +111,6 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
             }
         }
         return null;
-    }
-
-    private void emitDateChangeEvent(Calendar date) {
-        WritableMap event = Arguments.createMap();
-        String dateString = Utils.dateToIso(date);
-        event.putString("date", dateString);
-        event.putString("dateString", uiManager.getDisplayValueString());
-        DatePickerManager.context.getJSModule(RCTEventEmitter.class)
-                .receiveEvent(rootView.getId(), "dateChange", event);
     }
 
 }

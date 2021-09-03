@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
 import Minimal from './examples/Minimal'
+import Modal from './examples/Modal'
 import Advanced from './examples/Advanced'
 import TimeMode from './examples/TimeMode'
 import { EXAMPLE_KEYS } from './exampleKeys'
@@ -21,5 +21,9 @@ export default {
   [EXAMPLE_KEYS.DATE_MODE]: {
     buttonTitle: 'Date mode',
     component: DateMode,
+  },
+  [EXAMPLE_KEYS.MODAL]: {
+    buttonTitle: 'Modal',
+    component: Modal,
   },
 }

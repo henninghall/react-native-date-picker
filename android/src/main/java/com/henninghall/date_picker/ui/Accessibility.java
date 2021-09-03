@@ -8,20 +8,19 @@ import android.view.accessibility.AccessibilityManager;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
-import com.henninghall.date_picker.DatePickerManager;
+import com.henninghall.date_picker.DatePickerPackage;
 import com.henninghall.date_picker.State;
 import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.wheelFunctions.WheelFunction;
 import com.henninghall.date_picker.wheels.Wheel;
 
 import java.util.Locale;
-import java.util.Arrays;
 import java.util.List;
 
 public class Accessibility {
 
     private final static AccessibilityManager systemManager =
-            (AccessibilityManager) DatePickerManager.context
+            (AccessibilityManager) DatePickerPackage.context
                     .getApplicationContext()
                     .getSystemService(Context.ACCESSIBILITY_SERVICE);
 

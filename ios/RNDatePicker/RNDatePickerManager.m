@@ -6,7 +6,9 @@
  */
 
 #import "RNDatePickerManager.h"
+#import <React/RCTLog.h>
 
+#import "RCTConvert.h"
 
 #import "DatePicker.h"
 
@@ -24,6 +26,14 @@ RCT_ENUM_CONVERTER(UIDatePickerMode, (@{
 @implementation RNDatePickerManager
 
 RCT_EXPORT_MODULE()
+
+RCT_EXPORT_METHOD(addListener : (NSString *)eventName) {
+  // Keep: Required for RN built in Event Emitter Calls.
+}
+
+RCT_EXPORT_METHOD(removeListeners : (NSInteger)count) {
+  // Keep: Required for RN built in Event Emitter Calls.
+}
 
 - (UIView *)view
 {
@@ -43,6 +53,93 @@ RCT_REMAP_VIEW_PROPERTY(timeZoneOffsetInMinutes, timeZone, NSTimeZone)
 RCT_CUSTOM_VIEW_PROPERTY(textColor, NSString, DatePicker)
 {
     [view setTextColorProp:[RCTConvert NSString:json]];
+}
+
+RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
+                  onConfirm:(RCTResponseSenderBlock) onConfirm
+                  onCancel:(RCTResponseSenderBlock) onCancel)
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        bool iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+        UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+        CGRect rootBounds = rootViewController.view.bounds;
+        NSString * title = [RCTConvert NSString:[props objectForKey:@"title"]];
+        title = [title isEqualToString:@""] ? nil : title;
+        NSString * confirmText = [RCTConvert NSString:[props objectForKey:@"confirmText"]];
+        NSString * cancelText = [RCTConvert NSString:[props objectForKey:@"cancelText"]];
+        DatePicker* picker = [[DatePicker alloc] init];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        UIView * alertView = alertController.view;
+
+        // height
+        int heightPx = iPad ? (title ? 300 : 260) : (title ? 370 : 340);
+        NSLayoutConstraint *heigth = [NSLayoutConstraint constraintWithItem:alertView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:heightPx];
+        [alertView addConstraint:heigth];
+        
+        CGRect bounds = picker.bounds;
+        
+        // picker width
+        int widthPx = iPad ? 320 : alertController.view.bounds.size.width - 15;
+        bounds.size.width = widthPx;
+
+        // top padding
+        bounds.origin.y += iPad ? (title ? 20: 5) : (title ? 30 : 10);
+        
+        [picker setFrame: bounds];
+       
+        NSDate * _Nonnull date = [RCTConvert NSDate:[props objectForKey:@"date"]];
+        [picker setDate:date];
+
+        NSDate * minimumDate = [RCTConvert NSDate:[props objectForKey:@"minimumDate"]];
+        if(minimumDate) [picker setMinimumDate:minimumDate];
+        
+        NSDate * maximumDate = [RCTConvert NSDate:[props objectForKey:@"maximumDate"]];
+        if(maximumDate) [picker setMaximumDate:maximumDate];
+        
+        NSString * textColor = [RCTConvert NSString:[props objectForKey:@"textColor"]];
+        if(textColor) [picker setTextColorProp:textColor];
+        
+        UIDatePickerMode mode = [RCTConvert UIDatePickerMode:[props objectForKey:@"mode"]];
+        [picker setDatePickerMode:mode];
+        
+        NSLocale * locale = [RCTConvert NSLocale:[props objectForKey:@"locale"]];
+        if(locale) [picker setLocale:locale];
+
+        int minuteInterval = [RCTConvert int:[props objectForKey:@"minuteInterval"]];
+        [picker setMinuteInterval:minuteInterval];
+
+        NSTimeZone* timezone = [RCTConvert NSTimeZone:[props valueForKey:@"timeZoneOffsetInMinutes"]];
+        [picker setTimeZone:timezone];
+        
+        [alertView addSubview:picker];
+        
+        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:confirmText style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            onConfirm(@[@{ @"timestamp": @(picker.date.timeIntervalSince1970 * 1000.0) }]);
+        }];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelText style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            onCancel(@[]);
+        }];
+            
+        [alertController addAction:cancelAction];
+        [alertController addAction:confirmAction];
+
+        if (@available(iOS 9.0, *)) {
+            alertController.preferredAction = confirmAction;
+        }
+
+        // ipad needs to display the picker in a popover
+        if (iPad) {
+            UIPopoverPresentationController *popPresenter = [alertController popoverPresentationController];
+            popPresenter.sourceRect = CGRectMake(CGRectGetMidX(rootBounds), CGRectGetMidY(rootBounds),0,0);
+            popPresenter.sourceView = rootViewController.view;
+            popPresenter.presentingViewController.preferredContentSize = CGSizeMake(widthPx, heightPx);
+            [popPresenter setPermittedArrowDirections: (UIPopoverArrowDirection) 0];
+        }
+        
+        [rootViewController presentViewController:alertController animated:YES completion:nil];
+    });
+
 }
 
 @end

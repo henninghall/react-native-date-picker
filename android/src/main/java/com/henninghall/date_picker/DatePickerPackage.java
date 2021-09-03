@@ -10,25 +10,23 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by heng on 16/9/5.
- */
-
 public class DatePickerPackage implements ReactPackage {
+    public static ReactApplicationContext context;
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return Collections.emptyList();
-    }
-
-    public List<Class<? extends JavaScriptModule>> createJSModules() {
-        return Collections.emptyList();
+        context = reactContext;
+        return Arrays.<NativeModule>asList(
+                new DatePickerModule(reactContext)
+        );
     }
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+        context = reactContext;
         return Arrays.<ViewManager> asList(
                 new DatePickerManager()
         );
     }
+
 }

@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
-import { ScrollView, AppRegistry, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import {
+  ScrollView,
+  AppRegistry,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native'
 import examples from './examples'
 
 class App extends Component {
   state = {
     picker: undefined,
-    backgroundColor: '#ffffff',
   }
 
   render() {
@@ -25,7 +30,7 @@ class App extends Component {
     )
   }
 
-  setBackgroundColor = backgroundColor => this.setState({ backgroundColor })
+  setBackgroundColor = (backgroundColor) => this.setState({ backgroundColor })
 
   renderPicker = () => {
     const Picker = examples[this.state.picker].component
@@ -39,10 +44,10 @@ class App extends Component {
 
   renderButtons = () =>
     Object.keys(examples)
-      .filter(key => key !== this.state.picker)
+      .filter((key) => key !== this.state.picker)
       .map(this.renderButton)
 
-  renderButton = key => (
+  renderButton = (key) => (
     <TouchableOpacity
       key={key}
       onPress={() => this.setState({ picker: key })}
@@ -52,7 +57,7 @@ class App extends Component {
     </TouchableOpacity>
   )
 
-  renderBackButton = key => (
+  renderBackButton = (key) => (
     <TouchableOpacity
       onPress={() => this.setState({ picker: undefined })}
       style={{ margin: 10, position: 'absolute', top: 0, left: 10 }}

@@ -1,5 +1,10 @@
-import React from 'react'
-import { StyleSheet, View, requireNativeComponent } from 'react-native'
+import React, { useEffect } from 'react'
+import {
+  StyleSheet,
+  View,
+  requireNativeComponent,
+  NativeModules,
+} from 'react-native'
 
 const RCTDatePickerIOS = requireNativeComponent('RNDatePicker')
 
@@ -17,37 +22,51 @@ export default class DatePickerIOS extends React.Component {
     }
   }
 
-  _onChange = event => {
+  _onChange = (event) => {
     const nativeTimeStamp = event.nativeEvent.timestamp
     this.props.onDateChange &&
       this.props.onDateChange(new Date(nativeTimeStamp))
   }
 
+  _toIosProps = (props) => {
+    return {
+      ...props,
+      style: [styles.datePickerIOS, props.style],
+      date: props.date ? props.date.getTime() : undefined,
+      locale: props.locale ? props.locale : undefined,
+      maximumDate: props.maximumDate ? props.maximumDate.getTime() : undefined,
+      minimumDate: props.minimumDate ? props.minimumDate.getTime() : undefined,
+    }
+  }
+
+  _onConfirm = ({ timestamp }) => {
+    this.props.onConfirm(new Date(timestamp))
+  }
+
   render() {
-    const { props } = this
+    const props = this._toIosProps(this.props)
+
+    if (props.modal) {
+      if (props.open) {
+        NativeModules.RNDatePickerManager.openPicker(
+          props,
+          this._onConfirm,
+          props.onCancel
+        )
+      }
+      return null
+    }
+
     return (
       <RCTDatePickerIOS
-        testID={props.testID}
         key={props.textColor} // preventing "Today" string keep old text color when text color changes
-        ref={picker => {
+        ref={(picker) => {
           this._picker = picker
         }}
-        style={[styles.datePickerIOS, props.style]}
-        date={props.date ? props.date.getTime() : undefined}
-        locale={props.locale ? props.locale : undefined}
-        maximumDate={
-          props.maximumDate ? props.maximumDate.getTime() : undefined
-        }
-        minimumDate={
-          props.minimumDate ? props.minimumDate.getTime() : undefined
-        }
-        mode={props.mode}
-        minuteInterval={props.minuteInterval}
-        timeZoneOffsetInMinutes={props.timeZoneOffsetInMinutes}
         onChange={this._onChange}
         onStartShouldSetResponder={() => true}
         onResponderTerminationRequest={() => false}
-        textColor={props.textColor}
+        {...props}
       />
     )
   }
