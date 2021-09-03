@@ -14,28 +14,21 @@ const DatePicker = Platform.select({
 DatePicker.propTypes = propTypes
 
 const DatePickerWrapper = (props) => {
-  const {
-    textColor,
-    fadeToColor,
-    confirmText = 'Confirm',
-    cancelText = 'Cancel',
-    is24hourSource = 'device',
-    minuteInterval = 1,
-    mode = 'datetime',
-    androidVariant = props.modal ? 'nativeAndroid' : 'iosClone',
-    innerRef,
-    ...rest
-  } = props
   if (__DEV__) throwIfInvalidProps(props)
   return (
     <DatePicker
-      ref={innerRef}
-      textColor={colorToHex(textColor)}
-      fadeToColor={colorToHex(fadeToColor)}
+      ref={props.innerRef}
+      {...props}
+      textColor={colorToHex(props.textColor)}
+      fadeToColor={colorToHex(props.fadeToColor)}
       title={getTitle(props)}
-      confirmText={confirmText}
-      cancelText={cancelText}
-      {...rest}
+      confirmText={props.confirmText ?? 'Confirm'}
+      cancelText={props.cancelText ?? 'Cancel'}
+      androidVariant={
+        props.androidVariant ?? props.modal ? 'nativeAndroid' : 'iosClone'
+      }
+      minuteInterval={props.minuteInterval ?? 1}
+      mode={props.mode ?? 'datetime'}
     />
   )
 }
