@@ -5,7 +5,7 @@ export interface DatePickerProps extends ViewProps {
   /**
    * The currently selected date.
    */
-  date?: Date
+  date: Date
 
   /**
    * The date picker locale.
