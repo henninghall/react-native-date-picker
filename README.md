@@ -16,7 +16,7 @@ This is a React Native Date Picker with following main features:
 
 ## Modal
 
-The first option is to use the built-in modal.
+The first option is to use the built-in modal. <a href="#example-1-modal">See code</a>.
 
 <table>
    <tr>
@@ -31,7 +31,7 @@ The first option is to use the built-in modal.
 
 ## Stand-alone
 
-The second option is to use the picker stand-alone. Inlined in a view or a custom made modal.
+The second option is to use the picker stand-alone. Inlined in a view or a custom made modal. <a href="#example-2-standalone">See code</a>.
 
 <table>
    <tr>
