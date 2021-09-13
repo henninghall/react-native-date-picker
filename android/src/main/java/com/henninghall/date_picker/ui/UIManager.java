@@ -92,14 +92,13 @@ public class UIManager {
         wheels.applyOnVisible(new HorizontalPadding());
     }
 
-    public void updateContentDescription(Wheel wheel) {
-        // accessibility.update(picker);
-        Accessibility.updateContentDescription(wheel, state);
-    }
+    // public void updateContentDescription(Wheel wheel) {
+    //     Accessibility.updateContentDescription(wheel, state.getLocale());
+    // }
 
-    public void updateAccessibilityValues() {
-        wheels.applyOnAll(new Accessibility.SetAccessibilityDelegate(state.getLocale()));
-    }
+    // public void updateAccessibilityValues() {
+    //     wheels.applyOnAll(new Accessibility.SetAccessibilityDelegate(state.getLocale()));
+    // }
 
     public void updateLastSelectedDate(Calendar date) {
         state.setLastSelectedDate(date);

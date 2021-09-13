@@ -80,9 +80,9 @@ public class PickerView extends RelativeLayout {
             uiManager.updateDisplayValues();
         }
 
-        if (didUpdate(ModeProp.name, LocaleProp.name)) {
-            uiManager.updateAccessibilityValues();
-        }
+        // if (didUpdate(ModeProp.name, LocaleProp.name)) {
+        //     uiManager.updateAccessibilityValues();
+        // }
 
         uiManager.setWheelsToDate();
 

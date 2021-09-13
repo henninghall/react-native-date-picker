@@ -59,7 +59,7 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
             return;
         }
 
-        uiManager.updateContentDescription(picker);
+        // uiManagers.updateContentDescription(picker);
 
         String displayData = uiManager.getDisplayValueString();
 
