@@ -34,7 +34,7 @@ public class IosClone extends NumberPickerView implements Picker {
             @Override
 
             public void onValueChangeInScrolling(NumberPickerView picker, int oldVal, int newVal) {
-                Accessibility.announceNumberPickerValue(picker, newVal);
+                Accessibility.announcePickerValue(self, newVal);
 
                 if (mOnValueChangeListenerInScrolling != null) {
                     mOnValueChangeListenerInScrolling.onValueChangeInScrolling(self, oldVal, newVal);

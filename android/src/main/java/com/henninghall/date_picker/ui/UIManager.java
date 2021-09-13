@@ -92,8 +92,9 @@ public class UIManager {
         wheels.applyOnVisible(new HorizontalPadding());
     }
 
-    public void updateContentDescription(Wheel picker) {
-        accessibility.update(picker);
+    public void updateContentDescription(Wheel wheel) {
+        // accessibility.update(picker);
+        Accessibility.updateContentDescription(wheel, state);
     }
 
     public void updateAccessibilityValues() {

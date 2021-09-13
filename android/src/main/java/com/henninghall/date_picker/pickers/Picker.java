@@ -12,6 +12,7 @@ public interface Picker {
     int getMaxValue();
     boolean getWrapSelectorWheel();
     void setDisplayedValues(String[] value);
+    String[] getDisplayedValues();
     int getValue();
     void setValue(int value);
     void setTextColor(String value);

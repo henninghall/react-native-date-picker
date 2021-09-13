@@ -6,19 +6,18 @@ import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.accessibilityservice.AccessibilityServiceInfo;
-import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 import com.henninghall.date_picker.DatePickerPackage;
 import com.henninghall.date_picker.State;
 import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.wheelFunctions.WheelFunction;
 import com.henninghall.date_picker.wheels.Wheel;
+import com.henninghall.date_picker.pickers.Picker;
 
 import java.util.Locale;
 import java.util.List;
 
 public class Accessibility {
-
     private final static AccessibilityManager systemManager =
             (AccessibilityManager) DatePickerPackage.context
                     .getApplicationContext()
@@ -120,10 +119,10 @@ public class Accessibility {
     }
 
     /**
-     * Get NumberPickerView displayValue from value.
+     * Get Picker displayValue from value.
      */
-    private static String numberPickerValueToDisplayedValue(NumberPickerView numberPicker, int value) {
-        final String[] displayValues = numberPicker.getDisplayedValues();
+    private static String pickerValueToDisplayedValue(Picker picker, int value) {
+        final String[] displayValues = picker.getDisplayedValues();
 
         final String displayValue = displayValues[value];
 
@@ -135,11 +134,31 @@ public class Accessibility {
     }
 
     /**
-     * Read NumberPickerView displayed value.
+     * Read Picker displayed value.
      * For TalkBack to read dates etc. correctly, make sure they are in localised format.
      */
-    public static void announceNumberPickerValue(NumberPickerView numberPicker, int newValue) {
-        announce(numberPickerValueToDisplayedValue(numberPicker, newValue));
+    public static void announcePickerValue(Picker  picker, int newValue) {
+        announce(pickerValueToDisplayedValue(picker, newValue));
+    }
+
+    private static String getContentDescriptionLabel(String tagName, Locale locale) {
+        // TODO: create static class property locale used here
+        // Ex add private final static string locale with set
+        return Utils.getLocalisedStringFromResources(locale, "selected_" + tagName + "_description");
+    }
+
+    public static String getContentDescription(Picker picker, Locale locale) {
+        final String tagName = picker.getView().getTag().toString();
+        final int currentValue = picker.getValue();
+        final String currentDisplayValue = pickerValueToDisplayedValue(picker, currentValue);
+        final String label = getContentDescriptionLabel(tagName, locale); // java.util.Locale.ENGLISH
+
+        return currentDisplayValue + ", " + label;
+    }
+
+    public static void updateContentDescription(Wheel wheel, State state){
+        final String nextContentDescription = getContentDescription(wheel.picker, state.getLocale());
+        wheel.picker.getView().setContentDescription(nextContentDescription);
     }
 
     private String getAccessibleTextForSelectedDate() {
