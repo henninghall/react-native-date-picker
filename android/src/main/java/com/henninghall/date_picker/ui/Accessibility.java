@@ -22,14 +22,14 @@ public class Accessibility {
                     .getApplicationContext()
                     .getSystemService(Context.ACCESSIBILITY_SERVICE);
 
-    private static Locale locale = Locale.getDefault();
+    private static Locale mLocale = Locale.getDefault();
 
     public static void setLocale(Locale nextLocale) {
-        this.locale = nextLocale;
+        mLocale = nextLocale;
     }
 
     public static Locale getLocale() {
-        return this.locale;
+        return mLocale;
     }
 
     /**
@@ -65,7 +65,7 @@ public class Accessibility {
                         super.onPopulateAccessibilityEvent(host, event);
                         if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
                             // Screen reader reads the content description when focused on each picker wheel
-                            Accessibility.updateContentDescription(fPicker, Accessibility.getLocale());
+                            Accessibility.updateContentDescription(fPicker);
                         }
                     }
                 }
@@ -129,7 +129,7 @@ public class Accessibility {
     public static void announceSelectedPickerValue(Picker picker, int newValue) {
         String tagName = picker.getView().getTag().toString();
         String selectedDisplayValue = pickerValueToDisplayedValue(picker, newValue);
-        String label = getSelectedContentDescriptionLabel(tagName, Accessibility.getLocale());
+        String label = getSelectedContentDescriptionLabel(tagName);
         announce(label + ": " + selectedDisplayValue);
     }
 
@@ -149,13 +149,13 @@ public class Accessibility {
         String tagName = picker.getView().getTag().toString();
         int currentValue = picker.getValue();
         String currentDisplayValue = pickerValueToDisplayedValue(picker, currentValue);
-        String label = getContentDescriptionLabel(tagName, Accessibility.getLocale());
+        String label = getContentDescriptionLabel(tagName);
 
         return currentDisplayValue + ", " + label;
     }
 
     public static void updateContentDescription(Picker picker){
-        String nextContentDescription = getContentDescription(picker, Accessibility.getLocale());
+        String nextContentDescription = getContentDescription(picker);
         picker.getView().setContentDescription(nextContentDescription);
     }
 }

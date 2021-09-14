@@ -34,13 +34,11 @@ public class IosClone extends NumberPickerView implements Picker {
     }
 
     private void initAccessibility() {
-        Accessibility.startAccessibilityDelegate(this, java.util.Locale.ENGLISH);
+        Accessibility.startAccessibilityDelegate(this);
     }
 
     private void initSetOnValueChangeListenerInScrolling() {
         final Picker self = this;
-
-        Accessibility.startAccessibilityDelegate(self, java.util.Locale.ENGLISH);
 
         super.setOnValueChangeListenerInScrolling(new NumberPickerView.OnValueChangeListenerInScrolling() {
             @Override
@@ -74,7 +72,7 @@ public class IosClone extends NumberPickerView implements Picker {
         super.setOnValueChangedListener(new NumberPickerView.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPickerView picker, int oldVal, int newVal) {
-                Accessibility.announceSelectedPickerValue(self, newVal, java.util.Locale.ENGLISH);
+                Accessibility.announceSelectedPickerValue(self, newVal);
                 listener.onValueChange();
             }
         });
