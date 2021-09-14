@@ -10,7 +10,6 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import com.henninghall.date_picker.DatePickerPackage;
 import com.henninghall.date_picker.State;
 import com.henninghall.date_picker.Utils;
-import com.henninghall.date_picker.wheelFunctions.WheelFunction;
 import com.henninghall.date_picker.wheels.Wheel;
 import com.henninghall.date_picker.pickers.Picker;
 
@@ -22,6 +21,16 @@ public class Accessibility {
             (AccessibilityManager) DatePickerPackage.context
                     .getApplicationContext()
                     .getSystemService(Context.ACCESSIBILITY_SERVICE);
+
+    private static Locale locale = Locale.getDefault();
+
+    public static setLocale(Locale nextLocale) {
+        this.locale = nextLocale;
+    }
+
+    public static Locale getLocale() {
+        return this.locale;
+    }
 
     /**
       When TalkBack is active, user can use one finger to explore the screen
@@ -42,9 +51,11 @@ public class Accessibility {
         return false;
     }
 
-    public static void startAccessibilityDelegate(Picker picker, Locale locale) {
+    /**
+     * Enable capturing of accessibility events for a Picker
+     */
+    public static void startAccessibilityDelegate(Picker picker) {
         final Picker fPicker = picker;
-        final Locale fLocale =locale;
         final View view = picker.getView();
 
         view.setAccessibilityDelegate(
@@ -54,59 +65,11 @@ public class Accessibility {
                         super.onPopulateAccessibilityEvent(host, event);
                         if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
                             // Screen reader reads the content description when focused on each picker wheel
-                            Accessibility.updateContentDescription(fPicker, fLocale);
+                            Accessibility.updateContentDescription(fPicker, Accessibility.getLocale());
                         }
                     }
                 }
         );
-    }
-
-    public static class SetAccessibilityDelegate implements WheelFunction {
-
-        private final Locale locale;
-
-        public SetAccessibilityDelegate(Locale locale) {
-            this.locale = locale;
-        }
-
-        @Override
-        public void apply(Wheel wheel) {
-            final Picker picker = wheel.picker;
-            final View view = wheel.picker.getView();
-
-            view.setAccessibilityDelegate(
-                    new View.AccessibilityDelegate(){
-                        @Override
-                        public void onPopulateAccessibilityEvent(View host, AccessibilityEvent event) {
-                            super.onPopulateAccessibilityEvent(host, event);
-                            if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
-                                // Screen reader reads the content description when focused on each picker wheel
-                                Accessibility.updateContentDescription(picker, locale);
-                            }
-                        }
-                    }
-            );
-        }
-    }
-
-    private final State state;
-    private final Wheels wheels;
-
-    public Accessibility(State state, Wheels wheels){
-        this.state = state;
-        this.wheels = wheels;
-    }
-
-    /**
-     * DEL
-     */
-    public void update(Wheel picker){
-        String tagName = picker.picker.getView().getTag().toString();
-        String selectedDateString = getAccessibleTextForSelectedDate();
-        String descriptionPrefix = Utils.getLocalisedStringFromResources(state.getLocale(), "selected_"+tagName+"_description");
-        String descriptionPostFix = Utils.getLocalisedStringFromResources(state.getLocale(), "selected_value_description");
-
-        picker.picker.getView().setContentDescription(descriptionPrefix + ", "+ descriptionPostFix + " "+ selectedDateString);
     }
 
     /**
@@ -144,9 +107,9 @@ public class Accessibility {
      * Get Picker displayValue from value.
      */
     private static String pickerValueToDisplayedValue(Picker picker, int value) {
-        final String[] displayValues = picker.getDisplayedValues();
+        String[] displayValues = picker.getDisplayedValues();
 
-        final String displayValue = displayValues[value];
+        String displayValue = displayValues[value];
 
         if (displayValue != null) {
             return displayValue;
@@ -163,57 +126,36 @@ public class Accessibility {
         announce(pickerValueToDisplayedValue(picker, newValue));
     }
 
-    public static void announceSelectedPickerValue(Picker picker, int newValue, Locale locale) {
-        final String tagName = picker.getView().getTag().toString();
-        final String selectedDisplayValue = pickerValueToDisplayedValue(picker, newValue);
-        final String label = getSelectedContentDescriptionLabel(tagName, locale);
+    public static void announceSelectedPickerValue(Picker picker, int newValue) {
+        String tagName = picker.getView().getTag().toString();
+        String selectedDisplayValue = pickerValueToDisplayedValue(picker, newValue);
+        String label = getSelectedContentDescriptionLabel(tagName, Accessibility.getLocale());
         announce(label + ": " + selectedDisplayValue);
     }
 
-    private static String getContentDescriptionLabel(String tagName, Locale locale) {
+    private static String getContentDescriptionLabel(String tagName) {
         // TODO: create static class property locale used here
         // Ex add private final static string locale with set
-        return Utils.getLocalisedStringFromResources(locale, tagName + "_description");
+        return Utils.getLocalisedStringFromResources(Accessibility.getLocale(), tagName + "_description");
     }
 
-    private static String getSelectedContentDescriptionLabel(String tagName, Locale locale) {
+    private static String getSelectedContentDescriptionLabel(String tagName) {
         // TODO: create static class property locale used here
         // Ex add private final static string locale with set
-        return Utils.getLocalisedStringFromResources(locale, "selected_" + tagName + "_description");
+        return Utils.getLocalisedStringFromResources(Accessibility.getLocale(), "selected_" + tagName + "_description");
     }
 
-    public static String getContentDescription(Picker picker, Locale locale) {
-        final String tagName = picker.getView().getTag().toString();
-        final int currentValue = picker.getValue();
-        final String currentDisplayValue = pickerValueToDisplayedValue(picker, currentValue);
-        final String label = getContentDescriptionLabel(tagName, locale);
+    public static String getContentDescription(Picker picker) {
+        String tagName = picker.getView().getTag().toString();
+        int currentValue = picker.getValue();
+        String currentDisplayValue = pickerValueToDisplayedValue(picker, currentValue);
+        String label = getContentDescriptionLabel(tagName, Accessibility.getLocale());
 
         return currentDisplayValue + ", " + label;
     }
 
-    public static void updateContentDescription(Picker picker, Locale locale){
-        final String nextContentDescription = getContentDescription(picker, locale);
+    public static void updateContentDescription(Picker picker){
+        String nextContentDescription = getContentDescription(picker, Accessibility.getLocale());
         picker.getView().setContentDescription(nextContentDescription);
     }
-
-    private String getAccessibleTextForSelectedDate() {
-        String accessibleText;
-        switch(state.getMode()) {
-            case date:
-                accessibleText = wheels.getDateString();
-                break;
-            case time:
-                accessibleText = wheels.getTimeString();
-                break;
-            default:
-                // default is dateTime
-                String timePrefix = Utils.getLocalisedStringFromResources(state.getLocale(), "time_tag");
-                String hourPrefix = Utils.getLocalisedStringFromResources(state.getLocale(), "hour_tag");
-                String minutesPrefix = Utils.getLocalisedStringFromResources(state.getLocale(), "minutes_tag");
-                accessibleText = wheels.getAccessibleDateTimeString(timePrefix, hourPrefix, minutesPrefix);
-                break;
-        }
-        return accessibleText;
-    }
-
 }

@@ -21,13 +21,11 @@ public class UIManager {
     private Wheels wheels;
     private FadingOverlay fadingOverlay;
     private WheelScroller wheelScroller = new WheelScroller();
-    private Accessibility accessibility;
 
     public UIManager(State state, View rootView){
         this.state = state;
         this.rootView = rootView;
         wheels = new Wheels(state, rootView);
-        accessibility = new Accessibility(state, wheels);
         addOnChangeListener();
     }
 
@@ -91,14 +89,6 @@ public class UIManager {
     public void updateWheelPadding() {
         wheels.applyOnVisible(new HorizontalPadding());
     }
-
-    // public void updateContentDescription(Wheel wheel) {
-    //     Accessibility.updateContentDescription(wheel, state.getLocale());
-    // }
-
-    // public void updateAccessibilityValues() {
-    //     wheels.applyOnAll(new Accessibility.SetAccessibilityDelegate(state.getLocale()));
-    // }
 
     public void updateLastSelectedDate(Calendar date) {
         state.setLastSelectedDate(date);

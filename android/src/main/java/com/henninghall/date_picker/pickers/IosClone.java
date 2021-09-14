@@ -15,17 +15,26 @@ public class IosClone extends NumberPickerView implements Picker {
 
     public IosClone(Context context) {
         super(context);
-        initSetOnValueChangeListenerInScrolling();
+        init();
     }
 
     public IosClone(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initSetOnValueChangeListenerInScrolling();
+        init();
     }
 
     public IosClone(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    private void init() {
+        initAccessibility();
         initSetOnValueChangeListenerInScrolling();
+    }
+
+    private void initAccessibility() {
+        Accessibility.startAccessibilityDelegate(this, java.util.Locale.ENGLISH);
     }
 
     private void initSetOnValueChangeListenerInScrolling() {
