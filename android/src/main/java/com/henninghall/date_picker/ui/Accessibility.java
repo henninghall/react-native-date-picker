@@ -24,7 +24,7 @@ public class Accessibility {
 
     private static Locale locale = Locale.getDefault();
 
-    public static setLocale(Locale nextLocale) {
+    public static void setLocale(Locale nextLocale) {
         this.locale = nextLocale;
     }
 
