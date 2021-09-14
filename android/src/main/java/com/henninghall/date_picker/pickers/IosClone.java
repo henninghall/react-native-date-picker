@@ -30,6 +30,9 @@ public class IosClone extends NumberPickerView implements Picker {
 
     private void initSetOnValueChangeListenerInScrolling() {
         final Picker self = this;
+
+        Accessibility.startAccessibilityDelegate(self, java.util.Locale.ENGLISH);
+
         super.setOnValueChangeListenerInScrolling(new NumberPickerView.OnValueChangeListenerInScrolling() {
             @Override
 

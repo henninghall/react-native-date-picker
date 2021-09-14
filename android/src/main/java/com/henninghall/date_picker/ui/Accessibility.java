@@ -42,6 +42,25 @@ public class Accessibility {
         return false;
     }
 
+    public static void startAccessibilityDelegate(Picker picker, Locale locale) {
+        final Picker fPicker = picker;
+        final Locale fLocale =locale;
+        final View view = picker.getView();
+
+        view.setAccessibilityDelegate(
+                new View.AccessibilityDelegate(){
+                    @Override
+                    public void onPopulateAccessibilityEvent(View host, AccessibilityEvent event) {
+                        super.onPopulateAccessibilityEvent(host, event);
+                        if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
+                            // Screen reader reads the content description when focused on each picker wheel
+                            Accessibility.updateContentDescription(fPicker, fLocale);
+                        }
+                    }
+                }
+        );
+    }
+
     public static class SetAccessibilityDelegate implements WheelFunction {
 
         private final Locale locale;
