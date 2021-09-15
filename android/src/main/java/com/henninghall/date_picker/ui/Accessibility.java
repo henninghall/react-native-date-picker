@@ -8,9 +8,7 @@ import android.view.accessibility.AccessibilityManager;
 import android.accessibilityservice.AccessibilityServiceInfo;
 
 import com.henninghall.date_picker.DatePickerPackage;
-import com.henninghall.date_picker.State;
 import com.henninghall.date_picker.Utils;
-import com.henninghall.date_picker.wheels.Wheel;
 import com.henninghall.date_picker.pickers.Picker;
 
 import java.util.Locale;
@@ -83,7 +81,6 @@ public class Accessibility {
      * Get a list of accessibility services currently active
      */
     private static boolean hasAccessibilityFeatureTypeEnabled(int type) {
-
         List<AccessibilityServiceInfo> enabledServices =
                 systemManager.getEnabledAccessibilityServiceList(type);
 
@@ -108,7 +105,6 @@ public class Accessibility {
      */
     private static String pickerValueToDisplayedValue(Picker picker, int value) {
         String[] displayValues = picker.getDisplayedValues();
-
         String displayValue = displayValues[value];
 
         if (displayValue != null) {
@@ -134,14 +130,10 @@ public class Accessibility {
     }
 
     private static String getContentDescriptionLabel(String tagName) {
-        // TODO: create static class property locale used here
-        // Ex add private final static string locale with set
         return Utils.getLocalisedStringFromResources(Accessibility.getLocale(), tagName + "_description");
     }
 
     private static String getSelectedContentDescriptionLabel(String tagName) {
-        // TODO: create static class property locale used here
-        // Ex add private final static string locale with set
         return Utils.getLocalisedStringFromResources(Accessibility.getLocale(), "selected_" + tagName + "_description");
     }
 

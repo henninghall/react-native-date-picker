@@ -92,7 +92,7 @@ public class LocaleUtils {
 
             return result;
         } catch (Exception e) {
-            return ""; // Return empty string when no resource was found
+            return ""; // Eat the error and return empty string when no resource was found
         }
     }
 
