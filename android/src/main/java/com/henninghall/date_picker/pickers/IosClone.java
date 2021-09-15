@@ -2,13 +2,17 @@ package com.henninghall.date_picker.pickers;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.MotionEvent;
+import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 import com.henninghall.date_picker.ui.Accessibility;
+
 
 public class IosClone extends NumberPickerView implements Picker {
     private Picker.OnValueChangeListenerInScrolling mOnValueChangeListenerInScrolling;
@@ -95,5 +99,11 @@ public class IosClone extends NumberPickerView implements Picker {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
+        super.onInitializeAccessibilityNodeInfo(info);
+        Accessibility.setRoleToSlider(info);
     }
 }
