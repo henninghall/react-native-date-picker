@@ -92,6 +92,14 @@ public class Accessibility {
         );
     }
 
+    public static boolean isAccessibilityEnabled() {
+        if (systemManager == null) {
+            return false;
+        }
+
+        return systemManager.isEnabled();
+    }
+
     /**
      * Checks if the accessibility service responsible of spoken feedback is active
      */
@@ -111,15 +119,17 @@ public class Accessibility {
 
     /**
      * Read a message out loud when spoken feedback is active
+     *
+     * After announcing has been requested from TalkBack it can't be interrupted.
+     * For example, when values change in rapid succession, all changes are announced instead of just announcing the last change.
+     * Hence it's recommended usually not to announce. Instead notify TalkBack about changes by sending accessibility events or using accessibilityLiveRegion.
      */
-    public static void announce(String message) {
-        if (systemManager == null || !isSpokenFeedbackEnabled()) {
+    public static void announce(String message, View host) {
+        if (!isAccessibilityEnabled() || !isSpokenFeedbackEnabled()) {
             return;
-          }
+        }
 
-          AccessibilityEvent event = AccessibilityEvent.obtain(AccessibilityEvent.TYPE_ANNOUNCEMENT);
-          event.getText().add(message);
-          systemManager.sendAccessibilityEvent(event);
+        host.announceForAccessibility(message);
     }
 
     /**
@@ -137,26 +147,18 @@ public class Accessibility {
     }
 
     /**
-     * Read Picker displayed value.
-     * For TalkBack to read dates etc. correctly, make sure they are in localised format.
+     * Tell TalkBack a value has changed
      */
-    public static void announcePickerValue(Picker picker, int newValue) {
-        announce(pickerValueToDisplayedValue(picker, newValue));
-    }
+    public static void sendValueChangedEvent(Picker picker, int newValue) {
+        AccessibilityEvent event = buildEvent(picker.getView(), AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+        String message = pickerValueToDisplayedValue(picker, newValue);
+        event.getText().add(message);
 
-    public static void announceSelectedPickerValue(Picker picker, int newValue) {
-        String tagName = picker.getView().getTag().toString();
-        String selectedDisplayValue = pickerValueToDisplayedValue(picker, newValue);
-        String label = getSelectedContentDescriptionLabel(tagName);
-        announce(label + ": " + selectedDisplayValue);
+        sendEvent(event);
     }
 
     private static String getContentDescriptionLabel(String tagName) {
         return Utils.getLocalisedStringFromResources(Accessibility.getLocale(), tagName + "_description");
-    }
-
-    private static String getSelectedContentDescriptionLabel(String tagName) {
-        return Utils.getLocalisedStringFromResources(Accessibility.getLocale(), "selected_" + tagName + "_description");
     }
 
     public static String getContentDescription(Picker picker) {
@@ -173,14 +175,28 @@ public class Accessibility {
         picker.getView().setContentDescription(nextContentDescription);
     }
 
+    public static AccessibilityEvent buildEvent(View host, int eventType) {
+        AccessibilityEvent event = AccessibilityEvent.obtain(eventType);
+        event.setClassName(host.getClass().getName());
+        event.setPackageName(host.getContext().getPackageName());
+
+        return event;
+    }
+
+    public static void sendEvent(AccessibilityEvent event) {
+        if (systemManager == null || !systemManager.isEnabled()) {
+            return;
+        }
+
+        systemManager.sendAccessibilityEvent(event);
+    }
+
     /**
      * Sets the view with associated with given info to behave like a seekBar (slider) when said view receives accessibility focus
      */
     public static void setRoleToSlider(AccessibilityNodeInfo info) {
         // Sets "accessibility role" of the control - affects how the element is read by TalkBack
         info.setClassName("android.widget.SeekBar");
-
-        // info.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SET_PROGRESS);
 
         if (Build.VERSION.SDK_INT >= 21) {
             AccessibilityNodeInfo.AccessibilityAction increaseValue = new AccessibilityNodeInfo.AccessibilityAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD, "Increase value");

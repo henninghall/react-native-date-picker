@@ -48,7 +48,7 @@ public class IosClone extends NumberPickerView implements Picker {
             @Override
 
             public void onValueChangeInScrolling(NumberPickerView picker, int oldVal, int newVal) {
-                Accessibility.announcePickerValue(self, newVal);
+                Accessibility.sendValueChangedEvent(self, newVal);
 
                 if (mOnValueChangeListenerInScrolling != null) {
                     mOnValueChangeListenerInScrolling.onValueChangeInScrolling(self, oldVal, newVal);
@@ -72,11 +72,9 @@ public class IosClone extends NumberPickerView implements Picker {
 
     @Override
     public void setOnValueChangedListener(final Picker.OnValueChangeListener listener) {
-        final Picker self = this;
         super.setOnValueChangedListener(new NumberPickerView.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPickerView picker, int oldVal, int newVal) {
-                Accessibility.announceSelectedPickerValue(self, newVal);
                 listener.onValueChange();
             }
         });
