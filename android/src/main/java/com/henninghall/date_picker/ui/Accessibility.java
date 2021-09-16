@@ -17,6 +17,8 @@ import java.util.List;
 
 import android.view.accessibility.AccessibilityNodeInfo;
 
+import android.util.Log;
+
 public class Accessibility {
     private final static AccessibilityManager systemManager =
             (AccessibilityManager) DatePickerPackage.context
@@ -64,6 +66,7 @@ public class Accessibility {
                     @Override
                     public void onPopulateAccessibilityEvent(View host, AccessibilityEvent event) {
                         super.onPopulateAccessibilityEvent(host, event);
+                        Log.d("FOO", String.valueOf(event.getEventType()));
                         if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
                             // Screen reader reads the content description when focused on each picker wheel
                             Accessibility.updateContentDescription(fPicker);
@@ -75,14 +78,18 @@ public class Accessibility {
                         int currentValue;
                         switch (action) {
                             case AccessibilityNodeInfo.ACTION_SCROLL_FORWARD:
-                                // Increase value when pressing hardware volume up
-                                currentValue = fPicker.getValue();
-                                fPicker.smoothScrollToValue(currentValue - 1);
+                                if (!fPicker.isSpinning()) {
+                                    // Increase value when pressing hardware volume up (or scrolling by other means)
+                                    currentValue = fPicker.getValue();
+                                    fPicker.smoothScrollToValue(currentValue - 1);
+                                }
                                 break;
                             case AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD:
-                                // Decrease value when pressing hardware volume down
-                                currentValue = fPicker.getValue();
-                                fPicker.smoothScrollToValue(currentValue + 1);
+                                if (!fPicker.isSpinning()) {
+                                    // Decrease value when pressing hardware volume down (or scrolling by other means)
+                                    currentValue = fPicker.getValue();
+                                    fPicker.smoothScrollToValue(currentValue + 1);
+                                }
                                 break;
                         }
 
