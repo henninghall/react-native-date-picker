@@ -47,9 +47,7 @@ public class IosClone extends NumberPickerView implements Picker {
         super.setOnValueChangeListenerInScrolling(new NumberPickerView.OnValueChangeListenerInScrolling() {
             @Override
             public void onValueChangeInScrolling(NumberPickerView picker, int oldVal, int newVal) {
-                if (oldVal != newVal) {
-                    Accessibility.sendValueChangedEvent(self, newVal);
-                }
+                Accessibility.sendValueChangedEvent(self, newVal);
 
                 if (mOnValueChangeListenerInScrolling != null) {
                     mOnValueChangeListenerInScrolling.onValueChangeInScrolling(self, oldVal, newVal);
@@ -94,8 +92,7 @@ public class IosClone extends NumberPickerView implements Picker {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(Accessibility.shouldAllowScroll(this)){
-            super.onTouchEvent(event);
-            return true;
+            return super.onTouchEvent(event);
         }
         return false;
     }
@@ -103,6 +100,7 @@ public class IosClone extends NumberPickerView implements Picker {
     @Override
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
-        Accessibility.setRoleToSlider(info);
+        // Set the accessibility properties of this view
+        Accessibility.setRoleToSlider(this, info);
     }
 }

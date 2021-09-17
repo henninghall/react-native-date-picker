@@ -17,13 +17,9 @@ import java.util.List;
 
 import android.view.accessibility.AccessibilityNodeInfo;
 
-import android.util.Log;
-
 public class Accessibility {
-    private final static AccessibilityManager systemManager =
-            (AccessibilityManager) DatePickerPackage.context
-                    .getApplicationContext()
-                    .getSystemService(Context.ACCESSIBILITY_SERVICE);
+    private final static AccessibilityManager systemManager = (AccessibilityManager) DatePickerPackage.context
+            .getApplicationContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
 
     private static Locale mLocale = Locale.getDefault();
 
@@ -36,14 +32,13 @@ public class Accessibility {
     }
 
     /**
-      When TalkBack is active, user can use one finger to explore the screen
-      and set focus to elements. Then user can proceed to use second finger
-      to scroll contents of focused element.
-      When there's multiple pickers next to each other horizontally,
-      it's easy to accidentally scroll more than one picker at a time.
-      Following code aims to fix this issue.
-    */
-    public static boolean shouldAllowScroll(View view){
+     * When TalkBack is active, user can use one finger to explore the screen and
+     * set focus to elements. Then user can proceed to use second finger to scroll
+     * contents of focused element. When there's multiple pickers next to each other
+     * horizontally, it's easy to accidentally scroll more than one picker at a
+     * time. Following code aims to fix this issue.
+     */
+    public static boolean shouldAllowScroll(View view) {
         // If TalkBack isn't active, always proceed without suppressing touch events
         if (!systemManager.isTouchExplorationEnabled()) {
             return true;
@@ -61,42 +56,30 @@ public class Accessibility {
         final Picker fPicker = picker;
         final View view = picker.getView();
 
-        view.setAccessibilityDelegate(
-                new View.AccessibilityDelegate(){
-                    @Override
-                    public void onPopulateAccessibilityEvent(View host, AccessibilityEvent event) {
-                        super.onPopulateAccessibilityEvent(host, event);
-                        Log.d("FOO", String.valueOf(event.getEventType()));
-                        if (event.getEventType() == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
-                            // Screen reader reads the content description when focused on each picker wheel
-                            Accessibility.updateContentDescription(fPicker);
-                        }
-                    }
+        view.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+            @Override
+            public boolean performAccessibilityAction(View host, int action, Bundle args) {
+                int currentValue = fPicker.getValue();
 
-                    @Override
-                    public boolean performAccessibilityAction(View host, int action, Bundle args) {
-                        int currentValue;
-                        switch (action) {
-                            case AccessibilityNodeInfo.ACTION_SCROLL_FORWARD:
-                                if (!fPicker.isSpinning()) {
-                                    // Increase value when pressing hardware volume up (or scrolling by other means)
-                                    currentValue = fPicker.getValue();
-                                    fPicker.smoothScrollToValue(currentValue - 1);
-                                }
-                                break;
-                            case AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD:
-                                if (!fPicker.isSpinning()) {
-                                    // Decrease value when pressing hardware volume down (or scrolling by other means)
-                                    currentValue = fPicker.getValue();
-                                    fPicker.smoothScrollToValue(currentValue + 1);
-                                }
-                                break;
+                // Capture system automagic accessibility actions or custom actions created & sent manually via accessibility events
+                switch (action) {
+                    case AccessibilityNodeInfo.ACTION_SCROLL_FORWARD:
+                        if (!fPicker.isSpinning()) {
+                            // Increase value when pressing hardware volume up (or scrolling by other means)
+                            fPicker.smoothScrollToValue(currentValue - 1);
                         }
-
-                        return super.performAccessibilityAction(host, action, args);
-                    }
+                        break;
+                    case AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD:
+                        if (!fPicker.isSpinning()) {
+                            // Decrease value when pressing hardware volume down (or scrolling by other means)
+                            fPicker.smoothScrollToValue(currentValue + 1);
+                        }
+                        break;
                 }
-        );
+
+                return super.performAccessibilityAction(host, action, args);
+            }
+        });
     }
 
     public static boolean isAccessibilityEnabled() {
@@ -118,8 +101,7 @@ public class Accessibility {
      * Get a list of accessibility services currently active
      */
     private static boolean hasAccessibilityFeatureTypeEnabled(int type) {
-        List<AccessibilityServiceInfo> enabledServices =
-                systemManager.getEnabledAccessibilityServiceList(type);
+        List<AccessibilityServiceInfo> enabledServices = systemManager.getEnabledAccessibilityServiceList(type);
 
         return enabledServices != null && enabledServices.size() > 0;
     }
@@ -128,8 +110,10 @@ public class Accessibility {
      * Read a message out loud when spoken feedback is active
      *
      * After announcing has been requested from TalkBack it can't be interrupted.
-     * For example, when values change in rapid succession, all changes are announced instead of just announcing the last change.
-     * Hence it's recommended usually not to announce. Instead notify TalkBack about changes by sending accessibility events or using accessibilityLiveRegion.
+     * For example, when values change in rapid succession, all changes are
+     * announced instead of just announcing the last change. Hence it's recommended
+     * usually not to announce. Instead notify TalkBack about changes by sending
+     * accessibility events or using accessibilityLiveRegion.
      */
     public static void announce(String message, View host) {
         if (!isAccessibilityEnabled() || !isSpokenFeedbackEnabled()) {
@@ -177,11 +161,6 @@ public class Accessibility {
         return currentDisplayValue + ", " + label;
     }
 
-    public static void updateContentDescription(Picker picker){
-        String nextContentDescription = getContentDescription(picker);
-        picker.getView().setContentDescription(nextContentDescription);
-    }
-
     public static AccessibilityEvent buildEvent(View host, int eventType) {
         AccessibilityEvent event = AccessibilityEvent.obtain(eventType);
         event.setClassName(host.getClass().getName());
@@ -194,20 +173,27 @@ public class Accessibility {
         if (systemManager == null || !systemManager.isEnabled()) {
             return;
         }
-
         systemManager.sendAccessibilityEvent(event);
     }
 
     /**
-     * Sets the view with associated with given info to behave like a seekBar (slider) when said view receives accessibility focus
+     * Sets the view associated with given AccessibilityNodeInfo to behave like a seekBar / (slider)
+     * when said view receives accessibility focus
      */
-    public static void setRoleToSlider(AccessibilityNodeInfo info) {
+    public static void setRoleToSlider(Picker picker, AccessibilityNodeInfo info) {
         // Sets "accessibility role" of the control - affects how the element is read by TalkBack
         info.setClassName("android.widget.SeekBar");
+        info.setScrollable(true);
+        // Set the "accessibility label" read by spoken feedback
+        info.setContentDescription(getContentDescription(picker));
 
+        // Inform that we want to send and receive scrolling-related actions
+        // Enables us to handle special accessibility-only scroll-events created by TalkBack
         if (Build.VERSION.SDK_INT >= 21) {
-            AccessibilityNodeInfo.AccessibilityAction increaseValue = new AccessibilityNodeInfo.AccessibilityAction(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD, "Increase value");
-            AccessibilityNodeInfo.AccessibilityAction decreaseValue = new AccessibilityNodeInfo.AccessibilityAction(AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD, "Decrease value");
+            AccessibilityNodeInfo.AccessibilityAction increaseValue = new AccessibilityNodeInfo.AccessibilityAction(
+                    AccessibilityNodeInfo.ACTION_SCROLL_FORWARD, "Increase value");
+            AccessibilityNodeInfo.AccessibilityAction decreaseValue = new AccessibilityNodeInfo.AccessibilityAction(
+                    AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD, "Decrease value");
 
             info.addAction(increaseValue);
             info.addAction(decreaseValue);
