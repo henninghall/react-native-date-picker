@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Dynamic;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -34,13 +35,14 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void openPicker(ReadableMap props){
+    public void openPicker(ReadableMap props, Callback onConfirm, Callback onCancel){
         PickerView picker = createPicker(props);
-        AlertDialog dialog = createDialog(props, picker);
+        AlertDialog dialog = createDialog(props, picker, onConfirm, onCancel);
         dialog.show();
     }
 
-    private AlertDialog createDialog (ReadableMap props, final PickerView picker) {
+    private AlertDialog createDialog(
+            ReadableMap props, final PickerView picker, final Callback onConfirm, final Callback onCancel) {
         String title = props.getString("title");
         String confirmText = props.getString("confirmText");
         final String cancelText = props.getString("cancelText");
@@ -52,20 +54,20 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
                 .setView(pickerWithMargin)
                 .setPositiveButton(confirmText, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Emitter.onConfirm(picker.getDate());
+                        onConfirm.invoke(picker.getDate());
                         dialog.dismiss();
                     }
                 })
                 .setNegativeButton(cancelText, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Emitter.onCancel();
+                        onCancel.invoke();
                         dialog.dismiss();
                     }
                 })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialogInterface) {
-                        Emitter.onCancel();
+                        onCancel.invoke();
                     }
                 })
                 .create();

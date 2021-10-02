@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  StyleSheet,
-  requireNativeComponent,
-  NativeModules,
-  NativeEventEmitter,
-} from 'react-native'
+import { requireNativeComponent, NativeModules } from 'react-native'
 
 function addMinutes(date, minutesToAdd) {
   return new Date(date.valueOf() + minutesToAdd * 60 * 1000)
@@ -21,32 +16,15 @@ const timeModeWidth = 240
 const defaultWidth = 310
 
 class DatePickerAndroid extends React.PureComponent {
-  componentDidMount() {
-    const { onConfirm, onCancel } = this.props
-    const eventEmitter = new NativeEventEmitter(NativeModules.RNDatePicker)
-    this.confirmListener = eventEmitter.addListener(
-      'onConfirm',
-      ({ date: isoDate }) => {
-        if (onConfirm) {
-          onConfirm(this._fromIsoWithTimeZoneOffset(isoDate))
-        }
-      }
-    )
-    this.cancelListener = eventEmitter.addListener('onCancel', () => {
-      if (onCancel) onCancel()
-    })
-  }
-
-  componentWillUnmount() {
-    this.confirmListener.remove()
-    this.cancelListener.remove()
-  }
-
   render() {
     const props = this.getProps()
     if (props.modal) {
       if (props.open) {
-        NativeModules.RNDatePicker.openPicker(props)
+        NativeModules.RNDatePicker.openPicker(
+          props,
+          this._onConfirm,
+          this.props.onCancel
+        )
       }
       return null
     }
@@ -97,6 +75,10 @@ class DatePickerAndroid extends React.PureComponent {
       return date.toISOString()
 
     return addMinutes(date, this.props.timeZoneOffsetInMinutes).toISOString()
+  }
+
+  _onConfirm = (isoDate) => {
+    this.props.onConfirm(this._fromIsoWithTimeZoneOffset(isoDate))
   }
 }
 

@@ -27,14 +27,4 @@ public class Emitter {
         eventEmitter().receiveEvent(view.getId(), "dateChange", event);
     }
 
-    public static void onConfirm(String date) {
-        WritableMap event = Arguments.createMap();
-        event.putString("date", date);
-        deviceEventEmitter().emit("onConfirm", event);
-    }
-
-    public static void onCancel() {
-        WritableMap event = Arguments.createMap();
-        deviceEventEmitter().emit("onCancel", event);
-    }
 }
