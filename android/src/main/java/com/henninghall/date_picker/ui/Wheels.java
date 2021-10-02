@@ -150,15 +150,6 @@ public class Wheels {
         return getDateString(0);
     }
 
-    String getAccessibleDateTimeString(String timePrefix, String hourTag, String minutesTag) {
-        String date = getDateString();
-        String hour = hourWheel.getValue();
-        String minutes = minutesWheel.getValue();
-        String ampm = ampmWheel.getValue();
-        String time = timePrefix+ " "+ hour + hourTag + minutes + minutesTag + ampm;
-        return date+", "+ time;
-    }
-
     String getDisplayValue() {
         StringBuilder sb = new StringBuilder();
         for (Wheel wheel: getOrderedVisibleWheels()) {

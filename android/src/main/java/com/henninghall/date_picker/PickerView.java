@@ -20,6 +20,8 @@ import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.TextColorProp;
 import com.henninghall.date_picker.ui.UIManager;
+import com.henninghall.date_picker.ui.Accessibility;
+
 import java.util.ArrayList;
 
 public class PickerView extends RelativeLayout {
@@ -80,8 +82,8 @@ public class PickerView extends RelativeLayout {
             uiManager.updateDisplayValues();
         }
 
-        if (didUpdate(ModeProp.name, LocaleProp.name)) {
-            uiManager.updateAccessibilityValues();
+        if (didUpdate(LocaleProp.name)) {
+            Accessibility.setLocale(state.getLocale());
         }
 
         uiManager.setWheelsToDate();
