@@ -109,8 +109,10 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         int minuteInterval = [RCTConvert int:[props objectForKey:@"minuteInterval"]];
         [picker setMinuteInterval:minuteInterval];
 
-        NSTimeZone* timezone = [RCTConvert NSTimeZone:[props valueForKey:@"timeZoneOffsetInMinutes"]];
-        [picker setTimeZone:timezone];
+        NSString * timeZoneProp = [props valueForKey:@"timeZoneOffsetInMinutes"];
+        if(timeZoneProp){
+            [picker setTimeZone:[RCTConvert NSTimeZone:timeZoneProp]];
+        }
         
         [alertView addSubview:picker];
         
