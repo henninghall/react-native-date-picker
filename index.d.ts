@@ -48,7 +48,7 @@ export interface DatePickerProps extends ViewProps {
    * The first and only argument is a Date object representing the new
    * date and time.
    */
-  onDateChange: (date: Date) => void
+  onDateChange?: (date: Date) => void
 
   /**
    * Timezone offset in minutes.
