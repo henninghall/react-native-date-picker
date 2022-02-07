@@ -16,16 +16,18 @@ const timeModeWidth = 240
 const defaultWidth = 310
 
 class DatePickerAndroid extends React.PureComponent {
+  _isAlreadyOpen = false;
   render() {
     const props = this.getProps()
     if (props.modal) {
-      if (props.open) {
+      if (props.open && !this._isAlreadyOpen) {
+        this._isAlreadyOpen = true;
         NativeModules.RNDatePicker.openPicker(
           props,
           this._onConfirm,
-          this.props.onCancel
+          this._onCancel
         )
-      }
+      } 
       return null
     }
 
@@ -77,7 +79,13 @@ class DatePickerAndroid extends React.PureComponent {
     return addMinutes(date, this.props.timeZoneOffsetInMinutes).toISOString()
   }
 
+  _onCancel = () => {
+    this._isAlreadyOpen = false
+    this.props.onCancel()
+  }
+
   _onConfirm = (isoDate) => {
+    this._isAlreadyOpen = false
     this.props.onConfirm(this._fromIsoWithTimeZoneOffset(isoDate))
   }
 }

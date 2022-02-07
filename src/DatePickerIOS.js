@@ -10,7 +10,8 @@ const RCTDatePickerIOS = requireNativeComponent('RNDatePicker')
 
 export default class DatePickerIOS extends React.Component {
   _picker = null
-
+  _isAlreadyOpen = false;
+  
   componentDidUpdate() {
     if (this.props.date) {
       const propsTimeStamp = this.props.date.getTime()
@@ -40,18 +41,25 @@ export default class DatePickerIOS extends React.Component {
   }
 
   _onConfirm = ({ timestamp }) => {
+    this._isAlreadyOpen = false
     this.props.onConfirm(new Date(timestamp))
+  }
+
+  _onCancel = () => {
+    this._isAlreadyOpen = false
+    this.props.onCancel()
   }
 
   render() {
     const props = this._toIosProps(this.props)
 
     if (props.modal) {
-      if (props.open) {
+      if (props.open && !this._isAlreadyOpen) {
+        this._isAlreadyOpen = true;
         NativeModules.RNDatePickerManager.openPicker(
           props,
           this._onConfirm,
-          props.onCancel
+          this._onCancel,
         )
       }
       return null
