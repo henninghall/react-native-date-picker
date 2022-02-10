@@ -1,10 +1,5 @@
 import React, { useEffect } from 'react'
-import {
-  StyleSheet,
-  View,
-  requireNativeComponent,
-  NativeModules,
-} from 'react-native'
+import { StyleSheet, View, requireNativeComponent, NativeModules } from 'react-native'
 
 const RCTDatePickerIOS = requireNativeComponent('RNDatePicker')
 
@@ -24,8 +19,7 @@ export default class DatePickerIOS extends React.Component {
 
   _onChange = (event) => {
     const nativeTimeStamp = event.nativeEvent.timestamp
-    this.props.onDateChange &&
-      this.props.onDateChange(new Date(nativeTimeStamp))
+    this.props.onDateChange && this.props.onDateChange(new Date(nativeTimeStamp))
   }
 
   _toIosProps = (props) => {
@@ -51,7 +45,8 @@ export default class DatePickerIOS extends React.Component {
         NativeModules.RNDatePickerManager.openPicker(
           props,
           this._onConfirm,
-          props.onCancel
+          props.onCancel,
+          props.onNeutral
         )
       }
       return null

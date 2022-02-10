@@ -13,8 +13,10 @@ const modalPropTypes = {
   open: PropTypes.bool,
   onConfirm: PropTypes.func,
   onCancel: PropTypes.func,
+  onNeutral: PropTypes.func,
   confirmText: PropTypes.string,
   cancelText: PropTypes.string,
+  neutralText: PropTypes.string,
   title: PropTypes.string,
 }
 

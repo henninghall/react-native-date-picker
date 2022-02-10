@@ -5,11 +5,9 @@ function addMinutes(date, minutesToAdd) {
   return new Date(date.valueOf() + minutesToAdd * 60 * 1000)
 }
 
-const NativeDatePicker = requireNativeComponent(
-  `DatePickerManager`,
-  DatePickerAndroid,
-  { nativeOnly: { onChange: true } }
-)
+const NativeDatePicker = requireNativeComponent(`DatePickerManager`, DatePickerAndroid, {
+  nativeOnly: { onChange: true },
+})
 
 const height = 180
 const timeModeWidth = 240
@@ -23,7 +21,8 @@ class DatePickerAndroid extends React.PureComponent {
         NativeModules.RNDatePicker.openPicker(
           props,
           this._onConfirm,
-          this.props.onCancel
+          this.props.onCancel,
+          this.props.onNeutral
         )
       }
       return null
@@ -55,12 +54,10 @@ class DatePickerAndroid extends React.PureComponent {
   }
 
   _maximumDate = () =>
-    this.props.maximumDate &&
-    this._toIsoWithTimeZoneOffset(this.props.maximumDate)
+    this.props.maximumDate && this._toIsoWithTimeZoneOffset(this.props.maximumDate)
 
   _minimumDate = () =>
-    this.props.minimumDate &&
-    this._toIsoWithTimeZoneOffset(this.props.minimumDate)
+    this.props.minimumDate && this._toIsoWithTimeZoneOffset(this.props.minimumDate)
 
   _date = () => this._toIsoWithTimeZoneOffset(this.props.date)
 
@@ -71,8 +68,7 @@ class DatePickerAndroid extends React.PureComponent {
   }
 
   _toIsoWithTimeZoneOffset = (date) => {
-    if (this.props.timeZoneOffsetInMinutes === undefined)
-      return date.toISOString()
+    if (this.props.timeZoneOffsetInMinutes === undefined) return date.toISOString()
 
     return addMinutes(date, this.props.timeZoneOffsetInMinutes).toISOString()
   }

@@ -35,20 +35,21 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void openPicker(ReadableMap props, Callback onConfirm, Callback onCancel){
+    public void openPicker(ReadableMap props, Callback onConfirm, Callback onCancel, Callback onNeutral){
         PickerView picker = createPicker(props);
-        AlertDialog dialog = createDialog(props, picker, onConfirm, onCancel);
+        AlertDialog dialog = createDialog(props, picker, onConfirm, onCancel, onNeutral);
         dialog.show();
     }
 
     private AlertDialog createDialog(
-            ReadableMap props, final PickerView picker, final Callback onConfirm, final Callback onCancel) {
+            ReadableMap props, final PickerView picker, final Callback onConfirm, final Callback onCancel, final Callback onNeutral) {
         String title = props.getString("title");
         String confirmText = props.getString("confirmText");
+        String neutralText = props.getString("neutralText");
         final String cancelText = props.getString("cancelText");
         final View pickerWithMargin = withTopMargin(picker);
 
-        return new AlertDialog.Builder(DatePickerPackage.context.getCurrentActivity())
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(DatePickerPackage.context.getCurrentActivity())
                 .setTitle(title)
                 .setCancelable(true)
                 .setView(pickerWithMargin)
@@ -69,8 +70,18 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
                     public void onCancel(DialogInterface dialogInterface) {
                         onCancel.invoke();
                     }
-                })
-                .create();
+                });
+
+        if(neutralText != null && onNeutral != null) {
+            dialogBuilder.setNeutralButton(neutralText, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    onNeutral.invoke();
+                    dialog.dismiss();
+                }
+            });
+        }
+
+        return dialogBuilder.create();
     }
 
     private PickerView createPicker(ReadableMap props){
