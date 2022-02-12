@@ -18,8 +18,11 @@ const defaultWidth = 310
 class DatePickerAndroid extends React.PureComponent {
   render() {
     const props = this.getProps()
+    const isClosed = this._isCurrentlyClosed();
+
+    this.previousProps = props; 
     if (props.modal) {
-      if (props.open) {
+      if (props.open && isClosed) {
         NativeModules.RNDatePicker.openPicker(
           props,
           this._onConfirm,
@@ -31,6 +34,8 @@ class DatePickerAndroid extends React.PureComponent {
 
     return <NativeDatePicker {...props} onChange={this._onChange} />
   }
+
+  _isCurrentlyClosed = () => !this.previousProps || !this.previousProps.open
 
   getProps = () => ({
     ...this.props,
