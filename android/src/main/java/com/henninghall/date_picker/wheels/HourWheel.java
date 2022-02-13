@@ -2,9 +2,9 @@ package com.henninghall.date_picker.wheels;
 
 import android.graphics.Paint;
 
+import com.henninghall.date_picker.HourDisplayBugWorkaround;
 import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.State;
-import com.henninghall.date_picker.Utils;
 import com.henninghall.date_picker.models.Mode;
 
 import java.util.ArrayList;
@@ -12,8 +12,11 @@ import java.util.Calendar;
 
 public class HourWheel extends Wheel {
 
+    private final HourDisplayBugWorkaround hourDisplayAdjustment;
+
     public HourWheel(Picker picker, State id) {
         super(picker, id);
+        this.hourDisplayAdjustment = new HourDisplayBugWorkaround(state);
     }
 
     @Override
@@ -31,6 +34,11 @@ public class HourWheel extends Wheel {
             cal.add(Calendar.HOUR_OF_DAY, 1);
         }
         return values;
+    }
+
+    @Override
+    public String toDisplayValue(String value) {
+        return hourDisplayAdjustment.adjustValueIfNecessary(value);
     }
 
     @Override
