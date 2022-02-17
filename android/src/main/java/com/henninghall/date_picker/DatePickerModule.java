@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.henninghall.date_picker.Emitter;
+
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Dynamic;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -14,8 +16,12 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.Arguments;
 
 import net.time4j.android.ApplicationStarter;
+
+import java.util.Objects;
 
 public class DatePickerModule extends ReactContextBaseJavaModule {
 
@@ -35,14 +41,14 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void openPicker(ReadableMap props, Callback onConfirm, Callback onCancel, Callback onNeutral){
+    public void openPicker(ReadableMap props, Callback onConfirm, Callback onCancel){
         PickerView picker = createPicker(props);
-        AlertDialog dialog = createDialog(props, picker, onConfirm, onCancel, onNeutral);
+        AlertDialog dialog = createDialog(props, picker, onConfirm, onCancel);
         dialog.show();
     }
 
     private AlertDialog createDialog(
-            ReadableMap props, final PickerView picker, final Callback onConfirm, final Callback onCancel, final Callback onNeutral) {
+            ReadableMap props, final PickerView picker, final Callback onConfirm, final Callback onCancel) {
         String title = props.getString("title");
         String confirmText = props.getString("confirmText");
         String neutralText = props.getString("neutralText");
@@ -72,10 +78,13 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
                     }
                 });
 
-        if(neutralText != null && onNeutral != null) {
+        if(neutralText != null) {
             dialogBuilder.setNeutralButton(neutralText, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    onNeutral.invoke();
+                    WritableMap params = Arguments.createMap();
+                    params.putString("eventProperty", "neutralButton");
+
+                    Emitter.sendEvent("nativeButtonPress", params);
                     dialog.dismiss();
                 }
             });

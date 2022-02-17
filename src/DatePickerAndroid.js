@@ -1,28 +1,43 @@
 import React from 'react'
-import { requireNativeComponent, NativeModules } from 'react-native'
+import { requireNativeComponent, NativeModules, NativeEventEmitter } from 'react-native'
 
 function addMinutes(date, minutesToAdd) {
   return new Date(date.valueOf() + minutesToAdd * 60 * 1000)
 }
 
-const NativeDatePicker = requireNativeComponent(`DatePickerManager`, DatePickerAndroid, {
-  nativeOnly: { onChange: true },
-})
+const NativeDatePicker = requireNativeComponent(
+    `DatePickerManager`,
+    DatePickerAndroid,
+    { nativeOnly: { onChange: true } }
+)
 
 const height = 180
 const timeModeWidth = 240
 const defaultWidth = 310
 
 class DatePickerAndroid extends React.PureComponent {
+  componentDidMount() {
+    const eventEmitter = new NativeEventEmitter(NativeModules.RNDatePicker);
+
+    this.eventListener = eventEmitter.addListener('nativeButtonPress', (event) => {
+      if(event.eventProperty === 'neutralButton') {
+        this.props.onNeutral()
+      }
+    })
+  }
+
+  componentWillUnmount() {
+    this.eventListener.remove()
+  }
+
   render() {
     const props = this.getProps()
     if (props.modal) {
       if (props.open) {
         NativeModules.RNDatePicker.openPicker(
-          props,
-          this._onConfirm,
-          this.props.onCancel,
-          this.props.onNeutral
+            props,
+            this._onConfirm,
+            this.props.onCancel,
         )
       }
       return null
@@ -54,10 +69,12 @@ class DatePickerAndroid extends React.PureComponent {
   }
 
   _maximumDate = () =>
-    this.props.maximumDate && this._toIsoWithTimeZoneOffset(this.props.maximumDate)
+      this.props.maximumDate &&
+      this._toIsoWithTimeZoneOffset(this.props.maximumDate)
 
   _minimumDate = () =>
-    this.props.minimumDate && this._toIsoWithTimeZoneOffset(this.props.minimumDate)
+      this.props.minimumDate &&
+      this._toIsoWithTimeZoneOffset(this.props.minimumDate)
 
   _date = () => this._toIsoWithTimeZoneOffset(this.props.date)
 
@@ -68,7 +85,8 @@ class DatePickerAndroid extends React.PureComponent {
   }
 
   _toIsoWithTimeZoneOffset = (date) => {
-    if (this.props.timeZoneOffsetInMinutes === undefined) return date.toISOString()
+    if (this.props.timeZoneOffsetInMinutes === undefined)
+      return date.toISOString()
 
     return addMinutes(date, this.props.timeZoneOffsetInMinutes).toISOString()
   }

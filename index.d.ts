@@ -92,11 +92,17 @@ export interface DatePickerProps extends ViewProps {
   /** Modal callback invoked when user presses the cancel button or closes the modal by a press outside  */
   onCancel?: () => void
 
+  /** Modal callback invoked when user presses the optional neutral button */
+  onNeutral?: () => void
+
   /** Modal confirm button text */
   confirmText?: string
 
   /** Modal cancel button text */
   cancelText?: string
+
+  /** Text of an optional neutral modal button */
+  neutralText?: string
 
   /** Modal title. Set to null to remove */
   title?: string | null

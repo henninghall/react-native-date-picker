@@ -2,6 +2,8 @@ package com.henninghall.date_picker;
 
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
@@ -25,6 +27,10 @@ public class Emitter {
         event.putString("date", dateString);
         event.putString("dateString", displayValueString);
         eventEmitter().receiveEvent(view.getId(), "dateChange", event);
+    }
+
+    public static void sendEvent(String eventName, @Nullable WritableMap params) {
+        eventEmitter().emit(eventName, params);
     }
 
 }
