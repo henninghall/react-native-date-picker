@@ -49,6 +49,7 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
+        [self addTarget:self action:@selector(handleDatePickerTap) forControlEvents:UIControlEventEditingDidBegin];
         [self addTarget:self action:@selector(didChange)
        forControlEvents:UIControlEventValueChanged];
         if(@available(iOS 13, *)) {
@@ -63,6 +64,10 @@
         self.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     }
     return self;
+}
+
+- (void)handleDatePickerTap  {
+    [self resignFirstResponder];
 }
 
 - (void)setColor:(NSString *)hexColor {
