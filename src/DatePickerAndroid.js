@@ -21,7 +21,7 @@ class DatePickerAndroid extends React.PureComponent {
 
     this.eventListener = eventEmitter.addListener('nativeButtonPress', (event) => {
       if(event.eventProperty === 'neutralButton') {
-        this.props.onNeutral()
+        this.props.onNeutral && this.props.onNeutral()
       }
     })
   }

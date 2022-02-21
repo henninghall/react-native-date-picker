@@ -15,7 +15,7 @@ export default class DatePickerIOS extends React.Component {
     const eventEmitter = new NativeEventEmitter(NativeModules.DatePickerEventEmitterModule)
 
     this.eventListener = eventEmitter.addListener('neutralButtonPress', (event) => {
-      this.props.onNeutral()
+      this.props.onNeutral && this.props.onNeutral()
     })
   }
 
