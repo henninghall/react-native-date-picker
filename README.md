@@ -172,9 +172,11 @@ export default () => {
 | `open`                    | Modal only: Boolean indicating if modal should be open.                                                                                                                                                                                                                                                               |
 | `onConfirm`               | Modal only: Date callback when user presses confirm button                                                                                                                                                                                                                                                            |
 | `onCancel`                | Modal only: Callback for when user presses cancel button or closing the modal by pressing outside it.                                                                                                                                                                                                                 |
+| `onNeutral`               | Modal only: Callback for when user presses the optional neutral button. Only invoked if `neutralText` prop is provided.
 | `title`                   | Modal only: Title text. Can be set to null to remove text.                                                                                                                                                                                                                                                            |
 | `confirmText`             | Modal only: Confirm button text.                                                                                                                                                                                                                                                                                      |
 | `cancelText`              | Modal only: Cancel button text.                                                                                                                                                                                                                                                                                       |
+| `neutralText`             | Modal only: Optional neutral button text. If not set, the button will not be displayed.
 
 ## Linking
 
