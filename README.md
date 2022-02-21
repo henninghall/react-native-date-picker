@@ -49,7 +49,7 @@ The second option is to use the inlined picker. For instance in a view or a cust
 - Xcode >= 11.6
 - React Native >= 0.57.
 - If using React Native 0.64, 0.64.2 or later must be used.
-- If using Expo, SDK 42 or later must be used.
+- If using Expo, SDK 42 or later must be used. If using Expo SDK 44, 44.0.4 or later must be used. 
 
 ## Installation
 
