@@ -17,4 +17,14 @@ describe('Modal', () => {
     await element(by.text('CONFIRM')).tap()
     await expect(element(by.id('day'))).not.toBeVisible()
   })
+
+  it('can open modal and press neutral button', async () => {
+    await element(by.id('openModal')).tap()
+    await expect(element(by.text('Neutral'))).toBeVisible()
+    await element(by.text('Neutral')).tap()
+
+    await element(by.text('Neutral button pressed!')).toBeVisible()
+    await element(by.text('OK')).tap()
+    await expect(element(by.id('day'))).not.toBeVisible()
+  })
 })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, View, Text } from 'react-native'
+import { Button, View, Text, Alert } from 'react-native'
 import DatePicker from 'react-native-date-picker'
 
 export default class ModalExample extends React.Component {
@@ -18,6 +18,8 @@ export default class ModalExample extends React.Component {
         date={this.state.date}
         onConfirm={(date) => this.setState({ date, open: false })}
         onCancel={() => this.setState({ open: false })}
+        onNeutral={() => Alert.alert("Neutral button pressed!")}
+        neutralText="Neutral"
         androidVariant="nativeAndroid"
       />
       <Text style={{ marginTop: 20, fontSize: 26 }}>
