@@ -61,25 +61,16 @@ public class DerivedData {
     }
 
     private ArrayList<WheelType> getOrderedWheels() {
-        boolean isRtlLanguage = LocaleUtils.isRtlLanguage(state.getLocaleLanguageTag());
         String dateTimePatternOld = LocaleUtils.getDateTimePattern(state.getLocale());
         String dateTimePattern = dateTimePatternOld.replaceAll("\\('(.+?)'\\)","\\${$1}")
                 .replaceAll("'.+?'","")
                 .replaceAll("\\$\\{(.+?)\\}","('$1')");
-        
-        if (isRtlLanguage) {
-            String[] patternParts = dateTimePattern.split(" ");
-            dateTimePattern = "";
-            for (int partIndex = patternParts.length - 1; partIndex >=0; partIndex--) {
-                dateTimePattern += patternParts[partIndex] + " ";
-            }
-        }
-
         ArrayList<WheelType> unorderedTypes = new ArrayList(Arrays.asList(WheelType.values()));
         ArrayList<WheelType> orderedWheels = new ArrayList<>();
-
-        if (isRtlLanguage) putAmPmWheel(unorderedTypes, orderedWheels);
-        else putDayWheel(unorderedTypes, orderedWheels);
+        
+        // Always put day wheel first
+        unorderedTypes.remove(WheelType.DAY);
+        orderedWheels.add(WheelType.DAY);
 
         for (char c: dateTimePattern.toCharArray()){
             try {
@@ -92,9 +83,12 @@ public class DerivedData {
                 // ignore unknown pattern chars that not correspond to any wheel type
             }
         }
-        
-        if (isRtlLanguage) putDayWheel(unorderedTypes, orderedWheels);
-        else putAmPmWheel(unorderedTypes, orderedWheels);
+        // If AM/PM wheel remains it means that the locale does not have AM/PM by default and it
+        // should be put last.
+        if(unorderedTypes.contains(WheelType.AM_PM)){
+            unorderedTypes.remove(WheelType.AM_PM);
+            orderedWheels.add(WheelType.AM_PM);
+        }
 
         if(!unorderedTypes.isEmpty()) {
             Log.e(
@@ -104,22 +98,7 @@ public class DerivedData {
 
         return orderedWheels;
     }
-
-    private void putDayWheel(ArrayList<WheelType> unorderedTypes, ArrayList<WheelType> orderedWheels) {
-        // Always put day wheel first
-        unorderedTypes.remove(WheelType.DAY);
-        orderedWheels.add(WheelType.DAY);
-    }
-
-    private void putAmPmWheel(ArrayList<WheelType> unorderedTypes, ArrayList<WheelType> orderedWheels) {
-        // If AM/PM wheel remains it means that the locale does not have AM/PM by default and it
-        // should be put last.
-        if(unorderedTypes.contains(WheelType.AM_PM)){
-            unorderedTypes.remove(WheelType.AM_PM);
-            orderedWheels.add(WheelType.AM_PM);
-        }
-    }
-
+    
     public int getShownCount() {
         int DP_PER_SHOW_SHOW_COUNT = 35;
         int showCount = state.getHeight() / DP_PER_SHOW_SHOW_COUNT;

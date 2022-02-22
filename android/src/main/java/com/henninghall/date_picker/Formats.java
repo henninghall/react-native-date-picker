@@ -23,9 +23,9 @@ public class Formats {
     private static HashMap<String, EnumMap<Format, String>> map = new HashMap<String, EnumMap<Format, String>>() {{
         put("af", mapOf("EEE d MMM", "d", "y"));
         put("am", mapOf("EEE፣ MMM d", "d", "y"));
-        put("ar", mapOf("EEE، d MMM", "d", "y"));
-        put("ar_DZ", mapOf("EEE، d MMM", "d", "y"));
-        put("ar_EG", mapOf("EEE، d MMM", "d", "y"));
+        put("ar", mapOf("y", "d", "EEE، d MMM"));
+        put("ar_DZ", mapOf("y", "d", "EEE، d MMM"));
+        put("ar_EG", mapOf("y", "d", "EEE، d MMM"));
         put("az", mapOf("d MMM, EEE", "d", "y"));
         put("be", mapOf("EEE, d MMM", "d", "y"));
         put("bg", mapOf("EEE, d.MM", "d", "y 'г'."));
@@ -67,7 +67,7 @@ public class Formats {
         put("gsw", mapOf("EEE d. MMM", "d", "y"));
         put("gu", mapOf("EEE, d MMM", "d", "y"));
         put("haw", mapOf("EEE, d MMM", "d", "y"));
-        put("he", mapOf("EEE, d בMMM", "d", "y"));
+        put("he", mapOf("y", "d", "EEE, d בMMM"));
         put("hi", mapOf("EEE, d MMM", "d", "y"));
         put("hr", mapOf("EEE, d. MMM", "d.", "y."));
         put("hu", mapOf("MMM d., EEE", "d", "y."));
@@ -76,7 +76,7 @@ public class Formats {
         put("in", mapOf("EEE, d MMM", "d", "y"));
         put("is", mapOf("EEE, d. MMM", "d", "y"));
         put("it", mapOf("EEE d MMM", "d", "y"));
-        put("iw", mapOf("EEE, d בMMM", "d", "y"));
+        put("iw", mapOf("y", "d", "EEE, d בMMM"));
         put("ja", mapOf("M月d日 EEE", "d日", "y年"));
         put("ka", mapOf("EEE, d MMM", "d", "y"));
         put("kk", mapOf("d MMM, EEE", "d", "y"));
