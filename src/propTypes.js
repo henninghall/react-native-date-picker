@@ -8,6 +8,10 @@ const androidPropTypes = {
   is24hourSource: PropTypes.oneOf(['locale', 'device']),
 }
 
+const iOSPropTypes = {
+  theme: PropTypes.oneOf(['light', 'dark', 'auto']),
+}
+
 const modalPropTypes = {
   modal: PropTypes.bool,
   open: PropTypes.bool,
@@ -21,7 +25,7 @@ const modalPropTypes = {
 const DateType = PropTypes.instanceOf(Date)
 
 export default {
-  ...(Platform === 'android' ? androidPropTypes : {}),
+  ...(Platform === 'android' ? androidPropTypes : iOSPropTypes),
   date: DateType.isRequired,
   onChange: PropTypes.func,
   minimumDate: DateType,
