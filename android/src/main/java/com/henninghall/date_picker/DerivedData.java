@@ -67,7 +67,7 @@ public class DerivedData {
                 .replaceAll("\\$\\{(.+?)\\}","('$1')");
         ArrayList<WheelType> unorderedTypes = new ArrayList(Arrays.asList(WheelType.values()));
         ArrayList<WheelType> orderedWheels = new ArrayList<>();
-        
+
         // Always put day wheel first
         unorderedTypes.remove(WheelType.DAY);
         orderedWheels.add(WheelType.DAY);
@@ -98,7 +98,7 @@ public class DerivedData {
 
         return orderedWheels;
     }
-    
+
     public int getShownCount() {
         int DP_PER_SHOW_SHOW_COUNT = 35;
         int showCount = state.getHeight() / DP_PER_SHOW_SHOW_COUNT;
