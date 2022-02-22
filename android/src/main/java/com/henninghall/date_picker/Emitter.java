@@ -30,7 +30,7 @@ public class Emitter {
     }
 
     public static void sendEvent(String eventName, @Nullable WritableMap params) {
-        eventEmitter().emit(eventName, params);
+        deviceEventEmitter().emit(eventName, params);
     }
 
 }
