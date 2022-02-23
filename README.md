@@ -175,6 +175,7 @@ export default () => {
 | `title`                   | Modal only: Title text. Can be set to null to remove text.                                                                                                                                                                                                                                                            |
 | `confirmText`             | Modal only: Confirm button text.                                                                                                                                                                                                                                                                                      |
 | `cancelText`              | Modal only: Cancel button text.                                                                                                                                                                                                                                                                                       |
+| `theme`                   | Modal only, iOS 13+: The theme of the modal. `"light"`, `"dark"`, `"auto"`. Defaults to `"auto"`.                                                                                                                                                                                                                     |
 
 ## Linking
 

@@ -36,6 +36,7 @@ export default class DatePickerIOS extends React.Component {
       locale: props.locale ? props.locale : undefined,
       maximumDate: props.maximumDate ? props.maximumDate.getTime() : undefined,
       minimumDate: props.minimumDate ? props.minimumDate.getTime() : undefined,
+      theme: props.theme ? props.theme : 'auto',
     }
   }
 

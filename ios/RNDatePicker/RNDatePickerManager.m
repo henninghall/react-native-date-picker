@@ -114,6 +114,17 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
             [picker setTimeZone:[RCTConvert NSTimeZone:timeZoneProp]];
         }
         
+        if(@available(iOS 13, *)) {
+            NSString * _Nonnull theme = [RCTConvert NSString:[props objectForKey:@"theme"]];
+            if ([theme isEqualToString:@"light"]) {
+                alertController.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+            } else if ([theme isEqualToString:@"dark"]) {
+                alertController.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+            } else {
+                alertController.overrideUserInterfaceStyle = UIUserInterfaceStyleUnspecified;
+            }
+        }
+        
         [alertView addSubview:picker];
         
         UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:confirmText style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {

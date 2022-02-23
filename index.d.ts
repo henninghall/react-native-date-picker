@@ -100,6 +100,9 @@ export interface DatePickerProps extends ViewProps {
 
   /** Modal title. Set to null to remove */
   title?: string | null
+
+  /** Modal color theme on iOS. Defaults to 'auto' */
+  theme?: 'light' | 'dark' | 'auto'
 }
 
 export default class DatePicker extends Component<DatePickerProps> {}
