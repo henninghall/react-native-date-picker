@@ -96,4 +96,7 @@ public class LocaleUtils {
         }
     }
 
+    public static boolean isRtlLanguage(String languageTag) {
+        return languageTag.matches("he|iw|ar|ar_DZ|ar_EG");
+    }
 }
