@@ -177,6 +177,7 @@ export default () => {
 | `confirmText`             | Modal only: Confirm button text.                                                                                                                                                                                                                                                                                      |
 | `cancelText`              | Modal only: Cancel button text.                                                                                                                                                                                                                                                                                       |
 | `neutralText`             | Modal only: Optional neutral button text. If not set, the button will not be displayed.
+| `theme`                   | Modal only, iOS 13+: The theme of the modal. `"light"`, `"dark"`, `"auto"`. Defaults to `"auto"`.                                                                                                                                                                                                                     |
 
 ## Linking
 
