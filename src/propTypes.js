@@ -1,4 +1,5 @@
-import { Platform, ViewPropTypes } from 'react-native'
+import { Platform } from 'react-native'
+import { ViewPropTypes } from 'deprecated-react-native-prop-types'
 import PropTypes from 'prop-types'
 
 const androidPropTypes = {
