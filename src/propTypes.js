@@ -1,4 +1,4 @@
-import { Platform, ViewPropTypes } from 'react-native'
+import { Platform } from 'react-native'
 import PropTypes from 'prop-types'
 
 const androidPropTypes = {
@@ -35,7 +35,7 @@ export default {
   locale: PropTypes.string,
   textColor: PropTypes.string,
   timeZoneOffsetInMinutes: PropTypes.number,
-  testID: ViewPropTypes.testID,
-  style: ViewPropTypes.style,
+  testID: PropTypes.string,
+  style: PropTypes.any,
   ...modalPropTypes,
 }
