@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   StyleSheet,
-  View,
   requireNativeComponent,
   NativeModules,
 } from 'react-native'
