@@ -6,17 +6,17 @@ import propTypes from './propTypes'
 import { colorToHex } from './colorToHex'
 import { throwIfInvalidProps } from './propChecker'
 
-const DatePicker = Platform.select({
+const DateTimePicker = Platform.select({
   android: DatePickerAndroid,
   ios: DatePickerIOS,
 })
 
-DatePicker.propTypes = propTypes
+DateTimePicker.propTypes = propTypes
 
 const DatePickerWrapper = (props) => {
   if (__DEV__) throwIfInvalidProps(props)
   return (
-    <DatePicker
+    <DateTimePicker
       ref={props.innerRef}
       {...props}
       textColor={colorToHex(props.textColor)}
@@ -45,4 +45,4 @@ const getTitle = (props) => {
   return 'Select date'
 }
 
-export const DateTimePicker = React.memo(DatePickerWrapper)
+export const DatePicker = React.memo(DatePickerWrapper)
