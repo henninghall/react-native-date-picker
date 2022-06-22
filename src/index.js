@@ -45,4 +45,4 @@ const getTitle = (props) => {
   return 'Select date'
 }
 
-export const DatePicker = React.memo(DatePickerWrapper)
+export const DateTimePicker = React.memo(DatePickerWrapper)
