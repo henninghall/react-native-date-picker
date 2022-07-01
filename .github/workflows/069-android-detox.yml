@@ -29,21 +29,20 @@ jobs:
       - name: brew install --cask android-commandlinetools
         run: brew install --cask android-commandlinetools
 
+      - name: accept licences
+        run: yes | sdkmanager --licenses
+
       - name: install.sh
-        run: |
-          bash scripts/install.sh
+        run: bash scripts/install.sh
 
       - name: launch.sh
-        run: |
-          bash scripts/launch.sh
+        run: bash scripts/launch.sh
 
       - name: launch2.sh
-        run: |
-          bash scripts/launch2.sh
-
+        run: bash scripts/launch2.sh
+          
       - name: butler.sh
-        run: |
-          bash scripts/launch2.sh
+        run: bash scripts/launch2.sh
 
       - name: Install npm dependencies
         run: yarn install --frozen-lockfile
