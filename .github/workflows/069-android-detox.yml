@@ -29,8 +29,8 @@ jobs:
       - name: brew install --cask android-commandlinetools
         run: brew install --cask android-commandlinetools
 
-      - name: accept licences
-        run: yes | sdkmanager --licenses
+      - name: accept licenses
+        run: sh -c \\"yes | sdkmanager --licenses > /dev/null"
 
       - name: install.sh
         run: bash scripts/install.sh
