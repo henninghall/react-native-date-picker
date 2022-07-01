@@ -29,9 +29,8 @@
     "emulator": {
       "type": "android.emulator",
       "device": {
-        "avdName": "Pixel_5_API_30_AOSP"
-      },
-      "utilBinaryPaths": ["android/test-butler-app-2.2.1.apk"]
+        "avdName": "Pixel_4_API_29"
+      }
     }
   },
   "configurations": {
