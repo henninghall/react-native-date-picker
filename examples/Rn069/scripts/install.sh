@@ -9,7 +9,7 @@ sdkmanager --install "system-images;android-29;default;x86_64"
 echo "✨ Installed image"
 
 # To do that automatically in a script, try this:
-sdkmanager --licenses 
+yes | sdkmanager --licenses 
 
 echo "✨ Accepted licences"
 
