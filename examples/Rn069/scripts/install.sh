@@ -1,6 +1,6 @@
 
-# yes | sdkmanager --licenses 
-# echo "✨ Accepted licences"
+yes | sdkmanager --licenses 
+echo "✨ Accepted licences"
 
 # Install the emulator tool
 yes | sdkmanager --install emulator
