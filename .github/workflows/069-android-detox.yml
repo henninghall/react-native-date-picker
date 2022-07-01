@@ -1,0 +1,69 @@
+name: 'O.69 Android Detox'
+
+on:
+  push:
+    branches:
+      - Rn069
+
+jobs:
+  tests_end_to_end:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./examples/Rn069
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14.18.1
+          cache: "yarn"
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu' # See 'Supported distributions' for available options
+          java-version: '11'
+
+      - name: brew install --cask android-commandlinetools
+        run: brew install --cask android-commandlinetools
+
+      - name: install.sh
+        run: |
+          bash scripts/install.sh
+
+      - name: launch.sh
+        run: |
+          bash scripts/launch.sh
+
+      - name: launch2.sh
+        run: |
+          bash scripts/launch2.sh
+
+      - name: butler.sh
+        run: |
+          bash scripts/launch2.sh
+
+      - name: Install npm dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: |
+          yarn detox:build:android
+
+      - name: Test
+        run: |
+          yarn detox:build:android
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: Failing tests
+          path: ./detox-artifacts
+
+      - name: Kill emulator
+        if: always()
+        run: |
+          bash scripts/kill.sh
