@@ -1,13 +1,13 @@
 
-sdkmanager --licenses 
+echo "y" | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses 
 echo "✨ Accepted licences"
 
 # Install the emulator tool
-sdkmanager --install emulator
+echo "y" | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install emulator
 echo "✨ Installed emulator"
 
 # Install an AOSP image that would later be used as the AVD's OS
-sdkmanager --install "system-images;android-29;default;x86_64"
+echo "y" | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-29;default;x86_64"
 echo "✨ Installed image"
 
 # Create an AVD with the image we've previously installed

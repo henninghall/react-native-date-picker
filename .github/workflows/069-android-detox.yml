@@ -29,9 +29,9 @@ jobs:
       - name: brew install --cask android-commandlinetools
         run: brew install --cask android-commandlinetools
 
-      - name: accept licenses
-        run: | 
-          echo "y" | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-29;google_apis;x86"
+      # - name: accept licenses
+      #   run: | 
+      #     echo "y" | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-29;google_apis;x86"
 
       - name: install.sh
         run: bash scripts/install.sh
