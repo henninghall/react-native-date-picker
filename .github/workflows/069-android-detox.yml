@@ -31,8 +31,7 @@ jobs:
 
       - name: accept licenses
         run: | 
-          echo "y" | sdkmanager --licences
-          echo "y" | sdkmanager --install "system-images;android-29;google_apis;x86"
+          echo "y" | sdkmanager --licenses"
 
       - name: install.sh
         run: bash scripts/install.sh
