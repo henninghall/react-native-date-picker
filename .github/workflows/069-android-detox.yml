@@ -31,7 +31,7 @@ jobs:
 
       - name: accept licenses
         run: | 
-          echo "y" | sdkmanager --licenses"
+          echo "y" | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses"
 
       - name: install.sh
         run: bash scripts/install.sh
