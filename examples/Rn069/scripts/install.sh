@@ -17,7 +17,3 @@ echo "✨ Accepted licences"
 avdmanager --verbose create avd --force --name Pixel_4_API_29 --abi x86_64 --device "pixel" --package "system-images;android-29;default;x86_64"
 
 echo "✨ Created AVD"
-
-# (optional) Review your brand new AVD:
-
-avdmanager list avd
