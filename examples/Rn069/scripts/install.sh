@@ -8,11 +8,6 @@ sdkmanager --install "system-images;android-29;default;x86_64"
 
 echo "✨ Installed image"
 
-# To do that automatically in a script, try this:
-sdkmanager --licenses 
-
-echo "✨ Accepted licences"
-
 # Create an AVD with the image we've previously installed
 avdmanager --verbose create avd --force --name Pixel_4_API_29 --abi x86_64 --device "pixel" --package "system-images;android-29;default;x86_64"
 
