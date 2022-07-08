@@ -38,14 +38,7 @@ jobs:
       
       - name: accept licenses
         run: | 
-          timeout 10 watch yes | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
-          echo "✨ Licenses"
-          yes | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install emulator
-          echo "✨ Installed emulator"
-          yes | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-29;default;x86_64"
-          echo "✨ Installed image"
-          avdmanager --verbose create avd --force --name Pixel_4_API_29 --abi x86_64 --device "pixel" --package "system-images;android-29;default;x86_64"
-          echo "✨ Created AVD"        run: bash scripts/install.sh
+          bash license.sh
 
       - name: launch.sh
         run: bash scripts/launch.sh
