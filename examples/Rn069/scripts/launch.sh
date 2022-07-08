@@ -1,6 +1,6 @@
 
 # Launch the emulator!
-emulator -verbose -no-boot-anim @Pixel_4_API_29 &
+~/Library/Android/sdk/emulator/emulator -verbose -no-boot-anim @Pixel_4_API_29 &
 
 # Wait for the emulator to boot up completely.
 # This script is actually a bit naive. There are various suggestions out there
