@@ -31,14 +31,14 @@ jobs:
 
       - name: accept licenses
         run: | 
-          (while sleep 3; do echo "y"; done) | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+          (while sleep 3; do echo "y"; done) | sdkmanager --licenses
           echo "✨ Licenses"
-          ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install emulator
+          sdkmanager --install emulator
           echo "✨ Installed emulator"
-          ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-29;default;x86_64"
+          sdkmanager --install "system-images;android-29;default;x86_64"
           echo "✨ Installed image"
           avdmanager --verbose create avd --force --name Pixel_4_API_29 --abi x86_64 --device "pixel" --package "system-images;android-29;default;x86_64"
-          echo "✨ Created AVD"        run: bash scripts/install.sh
+          echo "✨ Created AVD"        
 
       - name: launch.sh
         run: bash scripts/launch.sh
