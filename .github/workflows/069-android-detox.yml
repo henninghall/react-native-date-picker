@@ -32,7 +32,7 @@ jobs:
 
       - name: accept licenses
         run: | 
-          (while sleep 3; do echo "y"; done) | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+          (while sleep 1; do echo "y"; done) | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
           echo "✨ Licenses"
           yes | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install emulator
           echo "✨ Installed emulator"
