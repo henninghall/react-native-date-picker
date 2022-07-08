@@ -29,23 +29,17 @@ jobs:
       - name: brew install --cask android-commandlinetools
         run: brew install --cask android-commandlinetools
 
-      # - name: install timeout
-      #   run: brew install coreutils
 
-      # - name: install watch
-      #   run: brew install watch
-      
-      # - name: accept licenses
-      #   run: | 
-      #     bash license.sh
-
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable' # or: 'beta' or 'master'
-      - run: flutter doctor --android-licenses
-
-      - name: install.sh
-        run: bash scripts/install.sh      
+      - name: accept licenses
+        run: | 
+          (while sleep 3; do echo "y"; done) | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+          echo "✨ Licenses"
+          yes | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install emulator
+          echo "✨ Installed emulator"
+          yes | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-29;default;x86_64"
+          echo "✨ Installed image"
+          avdmanager --verbose create avd --force --name Pixel_4_API_29 --abi x86_64 --device "pixel" --package "system-images;android-29;default;x86_64"
+          echo "✨ Created AVD"        run: bash scripts/install.sh
 
       - name: launch.sh
         run: bash scripts/launch.sh
