@@ -40,8 +40,8 @@ jobs:
       #     bash license.sh
 
       - uses: subosito/flutter-action@v2
-          with:
-            channel: 'stable' # or: 'beta' or 'master'
+        with:
+          channel: 'stable' # or: 'beta' or 'master'
       - run: flutter doctor --android-licenses
 
       - name: install.sh
