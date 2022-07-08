@@ -29,16 +29,20 @@ jobs:
       - name: brew install --cask android-commandlinetools
         run: brew install --cask android-commandlinetools
 
+      # - name: install timeout
+      #   run: brew install coreutils
 
-      - name: install timeout
-        run: brew install coreutils
-
-      - name: install watch
-        run: brew install watch
+      # - name: install watch
+      #   run: brew install watch
       
-      - name: accept licenses
-        run: | 
-          bash license.sh
+      # - name: accept licenses
+      #   run: | 
+      #     bash license.sh
+
+      - uses: subosito/flutter-action@v2
+          with:
+            channel: 'stable' # or: 'beta' or 'master'
+      - run: flutter doctor --android-licenses
 
       - name: launch.sh
         run: bash scripts/launch.sh
