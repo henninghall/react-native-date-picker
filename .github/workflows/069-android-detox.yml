@@ -29,9 +29,16 @@ jobs:
       - name: brew install --cask android-commandlinetools
         run: brew install --cask android-commandlinetools
 
+
+      - name: install timeout
+        run: brew install coreutils
+
+      - name: install watch
+        run: brew install watch
+      
       - name: accept licenses
         run: | 
-          yes | sudo ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+          timeout 10 watch yes | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
           echo "✨ Licenses"
           yes | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install emulator
           echo "✨ Installed emulator"
