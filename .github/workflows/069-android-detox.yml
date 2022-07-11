@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 14.18.1
-          cache: "yarn"
+          cache: 'yarn'
 
       - uses: actions/setup-java@v3
         with:
@@ -30,7 +30,7 @@ jobs:
         run: brew install --cask android-commandlinetools
 
       - name: accept licenses
-        run: | 
+        run: |
           (while sleep 3; do echo "y"; done) | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
           echo "✨ Licenses"
           ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install emulator
@@ -38,14 +38,14 @@ jobs:
           ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-29;default;x86_64"
           echo "✨ Installed image"
           ~/Library/Android/sdk/cmdline-tools/latest/bin/avdmanager --verbose create avd --force --name Pixel_4_API_29 --abi x86_64 --device "pixel" --package "system-images;android-29;default;x86_64"
-          echo "✨ Created AVD"        
+          echo "✨ Created AVD"
 
       - name: launch.sh
         run: bash scripts/launch.sh
 
       - name: launch2.sh
         run: bash scripts/launch2.sh
-          
+
       - name: butler.sh
         run: bash scripts/butler.sh
 
@@ -58,7 +58,7 @@ jobs:
 
       - name: Test
         run: |
-          yarn detox:build:android
+          yarn detox:test:android
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
