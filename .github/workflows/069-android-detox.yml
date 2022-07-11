@@ -43,8 +43,8 @@ jobs:
       - name: launch.sh
         run: bash scripts/launch.sh
 
-      - name: launch2.sh
-        run: bash scripts/launch2.sh
+      # - name: launch2.sh
+      #   run: bash scripts/launch2.sh
 
       - name: butler.sh
         run: bash scripts/butler.sh
