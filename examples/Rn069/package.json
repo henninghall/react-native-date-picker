@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "detox:build:android": "yarn detox build --configuration android",
     "detox:build:android:debug": "yarn detox build --configuration android.debug",
-    "detox:test:android": "yarn detox test --configuration android",
+    "detox:test:android": "yarn detox test --configuration android --record-videos failing --take-screenshots failing --record-logs failing",
     "detox:test:android:debug": "yarn detox test --configuration android.debug"
   },
   "dependencies": {
