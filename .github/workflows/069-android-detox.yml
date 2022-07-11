@@ -65,7 +65,7 @@ jobs:
         if: failure()
         with:
           name: Failing tests
-          path: ./detox-artifacts
+          path: ./artifacts
 
       - name: Kill emulator
         if: always()
