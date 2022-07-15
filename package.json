@@ -29,7 +29,9 @@
     "react-native",
     "react-native-date-picker"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "prop-types": "^15.8.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
