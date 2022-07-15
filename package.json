@@ -3,6 +3,7 @@
   "version": "4.2.2",
   "description": "A datetime picker for React Native. In-modal or inlined. Supports Android and iOS.",
   "main": "src/index.js",
+  "typings": "index.d.ts",
   "scripts": {
     "prepublishOnly": "mv README.md githubREADME.md && mv npmREADME.md README.md",
     "postpublish": "mv README.md npmREADME.md && mv githubREADME.md README.md",
