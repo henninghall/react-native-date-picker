@@ -2,17 +2,11 @@
 
 This is a React Native Date Picker with following main features:
 
-📱&nbsp; Supporting iOS and Android <br>
+📱&nbsp; Supports iOS, Android and Expo<br>
 🕑&nbsp; 3 different modes: Time, Date, DateTime <br>
 🌍&nbsp; Various languages<br>
 🎨&nbsp; Customizable<br>
 🖼&nbsp; Modal or Inlined<br>
-
-## Update 4.0.0
-
-- ✅&nbsp; No breaking changes
-
-- New feature: Modal mode
 
 ## Modal
 
@@ -31,7 +25,7 @@ The first option is to use the built-in modal. <a href="#example-1-modal">See co
 
 ## Inlined
 
-The second option is to use the inlined picker. For instance in a view or a custom made modal. <a href="#example-2-inlined">See code</a>.
+The second option is to use the inlined picker. Place it in a View or a custom made modal. <a href="#example-2-inlined">See code</a>.
 
 <table>
    <tr>
@@ -211,6 +205,9 @@ If you have enabled <a href="https://facebook.github.io/react-native/docs/signed
 -keep public class net.time4j.android.ApplicationStarter
 -keep public class net.time4j.PrettyTime
 ```
+
+### What does it take to upgrade to v4 (4.0.0)?
+There are no breaking changes in v4, so just bump the version number in your package json.
 
 ## Two different Android variants
 
