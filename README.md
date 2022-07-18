@@ -171,10 +171,6 @@ export default () => {
 | `cancelText`              | Modal only: Cancel button text.                                                                                                                                                                                                                                                                                       |
 | `theme`                   | Modal only, iOS 13+: The theme of the modal. `"light"`, `"dark"`, `"auto"`. Defaults to `"auto"`.                                                                                                                                                                                                                     |
 
-## Linking
-
-This package supports automatic linking. Usually, the only thing you need to do is to install the package, the cocoapods dependencies (as described above). Then rebuild the project by running `react-native run-ios`, `react-native run-android` or start the build from within Xcode/Android Studio. If you're running a React Native version below 0.60 or your setup is having issues with automatic linking, you can run `npx react-native link react-native-date-picker` and rebuild. In some occations you'll have to manually link the package. Instructions in <a href="https://github.com/henninghall/react-native-date-picker/issues/40">this issue</a>.
-
 ## Additional android styling
 
 There are som additional styling possibilities for the "androidNative" picker variant.
@@ -211,6 +207,10 @@ To change the font size on Android `nativeAndroid` variant. Open `styles.xml` an
 </style>
 ```
 
+## Linking
+
+This package supports automatic linking. Usually, the only thing you need to do is to install the package, the cocoapods dependencies (as described above). Then rebuild the project by running `react-native run-ios`, `react-native run-android` or start the build from within Xcode/Android Studio. If you're running a React Native version below 0.60 or your setup is having issues with automatic linking, you can run `npx react-native link react-native-date-picker` and rebuild. In some occations you'll have to manually link the package. Instructions in <a href="https://github.com/henninghall/react-native-date-picker/issues/40">this issue</a>.
+
 ## FAQ
 
 ### How do i change the date order? (To YYYY-MM-DD etc)
@@ -235,6 +235,7 @@ If you have enabled <a href="https://facebook.github.io/react-native/docs/signed
 ```
 
 ### What does it take to upgrade to v4 (4.0.0)?
+
 There are no breaking changes in v4, so just bump the version number in your package json.
 
 ## Two different Android variants
@@ -340,6 +341,6 @@ React Native Date Picker is a cross platform component for iOS and Android. It u
 
 ## Support this package!
 
-If you like this package and want to support it, you can give it <a href="https://openbase.com/js/react-native-date-picker" target="_blank">a review</a> or a github star ⭐
+If you like this package, consider giving it a github star ⭐
 
 Also, PR's are welcome!
