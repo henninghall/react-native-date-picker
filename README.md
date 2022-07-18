@@ -179,7 +179,7 @@ There are som additional styling possibilities for the "androidNative" picker va
 
 <img src="docs/divider-color.png" alt="react native date picker divider separator color" width="200px" />
 
-Open `styles.xml` and place this code right above the `</resources>` to change the divider color.
+To change the divider color, open `styles.xml` and place this code right above the `</resources>`.
 
 ```xml
 <style name="DatePickerTheme" parent="DatePickerBaseTheme">
@@ -191,7 +191,7 @@ Open `styles.xml` and place this code right above the `</resources>` to change t
 
 <img src="docs/button-colors.png" alt="date picker button colors on android" width="200px" />
 
-Open `styles.xml` and place this code within your theme.
+To change the confirm and cancel button colors. Open `styles.xml` and place this code within your theme.
 
 ```xml
   <item name="colorAccent">#dd00ff</item>
