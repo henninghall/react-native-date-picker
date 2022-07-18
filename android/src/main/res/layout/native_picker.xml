@@ -17,7 +17,7 @@
 
         <com.henninghall.date_picker.pickers.AndroidNative
             android:id="@+id/year"
-            android:theme="@style/android_native_theme"
+            android:theme="@style/DatePickerTheme"
             style="@style/android_native"
             android:tag="year"
             android:contentDescription="@string/year_description"
@@ -26,7 +26,7 @@
 
         <com.henninghall.date_picker.pickers.AndroidNative
             android:id="@+id/month"
-            android:theme="@style/android_native_theme"
+            android:theme="@style/DatePickerTheme"
             style="@style/android_native"
             android:tag="month"
             android:contentDescription="@string/month_description"
@@ -35,7 +35,7 @@
 
         <com.henninghall.date_picker.pickers.AndroidNative
             android:id="@+id/date"
-            android:theme="@style/android_native_theme"
+            android:theme="@style/DatePickerTheme"
             style="@style/android_native_small"
             android:tag="date"
             android:contentDescription="@string/date_description"
@@ -44,7 +44,7 @@
 
         <com.henninghall.date_picker.pickers.AndroidNative
             android:id="@+id/day"
-            android:theme="@style/android_native_theme"
+            android:theme="@style/DatePickerTheme"
             style="@style/android_native"
             android:tag="day"
             android:contentDescription="@string/day_description"
@@ -53,7 +53,7 @@
 
         <com.henninghall.date_picker.pickers.AndroidNative
             android:id="@+id/hour"
-            android:theme="@style/android_native_theme"
+            android:theme="@style/DatePickerTheme"
             style="@style/android_native_small"
             android:tag="hour"
             android:contentDescription="@string/hour_description"
@@ -62,7 +62,7 @@
 
         <com.henninghall.date_picker.pickers.AndroidNative
             android:id="@+id/minutes"
-            android:theme="@style/android_native_theme"
+            android:theme="@style/DatePickerTheme"
             style="@style/android_native_small"
             android:tag="minutes"
             android:contentDescription="@string/minutes_description"
@@ -71,7 +71,7 @@
 
         <com.henninghall.date_picker.pickers.AndroidNative
             android:id="@+id/ampm"
-            android:theme="@style/android_native_theme"
+            android:theme="@style/DatePickerTheme"
             style="@style/android_native"
             android:tag="ampm"
             android:contentDescription="@string/ampm_description"
