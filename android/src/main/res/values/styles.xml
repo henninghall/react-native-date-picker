@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="android_native_theme">
+    <style name="DatePickerBaseTheme">
         <item name="android:textSize" tools:ignore="SpUsage">17sp</item>
+    </style>
+    <style name="DatePickerTheme" parent="DatePickerBaseTheme">
+        <!-- Empty to allow overriding theme in consuming apps  -->
     </style>
     <style name="android_native">
         <item name="android:layout_marginLeft">5dp</item>

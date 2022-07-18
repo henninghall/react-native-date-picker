@@ -43,7 +43,7 @@ The second option is to use the inlined picker. Place it in a View or a custom m
 - Xcode >= 11.6
 - React Native >= 0.57.
 - If using React Native 0.64, 0.64.2 or later must be used.
-- If using Expo, SDK 42 or later must be used. If using Expo SDK 44, 44.0.4 or later must be used. 
+- If using Expo, SDK 42 or later must be used. If using Expo SDK 44, 44.0.4 or later must be used.
 
 ## Installation
 
@@ -171,19 +171,47 @@ export default () => {
 | `cancelText`              | Modal only: Cancel button text.                                                                                                                                                                                                                                                                                       |
 | `theme`                   | Modal only, iOS 13+: The theme of the modal. `"light"`, `"dark"`, `"auto"`. Defaults to `"auto"`.                                                                                                                                                                                                                     |
 
+## Additional android styling
+
+There are som additional styling possibilities for the "androidNative" picker variant.
+
+### Divider color
+
+<img src="docs/divider-color.png" alt="react native date picker divider separator color" width="200px" />
+
+To change the divider color, open `styles.xml` and place this code right above the `</resources>`.
+
+```xml
+<style name="DatePickerTheme" parent="DatePickerBaseTheme">
+    <item name="android:colorControlNormal">#dd00ff</item>
+</style>
+```
+
+### Button colors
+
+<img src="docs/button-colors.png" alt="date picker button colors on android" width="200px" />
+
+To change the confirm and cancel button colors. Open `styles.xml` and place this code within your theme.
+
+```xml
+  <item name="colorAccent">#dd00ff</item>
+```
+
+### Font size
+
+To change the font size on Android `nativeAndroid` variant. Open `styles.xml` and place this code right above the `</resources>`. The font size is not possible to change in iOS out of the box, but there are some [iOS workarounds](https://github.com/henninghall/react-native-date-picker/discussions/171).
+
+```xml
+<style name="DatePickerTheme" parent="DatePickerBaseTheme">
+    <item name="android:textSize">25sp</item>
+</style>
+```
+
 ## Linking
 
 This package supports automatic linking. Usually, the only thing you need to do is to install the package, the cocoapods dependencies (as described above). Then rebuild the project by running `react-native run-ios`, `react-native run-android` or start the build from within Xcode/Android Studio. If you're running a React Native version below 0.60 or your setup is having issues with automatic linking, you can run `npx react-native link react-native-date-picker` and rebuild. In some occations you'll have to manually link the package. Instructions in <a href="https://github.com/henninghall/react-native-date-picker/issues/40">this issue</a>.
 
 ## FAQ
-
-### How do I change the divider color?
-
-The color of the divider, separator (or whatever you choose to call it) can only be changed on android for the androidNative variant. To change it, add the following to your android AppTheme. The theme is often found in styles.xml.
-
-```xml
-<item name="colorControlNormal">#ff0000</item>
-```
 
 ### How do i change the date order? (To YYYY-MM-DD etc)
 
@@ -207,6 +235,7 @@ If you have enabled <a href="https://facebook.github.io/react-native/docs/signed
 ```
 
 ### What does it take to upgrade to v4 (4.0.0)?
+
 There are no breaking changes in v4, so just bump the version number in your package json.
 
 ## Two different Android variants
@@ -222,8 +251,7 @@ On Android there are two design variants to choose from:
 </td></tr>
 
 <tr><td>The so called "iOS clone" looks and works similar to the ios version. It shows normally 5 lines of dates. It is enabled by default.</td><td>
-The "Android Native" version looks more like a standard native implementation on Android. The divider color can be changed by adding the following to you Android theme:
-<br><code>&lt;item name=&quot;colorControlNormal&quot;&gt;#03b6fc&lt;/item&gt;</code>
+The "Android Native" version looks more like a standard native implementation on Android.
 </td></tr>
 <tr><td>
 
@@ -313,6 +341,6 @@ React Native Date Picker is a cross platform component for iOS and Android. It u
 
 ## Support this package!
 
-If you like this package and want to support it, you can give it <a href="https://openbase.com/js/react-native-date-picker" target="_blank">a review</a> or a github star ⭐
+If you like this package, consider giving it a github star ⭐
 
 Also, PR's are welcome!

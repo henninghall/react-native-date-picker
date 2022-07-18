@@ -2,7 +2,11 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorControlNormal">#03b6fc</item>
+        <item name="colorAccent">#dd00ff</item>
+    </style>
+
+    <style name="DatePickerTheme" parent="DatePickerBaseTheme">
+        <item name="android:colorControlNormal">#dd00ff</item>
     </style>
 
 </resources>
