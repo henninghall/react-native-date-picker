@@ -316,3 +316,6 @@ React Native Date Picker is a cross platform component for iOS and Android. It u
 If you like this package and want to support it, you can give it <a href="https://openbase.com/js/react-native-date-picker" target="_blank">a review</a> or a github star ⭐
 
 Also, PR's are welcome!
+
+[![Verified on Openbase](https://badges.openbase.com/js/verified/react-native-date-picker.svg?token=LT+m1F6fLWeb/3OxB+GFIQ2uXzM55mvYAOt7YQlT/NU=)](https://openbase.com/js/react-native-date-picker?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
+
