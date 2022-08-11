@@ -8,6 +8,7 @@
 
 import React from 'react';
 import type {Node} from 'react';
+import DatePicker from 'react-native-date-picker'
 import {
   SafeAreaView,
   ScrollView,
@@ -16,6 +17,7 @@ import {
   Text,
   useColorScheme,
   View,
+  
 } from 'react-native';
 
 import {
@@ -70,6 +72,7 @@ const App: () => Node = () => {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+          <DatePicker date={new Date()} onDateChange={() => {}}/>
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.js</Text> to change this
             screen and then come back to see your edits.

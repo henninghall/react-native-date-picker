@@ -5,6 +5,8 @@ function addMinutes(date, minutesToAdd) {
   return new Date(date.valueOf() + minutesToAdd * 60 * 1000)
 }
 
+console.log(NativeModules)
+
 const NativeDatePicker = requireNativeComponent(
   `DatePickerManager`,
   DatePickerAndroid,

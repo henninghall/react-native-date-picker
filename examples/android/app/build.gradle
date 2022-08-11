@@ -293,6 +293,8 @@ dependencies {
     // androidTestImplementation('com.wix:detox:+')
     androidTestImplementation 'com.linkedin.testbutler:test-butler-library:2.2.1'
     // implementation 'androidx.appcompat:appcompat:1.1.0' // (check what the latest version is!)
+
+    implementation project(':react-native-date-picker')
 }
 
 if (isNewArchitectureEnabled()) {

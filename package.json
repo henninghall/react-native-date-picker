@@ -1,6 +1,7 @@
 {
   "name": "react-native-date-picker",
   "version": "4.2.2",
+  "source": "src/index",
   "description": "A datetime picker for React Native. In-modal or inlined. Supports Android and iOS.",
   "main": "src/index.js",
   "scripts": {
@@ -29,6 +30,10 @@
     "react-native-date-picker"
   ],
   "dependencies": {},
+  "peerDependencies": {
+    "react": ">= 17.0.1",
+    "react-native": ">= 0.64.3"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
