@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - Rn069
+      - upgrade-example-to-rn069
 
 jobs:
   tests_end_to_end:
