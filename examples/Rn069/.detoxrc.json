@@ -38,7 +38,7 @@
       "device": "simulator",
       "app": "ios"
     },
-    "android": {
+    "android.ci": {
       "device": "emulator",
       "app": "android"
     },

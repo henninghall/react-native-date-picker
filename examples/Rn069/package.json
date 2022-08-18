@@ -8,10 +8,16 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "detox:build:android": "yarn detox build --configuration android",
-    "detox:build:android:debug": "yarn detox build --configuration android.debug",
-    "detox:test:android": "yarn detox test --configuration android --record-videos failing --take-screenshots failing --record-logs failing",
-    "detox:test:android:debug": "yarn detox test --configuration android.debug"
+    "set-time-format": "adb shell settings put system time_12_24",
+    "build:ios": "yarn detox build --configuration ios.debug",
+    "build:android:debug": "yarn detox build --configuration android.debug",
+    "build:android:ci": "yarn detox build --configuration android.ci",
+    "test:android-24h-mode": "yarn set-time-format 24 && yarn detox test --configuration android.debug e2e/tests/24h-mode/*.e2e.js",
+    "test:android-24h-mode:ci": "yarn set-time-format 24 && yarn detox test --configuration android.ci e2e/tests/24h-mode/*.e2e.js --record-logs failing --record-videos failing --take-screenshots failing",
+    "test:android-12h-mode": "yarn set-time-format 12 && yarn detox test --configuration android.debug e2e/tests/*.e2e.js",
+    "test:android-12h-mode:ci": "yarn set-time-format 12 && yarn detox test --configuration android.ci e2e/tests/*.e2e.js --record-logs failing --record-videos failing --take-screenshots failing",
+    "test:android": "yarn test:android-12h-mode && yarn test:android-24h-mode",
+    "test:android:ci": "yarn test:android-12h-mode:ci && yarn test:android-24h-mode:ci"
   },
   "dependencies": {
     "detox": "^19.7.1",

@@ -4,7 +4,7 @@ module.exports = {
   plugins: ['detox'],
   overrides: [
     {
-      files: ['*.e2e.js'],
+      files: ['**/*.spec.js', '**/*.spec.jsx', '*.js'],
       env: {
         'detox/detox': true,
         jest: true,

@@ -54,11 +54,11 @@ jobs:
 
       - name: Build
         run: |
-          yarn detox:build:android
+          yarn detox:build:android:ci
 
       - name: Test
         run: |
-          yarn detox:test:android
+          yarn detox:test:android:ci
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
