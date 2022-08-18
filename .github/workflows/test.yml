@@ -3,8 +3,8 @@ name: 'Test'
 on:
   push:
     branches:
-      - Rn069
-      - upgrade-example-to-rn069
+      - example
+      - upgrade-example-to-example
 
 jobs:
   javascript_unit_tests:
@@ -43,12 +43,12 @@ jobs:
           java-version: '11'
 
       - name: Install npm dependencies
-        working-directory: ./examples/Rn069
+        working-directory: ./examples/detox
         run: |
           yarn install --frozen-lockfile
 
       - name: Run unit tests
-        working-directory: ./examples/Rn069/android
+        working-directory: ./examples/detox/android
         run: ./gradlew testDebugUnitTest
 
   tests_end_to_end:
@@ -56,7 +56,7 @@ jobs:
     runs-on: macos-latest
     defaults:
       run:
-        working-directory: ./examples/Rn069
+        working-directory: ./examples/detox
 
     steps:
       - name: checkout
