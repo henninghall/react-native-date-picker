@@ -12,5 +12,3 @@ if (settings.hasProperty("newArchEnabled") && settings.newArchEnabled == "true")
 
 include ':detox'
 project(':detox').projectDir = new File(rootProject.projectDir, '../node_modules/detox/android/detox')
-include ':react-native-date-picker'
-project(':react-native-date-picker').projectDir = new File(rootProject.projectDir, '../../../android')
