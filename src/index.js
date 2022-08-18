@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform } from 'react-native'
+import { Platform, Appearance } from 'react-native'
 import DatePickerIOS from './DatePickerIOS'
 import DatePickerAndroid from './DatePickerAndroid'
 import propTypes from './propTypes'
@@ -19,7 +19,8 @@ const DatePickerWrapper = (props) => {
     <DatePicker
       ref={props.innerRef}
       {...props}
-      textColor={colorToHex(props.textColor)}
+      textColor={colorToHex(getTextColor(props))}
+      theme={getTheme(props)}
       fadeToColor={colorToHex(props.fadeToColor)}
       title={getTitle(props)}
       confirmText={props.confirmText ? props.confirmText : 'Confirm'}
@@ -29,6 +30,19 @@ const DatePickerWrapper = (props) => {
       mode={props.mode ? props.mode : 'datetime'}
     />
   )
+}
+
+const getTheme = (props) => {
+  if (props.theme) return props.theme
+  if (!Appearance) return 'auto'
+  return Appearance.getColorScheme()
+}
+
+const getTextColor = (props) => {
+  if (props.textColor) return props.textColor
+  const darkTheme = getTheme(props) === 'dark'
+  if (darkTheme) return 'white'
+  return undefined
 }
 
 const getAndroidVariant = (props) => {

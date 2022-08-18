@@ -72,21 +72,26 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         UIView * alertView = alertController.view;
 
+        CGRect pickerBounds = picker.bounds;
+
         // height
-        int heightPx = iPad ? (title ? 300 : 260) : (title ? 370 : 340);
-        NSLayoutConstraint *heigth = [NSLayoutConstraint constraintWithItem:alertView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:heightPx];
-        [alertView addConstraint:heigth];
+        double pickerHeight = [self getPickerHeight:alertView];
+        int alertHeightPx = iPad ? (title ? 300 : 260) : (title ? 370 : 340);
+        NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:alertView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:alertHeightPx];
+        [alertView addConstraint:height];
+        pickerBounds.size.height = pickerHeight;
         
-        CGRect bounds = picker.bounds;
-        
-        // picker width
-        int widthPx = iPad ? 320 : alertController.view.bounds.size.width - 15;
-        bounds.size.width = widthPx;
+        // width
+        double pickerWidth = [self getPickerWidth:alertView];
+        int alertWidthPx = pickerWidth;
+        NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:alertView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:alertWidthPx];
+        [alertView addConstraint:width];
+        pickerBounds.size.width = pickerWidth;
 
         // top padding
-        bounds.origin.y += iPad ? (title ? 20: 5) : (title ? 30 : 10);
+        pickerBounds.origin.y += iPad ? (title ? 20: 5) : (title ? 30 : 10);
         
-        [picker setFrame: bounds];
+        [picker setFrame: pickerBounds];
        
         NSDate * _Nonnull date = [RCTConvert NSDate:[props objectForKey:@"date"]];
         [picker setDate:date];
@@ -113,7 +118,7 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         if(timeZoneProp){
             [picker setTimeZone:[RCTConvert NSTimeZone:timeZoneProp]];
         }
-        
+
         if(@available(iOS 13, *)) {
             NSString * _Nonnull theme = [RCTConvert NSString:[props objectForKey:@"theme"]];
             if ([theme isEqualToString:@"light"]) {
@@ -146,7 +151,7 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
             UIPopoverPresentationController *popPresenter = [alertController popoverPresentationController];
             popPresenter.sourceRect = CGRectMake(CGRectGetMidX(rootBounds), CGRectGetMidY(rootBounds),0,0);
             popPresenter.sourceView = rootViewController.view;
-            popPresenter.presentingViewController.preferredContentSize = CGSizeMake(widthPx, heightPx);
+            popPresenter.presentingViewController.preferredContentSize = CGSizeMake(pickerWidth, alertHeightPx);
             [popPresenter setPermittedArrowDirections: (UIPopoverArrowDirection) 0];
         }
         
@@ -159,6 +164,20 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         [topViewController presentViewController:alertController animated:YES completion:nil];
     });
 
+}
+
+- (double) getPickerWidth :(UIView *) alertView
+{
+    bool iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+    bool isLandscape = UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation);
+    if(iPad) return 320;
+    if (isLandscape) return 320;
+    return alertView.bounds.size.width - 15;
+}
+
+- (double) getPickerHeight :(UIView *) alertView
+{
+    return 216;
 }
 
 @end
