@@ -19,6 +19,9 @@ target 'Rn069' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  rn_date_picker_path = '../../..'
+  pod 'react-native-date-picker', :path => rn_date_picker_path
+
   target 'Rn069Tests' do
     inherit! :complete
     # Pods for testing
