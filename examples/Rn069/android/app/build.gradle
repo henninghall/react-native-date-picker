@@ -293,6 +293,7 @@ dependencies {
     // androidTestImplementation('com.wix:detox:+')
     androidTestImplementation 'com.linkedin.testbutler:test-butler-library:2.2.1'
     // implementation 'androidx.appcompat:appcompat:1.1.0' // (check what the latest version is!)
+    testImplementation 'junit:junit:4.13.2'
 }
 
 if (isNewArchitectureEnabled()) {
