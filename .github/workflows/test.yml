@@ -1,10 +1,15 @@
 name: 'Test'
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - example
       - upgrade-example-to-example
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   javascript_unit_tests:
@@ -43,12 +48,12 @@ jobs:
           java-version: '11'
 
       - name: Install npm dependencies
-        working-directory: ./examples/detox
+        working-directory: ./examples/Rn069
         run: |
           yarn install --frozen-lockfile
 
       - name: Run unit tests
-        working-directory: ./examples/detox/android
+        working-directory: ./examples/Rn069/android
         run: ./gradlew testDebugUnitTest
 
   tests_end_to_end:
@@ -56,7 +61,7 @@ jobs:
     runs-on: macos-latest
     defaults:
       run:
-        working-directory: ./examples/detox
+        working-directory: ./examples/Rn069
 
     steps:
       - name: checkout
