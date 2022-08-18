@@ -1,4 +1,4 @@
-name: 'Test (Js unit, Java unit & E2E)'
+name: 'Test'
 
 on:
   push:
