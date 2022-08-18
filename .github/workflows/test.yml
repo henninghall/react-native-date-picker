@@ -14,12 +14,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
+        uses: actions/checkout@v3
 
-      - name: Node
-        uses: actions/setup-node@v1
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: 'yarn'
 
       - name: Install npm dependencies
         run: |
@@ -34,11 +35,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v3
         with:
-          java-version: 1.8
+          distribution: 'zulu'
+          java-version: '11'
 
       - name: Install npm dependencies
         working-directory: ./examples/Rn069
@@ -65,16 +67,16 @@ jobs:
           node-version: 14.18.1
           cache: 'yarn'
 
-      - name: Install npm dependencies
+      - name: Install npm dependencies (example project)
         run: yarn install --frozen-lockfile
 
-      - name: Install npm dependencies
+      - name: Install npm dependencies (root)
         run: yarn install --frozen-lockfile
         working-directory: ./
 
       - uses: actions/setup-java@v3
         with:
-          distribution: 'zulu' # See 'Supported distributions' for available options
+          distribution: 'zulu'
           java-version: '11'
 
       - name: brew install --cask android-commandlinetools
