@@ -33,6 +33,10 @@
   "dependencies": {
     "prop-types": "^15.8.1"
   },
+  "peerDependencies": {
+    "react": ">= 17.0.1",
+    "react-native": ">= 0.64.3"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
