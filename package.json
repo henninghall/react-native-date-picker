@@ -29,7 +29,9 @@
     "react-native",
     "react-native-date-picker"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "prop-types": "^15.8.1"
+  },
   "peerDependencies": {
     "react": ">= 17.0.1",
     "react-native": ">= 0.64.3"
