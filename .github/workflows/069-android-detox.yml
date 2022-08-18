@@ -22,6 +22,13 @@ jobs:
           node-version: 14.18.1
           cache: 'yarn'
 
+      - name: Install npm dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install npm dependencies
+        run: yarn install --frozen-lockfile
+        working-directory: ./
+
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu' # See 'Supported distributions' for available options
@@ -49,9 +56,6 @@ jobs:
 
       - name: butler.sh
         run: bash scripts/butler.sh
-
-      - name: Install npm dependencies
-        run: yarn install --frozen-lockfile
 
       - name: Build
         run: |
