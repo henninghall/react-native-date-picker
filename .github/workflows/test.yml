@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - upgrade-example-to-rn069
       - master
   pull_request:
     branches:
