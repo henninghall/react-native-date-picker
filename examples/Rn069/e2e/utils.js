@@ -1,4 +1,7 @@
 const expectDate = async date => {
+  await waitFor(element(by.id('dateOutput')))
+    .toHaveText(date)
+    .withTimeout(5000);
   await expect(element(by.id('dateOutput'))).toHaveText(date);
 };
 
