@@ -97,6 +97,7 @@ jobs:
           echo "✨ Created AVD"
 
       - name: launch.sh
+        timeout-minutes: 3
         run: bash scripts/launch.sh
 
       - name: launch2.sh
