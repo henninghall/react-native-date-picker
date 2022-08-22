@@ -57,11 +57,11 @@ public class IosClone extends NumberPickerView implements Picker {
         });
     }
 
-    @Override
-    public void smoothScrollToValue(int value) {
-        setValue(value);
-        onChangeListener.onValueChange();
-    }
+//    @Override
+//    public void smoothScrollToValue(int value) {
+//        setValue(value);
+//        onChangeListener.onValueChange();
+//    }
 
     @Override
     public void setTextColor(String color) {

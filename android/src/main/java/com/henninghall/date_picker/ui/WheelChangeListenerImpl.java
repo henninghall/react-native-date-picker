@@ -1,5 +1,6 @@
 package com.henninghall.date_picker.ui;
 
+import android.util.Log;
 import android.view.View;
 
 import com.henninghall.date_picker.Emitter;
@@ -34,6 +35,8 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
 
     @Override
     public void onChange(Wheel picker) {
+        picker.isAnimating = false;
+        if(wheels.hasAnimatedWheel()) return;
         if(wheels.hasSpinningWheel()) return;
 
         if(!dateExists()){
@@ -49,12 +52,14 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
 
         Calendar minDate = state.getMinimumDate();
         if (minDate != null && selectedDate.before(minDate)) {
+            Log.w("Henning", minDate + " " + selectedDate);
             uiManager.animateToDate(minDate);
             return;
         }
 
         Calendar maxDate = state.getMaximumDate();
         if (maxDate != null && selectedDate.after(maxDate)) {
+            Log.w("Henning", maxDate + " " + selectedDate);
             uiManager.animateToDate(maxDate);
             return;
         }

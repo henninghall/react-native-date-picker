@@ -227,4 +227,11 @@ public class Wheels {
         }
         return false;
     }
+
+    public boolean hasAnimatedWheel() {
+        for(Wheel wheel: getOrderedVisibleWheels()) {
+            if(wheel.isAnimating) return true;
+        }
+        return false;
+    }
 }
