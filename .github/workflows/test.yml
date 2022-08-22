@@ -118,7 +118,7 @@ jobs:
         if: failure()
         with:
           name: Failing tests
-          path: ./artifacts
+          path: ./examples/Rn069/artifacts
 
       - name: Kill emulator
         if: always()
