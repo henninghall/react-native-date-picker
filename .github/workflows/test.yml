@@ -97,8 +97,11 @@ jobs:
           echo "✨ Created AVD"
 
       - name: launch.sh
-        timeout-minutes: 3
-        run: bash scripts/launch.sh
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 3
+          command: bash scripts/launch.sh
 
       - name: launch2.sh
         run: bash scripts/launch2.sh
