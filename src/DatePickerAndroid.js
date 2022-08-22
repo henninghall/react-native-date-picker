@@ -32,6 +32,8 @@ class DatePickerAndroid extends React.PureComponent {
       return null
     }
 
+    console.log(props.date)
+
     return <NativeDatePicker {...props} onChange={this._onChange} />
   }
 
