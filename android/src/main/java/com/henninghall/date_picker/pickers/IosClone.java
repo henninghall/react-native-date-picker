@@ -57,6 +57,11 @@ public class IosClone extends NumberPickerView implements Picker {
     }
 
     @Override
+    public void smoothScrollToValue(int value) {
+        setValue(value);
+    }
+
+    @Override
     public void setTextColor(String color) {
         int fullColor= Color.parseColor(color);
         int fadedColor = Color.parseColor("#70"+ color.substring(1));
