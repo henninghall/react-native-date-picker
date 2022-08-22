@@ -9,15 +9,8 @@ booted=0
 while [ "$booted" != "1" ]
 do
   echo "Waiting for emulator..."
+  adb shell getprop dev.bootcomplete
   booted=`adb shell getprop dev.bootcomplete`
   sleep 1
 done
-
-
-# Wait for running processes to cool down.
-# Run:
-adb shell top
-# And continuously inspect the refreshing output - wait for the idle
-# percent indicator to settle down, as in line 4 (L4):
-#
 
