@@ -16,7 +16,7 @@ public abstract class Wheel {
 
     protected final State state;
     private Calendar userSetValue;
-    public boolean isAnimating;
+    public boolean spinning;
 
     public abstract boolean visible();
     public abstract boolean wrapSelectorWheel();
@@ -49,7 +49,7 @@ public abstract class Wheel {
         int indexToScrollTo = getIndexOfDate(date);
         int currentIndex = getIndex();
         if(currentIndex == indexToScrollTo) return;
-        isAnimating = true;
+        spinning = true;
         picker.smoothScrollToValue(getIndexOfDate(date));
     }
 
@@ -143,4 +143,15 @@ public abstract class Wheel {
                 return 5;
         }
     }
+
+    public void scroll(int scrollTimes){
+        int currentIndex = picker.getValue();
+        int maxValue = picker.getMaxValue();
+        boolean isWrapping = picker.getWrapSelectorWheel();
+        int nextValue = currentIndex + scrollTimes;
+        if(nextValue <= maxValue || isWrapping) {
+            picker.smoothScrollToValue(nextValue % (maxValue + 1));
+        }
+    }
+
 }

@@ -35,8 +35,7 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
 
     @Override
     public void onChange(Wheel picker) {
-        picker.isAnimating = false;
-        if(wheels.hasAnimatedWheel()) return;
+        picker.spinning = false;
         if(wheels.hasSpinningWheel()) return;
 
         if(!dateExists()){

@@ -20,7 +20,6 @@ public class UIManager {
     private final View rootView;
     private Wheels wheels;
     private FadingOverlay fadingOverlay;
-    private WheelScroller wheelScroller = new WheelScroller();
 
     public UIManager(State state, View rootView){
         this.state = state;
@@ -61,7 +60,7 @@ public class UIManager {
 
     public void scroll(int wheelIndex, int scrollTimes) {
         Wheel wheel = wheels.getWheel(state.derived.getOrderedVisibleWheels().get(wheelIndex));
-        wheelScroller.scroll(wheel, scrollTimes);
+        wheel.scroll(scrollTimes);
     }
 
     SimpleDateFormat getDateFormat() {

@@ -223,15 +223,9 @@ public class Wheels {
 
     public boolean hasSpinningWheel() {
         for(Wheel wheel: getAll()) {
-            if(wheel.picker.isSpinning()) return true;
+            if(wheel.spinning) return true;
         }
         return false;
     }
 
-    public boolean hasAnimatedWheel() {
-        for(Wheel wheel: getOrderedVisibleWheels()) {
-            if(wheel.isAnimating) return true;
-        }
-        return false;
-    }
 }
