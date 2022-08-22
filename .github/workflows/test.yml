@@ -101,7 +101,7 @@ jobs:
         with:
           timeout_minutes: 3
           max_attempts: 3
-          command: bash scripts/launch.sh
+          command: bash ./examples/Rn069/scripts/launch.sh
 
       - name: launch2.sh
         run: bash scripts/launch2.sh
