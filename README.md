@@ -45,9 +45,12 @@ The second option is to use the inlined picker. Place it in a View or a custom m
 - If using React Native 0.64, 0.64.2 or later must be used.
 - If using Expo, SDK 42 or later must be used. If using Expo SDK 44, 44.0.4 or later must be used.
 
-## Installation
+## Expo
 
-If you're using expo, follow <a href="#using-expo">these steps instead.</a>
+- ✅ You can use this library with [Development Builds](https://docs.expo.dev/development/introduction/). No config plugin is required.
+- ❌ This library can't be used in the "Expo Go" app because it [requires custom native code](https://docs.expo.dev/workflow/customizing/).
+
+## Installation
 
 1. Download package with npm or yarn
 
@@ -73,33 +76,6 @@ npx react-native run-ios
 ```
 
 If you're having troubles after following these steps, there might be a <a href="https://github.com/henninghall/react-native-date-picker/#user-content-linking">linking issue</a>.
-
-## Using Expo
-
-<a href="https://expo.dev/">Expo</a> is supported by creating <a href="https://docs.expo.dev/clients/introduction/">a custom client</a>.
-
-1. Create the custom client:
-
-```
-expo install react-native-date-picker expo-dev-client
-```
-
-2. Build the app
-
-Locally
-
-```
-expo run:ios
-expo run:android
-```
-
-Or in the cloud
-
-```
-eas build -p all --profile development
-```
-
-If you're having troubles, read the <a href="https://expo.canny.io/feature-requests/p/react-native-date-picker">pinned comment here. </a>
 
 ## Example 1: Modal
 
