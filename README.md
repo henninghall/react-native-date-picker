@@ -149,7 +149,7 @@ export default () => {
 
 ## Additional android styling
 
-There are som additional styling possibilities for the "androidNative" picker variant.
+There are some additional styling possibilities for the "androidNative" picker variant.
 
 ### Divider color
 
