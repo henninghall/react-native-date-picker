@@ -3,7 +3,7 @@
 This is a React Native Date Picker with following main features:
 
 📱&nbsp; Supports iOS, Android and Expo<br>
-🕑&nbsp; 3 different modes: Time, Date, DateTime <br>
+🕑&nbsp; 3 different modes: Time, Date, DateTime<br>
 🌍&nbsp; Various languages<br>
 🎨&nbsp; Customizable<br>
 🖼&nbsp; Modal or Inlined<br>
