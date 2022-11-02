@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="overlay">Date Picker Overlay</string>
+    <string name="year_description">Sélectionnez l\'année</string>
+    <string name="month_description">Sélectionnez le mois</string>
+    <string name="date_description">Sélectionnez la date</string>
+    <string name="day_description">Sélectionnez le jour</string>
+    <string name="hour_description">Sélectionnez l\'heure</string>
+    <string name="minutes_description">Sélectionnez les minutes</string>
+    <string name="ampm_description">Sélectionnez AM/PM</string>
+    <string name="time_tag">Le temps est</string>
+    <string name="hour_tag">Heure :</string>
+    <string name="minutes_tag">Minutes </string>
+</resources>

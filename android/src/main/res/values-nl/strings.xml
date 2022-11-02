@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="overlay">Date Picker Overlay</string>
+    <string name="year_description">Selecteer jaar</string>
+    <string name="month_description">Selecteer maand</string>
+    <string name="date_description">Selecteer datum</string>
+    <string name="day_description">Selecteer dag</string>
+    <string name="hour_description">Selecteer uur</string>
+    <string name="minutes_description">Selecteer minuten</string>
+    <string name="ampm_description">Selecteer AM/PM</string>
+    <string name="time_tag">Tijd is</string>
+    <string name="hour_tag">Uur :</string>
+    <string name="minutes_tag">Minuten </string>
+</resources>
