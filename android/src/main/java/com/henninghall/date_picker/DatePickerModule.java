@@ -19,6 +19,8 @@ import net.time4j.android.ApplicationStarter;
 
 public class DatePickerModule extends ReactContextBaseJavaModule {
 
+    private AlertDialog dialog;
+
     DatePickerModule(ReactApplicationContext context) {
         super(context);
         ApplicationStarter.initialize(context, false); // false = no need to prefetch on time data background tread
@@ -37,8 +39,13 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void openPicker(ReadableMap props, Callback onConfirm, Callback onCancel){
         PickerView picker = createPicker(props);
-        AlertDialog dialog = createDialog(props, picker, onConfirm, onCancel);
+        dialog = createDialog(props, picker, onConfirm, onCancel);
         dialog.show();
+    }
+
+    @ReactMethod
+    public void closePicker(){
+        dialog.dismiss();
     }
 
     private AlertDialog createDialog(
