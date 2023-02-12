@@ -1,8 +1,8 @@
 import fs from 'fs'
 
-const file = './android/build.gradle'
+const file = '../../android/build.gradle'
 const replace = /implementation 'com.facebook.react:react-native:\+'/g
-const replacement = "implementation 'com.facebook.react:react-native:0.59.10'"
+const replacement = "implementation 'com.facebook.react:react-native:0.59.9'"
 const encoding = 'utf8'
 
 const data = fs.readFileSync(file, encoding)
