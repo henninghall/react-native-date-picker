@@ -20,7 +20,7 @@ class DatePickerAndroid extends React.PureComponent {
     const props = this.getProps()
     const isClosed = this._isCurrentlyClosed();
 
-    this.previousProps = props; 
+    this.previousProps = props;
     if (props.modal) {
       if (props.open && isClosed) {
         NativeModules.RNDatePicker.openPicker(
@@ -28,6 +28,8 @@ class DatePickerAndroid extends React.PureComponent {
           this._onConfirm,
           this.props.onCancel
         )
+      } else if (!props.open && !isClosed) {
+        NativeModules.RNDatePicker.closePicker()
       }
       return null
     }

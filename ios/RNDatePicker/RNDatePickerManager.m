@@ -156,14 +156,20 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         }
         
         // Finding the top view controller which is neccessary to be able to show the picker from within modal
-        UIViewController *topViewController = rootViewController;
-        while (topViewController.presentedViewController){
-            topViewController = topViewController.presentedViewController;
+        _topViewController = rootViewController;
+        while (_topViewController.presentedViewController){
+            _topViewController = _topViewController.presentedViewController;
         }
-        
-        [topViewController presentViewController:alertController animated:YES completion:nil];
+        [_topViewController presentViewController:alertController animated:YES completion:nil];
     });
 
+}
+
+RCT_EXPORT_METHOD(closePicker)
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_topViewController dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 
 - (double) getPickerWidth :(UIView *) alertView

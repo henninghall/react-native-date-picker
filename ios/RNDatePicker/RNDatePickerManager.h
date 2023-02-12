@@ -10,4 +10,6 @@
 
 @interface RNDatePickerManager : RCTViewManager
 
+@property (strong, nonatomic) UIViewController *topViewController;
+
 @end

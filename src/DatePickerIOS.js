@@ -47,7 +47,7 @@ export default class DatePickerIOS extends React.Component {
     const props = this._toIosProps(this.props)
     const isClosed = this._isCurrentlyClosed();
 
-    this.previousProps = props; 
+    this.previousProps = props;
     if (props.modal) {
       if (props.open && isClosed) {
         NativeModules.RNDatePickerManager.openPicker(
@@ -55,6 +55,8 @@ export default class DatePickerIOS extends React.Component {
           this._onConfirm,
           props.onCancel
         )
+      } else if (!props.open && !isClosed) {
+        NativeModules.RNDatePickerManager.closePicker()
       }
       return null
     }
@@ -72,7 +74,7 @@ export default class DatePickerIOS extends React.Component {
       />
     )
   }
-  
+
   _isCurrentlyClosed = () => !this.previousProps || !this.previousProps.open
 }
 
