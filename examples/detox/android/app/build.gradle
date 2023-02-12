@@ -74,7 +74,10 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
 
     // noinspection GradleDynamicVersion
-    implementation 'com.facebook.react:react-native:+'
+    implementation ('com.facebook.react:react-native:0.59.9') {
+        force = true
+    }
+    
 
     androidTestImplementation('com.wix:detox:+') { transitive = true }
     androidTestImplementation 'junit:junit:4.12'
