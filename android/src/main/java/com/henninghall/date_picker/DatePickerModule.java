@@ -55,7 +55,7 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
         final String cancelText = props.getString("cancelText");
         final View pickerWithMargin = withTopMargin(picker);
 
-        return new AlertDialog.Builder(DatePickerPackage.context.getCurrentActivity())
+        return new AlertDialog.Builder(DatePickerPackage.context.getCurrentActivity(), getTheme(props))
                 .setTitle(title)
                 .setCancelable(true)
                 .setView(pickerWithMargin)
@@ -78,6 +78,17 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
                     }
                 })
                 .create();
+    }
+
+    private int getTheme(ReadableMap props) {
+        int defaultTheme = 0;
+        String theme = props.getString("theme");
+        if(theme == null) return defaultTheme;
+        switch (theme){
+            case "light": return AlertDialog.THEME_DEVICE_DEFAULT_LIGHT;
+            case "dark": return AlertDialog.THEME_DEVICE_DEFAULT_DARK;
+            default: return defaultTheme;
+        }
     }
 
     private PickerView createPicker(ReadableMap props){
