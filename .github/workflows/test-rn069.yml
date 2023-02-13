@@ -2,6 +2,7 @@ name: 'Test'
 
 on:
   workflow_dispatch:
+  push:
 
 jobs:
   javascript_unit_tests:
