@@ -1,0 +1,124 @@
+name: 'Test'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  javascript_unit_tests:
+    name: Unit tests - javascript
+    runs-on: macos-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: 'yarn'
+
+      - name: Install npm dependencies
+        run: |
+          yarn install --frozen-lockfile
+
+      - name: Run unit tests
+        run: |
+          yarn test
+
+  java_unit_tests:
+    name: Unit tests - java
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+      - name: Install npm dependencies
+        working-directory: ./examples/Rn069
+        run: |
+          yarn install --frozen-lockfile
+
+      - name: Run unit tests
+        working-directory: ./examples/Rn069/android
+        run: ./gradlew testDebugUnitTest
+
+  tests_end_to_end:
+    name: End to end tests
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./examples/Rn069
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14.18.1
+          cache: 'yarn'
+
+      - name: Install npm dependencies (example project)
+        run: yarn install --frozen-lockfile
+
+      - name: Install npm dependencies (root)
+        run: yarn install --frozen-lockfile
+        working-directory: ./
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+      - name: brew install --cask android-commandlinetools
+        run: brew install --cask android-commandlinetools
+
+      - name: Install emulator
+        run: |
+          (while sleep 3; do echo "y"; done) | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+          echo "✨ Licenses accepted"
+          ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install emulator
+          echo "✨ Installed emulator"
+          ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-29;default;x86_64"
+          echo "✨ Installed image"
+          ~/Library/Android/sdk/cmdline-tools/latest/bin/avdmanager --verbose create avd --force --name Pixel_4_API_29 --abi x86_64 --device "pixel" --package "system-images;android-29;default;x86_64"
+          echo "✨ Created AVD"
+
+      - name: launch.sh
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 3
+          command: bash ./examples/Rn069/scripts/launch.sh
+
+      - name: launch2.sh
+        run: bash scripts/launch2.sh
+
+      - name: butler.sh
+        run: bash scripts/butler.sh
+
+      - name: Build
+        run: |
+          yarn build:android:ci
+
+      - name: Test
+        run: |
+          yarn test:android:ci
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: Failing tests
+          path: ./examples/Rn069/artifacts
+
+      - name: Kill emulator
+        if: always()
+        run: |
+          bash scripts/kill.sh
