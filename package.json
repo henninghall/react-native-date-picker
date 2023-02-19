@@ -8,7 +8,8 @@
   "scripts": {
     "prepublishOnly": "mv README.md githubREADME.md && mv npmREADME.md README.md",
     "postpublish": "mv README.md npmREADME.md && mv githubREADME.md README.md",
-    "test": "jest src"
+    "test": "jest src",
+    "emulator": "bash ./scripts/start-android-emulator.sh"
   },
   "repository": {
     "type": "git",
