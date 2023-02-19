@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {
   ScrollView,
-  AppRegistry,
   StyleSheet,
   Text,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import examples from './examples';
 
@@ -22,10 +22,12 @@ export default class App extends Component {
         ]}
         contentContainerStyle={styles.content}
       >
-        <Text style={styles.header}>{!this.state.picker && 'Examples'}</Text>
-        {!this.state.picker && this.renderButtons()}
-        {!!this.state.picker && this.renderBackButton()}
-        {!!this.state.picker && this.renderPicker()}
+        <SafeAreaView>
+          <Text style={styles.header}>{!this.state.picker && 'Examples'}</Text>
+          {!this.state.picker && this.renderButtons()}
+          {!!this.state.picker && this.renderBackButton()}
+          {!!this.state.picker && this.renderPicker()}
+        </SafeAreaView>
       </ScrollView>
     );
   }
@@ -60,7 +62,7 @@ export default class App extends Component {
   renderBackButton = key => (
     <TouchableOpacity
       onPress={() => this.setState({picker: undefined})}
-      style={{margin: 10, position: 'absolute', top: 0, left: 10}}
+      style={{margin: 10, position: 'absolute', top: 30, left: 0}}
     >
       <Text style={styles.text}>Back</Text>
     </TouchableOpacity>
