@@ -1,0 +1,12 @@
+appId: com.rn069
+---
+- tapOn:
+    id: propName
+- inputText: locale
+- tapOn:
+    id: propValue
+- inputText: vi-VN
+- tapOn:
+    id: changeProp
+- tapOn:
+    id: changeProp

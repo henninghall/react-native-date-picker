@@ -1,0 +1,5 @@
+appId: com.rn069
+---
+- swipe:
+    start: 50%, 40% # From (90% of width, 50% of height)
+    end: 50%, 35% # To (10% of width, 50% of height)
