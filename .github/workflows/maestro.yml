@@ -13,11 +13,24 @@ jobs:
       app: app/build/outputs/apk/release
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-      - run: cd android && chmod +x gradlew
-      - run: cd android && chmod +x ./gradlew
-      - run: cd android && ./gradlew assembleRelease
+
+      - name: Node
+        uses: actions/setup-node@v2
+
+      - name: Use specific Java version for sdkmanager to work
+        uses: joschi/setup-jdk@v2
+        with:
+          java-version: 'openjdk8'
+          architecture: 'x64'
+
+      - name: Install npm dependencies
+        working-directory: ./examples/Rn069
+        run: yarn install --frozen-lockfile --network-timeout 60000
+
+      - name: build
+        working-directory: ./examples/Rn069/android
+        run: ./gradlew assembleRelease
+
       - uses: mobile-dev-inc/action-maestro-cloud@v1.1.1
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
