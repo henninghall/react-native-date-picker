@@ -8,18 +8,24 @@ on:
 
 jobs:
   maestro-cloud:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     outputs:
       app: app/build/outputs/apk/release
     steps:
       - uses: actions/checkout@v3
 
-      - name: Node
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14.18.1
+          cache: 'yarn'
 
-      - name: Install npm dependencies
-        working-directory: ./examples/Rn069
-        run: yarn install --frozen-lockfile --network-timeout 60000
+      - name: Install npm dependencies (example project)
+        working-directory: ./examples/Rn069/
+        run: yarn install --frozen-lockfile
+
+      - name: Install npm dependencies (root)
+        working-directory: ./
+        run: yarn install --frozen-lockfile
 
       - uses: actions/setup-java@v3
         with:
