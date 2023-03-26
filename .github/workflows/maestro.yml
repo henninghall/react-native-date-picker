@@ -17,7 +17,7 @@ jobs:
         with:
           java-version: 11
           distribution: 'temurin'
-      - run: ./gradlew assembleRelease
+      - run: cd android && ./gradlew assembleRelease
       - uses: mobile-dev-inc/action-maestro-cloud@v1.1.1
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
