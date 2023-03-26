@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup Gradle
-      uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v2
       - run: cd android && ./gradlew assembleRelease
       - uses: mobile-dev-inc/action-maestro-cloud@v1.1.1
         with:
