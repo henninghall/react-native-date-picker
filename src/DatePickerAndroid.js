@@ -1,16 +1,17 @@
 import React from 'react'
-import { NativeModules, requireNativeComponent } from 'react-native'
+import { NativeModules, requireNativeComponent, Platform } from 'react-native'
 import { shouldCloseModal, shouldOpenModal } from './modal'
 
 function addMinutes(date, minutesToAdd) {
   return new Date(date.valueOf() + minutesToAdd * 60 * 1000)
 }
 
-const NativeDatePicker = requireNativeComponent(
-  `DatePickerManager`,
-  DatePickerAndroid,
-  { nativeOnly: { onChange: true } }
-)
+const NativeDatePicker =
+  Platform.OS === 'android'
+    ? requireNativeComponent(`DatePickerManager`, DatePickerAndroid, {
+        nativeOnly: { onChange: true },
+      })
+    : null
 
 const height = 180
 const timeModeWidth = 240
