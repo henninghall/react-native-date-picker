@@ -1,10 +1,6 @@
 import React from 'react'
-import {
-  StyleSheet,
-  requireNativeComponent,
-  NativeModules,
-  Platform,
-} from 'react-native'
+import { StyleSheet, requireNativeComponent, NativeModules, Platform } from 'react-native'
+import { shouldCloseModal, shouldOpenModal } from './modal'
 
 const RCTDatePickerIOS =
   Platform.OS === 'ios' ? requireNativeComponent('RNDatePicker') : null
@@ -42,26 +38,34 @@ export default class DatePickerIOS extends React.Component {
   }
 
   _onConfirm = ({ timestamp }) => {
+    this.isClosing = true
     this.props.onConfirm(new Date(timestamp))
+  }
+
+  _onCancel = () => {
+    this.isClosing = true
+    this.props.onCancel()
   }
 
   render() {
     const props = this._toIosProps(this.props)
-    const isClosed = this._isCurrentlyClosed();
 
-    this.previousProps = props;
-    if (props.modal) {
-      if (props.open && isClosed) {
-        NativeModules.RNDatePickerManager.openPicker(
-          props,
-          this._onConfirm,
-          props.onCancel
-        )
-      } else if (!props.open && !isClosed) {
-        NativeModules.RNDatePickerManager.closePicker()
-      }
-      return null
+    if (shouldOpenModal(props, this.previousProps)) {
+      this.isClosing = false
+      NativeModules.RNDatePickerManager.openPicker(
+        props,
+        this._onConfirm,
+        this._onCancel
+      )
     }
+    if (shouldCloseModal(props, this.previousProps, this.isClosing)) {
+      this.isClosing = true
+      NativeModules.RNDatePickerManager.closePicker()
+    }
+
+    this.previousProps = props
+
+    if (props.modal) return null
 
     return (
       <RCTDatePickerIOS
@@ -76,8 +80,6 @@ export default class DatePickerIOS extends React.Component {
       />
     )
   }
-
-  _isCurrentlyClosed = () => !this.previousProps || !this.previousProps.open
 }
 
 const styles = StyleSheet.create({

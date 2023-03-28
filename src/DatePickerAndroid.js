@@ -1,5 +1,6 @@
 import React from 'react'
-import { requireNativeComponent, NativeModules, Platform } from 'react-native'
+import { NativeModules, requireNativeComponent, Platform } from 'react-native'
+import { shouldCloseModal, shouldOpenModal } from './modal'
 
 function addMinutes(date, minutesToAdd) {
   return new Date(date.valueOf() + minutesToAdd * 60 * 1000)
@@ -19,26 +20,26 @@ const defaultWidth = 310
 class DatePickerAndroid extends React.PureComponent {
   render() {
     const props = this.getProps()
-    const isClosed = this._isCurrentlyClosed()
+
+    if (shouldOpenModal(props, this.previousProps)) {
+      this.isClosing = false
+      NativeModules.RNDatePicker.openPicker(
+        props,
+        this._onConfirm,
+        this._onCancel
+      )
+    }
+    if (shouldCloseModal(props, this.previousProps, this.isClosing)) {
+      this.closing = true
+      NativeModules.RNDatePicker.closePicker()
+    }
 
     this.previousProps = props
-    if (props.modal) {
-      if (props.open && isClosed) {
-        NativeModules.RNDatePicker.openPicker(
-          props,
-          this._onConfirm,
-          this.props.onCancel
-        )
-      } else if (!props.open && !isClosed) {
-        NativeModules.RNDatePicker.closePicker()
-      }
-      return null
-    }
+
+    if (props.modal) return null
 
     return <NativeDatePicker {...props} onChange={this._onChange} />
   }
-
-  _isCurrentlyClosed = () => !this.previousProps || !this.previousProps.open
 
   getProps = () => ({
     ...this.props,
@@ -86,7 +87,13 @@ class DatePickerAndroid extends React.PureComponent {
   }
 
   _onConfirm = (isoDate) => {
+    this.isClosing = true
     this.props.onConfirm(this._fromIsoWithTimeZoneOffset(isoDate))
+  }
+
+  _onCancel = () => {
+    this.isClosing = true
+    this.props.onCancel()
   }
 }
 
