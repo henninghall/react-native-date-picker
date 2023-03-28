@@ -3,9 +3,11 @@ import {
   StyleSheet,
   requireNativeComponent,
   NativeModules,
+  Platform,
 } from 'react-native'
 
-const RCTDatePickerIOS = requireNativeComponent('RNDatePicker')
+const RCTDatePickerIOS =
+  Platform.OS === 'ios' ? requireNativeComponent('RNDatePicker') : null
 
 export default class DatePickerIOS extends React.Component {
   _picker = null

@@ -1,15 +1,16 @@
 import React from 'react'
-import { requireNativeComponent, NativeModules } from 'react-native'
+import { requireNativeComponent, NativeModules, Platform } from 'react-native'
 
 function addMinutes(date, minutesToAdd) {
   return new Date(date.valueOf() + minutesToAdd * 60 * 1000)
 }
 
-const NativeDatePicker = requireNativeComponent(
-  `DatePickerManager`,
-  DatePickerAndroid,
-  { nativeOnly: { onChange: true } }
-)
+const NativeDatePicker =
+  Platform.OS === 'android'
+    ? requireNativeComponent(`DatePickerManager`, DatePickerAndroid, {
+        nativeOnly: { onChange: true },
+      })
+    : null
 
 const height = 180
 const timeModeWidth = 240
@@ -18,9 +19,9 @@ const defaultWidth = 310
 class DatePickerAndroid extends React.PureComponent {
   render() {
     const props = this.getProps()
-    const isClosed = this._isCurrentlyClosed();
+    const isClosed = this._isCurrentlyClosed()
 
-    this.previousProps = props;
+    this.previousProps = props
     if (props.modal) {
       if (props.open && isClosed) {
         NativeModules.RNDatePicker.openPicker(
