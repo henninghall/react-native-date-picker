@@ -19,5 +19,5 @@ appId: com.android.settings
     commands:
       - runFlow: utils/swipe-wheel-1.yml
 
-- runFlow: utils/swipe-wheel-am-pm.yml
+- runFlow: utils/swipe-wheel-4.yml
 - assertVisible: 'Wed Jan 5200 AM '
