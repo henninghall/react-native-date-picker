@@ -46,9 +46,15 @@ class DatePickerAndroid extends React.PureComponent {
     date: this._date(),
     minimumDate: this._minimumDate(),
     maximumDate: this._maximumDate(),
-    utc: this.props.timeZoneOffsetInMinutes !== undefined,
+    timezoneOffsetInMinutes: this._getTimezoneOffsetInMinutes(),
     style: this._getStyle(),
   })
+
+  _getTimezoneOffsetInMinutes = () => {
+    const deviceOffset = new Date().getTimezoneOffset()
+    if (this.props.timeZoneOffsetInMinutes == undefined) return deviceOffset
+    return this.props.timeZoneOffsetInMinutes
+  }
 
   _getStyle = () => {
     const width = this.props.mode === 'time' ? timeModeWidth : defaultWidth
@@ -75,15 +81,11 @@ class DatePickerAndroid extends React.PureComponent {
 
   _fromIsoWithTimeZoneOffset = (timestamp) => {
     const date = new Date(timestamp)
-    if (this.props.timeZoneOffsetInMinutes === undefined) return date
-    return addMinutes(date, -this.props.timeZoneOffsetInMinutes)
+    return addMinutes(date, -this._getTimezoneOffsetInMinutes())
   }
 
   _toIsoWithTimeZoneOffset = (date) => {
-    if (this.props.timeZoneOffsetInMinutes === undefined)
-      return date.toISOString()
-
-    return addMinutes(date, this.props.timeZoneOffsetInMinutes).toISOString()
+    return addMinutes(date, this._getTimezoneOffsetInMinutes()).toISOString()
   }
 
   _onConfirm = (isoDate) => {

@@ -9,6 +9,7 @@ import com.henninghall.date_picker.models.WheelType;
 
 import net.time4j.PrettyTime;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -109,5 +110,10 @@ public class Utils {
 
     public static int toDp(int pixels){
         return (int) (pixels * DatePickerPackage.context.getResources().getDisplayMetrics().density);
+    }
+
+    public static String toPaddedMinutes(int minutes){
+        DecimalFormat df = new DecimalFormat("00");
+        return df.format(minutes);
     }
 }

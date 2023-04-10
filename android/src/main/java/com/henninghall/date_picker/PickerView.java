@@ -11,7 +11,7 @@ import com.henninghall.date_picker.props.Is24hourSourceProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
 import com.henninghall.date_picker.props.MinimumDateProp;
 import com.henninghall.date_picker.props.MinuteIntervalProp;
-import com.henninghall.date_picker.props.UtcProp;
+import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
 import com.henninghall.date_picker.props.VariantProp;
 import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.FadeToColorProp;
@@ -77,7 +77,7 @@ public class PickerView extends RelativeLayout {
 
         if (didUpdate(DateProp.name, HeightProp.name, LocaleProp.name,
                 MaximumDateProp.name, MinimumDateProp.name, MinuteIntervalProp.name, ModeProp.name,
-                UtcProp.name, VariantProp.name
+                TimezoneOffsetInMinutesProp.name, VariantProp.name
         )) {
             uiManager.updateDisplayValues();
         }
