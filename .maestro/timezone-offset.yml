@@ -1,0 +1,20 @@
+appId: com.android.settings
+---
+- runFlow:
+    file: utils/set-timezone.yml
+    env:
+      TIMEZONE: Denver
+
+- runFlow: utils/launch.yml
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: timeZoneOffsetInMinutes
+      VALUE: 180
+- repeat:
+    times: 5
+    commands:
+      - runFlow: utils/swipe-wheel-1.yml
+
+- runFlow: utils/swipe-wheel-am-pm.yml
+- assertVisible: 'Wed Jan 5200 AM '

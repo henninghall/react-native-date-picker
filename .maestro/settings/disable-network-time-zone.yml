@@ -1,0 +1,4 @@
+appId: com.android.settings
+---
+- tapOn: 'Use network-provided time zone'
+- tapOn: 'Time zone'
