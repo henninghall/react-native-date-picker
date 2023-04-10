@@ -18,7 +18,7 @@ export default class App extends Component {
       <ScrollView
         style={[
           styles.container,
-          {backgroundColor: this.state.backgroundColor},
+          {backgroundColor: this.state.backgroundColor || 'white'},
         ]}
         contentContainerStyle={styles.content}
       >
@@ -64,7 +64,7 @@ export default class App extends Component {
       onPress={() => this.setState({picker: undefined})}
       style={{margin: 10, position: 'absolute', top: 30, left: 0}}
     >
-      <Text style={styles.text}>Back</Text>
+      <Text style={styles.text}>Go back</Text>
     </TouchableOpacity>
   );
 }

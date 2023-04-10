@@ -1,3 +1,6 @@
+# Covering situation where current timezone is different from timezoneOffsetInMinutes combined with max/min date set.
+# Bug was reported here: https://github.com/henninghall/react-native-date-picker/issues/613
+
 appId: com.android.settings
 ---
 - runFlow:

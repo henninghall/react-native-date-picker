@@ -19,6 +19,8 @@ import com.henninghall.date_picker.props.Prop;
 import com.henninghall.date_picker.props.TextColorProp;
 import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
 
+import net.time4j.tz.Timezone;
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
@@ -99,8 +101,10 @@ public class State {
     }
 
     public TimeZone getTimeZone() {
-        int totalOffsetMinutes = Math.abs(timezoneOffsetInMinutesProp.getValue());
-        char offsetDirection = timezoneOffsetInMinutesProp.getValue() < 0 ? '-' : '+';
+        Integer offset = timezoneOffsetInMinutesProp.getValue();
+        if(offset == null) return TimeZone.getDefault();
+        int totalOffsetMinutes = Math.abs(offset);
+        char offsetDirection = offset < 0 ? '-' : '+';
         int offsetHours = (int) Math.floor(totalOffsetMinutes / 60f);
         int offsetMinutes = totalOffsetMinutes - offsetHours * 60;
         String timeZoneId = "GMT" + offsetDirection + offsetHours + ":" + Utils.toPaddedMinutes(offsetMinutes);

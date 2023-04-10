@@ -12,4 +12,6 @@ appId: com.android.settings
       notVisible: 'Select time zone'
     file: ../settings/disable-network-time-zone.yml
 - tapOn: 'Region'
-- inputText: ${TIMEZONE}
+- inputText: 'us'
+- tapOn: 'United states'
+- tapOn: ${STATE}

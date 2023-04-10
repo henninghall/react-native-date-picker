@@ -7,6 +7,7 @@ public class TimezoneOffsetInMinutesProp extends Prop<Integer> {
 
     @Override
     Integer toValue(Dynamic value) {
+        if(value.isNull()) return null;
         return value.asInt();
     }
 }
