@@ -1,6 +1,7 @@
 appId: com.rn069
 ---
-- launchApp
+- launchApp:
+    stopApp: true
 - tapOn: Advanced
 - tapOn: androidVariant
 - tapOn: nativeAndroid
