@@ -1,13 +1,10 @@
-name: Build and upload to Maestro Cloud
+name: E2E tests (maestro)
 
 on:
-  push:
-  #   branches: [main]
-  # pull_request:
-  #   branches: [main]
+  workflow_dispatch:
 
 jobs:
-  maestro-cloud:
+  e2e-maestro:
     runs-on: ubuntu-latest
     outputs:
       app: app/build/outputs/apk/release
