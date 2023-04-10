@@ -1,0 +1,12 @@
+appId: com.rn069
+---
+- runFlow: utils/launch.yml
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: locale
+      VALUE: vi-VN
+- runFlow: utils/swipe-wheel-1.yml
+- assertVisible:
+    id: dateStringOutput
+    text: 'CN 2 thg 11200 SA '
