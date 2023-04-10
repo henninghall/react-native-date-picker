@@ -18,7 +18,8 @@
     "test:android-12h-mode": "yarn set-time-format 12 && yarn detox test --configuration android.debug e2e/tests/*.spec.js",
     "test:android-12h-mode:ci": "yarn set-time-format 12 && yarn detox test --configuration android.ci e2e/tests/*.spec.js --record-logs failing --record-videos failing --take-screenshots failing",
     "test:android": "yarn test:android-12h-mode && yarn test:android-24h-mode",
-    "test:android:ci": "yarn test:android-12h-mode:ci && yarn test:android-24h-mode:ci"
+    "test:android:ci": "yarn test:android-12h-mode:ci && yarn test:android-24h-mode:ci",
+    "emulator": "scripts/start-android-emulator.sh"
   },
   "dependencies": {
     "detox": "^19.7.1",
@@ -28,15 +29,15 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/preset-typescript": "^7.18.6",
-    "@babel/runtime": "^7.12.5",
+    "@babel/runtime": "^7.21.0",
     "@react-native-community/eslint-config": "^2.0.0",
     "babel-jest": "^28.1.2",
+    "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^7.32.0",
     "eslint-plugin-detox": "^1.0.0",
     "jest": "^28.1.2",
     "metro-react-native-babel-preset": "^0.70.3",
-    "react-test-renderer": "18.0.0",
-    "babel-plugin-module-resolver": "^4.1.0"
+    "react-test-renderer": "18.0.0"
   },
   "jest": {
     "preset": "react-native"

@@ -1,0 +1,39 @@
+name: E2E tests (maestro)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  e2e-maestro:
+    runs-on: ubuntu-latest
+    outputs:
+      app: app/build/outputs/apk/release
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14.18.1
+          cache: 'yarn'
+
+      - name: Install npm dependencies (example project)
+        working-directory: ./examples/Rn069/
+        run: yarn install --frozen-lockfile
+
+      - name: Install npm dependencies (root)
+        working-directory: ./
+        run: yarn install --frozen-lockfile
+
+      - uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: 'temurin'
+
+      - name: build
+        working-directory: ./examples/Rn069/android
+        run: ./gradlew assembleRelease
+
+      - uses: mobile-dev-inc/action-maestro-cloud@v1.1.1
+        with:
+          api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
+          app-file: examples/Rn069/android/app/build/outputs/apk/release/app-release.apk

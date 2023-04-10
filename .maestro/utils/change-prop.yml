@@ -1,0 +1,12 @@
+appId: com.rn069
+---
+- tapOn:
+    id: propName
+- inputText: ${PROP}
+- tapOn:
+    id: propValue
+- inputText: ${VALUE}
+- tapOn:
+    id: changeProp
+- tapOn:
+    id: changeProp
