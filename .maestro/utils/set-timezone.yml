@@ -15,14 +15,19 @@ appId: com.android.settings
       notVisible: 'Select time zone'
     file: disable-network-time-zone.yml
 
+# on some devices (maestro cloud) "Select UTC offset" is displayed instead of Region
 - runFlow:
     file: tap-if-visible.yml
     env:
       TEXT: 'Select UTC offset'
+- runFlow:
+    file: tap-if-visible.yml
+    env:
+      TEXT: 'GMT-07:00'
 
+# Region
 - runFlow:
     file: tap-if-visible.yml
     env:
       TEXT: 'Region'
-
 - inputText: ${TIMEZONE}
