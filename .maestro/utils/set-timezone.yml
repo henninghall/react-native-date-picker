@@ -1,7 +1,11 @@
 appId: com.android.settings
 ---
-- launchApp:
-    stopApp: true
+- launchApp
+- scrollUntilVisible:
+    element:
+      text: 'Settings'
+- tapOn: 'Settings'
+- tapOn: 'Open'
 - tapOn: 'Search settings'
 - inputText: 'Date'
 - tapOn: 'Date & time'

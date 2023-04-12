@@ -1,17 +1,7 @@
 appId: com.android.settings
 ---
-- launchApp:
-    stopApp: true
-- tapOn: 'Search settings'
-- inputText: 'Date'
-- tapOn: 'Date & time'
-- tapOn: 'Date & time'
-- tapOn: 'Time zone'
 - runFlow:
-    when:
-      notVisible: 'Select time zone'
-    file: ../settings/disable-network-time-zone.yml
-- tapOn: 'Region'
-- inputText: 'us'
-- tapOn: 'United states'
+    file: set-timezone.yml
+    env:
+      TIMEZONE: 'United states'
 - tapOn: ${STATE}
