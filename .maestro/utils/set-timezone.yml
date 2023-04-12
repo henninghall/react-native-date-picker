@@ -14,5 +14,15 @@ appId: com.android.settings
     when:
       notVisible: 'Select time zone'
     file: disable-network-time-zone.yml
-- tapOn: 'Region'
+
+- runFlow:
+    file: tap-if-visible.yml
+    env:
+      TEXT: 'Select UTC offset'
+
+- runFlow:
+    file: tap-if-visible.yml
+    env:
+      TEXT: 'Region'
+
 - inputText: ${TIMEZONE}
