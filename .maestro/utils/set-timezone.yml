@@ -1,11 +1,10 @@
 appId: com.android.settings
 ---
 - launchApp
-- scrollUntilVisible:
-    element:
-      text: 'Settings'
-- tapOn: 'Settings'
-- tapOn: 'Open'
+- runFlow:
+    when:
+      visible: 'App info'
+    file: goto-settings-from-app-info.yml
 - tapOn: 'Search settings'
 - inputText: 'Date'
 - tapOn: 'Date & time'
@@ -14,6 +13,6 @@ appId: com.android.settings
 - runFlow:
     when:
       notVisible: 'Select time zone'
-    file: ../settings/disable-network-time-zone.yml
+    file: disable-network-time-zone.yml
 - tapOn: 'Region'
 - inputText: ${TIMEZONE}
