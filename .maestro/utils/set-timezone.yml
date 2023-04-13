@@ -17,17 +17,16 @@ appId: com.android.settings
 
 # on some devices (maestro cloud) "Select UTC offset" is displayed instead of Region
 - runFlow:
-    file: tap-if-visible.yml
+    when:
+      visible: 'Select UTC offset'
+    file: select-utc-offset.yml
     env:
-      TEXT: 'Select UTC offset'
-- runFlow:
-    file: tap-if-visible.yml
-    env:
-      TEXT: ${GMT}
+      GMT: ${GMT}
 
-# Region
+# on most(?) devices timezone is selected by picking region
 - runFlow:
-    file: tap-if-visible.yml
+    when:
+      visible: Region
+    file: select-region.yml
     env:
-      TEXT: 'Region'
-- inputText: ${TIMEZONE}
+      TIMEZONE: ${TIMEZONE}
