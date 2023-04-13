@@ -23,7 +23,7 @@ appId: com.android.settings
 - runFlow:
     file: tap-if-visible.yml
     env:
-      TEXT: 'GMT-07:00'
+      TEXT: ${GMT}
 
 # Region
 - runFlow:
