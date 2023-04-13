@@ -4,7 +4,7 @@ appId: com.rn069
     file: utils/set-timezone.yml
     env:
       TIMEZONE: Sweden
-      GMT: GMT+02:00
+      GMT: GMT+01:00
 
 - runFlow: utils/launch.yml
 
