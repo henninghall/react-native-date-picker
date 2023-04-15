@@ -70,9 +70,11 @@ jobs:
         run: ./gradlew installRelease
 
       - name: Run tests
+        working-directory: ./
         run: maestro test .maestro/display-text.yml
 
       - name: Run tests
+        working-directory: ./
         run: maestro test .maestro/timezone-offset-in-minutes.yml
 
       - name: Upload artifacts
