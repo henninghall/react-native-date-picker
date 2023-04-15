@@ -22,11 +22,9 @@ jobs:
           cache: 'yarn'
 
       - name: Install maestro
-        run: curl -Ls "https://get.maestro.mobile.dev" | bash
-
-      - run: echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
-
-      - run: maestro
+        run: |
+          curl -Ls "https://get.maestro.mobile.dev" | bash
+          echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
 
       - name: Install npm dependencies (example project)
         run: yarn install --frozen-lockfile
@@ -70,11 +68,6 @@ jobs:
       - name: build
         working-directory: ./examples/Rn069/android
         run: ./gradlew installRelease
-
-      - name: Install maestro
-        run: |
-          curl -Ls "https://get.maestro.mobile.dev" | bash
-          export PATH="$PATH":"$HOME/.maestro/bin"
 
       - name: Run tests
         run: maestro test .maestro/display-text.yml
