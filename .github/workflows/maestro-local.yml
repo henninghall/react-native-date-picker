@@ -53,6 +53,7 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: ./gradlew connectedCheck
+          working-directory: ./examples/Rn069/android
 
       - name: build
         working-directory: ./examples/Rn069/android
