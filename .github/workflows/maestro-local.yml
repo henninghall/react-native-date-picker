@@ -24,8 +24,7 @@ jobs:
       - name: Install maestro
         run: curl -Ls "https://get.maestro.mobile.dev" | bash
 
-      - name: maestro path
-        run: export PATH="$PATH":"$HOME/.maestro/bin"
+      - run: echo "${HOME}/.maestro/bin" >> $GITHUB_PATH
 
       - run: maestro
 
