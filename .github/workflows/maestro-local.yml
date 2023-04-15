@@ -21,6 +21,14 @@ jobs:
           node-version: 14.18.1
           cache: 'yarn'
 
+      - name: Install maestro
+        run: curl -Ls "https://get.maestro.mobile.dev" | bash
+
+      - name: maestro path
+        run: export PATH="$PATH":"$HOME/.maestro/bin"
+
+      - run: maestro
+
       - name: Install npm dependencies (example project)
         run: yarn install --frozen-lockfile
 
