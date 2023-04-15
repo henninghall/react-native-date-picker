@@ -23,6 +23,11 @@ jobs:
         working-directory: ./
         run: yarn install --frozen-lockfile
 
+      - uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: 'temurin'
+
       - name: Gradle cache
         uses: gradle/gradle-build-action@v2
 
@@ -45,7 +50,7 @@ jobs:
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
-      - name: run tests
+      - name: emulator runner
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
