@@ -5,10 +5,16 @@ on:
   push:
 
 jobs:
-  e2e-maestro:
+  tests_end_to_end:
+    name: End to end tests
     runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./examples/Rn069
+
     steps:
-      - uses: actions/checkout@v3
+      - name: checkout
+        uses: actions/checkout@v3
 
       - uses: actions/setup-node@v3
         with:
@@ -16,56 +22,65 @@ jobs:
           cache: 'yarn'
 
       - name: Install npm dependencies (example project)
-        working-directory: ./examples/Rn069/
         run: yarn install --frozen-lockfile
 
       - name: Install npm dependencies (root)
-        working-directory: ./
         run: yarn install --frozen-lockfile
+        working-directory: ./
 
       - uses: actions/setup-java@v3
         with:
-          java-version: 11
-          distribution: 'temurin'
+          distribution: 'zulu'
+          java-version: '11'
 
-      - name: Gradle cache
-        uses: gradle/gradle-build-action@v2
+      - name: brew install --cask android-commandlinetools
+        run: brew install --cask android-commandlinetools
 
-      - name: AVD cache
-        uses: actions/cache@v3
-        id: avd-cache
+      - name: Install emulator
+        run: |
+          (while sleep 3; do echo "y"; done) | ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+          echo "✨ Licenses accepted"
+          ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install emulator
+          echo "✨ Installed emulator"
+          ~/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-29;default;x86_64"
+          echo "✨ Installed image"
+          ~/Library/Android/sdk/cmdline-tools/latest/bin/avdmanager --verbose create avd --force --name Pixel_4_API_29 --abi x86_64 --device "pixel" --package "system-images;android-29;default;x86_64"
+          echo "✨ Created AVD"
+
+      - name: launch.sh
+        uses: nick-fields/retry@v2
         with:
-          path: |
-            ~/.android/avd/*
-            ~/.android/adb*
-          key: avd
+          timeout_minutes: 3
+          max_attempts: 3
+          command: bash ./examples/Rn069/scripts/launch.sh
 
-      - name: create AVD and generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true'
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
-          script: echo "Generated AVD snapshot for caching."
+      - name: launch2.sh
+        run: bash scripts/launch2.sh
 
-      - name: emulator runner
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          script: ./gradlew connectedCheck
-          working-directory: ./examples/Rn069/android
+      - name: butler.sh
+        run: bash scripts/butler.sh
 
       - name: build
         working-directory: ./examples/Rn069/android
-        run: ./gradlew assembleRelease
+        run: ./gradlew installRelease
 
       - name: Install maestro
         run: curl -Ls "https://get.maestro.mobile.dev" | bash
 
       - name: Run tests
+        run: maestro test .maestro/display-text.yml
+
+      - name: Run tests
         run: maestro test .maestro/timezone-offset-in-minutes.yml
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: Failing tests
+          path: ./examples/Rn069/artifacts
+
+      - name: Kill emulator
+        if: always()
+        run: |
+          bash scripts/kill.sh
