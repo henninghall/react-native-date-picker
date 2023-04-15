@@ -65,7 +65,9 @@ jobs:
         run: ./gradlew installRelease
 
       - name: Install maestro
-        run: curl -Ls "https://get.maestro.mobile.dev" | bash
+        run: |
+          curl -Ls "https://get.maestro.mobile.dev" | bash
+          export PATH="$PATH":"$HOME/.maestro/bin"
 
       - name: Run tests
         run: maestro test .maestro/display-text.yml
