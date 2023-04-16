@@ -69,6 +69,11 @@ jobs:
         working-directory: ./examples/Rn069/android
         run: ./gradlew installRelease
 
+      - name: Run FFMPEG
+        run: |
+          brew install ffmpeg
+          ffmpeg -nostdin -f avfoundation -i 0 recording.mov &
+
       - name: Run tests
         working-directory: ./
         run: maestro test .maestro/display-text.yml
@@ -76,6 +81,21 @@ jobs:
       - name: Run tests
         working-directory: ./
         run: maestro test .maestro/timezone-offset-in-minutes.yml
+
+      - name: Stop Recording
+        continue-on-error: true
+        shell: bash
+        run: |
+          PID=$(ps aux | grep -m 1 ffmpeg | awk '{print $2}')
+          python -c "import os, signal; os.kill($PID, signal.SIGINT)"
+
+      - name: upload video
+        if: failure()
+        continue-on-error: true
+        uses: actions/upload-artifact@master
+        with:
+          name: Recording
+          path: recording.mov
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
