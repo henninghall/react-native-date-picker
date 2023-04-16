@@ -83,6 +83,7 @@ jobs:
         run: maestro test .maestro/timezone-offset-in-minutes.yml
 
       - name: Stop Recording
+        if: always()
         continue-on-error: true
         shell: bash
         run: |
@@ -90,7 +91,7 @@ jobs:
           python -c "import os, signal; os.kill($PID, signal.SIGINT)"
 
       - name: upload video
-        if: failure()
+        if: always()
         continue-on-error: true
         uses: actions/upload-artifact@master
         with:
