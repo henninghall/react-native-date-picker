@@ -49,8 +49,14 @@ appId: com.rn069
 - assertVisible: '2000-01-01 00:01:00'
 - assertVisible: 'Fri Dec 31801 PM '
 
-## describe: DAYLIGHT SAVING
-- runFlow: utils/reset.yml
+########## describe: DAYLIGHT SAVING
+- runFlow:
+    file: utils/set-timezone.yml
+    env:
+      TIMEZONE: Sweden
+      GMT: GMT+02:00
+
+- runFlow: utils/launch.yml
 
 # test: timezone offset undefined
 - runFlow:
