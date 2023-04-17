@@ -1,5 +1,6 @@
 appId: com.rn069
 ---
+- tapOn: clear
 - tapOn:
     id: propName
 - inputText: ${PROP}

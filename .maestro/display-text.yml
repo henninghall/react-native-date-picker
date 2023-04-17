@@ -1,6 +1,8 @@
 appId: com.rn069
 ---
 - runFlow: utils/launch.yml
+- tapOn: androidVariant
+- tapOn: nativeAndroid
 - runFlow:
     file: utils/change-prop.yml
     env:
