@@ -127,7 +127,7 @@ appId: com.rn069
     file: utils/set-timezone.yml
     env:
       REGION: 'United states'
-      STATE: Denver
+      STATE: Phoenix
       GMT: GMT-07:00
 - runFlow: utils/launch.yml
 - runFlow:
@@ -140,4 +140,4 @@ appId: com.rn069
     commands:
       - runFlow: utils/swipe-wheel-1.yml
 - runFlow: utils/swipe-wheel-4.yml
-- assertVisible: 'Wed Jan 5200 AM '
+- assertVisible: 'Thu Jan 61000 AM '
