@@ -50,10 +50,8 @@ public class DayWheel extends Wheel {
         Calendar min = state.getMinimumDate();
         if (min != null) {
             cal = (Calendar) min.clone();
-            resetToMidnight(cal);
         } else if (max != null) {
             cal = (Calendar) max.clone();
-            resetToMidnight(cal);
             cal.add(Calendar.DATE, -cal.getActualMaximum(Calendar.DAY_OF_YEAR) / 2);
         } else {
             cal = (Calendar) getInitialDate().clone();
@@ -68,10 +66,8 @@ public class DayWheel extends Wheel {
         Calendar min = state.getMinimumDate();
         if (max != null) {
             cal = (Calendar) max.clone();
-            resetToMidnight(cal);
         } else if (min != null) {
             cal = (Calendar) min.clone();
-            resetToMidnight(cal);
             cal.add(Calendar.DATE, cal.getActualMaximum(Calendar.DAY_OF_YEAR) / 2);
         } else {
             cal = (Calendar) getInitialDate().clone();
