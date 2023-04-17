@@ -1,0 +1,7 @@
+appId: com.android.settings
+---
+- scrollUntilVisible:
+    element:
+      text: 'Settings'
+- tapOn: 'Settings'
+- tapOn: 'Open'

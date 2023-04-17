@@ -9,6 +9,10 @@
     "prepublishOnly": "mv README.md githubREADME.md && mv npmREADME.md README.md",
     "postpublish": "mv README.md npmREADME.md && mv githubREADME.md README.md",
     "test": "jest src",
+    "install:release": "adb install examples/Rn069/android/app/build/outputs/apk/release/app-release.apk",
+    "install:debug": "adb install examples/Rn069/android/app/build/outputs/apk/debug/app-debug.apk",
+    "build:release": "(cd examples/Rn069/android && ./gradlew assembleRelease) && yarn install:release",
+    "build:debug": "(cd examples/Rn069/android && ./gradlew assembleDebug) && yarn install:debug",
     "emulator": "bash ./scripts/start-android-emulator.sh"
   },
   "repository": {

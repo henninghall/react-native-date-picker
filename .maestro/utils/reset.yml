@@ -1,5 +1,4 @@
 appId: com.rn069
 ---
-- launchApp:
-    stopApp: true
+- tapOn: 'Go back'
 - tapOn: Advanced

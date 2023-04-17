@@ -1,0 +1,4 @@
+appId: com.android.settings
+---
+- tapOn: Region
+- inputText: ${TIMEZONE}

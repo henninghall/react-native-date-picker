@@ -1,0 +1,7 @@
+appId: com.android.settings
+---
+- tapOn: 'Select UTC offset'
+- scrollUntilVisible:
+    element:
+      text: ${GMT}
+- tapOn: ${GMT}

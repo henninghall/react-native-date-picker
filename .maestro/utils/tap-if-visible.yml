@@ -1,0 +1,8 @@
+appId: com.android.settings
+---
+- runFlow:
+    when:
+      visible: ${TEXT}
+    file: tap.yml
+    env:
+      TEXT: ${TEXT}
