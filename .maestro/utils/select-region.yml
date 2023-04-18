@@ -1,4 +1,14 @@
 appId: com.android.settings
 ---
 - tapOn: Region
-- inputText: ${TIMEZONE}
+- inputText: ${REGION}
+- tapOn:
+    text: ${REGION}
+    index: 1
+
+- runFlow:
+    when:
+      true: ${REGION == 'United states'}
+    file: tap.yml
+    env:
+      TEXT: ${STATE}

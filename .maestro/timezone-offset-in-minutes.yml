@@ -3,8 +3,9 @@ appId: com.rn069
 - runFlow:
     file: utils/set-timezone.yml
     env:
-      TIMEZONE: Sweden
+      REGION: Sweden
       GMT: GMT+01:00
+      STATE: ''
 
 - runFlow: utils/launch.yml
 
@@ -53,8 +54,9 @@ appId: com.rn069
 - runFlow:
     file: utils/set-timezone.yml
     env:
-      TIMEZONE: Sweden
+      REGION: Sweden
       GMT: GMT+02:00
+      STATE: ''
 
 - runFlow: utils/launch.yml
 
@@ -118,3 +120,24 @@ appId: com.rn069
 - assertVisible: 'Thu Jun 1101 AM '
 
 - runFlow: utils/reset.yml
+
+# test: timezoneOffsetInMinutes combined with maximumDate/minimumDate in another timezone than current device.
+# Bug was reported here: https://github.com/henninghall/react-native-date-picker/issues/613
+- runFlow:
+    file: utils/set-timezone.yml
+    env:
+      REGION: 'United states'
+      STATE: Phoenix
+      GMT: GMT-07:00
+- runFlow: utils/launch.yml
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: timeZoneOffsetInMinutes
+      VALUE: 180
+- repeat:
+    times: 5
+    commands:
+      - runFlow: utils/swipe-wheel-1.yml
+- runFlow: utils/swipe-wheel-4.yml
+- assertVisible: 'Thu Jan 61000 AM '

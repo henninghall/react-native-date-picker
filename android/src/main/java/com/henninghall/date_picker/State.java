@@ -17,7 +17,9 @@ import com.henninghall.date_picker.props.MinuteIntervalProp;
 import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.Prop;
 import com.henninghall.date_picker.props.TextColorProp;
-import com.henninghall.date_picker.props.UtcProp;
+import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
+
+import net.time4j.tz.Timezone;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -35,7 +37,7 @@ public class State {
     private final MinuteIntervalProp minuteIntervalProp = new MinuteIntervalProp();
     private final MinimumDateProp minimumDateProp = new MinimumDateProp();
     private final MaximumDateProp maximumDateProp = new MaximumDateProp();
-    private final UtcProp utcProp = new UtcProp();
+    private final TimezoneOffsetInMinutesProp timezoneOffsetInMinutesProp = new TimezoneOffsetInMinutesProp();
     private final HeightProp heightProp = new HeightProp();
     private final VariantProp variantProp = new VariantProp();
     private final DividerHeightProp dividerHeightProp = new DividerHeightProp();
@@ -50,7 +52,7 @@ public class State {
         put(MinuteIntervalProp.name, minuteIntervalProp);
         put(MinimumDateProp.name, minimumDateProp);
         put(MaximumDateProp.name, maximumDateProp);
-        put(UtcProp.name, utcProp);
+        put(TimezoneOffsetInMinutesProp.name, timezoneOffsetInMinutesProp);
         put(HeightProp.name, heightProp);
         put(VariantProp.name, variantProp);
         put(DividerHeightProp.name, dividerHeightProp);
@@ -91,18 +93,23 @@ public class State {
     }
 
     public Calendar getMinimumDate() {
-        DateBoundary db = new DateBoundary(getTimeZone(), (String) minimumDateProp.getValue());
-        return db.get();
+        return Utils.isoToCalendar(minimumDateProp.getValue(), getTimeZone());
     }
 
     public Calendar getMaximumDate() {
-        DateBoundary db = new DateBoundary(getTimeZone(), (String) maximumDateProp.getValue());
-        return db.get();
+        return Utils.isoToCalendar(maximumDateProp.getValue(), getTimeZone());
     }
 
     public TimeZone getTimeZone() {
-        boolean utc = (boolean) utcProp.getValue();
-        return utc ? TimeZone.getTimeZone("UTC") : TimeZone.getDefault();
+        Integer offset = timezoneOffsetInMinutesProp.getValue();
+        if(offset == null) return TimeZone.getDefault();
+        int totalOffsetMinutes = Math.abs(offset);
+        char offsetDirection = offset < 0 ? '-' : '+';
+        int offsetHours = (int) Math.floor(totalOffsetMinutes / 60f);
+        int offsetMinutes = totalOffsetMinutes - offsetHours * 60;
+        String timeZoneId = "GMT" + offsetDirection + offsetHours + ":" + Utils.toPaddedMinutes(offsetMinutes);
+        TimeZone zone = TimeZone.getTimeZone(timeZoneId);
+        return zone;
     }
 
     public String getIsoDate() {

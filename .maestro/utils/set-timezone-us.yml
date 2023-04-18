@@ -1,8 +1,0 @@
-appId: com.android.settings
----
-- runFlow:
-    file: set-timezone.yml
-    env:
-      TIMEZONE: 'United states'
-      GMT: ${GMT}
-- tapOn: ${STATE}

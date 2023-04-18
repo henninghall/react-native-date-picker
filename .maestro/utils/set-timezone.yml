@@ -29,4 +29,5 @@ appId: com.android.settings
       visible: Region
     file: select-region.yml
     env:
-      TIMEZONE: ${TIMEZONE}
+      REGION: ${REGION}
+      STATE: ${STATE}
