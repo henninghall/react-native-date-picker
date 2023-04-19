@@ -1,8 +1,35 @@
 appId: com.rn069
 ---
+- runFlow:
+    file: utils/set-timezone.yml
+    env:
+      REGION: Sweden
+      GMT: GMT+01:00
+      STATE: ''
+
+# test: can have initial date in past
 - runFlow: utils/launch.yml
-- tapOn: androidVariant
-- tapOn: nativeAndroid
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: maximumDate
+      VALUE: undefined
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: minimumDate
+      VALUE: undefined
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '1999-01-01'
+- runFlow: utils/swipe-wheel-1.yml
+- assertVisible: '1999-01-02 01:00:00'
+
+- runFlow: utils/reset.yml
+
+# test: display text
 - runFlow:
     file: utils/change-prop.yml
     env:
