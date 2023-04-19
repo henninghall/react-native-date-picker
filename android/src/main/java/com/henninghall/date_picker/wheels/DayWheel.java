@@ -11,7 +11,6 @@ import com.henninghall.date_picker.Utils;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
 
@@ -54,7 +53,7 @@ public class DayWheel extends Wheel {
             cal = (Calendar) max.clone();
             cal.add(Calendar.DATE, -cal.getActualMaximum(Calendar.DAY_OF_YEAR) / 2);
         } else {
-            cal = getInitialDate();
+            cal = state.getPickerDate();
             cal.add(Calendar.DATE, -defaultNumberOfDays / 2);
         }
         return cal;
@@ -70,7 +69,7 @@ public class DayWheel extends Wheel {
             cal = (Calendar) min.clone();
             cal.add(Calendar.DATE, cal.getActualMaximum(Calendar.DAY_OF_YEAR) / 2);
         } else {
-            cal = getInitialDate();
+            cal = state.getPickerDate();
             cal.add(Calendar.DATE, defaultNumberOfDays / 2);
         }
         return cal;
@@ -131,20 +130,5 @@ public class DayWheel extends Wheel {
                 : todayString;
     }
 
-    // Rounding cal to closest minute interval
-    private Calendar getInitialDate() {
-        Calendar cal = state.getDate();
-        int minuteInterval = state.getMinuteInterval();
-        if(minuteInterval <= 1) return cal;
-        SimpleDateFormat minuteFormat = new SimpleDateFormat("mm", state.getLocale());
-        int exactMinute = Integer.valueOf(minuteFormat.format(cal.getTime()));
-        int diffSinceLastInterval = exactMinute % minuteInterval;
-        int diffAhead = minuteInterval - diffSinceLastInterval;
-        int diffBehind= -diffSinceLastInterval;
-        boolean closerToPrevious = minuteInterval / 2 > diffSinceLastInterval;
-        int diffToExactValue = closerToPrevious ? diffBehind : diffAhead;
-        cal.add(Calendar.MINUTE, diffToExactValue);
-        return (Calendar) cal.clone();
-    }
 
 }

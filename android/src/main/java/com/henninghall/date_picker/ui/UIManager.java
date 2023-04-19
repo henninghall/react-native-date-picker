@@ -56,7 +56,7 @@ public class UIManager {
     }
 
     public void setWheelsToDate(){
-        wheels.applyOnAll(new SetDate(state.getDate()));
+        wheels.applyOnAll(new SetDate(state.getPickerDate()));
     }
 
     public void scroll(int wheelIndex, int scrollTimes) {

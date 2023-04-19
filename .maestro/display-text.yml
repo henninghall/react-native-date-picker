@@ -7,8 +7,25 @@ appId: com.rn069
       GMT: GMT+01:00
       STATE: ''
 
-# test: can have initial date in past
 - runFlow: utils/launch.yml
+
+# test: minuteInterval rounding should round with floor
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: minuteInterval
+      VALUE: 5
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '2000-01-01T00:34:00+01:00'
+- runFlow: utils/swipe-wheel-1.yml
+- assertVisible: '2000-01-02 00:30:00'
+
+- runFlow: utils/reset.yml
+
+# test: can have initial date in past
 - runFlow:
     file: utils/change-prop.yml
     env:
