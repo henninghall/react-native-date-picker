@@ -19,8 +19,7 @@ import com.henninghall.date_picker.props.Prop;
 import com.henninghall.date_picker.props.TextColorProp;
 import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
 
-import net.time4j.tz.Timezone;
-
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
@@ -116,8 +115,21 @@ public class State {
         return (String) dateProp.getValue();
     }
 
-    public Calendar getDate() {
+    private Calendar getDate() {
         return Utils.isoToCalendar(getIsoDate(), getTimeZone());
+    }
+
+    // The date the picker is suppose to display.
+    // Includes minute rounding to desired minute interval.
+    public Calendar getPickerDate() {
+        Calendar cal = getDate();
+        int minuteInterval = getMinuteInterval();
+        if(minuteInterval <= 1) return cal;
+        SimpleDateFormat minuteFormat = new SimpleDateFormat("mm", getLocale());
+        int exactMinute = Integer.parseInt(minuteFormat.format(cal.getTime()));
+        int minutesSinceLastInterval = exactMinute % minuteInterval;
+        cal.add(Calendar.MINUTE, -minutesSinceLastInterval);
+        return (Calendar) cal.clone();
     }
 
     public Integer getHeight() {
