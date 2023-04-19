@@ -17,10 +17,6 @@ public abstract class Prop<T> {
         this.value = toValue(value);
     }
 
-    public void setValue(T value){
-        this.value = value;
-    }
-
     public T getValue(){
         return value;
     }

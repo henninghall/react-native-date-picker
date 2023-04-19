@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class DayWheel extends Wheel {
 
     private String todayValue;
-    private static int defaultNumberOfDays = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_YEAR);
+    private static int defaultNumberOfDays = 150;
     private HashMap<String, String> displayValues;
 
     public DayWheel(Picker picker, State state) {
@@ -54,7 +54,7 @@ public class DayWheel extends Wheel {
             cal = (Calendar) max.clone();
             cal.add(Calendar.DATE, -cal.getActualMaximum(Calendar.DAY_OF_YEAR) / 2);
         } else {
-            cal = (Calendar) getInitialDate().clone();
+            cal = getInitialDate();
             cal.add(Calendar.DATE, -defaultNumberOfDays / 2);
         }
         return cal;
@@ -70,18 +70,10 @@ public class DayWheel extends Wheel {
             cal = (Calendar) min.clone();
             cal.add(Calendar.DATE, cal.getActualMaximum(Calendar.DAY_OF_YEAR) / 2);
         } else {
-            cal = (Calendar) getInitialDate().clone();
-            cal.setTime(new Date());
+            cal = getInitialDate();
             cal.add(Calendar.DATE, defaultNumberOfDays / 2);
         }
         return cal;
-    }
-
-    private void resetToMidnight(Calendar cal){
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
     }
 
     private String getValue(Calendar cal){
@@ -141,7 +133,7 @@ public class DayWheel extends Wheel {
 
     // Rounding cal to closest minute interval
     private Calendar getInitialDate() {
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = state.getDate();
         int minuteInterval = state.getMinuteInterval();
         if(minuteInterval <= 1) return cal;
         SimpleDateFormat minuteFormat = new SimpleDateFormat("mm", state.getLocale());
