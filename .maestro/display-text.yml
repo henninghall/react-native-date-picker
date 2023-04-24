@@ -56,3 +56,13 @@ appId: com.rn069
 - assertVisible:
     id: dateStringOutput
     text: 'CN 2 thg 11200 SA '
+
+# Should be possible to use picker with invalid locale
+- runFlow: utils/launch.yml
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: locale
+      VALUE: xx
+- runFlow: utils/swipe-wheel-1.yml
+- assertVisible: '2000-01-02 00:00:00'

@@ -84,6 +84,7 @@ public class Formats {
         put("kn", mapOf("EEE, d MMM", "d", "y"));
         put("ko", mapOf("MMM d일 EEE", "d일", "y년"));
         put("ky", mapOf("d-MMM, EEE", "d", "y"));
+        put("lb", mapOf("EEE d MMM", "d", "y"));
         put("ln", mapOf("EEE d MMM", "d", "y"));
         put("lo", mapOf("EEE d MMM", "d", "y"));
         put("lt", mapOf("MM-dd, EEE", "dd", "y"));
