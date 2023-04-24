@@ -30,7 +30,7 @@ public class LocaleUtils {
             try {
                 String firstPartOfLanguageTag = languageTag.substring(0, languageTag.indexOf("_"));
                 return Formats.get(firstPartOfLanguageTag, format);
-            } catch (Formats.FormatNotFoundException ex) {
+            } catch (Formats.FormatNotFoundException | IndexOutOfBoundsException ex) {
                 return Formats.defaultFormat.get(format);
             }
         }
