@@ -7,6 +7,7 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
+    "pods": "(cd ios && bundle exec pod install)",
     "test": "jest"
   },
   "dependencies": {

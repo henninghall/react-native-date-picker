@@ -25,6 +25,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import DatePicker from 'react-native-date-picker';
+
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -33,6 +35,7 @@ function Section({children, title}: SectionProps): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
+      <DatePicker date={new Date()} />
       <Text
         style={[
           styles.sectionTitle,
