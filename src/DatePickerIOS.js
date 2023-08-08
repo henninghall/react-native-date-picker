@@ -1,5 +1,10 @@
 import React from 'react'
-import { StyleSheet, requireNativeComponent, NativeModules, Platform } from 'react-native'
+import {
+  StyleSheet,
+  requireNativeComponent,
+  NativeModules,
+  Platform,
+} from 'react-native'
 import { shouldCloseModal, shouldOpenModal } from './modal'
 
 const RCTDatePickerIOS =

@@ -16,4 +16,6 @@ Pod::Spec.new do |s|
   s.source_files  = "ios/RNDatePicker/*.{h,m}"
 
   s.dependency 'React-Core'
+
+  install_modules_dependencies(s)
 end

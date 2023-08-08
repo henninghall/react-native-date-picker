@@ -1,0 +1,40 @@
+{
+  "name": "rtn-centered-text",
+  "version": "0.0.1",
+  "description": "Showcase a Fabric Native Component with a centered text",
+  "react-native": "js/index",
+  "source": "js/index",
+  "files": [
+    "js",
+    "android",
+    "ios",
+    "rtn-centered-text.podspec",
+    "!android/build",
+    "!ios/build",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__"
+  ],
+  "keywords": [
+    "react-native",
+    "ios",
+    "android"
+  ],
+  "repository": "https://github.com/atar9500/rtn-centered-text",
+  "author": "Atar Avraham atar.avraham@itechart-group.com (https://github.com/atar9500)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/atar9500/rtn-centered-text/issues"
+  },
+  "homepage": "https://github.com/atar9500/rtn-centered-text#readme",
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "codegenConfig": {
+    "name": "RTNCenteredTextSpecs",
+    "type": "components",
+    "jsSrcsDir": "js"
+  }
+}

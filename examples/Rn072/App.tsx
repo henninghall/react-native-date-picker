@@ -25,7 +25,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import DatePicker from 'react-native-date-picker';
+import RTNCenteredText from 'rtn-centered-text/js/RTNCenteredTextNativeComponent';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -35,7 +35,8 @@ function Section({children, title}: SectionProps): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
-      <DatePicker date={new Date()} />
+      <RTNCenteredText text="Hello World!" />
+      {/* <DatePicker date={new Date()} /> */}
       <Text
         style={[
           styles.sectionTitle,
