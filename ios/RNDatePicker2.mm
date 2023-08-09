@@ -16,9 +16,6 @@ using namespace facebook::react;
 
 @interface RNDatePicker2 () <RCTRNDatePicker2ViewProtocol>
 
-// @property (nonatomic, copy) RCTBubblingEventBlock onChange;
-// @property (nonatomic, assign) NSInteger reactMinuteInterval;
-
 @end
 
 @implementation RNDatePicker2 {
@@ -125,7 +122,7 @@ using namespace facebook::react;
 }
 
 
-// RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
+RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 
 // - (void)didChange
 // {
@@ -134,30 +131,18 @@ using namespace facebook::react;
 //     }
 // }
 
-// - (void)setDatePickerMode:(UIDatePickerMode)datePickerMode
-// {
-//   [super setDatePickerMode:datePickerMode];
-//   // We need to set minuteInterval after setting datePickerMode, otherwise minuteInterval is invalid in time mode.
-//   self.minuteInterval = _reactMinuteInterval;
-// }
+- (void)setDatePickerMode:(UIDatePickerMode)datePickerMode
+{
+  [super setDatePickerMode:datePickerMode];
+  // We need to set minuteInterval after setting datePickerMode, otherwise minuteInterval is invalid in time mode.
+  self.minuteInterval = _reactMinuteInterval;
+}
 
 - (void)setMinuteInterval:(NSInteger)minuteInterval
 {
   [super setMinuteInterval:minuteInterval];
   _reactMinuteInterval = minuteInterval;
 }
-
-// - (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
-// {
-//   const auto &oldViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(_props);
-//   const auto &newViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(props);
-
-//   if (oldViewProps.text != newViewProps.text) {
-//     _label.text = [[NSString alloc] initWithCString:newViewProps.text.c_str() encoding:NSASCIIStringEncoding];
-//   }
-
-//   [super updateProps:props oldProps:oldProps];
-// }
 
 @end
 
