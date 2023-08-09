@@ -3,6 +3,8 @@
 
 // #import "RCTUtils.h"
 // #import "UIView+React.h"
+#import <React/RCTConversions.h>
+
 
 #import <react/renderer/components/RNDatePicker2Specs/ComponentDescriptors.h>
 #import <react/renderer/components/RNDatePicker2Specs/EventEmitters.h>
@@ -33,6 +35,10 @@ using namespace facebook::react;
 
 #define UIColorFromRGB(rgbHex) [UIColor colorWithRed:((float)((rgbHex & 0xFF0000) >> 16))/255.0 green:((float)((rgbHex & 0xFF00) >> 8))/255.0 blue:((float)(rgbHex & 0xFF))/255.0 alpha:1.0]
 
+NSDate* unixMillisToNSDate (double unixMillis) {
+    double time = unixMillis/1000.0;
+    return [NSDate dateWithTimeIntervalSince1970: time];
+}
 
 - (UIColor *) colorFromHexCode:(NSString *)hexString {
     NSString *cleanString = [hexString stringByReplacingOccurrencesOfString:@"#" withString:@""];
@@ -133,6 +139,29 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
   const auto &oldViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(_props);
   const auto &newViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(props);
     
+    //  locale
+    if(oldViewProps.locale != newViewProps.locale) {
+        NSString *convertedLocale = RCTNSStringFromString(newViewProps.locale);
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:convertedLocale];
+        [super setLocale:locale];
+    }
+    
+    //  date
+    if(oldViewProps.date != newViewProps.date) {
+        [super setDate: unixMillisToNSDate(newViewProps.date)];
+    }
+    
+    //  maximumDate
+    if(oldViewProps.maximumDate != newViewProps.maximumDate) {
+        [super setMaximumDate: unixMillisToNSDate(newViewProps.maximumDate)];
+    }
+    
+    //  minimumDate
+    if(oldViewProps.minimumDate != newViewProps.minimumDate) {
+        [super setMinimumDate: unixMillisToNSDate(newViewProps.minimumDate)];
+    }
+    
+  // mode
   if (oldViewProps.mode != newViewProps.mode) {
       if(newViewProps.mode == RNDatePicker2Mode::Time) [super setDatePickerMode:UIDatePickerModeTime];
       if(newViewProps.mode == RNDatePicker2Mode::Date) [super setDatePickerMode:UIDatePickerModeDate];
@@ -141,6 +170,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     self.minuteInterval = _reactMinuteInterval;
   }
 
+    //  minute interval
     if (oldViewProps.minuteInterval != newViewProps.minuteInterval) {
         [super setMinuteInterval:newViewProps.minuteInterval];
         _reactMinuteInterval = newViewProps.minuteInterval;
