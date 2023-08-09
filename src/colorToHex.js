@@ -1,7 +1,7 @@
 export function colorToHex(c) {
   if (c === undefined) return c
-  if (c === "none") return c
-  if (c.includes('rgb')) return rgb2hex(c)
+  if (c === 'none') return c
+  if (c.includes('rgb')) return rgb2hex(parseRgb(c))
   if (c.includes('#')) {
     if (!isValidHex(c)) throw Error('Invalid color: ' + c)
     if (c.length === 4) return '#' + c[1] + c[1] + c[2] + c[2] + c[3] + c[3]
@@ -16,16 +16,24 @@ function isValidHex(color) {
   return /^#([0-9A-Fa-f]{3}){1,2}$/i.test(color)
 }
 
-function rgb2hex(rgb) {
-  rgb = rgb.match(
-    /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i
+function parseRgb(rgb) {
+  return rgb
+    .match(
+      /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i
+    )
+    .slice(1)
+}
+
+function rgb2hex(rgbArray) {
+  if (rgbArray.length != 3) {
+    return ''
+  }
+  return (
+    '#' +
+    parseInt(rgbArray[0]).toString(16).padStart(2, '0') +
+    parseInt(rgbArray[1]).toString(16).padStart(2, '0') +
+    parseInt(rgbArray[2]).toString(16).padStart(2, '0')
   )
-  return rgb && rgb.length === 4
-    ? '#' +
-        ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) +
-        ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) +
-        ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2)
-    : ''
 }
 
 function colourNameToHex(color) {
