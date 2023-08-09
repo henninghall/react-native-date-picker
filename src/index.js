@@ -1,18 +1,15 @@
 import React from 'react'
-import { Platform, Appearance, Text } from 'react-native'
+import { Appearance, Platform, Text } from 'react-native'
 import DatePickerAndroid from './DatePickerAndroid'
-import propTypes from './propTypes'
+import DatePickerIOS from './DatePickerIOS'
 import { colorToHex } from './colorToHex'
 import { throwIfInvalidProps } from './propChecker'
-import DatePickerIOS from './DatePickerIOS'
 
 const DatePicker = Platform.select({
   android: DatePickerAndroid,
   ios: DatePickerIOS,
   default: () => <Text>DatePicker is not supported on this platform.</Text>,
 })
-
-DatePicker.propTypes = propTypes
 
 const DatePickerWrapper = (props) => {
   if (__DEV__) throwIfInvalidProps(props)
@@ -29,6 +26,11 @@ const DatePickerWrapper = (props) => {
       androidVariant={getAndroidVariant(props)}
       minuteInterval={props.minuteInterval ? props.minuteInterval : 1}
       mode={props.mode ? props.mode : 'datetime'}
+      timeZoneOffsetInMinutes={
+        props.timeZoneOffsetInMinutes == null
+          ? ''
+          : props.timeZoneOffsetInMinutes.toString()
+      }
     />
   )
 }

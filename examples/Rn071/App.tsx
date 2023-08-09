@@ -36,12 +36,11 @@ function Section({children, title}: SectionProps): JSX.Element {
   return (
     <View style={styles.sectionContainer}>
       <DatePicker
-        date={new Date('2023-09-02')}
-        minimumDate={new Date('2023-09-01')}
-        maximumDate={new Date('2023-09-04')}
+        date={new Date()}
         onDateChange={() => {}}
         mode={'datetime'}
         minuteInterval={5}
+        timeZoneOffsetInMinutes={null}
       />
       <Text
         style={[

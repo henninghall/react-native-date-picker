@@ -4,6 +4,7 @@
 // #import "RCTUtils.h"
 // #import "UIView+React.h"
 #import <React/RCTConversions.h>
+#import "RCTConvert.h"
 
 
 #import <react/renderer/components/RNDatePicker2Specs/ComponentDescriptors.h>
@@ -24,7 +25,7 @@ using namespace facebook::react;
   UIView *_view;
   UILabel *_label;
   NSInteger _reactMinuteInterval;
-  facebook::react::SharedViewProps _props;
+  facebook::react::SharedViewProps _initialProps;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
@@ -67,7 +68,7 @@ NSDate* unixMillisToNSDate (double unixMillis) {
 {
     if ((self = [super initWithFrame:frame])) {
         static const auto defaultProps = std::make_shared<const RNDatePicker2Props>();
-        _props = defaultProps;
+        _initialProps = defaultProps;
         
         [self addTarget:self action:@selector(didChange)
        forControlEvents:UIControlEventValueChanged];
@@ -136,8 +137,13 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 
 - (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
 {
-  const auto &oldViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(_props);
+  const auto &oldViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(oldProps ? oldProps : _initialProps);
   const auto &newViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(props);
+    
+    //  date
+    if(oldViewProps.date != newViewProps.date) {
+        [super setDate: unixMillisToNSDate(newViewProps.date)];
+    }
     
     //  locale
     if(oldViewProps.locale != newViewProps.locale) {
@@ -145,13 +151,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
         NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:convertedLocale];
         [super setLocale:locale];
     }
-    
-    //  date
-    if(oldViewProps.date != newViewProps.date) {
-        [super setDate: unixMillisToNSDate(newViewProps.date)];
-    }
-    
-    //  maximumDate
+ 
+    // maximumDate
     if(oldViewProps.maximumDate != newViewProps.maximumDate) {
         [super setMaximumDate: unixMillisToNSDate(newViewProps.maximumDate)];
     }
@@ -159,6 +160,12 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     //  minimumDate
     if(oldViewProps.minimumDate != newViewProps.minimumDate) {
         [super setMinimumDate: unixMillisToNSDate(newViewProps.minimumDate)];
+    }
+    
+    //  setMinuteInterval
+    if (oldViewProps.minuteInterval != newViewProps.minuteInterval) {
+        [super setMinuteInterval:newViewProps.minuteInterval];
+        _reactMinuteInterval = newViewProps.minuteInterval;
     }
     
   // mode
@@ -170,12 +177,18 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     self.minuteInterval = _reactMinuteInterval;
   }
 
-    //  minute interval
-    if (oldViewProps.minuteInterval != newViewProps.minuteInterval) {
-        [super setMinuteInterval:newViewProps.minuteInterval];
-        _reactMinuteInterval = newViewProps.minuteInterval;
+    //  timeZoneOffsetInMinutes
+    if (oldViewProps.timeZoneOffsetInMinutes != newViewProps.timeZoneOffsetInMinutes) {
+        if([RCTNSStringFromString(newViewProps.timeZoneOffsetInMinutes) length] == 0){
+            [super setTimeZone: nil];
+        }
+        else {
+            NSString *timezoneOffsetString = RCTNSStringFromString(newViewProps.timeZoneOffsetInMinutes);
+            NSNumber *timezoneMinutesInt = [NSNumber numberWithInt:[timezoneOffsetString intValue]];
+            [super setTimeZone:[RCTConvert NSTimeZone: timezoneMinutesInt]];
+        }
+        
     }
-    
 
   [super updateProps:props oldProps:oldProps];
 }
