@@ -32,7 +32,7 @@ using namespace facebook::react;
     _view.backgroundColor = [UIColor redColor];
 
     _label = [[UILabel alloc] init];
-    _label.text = @"Initial value";
+    _label.text = @"Initial value 2";
     [_view addSubview:_label];
 
     _label.translatesAutoresizingMaskIntoConstraints = false;
