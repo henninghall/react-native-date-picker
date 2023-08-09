@@ -1,31 +1,31 @@
-#import "RTNCenteredText2.h"
+#import "RNDatePicker2.h"
 
-#import <react/renderer/components/RTNCenteredText2Specs/ComponentDescriptors.h>
-#import <react/renderer/components/RTNCenteredText2Specs/EventEmitters.h>
-#import <react/renderer/components/RTNCenteredText2Specs/Props.h>
-#import <react/renderer/components/RTNCenteredText2Specs/RCTComponentViewHelpers.h>
+#import <react/renderer/components/RNDatePicker2Specs/ComponentDescriptors.h>
+#import <react/renderer/components/RNDatePicker2Specs/EventEmitters.h>
+#import <react/renderer/components/RNDatePicker2Specs/Props.h>
+#import <react/renderer/components/RNDatePicker2Specs/RCTComponentViewHelpers.h>
 
 #import "RCTFabricComponentsPlugins.h"
 
 using namespace facebook::react;
 
-@interface RTNCenteredText2 () <RCTRTNCenteredText2ViewProtocol>
+@interface RNDatePicker2 () <RCTRNDatePicker2ViewProtocol>
 @end
 
-@implementation RTNCenteredText2 {
+@implementation RNDatePicker2 {
   UIView *_view;
   UILabel *_label;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
 {
-  return concreteComponentDescriptorProvider<RTNCenteredText2ComponentDescriptor>();
+  return concreteComponentDescriptorProvider<RNDatePicker2ComponentDescriptor>();
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
   if (self = [super initWithFrame:frame]) {
-    static const auto defaultProps = std::make_shared<const RTNCenteredText2Props>();
+    static const auto defaultProps = std::make_shared<const RNDatePicker2Props>();
     _props = defaultProps;
 
     _view = [[UIView alloc] init];
@@ -53,8 +53,8 @@ using namespace facebook::react;
 
 - (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
 {
-  const auto &oldViewProps = *std::static_pointer_cast<RTNCenteredText2Props const>(_props);
-  const auto &newViewProps = *std::static_pointer_cast<RTNCenteredText2Props const>(props);
+  const auto &oldViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(_props);
+  const auto &newViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(props);
 
   if (oldViewProps.text != newViewProps.text) {
     _label.text = [[NSString alloc] initWithCString:newViewProps.text.c_str() encoding:NSASCIIStringEncoding];
@@ -65,7 +65,7 @@ using namespace facebook::react;
 
 @end
 
-Class<RCTComponentViewProtocol> RTNCenteredText2Cls(void)
+Class<RCTComponentViewProtocol> RNDatePicker2Cls(void)
 {
-  return RTNCenteredText2.class;
+  return RNDatePicker2.class;
 }

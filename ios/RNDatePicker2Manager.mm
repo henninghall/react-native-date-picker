@@ -2,12 +2,12 @@
 #import <React/RCTUIManager.h>
 #import <React/RCTViewManager.h>
 
-@interface RTNCenteredText2Manager : RCTViewManager
+@interface RNDatePicker2Manager : RCTViewManager
 @end
 
-@implementation RTNCenteredText2Manager
+@implementation RNDatePicker2Manager
 
-RCT_EXPORT_MODULE(RTNCenteredText2)
+RCT_EXPORT_MODULE(RNDatePicker2)
 
 RCT_EXPORT_VIEW_PROPERTY(text, NSString)
 

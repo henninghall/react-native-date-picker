@@ -8,7 +8,7 @@ import {
 import { shouldCloseModal, shouldOpenModal } from './modal'
 
 const RCTDatePickerIOS =
-  Platform.OS === 'ios' ? requireNativeComponent('RNDatePicker') : null
+  Platform.OS === 'ios' ? requireNativeComponent('RNDatePicker2') : null
 
 export default class DatePickerIOS extends React.Component {
   _picker = null
