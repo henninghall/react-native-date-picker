@@ -2,12 +2,12 @@
 #import <React/RCTUIManager.h>
 #import <React/RCTViewManager.h>
 
-@interface RTNCenteredTextManager : RCTViewManager
+@interface RTNCenteredText2Manager : RCTViewManager
 @end
 
-@implementation RTNCenteredTextManager
+@implementation RTNCenteredText2Manager
 
-RCT_EXPORT_MODULE(RTNCenteredText)
+RCT_EXPORT_MODULE(RTNCenteredText2)
 
 RCT_EXPORT_VIEW_PROPERTY(text, NSString)
 

@@ -1,31 +1,31 @@
-#import "RTNCenteredText.h"
+#import "RTNCenteredText2.h"
 
-#import <react/renderer/components/RTNCenteredTextSpecs/ComponentDescriptors.h>
-#import <react/renderer/components/RTNCenteredTextSpecs/EventEmitters.h>
-#import <react/renderer/components/RTNCenteredTextSpecs/Props.h>
-#import <react/renderer/components/RTNCenteredTextSpecs/RCTComponentViewHelpers.h>
+#import <react/renderer/components/RTNCenteredText2Specs/ComponentDescriptors.h>
+#import <react/renderer/components/RTNCenteredText2Specs/EventEmitters.h>
+#import <react/renderer/components/RTNCenteredText2Specs/Props.h>
+#import <react/renderer/components/RTNCenteredText2Specs/RCTComponentViewHelpers.h>
 
 #import "RCTFabricComponentsPlugins.h"
 
 using namespace facebook::react;
 
-@interface RTNCenteredText () <RCTRTNCenteredTextViewProtocol>
+@interface RTNCenteredText2 () <RCTRTNCenteredText2ViewProtocol>
 @end
 
-@implementation RTNCenteredText {
+@implementation RTNCenteredText2 {
   UIView *_view;
   UILabel *_label;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
 {
-  return concreteComponentDescriptorProvider<RTNCenteredTextComponentDescriptor>();
+  return concreteComponentDescriptorProvider<RTNCenteredText2ComponentDescriptor>();
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
   if (self = [super initWithFrame:frame]) {
-    static const auto defaultProps = std::make_shared<const RTNCenteredTextProps>();
+    static const auto defaultProps = std::make_shared<const RTNCenteredText2Props>();
     _props = defaultProps;
 
     _view = [[UIView alloc] init];
@@ -53,8 +53,8 @@ using namespace facebook::react;
 
 - (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
 {
-  const auto &oldViewProps = *std::static_pointer_cast<RTNCenteredTextProps const>(_props);
-  const auto &newViewProps = *std::static_pointer_cast<RTNCenteredTextProps const>(props);
+  const auto &oldViewProps = *std::static_pointer_cast<RTNCenteredText2Props const>(_props);
+  const auto &newViewProps = *std::static_pointer_cast<RTNCenteredText2Props const>(props);
 
   if (oldViewProps.text != newViewProps.text) {
     _label.text = [[NSString alloc] initWithCString:newViewProps.text.c_str() encoding:NSASCIIStringEncoding];
@@ -65,7 +65,7 @@ using namespace facebook::react;
 
 @end
 
-Class<RCTComponentViewProtocol> RTNCenteredTextCls(void)
+Class<RCTComponentViewProtocol> RTNCenteredText2Cls(void)
 {
-  return RTNCenteredText.class;
+  return RTNCenteredText2.class;
 }

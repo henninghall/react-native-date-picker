@@ -50,7 +50,7 @@
     "prettier": "^2.2.1"
   },
   "codegenConfig": {
-    "name": "RNDatePickerSpecs",
+    "name": "RTNCenteredText2Specs",
     "type": "components",
     "jsSrcsDir": "src/fabric"
   }
