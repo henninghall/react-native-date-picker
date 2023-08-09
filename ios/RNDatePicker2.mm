@@ -24,6 +24,7 @@ using namespace facebook::react;
 @implementation RNDatePicker2 {
   UIView *_view;
   UILabel *_label;
+  NSInteger _reactMinuteInterval;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
@@ -31,79 +32,51 @@ using namespace facebook::react;
   return concreteComponentDescriptorProvider<RNDatePicker2ComponentDescriptor>();
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-  if (self = [super initWithFrame:frame]) {
-    static const auto defaultProps = std::make_shared<const RNDatePicker2Props>();
-    _props = defaultProps;
-
-    _view = [[UIView alloc] init];
-    _view.backgroundColor = [UIColor redColor];
-
-    _label = [[UILabel alloc] init];
-    _label.text = @"Initial value 3";
-    [_view addSubview:_label];
-
-    _label.translatesAutoresizingMaskIntoConstraints = false;
-    [NSLayoutConstraint activateConstraints:@[
-      [_label.leadingAnchor constraintEqualToAnchor:_view.leadingAnchor],
-      [_label.topAnchor constraintEqualToAnchor:_view.topAnchor],
-      [_label.trailingAnchor constraintEqualToAnchor:_view.trailingAnchor],
-      [_label.bottomAnchor constraintEqualToAnchor:_view.bottomAnchor],
-    ]];
-
-    _label.textAlignment = NSTextAlignmentCenter;
-
-    self.contentView = _view;
-  }
-
-  return self;
-}
 
 #define UIColorFromRGB(rgbHex) [UIColor colorWithRed:((float)((rgbHex & 0xFF0000) >> 16))/255.0 green:((float)((rgbHex & 0xFF00) >> 8))/255.0 blue:((float)(rgbHex & 0xFF))/255.0 alpha:1.0]
 
 
-// - (UIColor *) colorFromHexCode:(NSString *)hexString {
-//     NSString *cleanString = [hexString stringByReplacingOccurrencesOfString:@"#" withString:@""];
-//     if([cleanString length] == 3) {
-//         cleanString = [NSString stringWithFormat:@"%@%@%@%@%@%@",
-//                        [cleanString substringWithRange:NSMakeRange(0, 1)],[cleanString substringWithRange:NSMakeRange(0, 1)],
-//                        [cleanString substringWithRange:NSMakeRange(1, 1)],[cleanString substringWithRange:NSMakeRange(1, 1)],
-//                        [cleanString substringWithRange:NSMakeRange(2, 1)],[cleanString substringWithRange:NSMakeRange(2, 1)]];
-//     }
-//     if([cleanString length] == 6) {
-//         cleanString = [cleanString stringByAppendingString:@"ff"];
-//     }
+- (UIColor *) colorFromHexCode:(NSString *)hexString {
+    NSString *cleanString = [hexString stringByReplacingOccurrencesOfString:@"#" withString:@""];
+    if([cleanString length] == 3) {
+        cleanString = [NSString stringWithFormat:@"%@%@%@%@%@%@",
+                       [cleanString substringWithRange:NSMakeRange(0, 1)],[cleanString substringWithRange:NSMakeRange(0, 1)],
+                       [cleanString substringWithRange:NSMakeRange(1, 1)],[cleanString substringWithRange:NSMakeRange(1, 1)],
+                       [cleanString substringWithRange:NSMakeRange(2, 1)],[cleanString substringWithRange:NSMakeRange(2, 1)]];
+    }
+    if([cleanString length] == 6) {
+        cleanString = [cleanString stringByAppendingString:@"ff"];
+    }
     
-//     unsigned int baseValue;
-//     [[NSScanner scannerWithString:cleanString] scanHexInt:&baseValue];
+    unsigned int baseValue;
+    [[NSScanner scannerWithString:cleanString] scanHexInt:&baseValue];
     
-//     float red = ((baseValue >> 24) & 0xFF)/255.0f;
-//     float green = ((baseValue >> 16) & 0xFF)/255.0f;
-//     float blue = ((baseValue >> 8) & 0xFF)/255.0f;
-//     float alpha = ((baseValue >> 0) & 0xFF)/255.0f;
+    float red = ((baseValue >> 24) & 0xFF)/255.0f;
+    float green = ((baseValue >> 16) & 0xFF)/255.0f;
+    float blue = ((baseValue >> 8) & 0xFF)/255.0f;
+    float alpha = ((baseValue >> 0) & 0xFF)/255.0f;
     
-//     return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-// }
+    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+}
 
-// - (instancetype)initWithFrame:(CGRect)frame
-// {
-//     if ((self = [super initWithFrame:frame])) {
-//         [self addTarget:self action:@selector(didChange)
-//        forControlEvents:UIControlEventValueChanged];
-//         if(@available(iOS 13, *)) {
-//             self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-//         }
-//         if(@available(iOS 14, *)) {
-//             self.preferredDatePickerStyle = UIDatePickerStyleWheels;
-//         }
-//          _reactMinuteInterval = 1;
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    if ((self = [super initWithFrame:frame])) {
+        [self addTarget:self action:@selector(didChange)
+       forControlEvents:UIControlEventValueChanged];
+        if(@available(iOS 13, *)) {
+            self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+        }
+        if(@available(iOS 14, *)) {
+            self.preferredDatePickerStyle = UIDatePickerStyleWheels;
+        }
+         _reactMinuteInterval = 1;
          
-//         // only allow gregorian calendar
-//         self.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
-//     }
-//     return self;
-// }
+        // only allow gregorian calendar
+        self.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+    }
+    return self;
+}
 
 - (void)setColor:(NSString *)hexColor {
     // Hex to int color
@@ -168,23 +141,23 @@ using namespace facebook::react;
 //   self.minuteInterval = _reactMinuteInterval;
 // }
 
-// - (void)setMinuteInterval:(NSInteger)minuteInterval
-// {
-//   [super setMinuteInterval:minuteInterval];
-//   _reactMinuteInterval = minuteInterval;
-// }
-
-- (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
+- (void)setMinuteInterval:(NSInteger)minuteInterval
 {
-  const auto &oldViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(_props);
-  const auto &newViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(props);
-
-  if (oldViewProps.text != newViewProps.text) {
-    _label.text = [[NSString alloc] initWithCString:newViewProps.text.c_str() encoding:NSASCIIStringEncoding];
-  }
-
-  [super updateProps:props oldProps:oldProps];
+  [super setMinuteInterval:minuteInterval];
+  _reactMinuteInterval = minuteInterval;
 }
+
+// - (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
+// {
+//   const auto &oldViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(_props);
+//   const auto &newViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(props);
+
+//   if (oldViewProps.text != newViewProps.text) {
+//     _label.text = [[NSString alloc] initWithCString:newViewProps.text.c_str() encoding:NSASCIIStringEncoding];
+//   }
+
+//   [super updateProps:props oldProps:oldProps];
+// }
 
 @end
 

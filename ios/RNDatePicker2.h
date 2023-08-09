@@ -3,7 +3,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RNDatePicker2 : RCTViewComponentView
+@interface RNDatePicker2 : UIDatePicker
 
 @end
 
