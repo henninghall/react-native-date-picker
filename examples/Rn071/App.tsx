@@ -35,7 +35,7 @@ function Section({children, title}: SectionProps): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
-      <DatePicker date={new Date()} onDateChange={() => {}} />
+      <DatePicker date={new Date()} onDateChange={() => {}} mode={'time'} />
       <Text
         style={[
           styles.sectionTitle,

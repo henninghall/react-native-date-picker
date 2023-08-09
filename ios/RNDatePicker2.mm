@@ -22,6 +22,7 @@ using namespace facebook::react;
   UIView *_view;
   UILabel *_label;
   NSInteger _reactMinuteInterval;
+  facebook::react::SharedViewProps _props;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
@@ -59,6 +60,9 @@ using namespace facebook::react;
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
+        static const auto defaultProps = std::make_shared<const RNDatePicker2Props>();
+        _props = defaultProps;
+        
         [self addTarget:self action:@selector(didChange)
        forControlEvents:UIControlEventValueChanged];
         if(@available(iOS 13, *)) {
@@ -124,18 +128,29 @@ using namespace facebook::react;
 
 RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 
-// - (void)didChange
-// {
-//     if (_onChange) {
-//         _onChange(@{ @"timestamp": @(self.date.timeIntervalSince1970 * 1000.0) });
-//     }
-// }
-
-- (void)setDatePickerMode:(UIDatePickerMode)datePickerMode
+- (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
 {
-  [super setDatePickerMode:datePickerMode];
-  // We need to set minuteInterval after setting datePickerMode, otherwise minuteInterval is invalid in time mode.
-  self.minuteInterval = _reactMinuteInterval;
+  const auto &oldViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(_props);
+  const auto &newViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(props);
+
+  if (oldViewProps.mode != newViewProps.mode) {
+      if(newViewProps.mode == "time") [super setDatePickerMode:UIDatePickerModeTime];
+      if(newViewProps.mode == "date") [super setDatePickerMode:UIDatePickerModeDate];
+      if(newViewProps.mode == "datetime") [super setDatePickerMode:UIDatePickerModeDateAndTime];
+    // We need to set minuteInterval after setting datePickerMode, otherwise minuteInterval is invalid in time mode.
+    self.minuteInterval = _reactMinuteInterval;
+  }
+    
+
+  [super updateProps:props oldProps:oldProps];
+}
+
+
+- (void)didChange
+{
+    // if (_onChange) {
+    //     _onChange(@{ @"timestamp": @(self.date.timeIntervalSince1970 * 1000.0) });
+    // }
 }
 
 - (void)setMinuteInterval:(NSInteger)minuteInterval

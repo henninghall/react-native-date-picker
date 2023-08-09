@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import { shouldCloseModal, shouldOpenModal } from './modal'
 
+// TODO: Move to its own file
 const RCTDatePickerIOS =
   Platform.OS === 'ios' ? requireNativeComponent('RNDatePicker2') : null
 
@@ -17,9 +18,10 @@ export default class DatePickerIOS extends React.Component {
     if (this.props.date) {
       const propsTimeStamp = this.props.date.getTime()
       if (this._picker) {
-        this._picker.setNativeProps({
-          date: propsTimeStamp,
-        })
+        // TODO: Not supported with fabric
+        // this._picker.setNativeProps({
+        //   date: propsTimeStamp,
+        // })
       }
     }
   }
