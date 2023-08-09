@@ -132,14 +132,19 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 {
   const auto &oldViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(_props);
   const auto &newViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(props);
-
+    
   if (oldViewProps.mode != newViewProps.mode) {
-      if(newViewProps.mode == "time") [super setDatePickerMode:UIDatePickerModeTime];
-      if(newViewProps.mode == "date") [super setDatePickerMode:UIDatePickerModeDate];
-      if(newViewProps.mode == "datetime") [super setDatePickerMode:UIDatePickerModeDateAndTime];
+      if(newViewProps.mode == RNDatePicker2Mode::Time) [super setDatePickerMode:UIDatePickerModeTime];
+      if(newViewProps.mode == RNDatePicker2Mode::Date) [super setDatePickerMode:UIDatePickerModeDate];
+      if(newViewProps.mode == RNDatePicker2Mode::Datetime) [super setDatePickerMode:UIDatePickerModeDateAndTime];
     // We need to set minuteInterval after setting datePickerMode, otherwise minuteInterval is invalid in time mode.
     self.minuteInterval = _reactMinuteInterval;
   }
+
+    if (oldViewProps.minuteInterval != newViewProps.minuteInterval) {
+        [super setMinuteInterval:newViewProps.minuteInterval];
+        _reactMinuteInterval = newViewProps.minuteInterval;
+    }
     
 
   [super updateProps:props oldProps:oldProps];
