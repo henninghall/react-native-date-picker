@@ -1,5 +1,5 @@
 // #import "RCTComponent.h"
-#import "RNDatePicker2.h"
+#import "RNDatePicker.h"
 
 // #import "RCTUtils.h"
 // #import "UIView+React.h"
@@ -7,10 +7,10 @@
 #import "RCTConvert.h"
 
 
-#import <react/renderer/components/RNDatePicker2Specs/ComponentDescriptors.h>
-#import <react/renderer/components/RNDatePicker2Specs/EventEmitters.h>
-#import <react/renderer/components/RNDatePicker2Specs/Props.h>
-#import <react/renderer/components/RNDatePicker2Specs/RCTComponentViewHelpers.h>
+#import <react/renderer/components/RNDatePickerSpecs/ComponentDescriptors.h>
+#import <react/renderer/components/RNDatePickerSpecs/EventEmitters.h>
+#import <react/renderer/components/RNDatePickerSpecs/Props.h>
+#import <react/renderer/components/RNDatePickerSpecs/RCTComponentViewHelpers.h>
 
 #import "RCTFabricComponentsPlugins.h"
 
@@ -19,11 +19,11 @@
 using namespace facebook::react;
 
 
-@interface RNDatePicker2 () <RCTRNDatePicker2ViewProtocol>
+@interface RNDatePicker () <RCTRNDatePickerViewProtocol>
 
 @end
 
-@implementation RNDatePicker2 {
+@implementation RNDatePicker {
   DatePicker *_picker;
   UIView *_view;
   UILabel *_label;
@@ -32,7 +32,7 @@ using namespace facebook::react;
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
 {
-  return concreteComponentDescriptorProvider<RNDatePicker2ComponentDescriptor>();
+  return concreteComponentDescriptorProvider<RNDatePickerComponentDescriptor>();
 }
 
 NSDate* unixMillisToNSDate (double unixMillis) {
@@ -43,7 +43,7 @@ NSDate* unixMillisToNSDate (double unixMillis) {
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
-        static const auto defaultProps = std::make_shared<const RNDatePicker2Props>();
+        static const auto defaultProps = std::make_shared<const RNDatePickerProps>();
         _props = defaultProps;
         
         _picker = [[DatePicker alloc] initWithFrame:_view.bounds];
@@ -75,8 +75,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 
 - (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
 {
-  const auto &oldViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(oldProps ? oldProps : _props); //_props equ
-  const auto &newViewProps = *std::static_pointer_cast<RNDatePicker2Props const>(props);
+  const auto &oldViewProps = *std::static_pointer_cast<RNDatePickerProps const>(oldProps ? oldProps : _props); //_props equ
+  const auto &newViewProps = *std::static_pointer_cast<RNDatePickerProps const>(props);
     
     //  date
     if(oldViewProps.date != newViewProps.date) {
@@ -108,9 +108,9 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     
   // mode
   if (oldViewProps.mode != newViewProps.mode) {
-      if(newViewProps.mode == RNDatePicker2Mode::Time) [_picker setDatePickerMode:UIDatePickerModeTime];
-      if(newViewProps.mode == RNDatePicker2Mode::Date) [_picker setDatePickerMode:UIDatePickerModeDate];
-      if(newViewProps.mode == RNDatePicker2Mode::Datetime) [_picker setDatePickerMode:UIDatePickerModeDateAndTime];
+      if(newViewProps.mode == RNDatePickerMode::Time) [_picker setDatePickerMode:UIDatePickerModeTime];
+      if(newViewProps.mode == RNDatePickerMode::Date) [_picker setDatePickerMode:UIDatePickerModeDate];
+      if(newViewProps.mode == RNDatePickerMode::Datetime) [_picker setDatePickerMode:UIDatePickerModeDateAndTime];
     // We need to set minuteInterval after setting datePickerMode, otherwise minuteInterval is invalid in time mode.
     _picker.minuteInterval = _reactMinuteInterval;
   }
@@ -136,15 +136,15 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
   [super updateProps:props oldProps:oldProps];
 }
 
--(void)didChange:(RNDatePicker2 *)sender
+-(void)didChange:(RNDatePicker *)sender
 {
-    std::dynamic_pointer_cast<const RNDatePicker2EventEmitter>(_eventEmitter)
-     ->onChange(RNDatePicker2EventEmitter::OnChange{ .timestamp = _picker.date.timeIntervalSince1970 * 1000.0f });
+    std::dynamic_pointer_cast<const RNDatePickerEventEmitter>(_eventEmitter)
+     ->onChange(RNDatePickerEventEmitter::OnChange{ .timestamp = _picker.date.timeIntervalSince1970 * 1000.0f });
 }
 
 @end
 
-Class<RCTComponentViewProtocol> RNDatePicker2Cls(void)
+Class<RCTComponentViewProtocol> RNDatePickerCls(void)
 {
-  return RNDatePicker2.class;
+  return RNDatePicker.class;
 }

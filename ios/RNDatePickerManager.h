@@ -8,7 +8,7 @@
 #import <React/RCTConvert.h>
 #import <React/RCTViewManager.h>
 
-@interface RNDatePicker2Manager : RCTViewManager
+@interface RNDatePickerManager : RCTViewManager
 
 @property (strong, nonatomic) UIViewController *topViewController;
 

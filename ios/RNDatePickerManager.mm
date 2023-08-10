@@ -2,7 +2,7 @@
 #import <React/RCTUIManager.h>
 #import <React/RCTViewManager.h>
 
-#import "RNDatePicker2Manager.h"
+#import "RNDatePickerManager.h"
 
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
@@ -28,9 +28,9 @@ RCT_ENUM_CONVERTER(UIDatePickerMode, (@{
 
 @end
 
-@implementation RNDatePicker2Manager
+@implementation RNDatePickerManager
 
-RCT_EXPORT_MODULE(RNDatePicker2)
+RCT_EXPORT_MODULE(RNDatePicker)
 
 RCT_EXPORT_METHOD(addListener : (NSString *)eventName) {
   // Keep: Required for RN built in Event Emitter Calls.

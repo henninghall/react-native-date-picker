@@ -50,7 +50,7 @@
     "prettier": "^2.2.1"
   },
   "codegenConfig": {
-    "name": "RNDatePicker2Specs",
+    "name": "RNDatePickerSpecs",
     "type": "components",
     "jsSrcsDir": "src/fabric"
   }

@@ -41,5 +41,5 @@ export interface NativeProps extends ViewProps {
 }
 
 export default codegenNativeComponent<NativeProps>(
-  'RNDatePicker2'
+  'RNDatePicker'
 ) as HostComponent<NativeProps>
