@@ -14,6 +14,8 @@
 
 #import "RCTFabricComponentsPlugins.h"
 
+#import "DatePicker.h"
+
 using namespace facebook::react;
 
 
@@ -22,7 +24,7 @@ using namespace facebook::react;
 @end
 
 @implementation RNDatePicker2 {
-  UIDatePicker *_picker;
+  DatePicker *_picker;
   UIView *_view;
   UILabel *_label;
   NSInteger _reactMinuteInterval;
@@ -70,7 +72,7 @@ NSDate* unixMillisToNSDate (double unixMillis) {
         static const auto defaultProps = std::make_shared<const RNDatePicker2Props>();
         _props = defaultProps;
         
-        _picker = [[UIDatePicker alloc] initWithFrame:_view.bounds];
+        _picker = [[DatePicker alloc] initWithFrame:_view.bounds];
         
         [_picker addTarget:self action:@selector(didChange:)
        forControlEvents:UIControlEventValueChanged];
@@ -112,35 +114,6 @@ NSDate* unixMillisToNSDate (double unixMillis) {
     [_picker performSelector:@selector(setHighlightsToday:) withObject:[NSNumber numberWithBool:NO]];
     #pragma clang diagnostic pop
 }
-
-
-- (void)setTextColorProp:(NSString *)hexColor
-{
-    
-    if(@available(iOS 13, *)) {
-
-        // black text -> set light mode
-        if([hexColor isEqualToString:@"#000000"]){
-            _picker.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-        }
-
-        // white text -> set dark mode
-        else if([hexColor isEqualToString:@"#FFFFFF"] || [hexColor isEqualToString:@"#ffffff"]){
-            _picker.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
-        }
-        // other colors -> remove "Today" string since it cannot be colored from iOS 13.
-        else {
-            [self removeTodayString];
-            [self setColor:hexColor];
-        }
-    }
-
-    // if ios 12 and earlier -> no need to remove today string since it can be colored.
-    else {
-        [self setColor:hexColor];
-    }
-}
-
 
 RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 
@@ -201,7 +174,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
   // text color
     if(oldViewProps.textColor != newViewProps.textColor){
         NSString *textColor = RCTNSStringFromString(newViewProps.textColor);
-        [self setTextColorProp:textColor];
+        [_picker setTextColorProp:textColor];
     }
 
   [super updateProps:props oldProps:oldProps];
