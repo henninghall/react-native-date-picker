@@ -14,18 +14,6 @@ const RCTDatePickerIOS =
 export default class DatePickerIOS extends React.Component {
   _picker = null
 
-  componentDidUpdate() {
-    if (this.props.date) {
-      const propsTimeStamp = this.props.date.getTime()
-      if (this._picker) {
-        // TODO: Not supported with fabric
-        // this._picker.setNativeProps({
-        //   date: propsTimeStamp,
-        // })
-      }
-    }
-  }
-
   _onChange = (event) => {
     const nativeTimeStamp = event.nativeEvent.timestamp
     this.props.onDateChange &&
