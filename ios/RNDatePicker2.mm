@@ -35,35 +35,9 @@ using namespace facebook::react;
   return concreteComponentDescriptorProvider<RNDatePicker2ComponentDescriptor>();
 }
 
-
-#define UIColorFromRGB(rgbHex) [UIColor colorWithRed:((float)((rgbHex & 0xFF0000) >> 16))/255.0 green:((float)((rgbHex & 0xFF00) >> 8))/255.0 blue:((float)(rgbHex & 0xFF))/255.0 alpha:1.0]
-
 NSDate* unixMillisToNSDate (double unixMillis) {
     double time = unixMillis/1000.0;
     return [NSDate dateWithTimeIntervalSince1970: time];
-}
-
-- (UIColor *) colorFromHexCode:(NSString *)hexString {
-    NSString *cleanString = [hexString stringByReplacingOccurrencesOfString:@"#" withString:@""];
-    if([cleanString length] == 3) {
-        cleanString = [NSString stringWithFormat:@"%@%@%@%@%@%@",
-                       [cleanString substringWithRange:NSMakeRange(0, 1)],[cleanString substringWithRange:NSMakeRange(0, 1)],
-                       [cleanString substringWithRange:NSMakeRange(1, 1)],[cleanString substringWithRange:NSMakeRange(1, 1)],
-                       [cleanString substringWithRange:NSMakeRange(2, 1)],[cleanString substringWithRange:NSMakeRange(2, 1)]];
-    }
-    if([cleanString length] == 6) {
-        cleanString = [cleanString stringByAppendingString:@"ff"];
-    }
-    
-    unsigned int baseValue;
-    [[NSScanner scannerWithString:cleanString] scanHexInt:&baseValue];
-    
-    float red = ((baseValue >> 24) & 0xFF)/255.0f;
-    float green = ((baseValue >> 16) & 0xFF)/255.0f;
-    float blue = ((baseValue >> 8) & 0xFF)/255.0f;
-    float alpha = ((baseValue >> 0) & 0xFF)/255.0f;
-    
-    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -95,24 +69,6 @@ NSDate* unixMillisToNSDate (double unixMillis) {
 - (void)setContentView:(UIView *)contentView
 {
   [super setContentView:_picker];
-}
-
-- (void)setColor:(NSString *)hexColor {
-    // Hex to int color
-    unsigned intColor = 0;
-    NSScanner *scanner = [NSScanner scannerWithString:hexColor];
-    [scanner setScanLocation:1]; // bypass '#' character
-    [scanner scanHexInt:&intColor];
-
-    // Setting picker text color
-    [_picker setValue:UIColorFromRGB(intColor) forKeyPath:@"textColor"];
-}
-
-- (void)removeTodayString {
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wundeclared-selector"
-    [_picker performSelector:@selector(setHighlightsToday:) withObject:[NSNumber numberWithBool:NO]];
-    #pragma clang diagnostic pop
 }
 
 RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
@@ -170,7 +126,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
             [_picker setTimeZone:[RCTConvert NSTimeZone: timezoneMinutesInt]];
         }
     }
-    
+
   // text color
     if(oldViewProps.textColor != newViewProps.textColor){
         NSString *textColor = RCTNSStringFromString(newViewProps.textColor);
@@ -184,12 +140,6 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 {
     std::dynamic_pointer_cast<const RNDatePicker2EventEmitter>(_eventEmitter)
      ->onChange(RNDatePicker2EventEmitter::OnChange{ .timestamp = _picker.date.timeIntervalSince1970 * 1000.0f });
-}
-
-- (void)setMinuteInterval:(NSInteger)minuteInterval
-{
-  [_picker setMinuteInterval:minuteInterval];
-  _reactMinuteInterval = minuteInterval;
 }
 
 @end
