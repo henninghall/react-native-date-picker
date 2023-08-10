@@ -8,7 +8,7 @@ import {
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent'
 
 type DateEvent = {
-  date: Double
+  timestamp: Double
 }
 
 export interface NativeProps extends ViewProps {
