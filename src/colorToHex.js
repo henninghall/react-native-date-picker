@@ -1,7 +1,8 @@
 export function colorToHex(c) {
   if (c === undefined) return c
-  if (c === "none") return c
-  if (c.includes('rgb')) return rgb2hex(c)
+  if (c === 'none') return c
+  if (c.includes('rgb')) return rgb2hex(parseRgb(c))
+  if (c.includes('hsl')) return hsl2hex(parseHsl(c))
   if (c.includes('#')) {
     if (!isValidHex(c)) throw Error('Invalid color: ' + c)
     if (c.length === 4) return '#' + c[1] + c[1] + c[2] + c[2] + c[3] + c[3]
@@ -16,16 +17,74 @@ function isValidHex(color) {
   return /^#([0-9A-Fa-f]{3}){1,2}$/i.test(color)
 }
 
-function rgb2hex(rgb) {
-  rgb = rgb.match(
-    /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i
+function parseRgb(rgb) {
+  return rgb
+    .match(
+      /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i
+    )
+    .slice(1)
+}
+
+function rgb2hex(rgbArray) {
+  if (rgbArray.length != 3) {
+    return ''
+  }
+  return (
+    '#' +
+    parseInt(rgbArray[0]).toString(16).padStart(2, '0') +
+    parseInt(rgbArray[1]).toString(16).padStart(2, '0') +
+    parseInt(rgbArray[2]).toString(16).padStart(2, '0')
   )
-  return rgb && rgb.length === 4
-    ? '#' +
-        ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) +
-        ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) +
-        ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2)
-    : ''
+}
+
+function parseHsl(hsl) {
+  const matches = hsl.match(
+    /^hsla*\((\d{1,3})\s*[, ]\s*(\d{1,3})%\s*[, ]\s*(\d{1,3})%.*\)/i
+  )
+
+  if (matches === null) {
+    throw Error('Invalid color: ' + hsl)
+  }
+
+  const h = matches[1] / 360
+  const s = matches[2] / 100
+  const l = matches[3] / 100
+  return [h, s, l]
+}
+
+function hsl2hex(hslArray) {
+  if (hslArray.length != 3) {
+    return ''
+  }
+
+  const [h, s, l] = hslArray
+
+  var r, g, b
+
+  if (s === 0) {
+    r = g = b = l
+  } else {
+    const hue2rgb = (p, q, t) => {
+      if (t < 0) t += 1
+      if (t > 1) t -= 1
+      if (t < 1 / 6) return p + (q - p) * 6 * t
+      if (t < 1 / 2) return q
+      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6
+      return p
+    }
+
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s
+    const p = 2 * l - q
+    r = hue2rgb(p, q, h + 1 / 3)
+    g = hue2rgb(p, q, h)
+    b = hue2rgb(p, q, h - 1 / 3)
+  }
+
+  return rgb2hex([
+    Math.round(r * 255),
+    Math.round(g * 255),
+    Math.round(b * 255),
+  ])
 }
 
 function colourNameToHex(color) {
