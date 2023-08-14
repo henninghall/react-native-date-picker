@@ -75,6 +75,8 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         NSString * confirmText = [RCTConvert NSString:[props objectForKey:@"confirmText"]];
         NSString * cancelText = [RCTConvert NSString:[props objectForKey:@"cancelText"]];
         DatePicker* picker = [[DatePicker alloc] init];
+        [picker setup];
+        
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         UIView * alertView = alertController.view;
 

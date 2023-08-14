@@ -5,9 +5,10 @@
  * @format
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -33,14 +34,28 @@ type SectionProps = PropsWithChildren<{
 
 function Section({children, title}: SectionProps): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
   return (
     <View style={styles.sectionContainer}>
+      <Button title="open" onPress={() => setOpen(true)} />
       <DatePicker
-        date={new Date()}
-        onDateChange={() => {}}
-        mode={'datetime'}
-        minuteInterval={5}
-        timeZoneOffsetInMinutes={null}
+        date={new Date('2021-01-01T2:00:00Z')}
+        modal
+        mode="date"
+        onConfirm={date => {
+          setDate(date);
+          setOpen(false);
+        }}
+        onCancel={() => {
+          setOpen(false);
+        }}
+        open={open}
+        onDateChange={setDate}
+      />
+      <DatePicker
+        date={new Date('2021-01-01T2:00:00Z')}
+        onDateChange={setDate}
       />
       <Text
         style={[
@@ -49,7 +64,7 @@ function Section({children, title}: SectionProps): JSX.Element {
             color: isDarkMode ? Colors.white : Colors.black,
           },
         ]}>
-        {title}
+        {date.toISOString()}
       </Text>
       <Text
         style={[

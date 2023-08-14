@@ -2,6 +2,7 @@
 
 @interface DatePicker : UIDatePicker
 
+- (void)setup;
 - (void)setTextColorProp:(NSString *)hexColor;
 
 @end

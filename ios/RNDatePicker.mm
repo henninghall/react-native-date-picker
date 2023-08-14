@@ -47,16 +47,12 @@ NSDate* unixMillisToNSDate (double unixMillis) {
         _props = defaultProps;
         
         _picker = [[DatePicker alloc] initWithFrame:_view.bounds];
+        [_picker setup];
         
         [_picker addTarget:self action:@selector(didChange:)
        forControlEvents:UIControlEventValueChanged];
-        if(@available(iOS 13, *)) {
-            _picker.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-        }
-        if(@available(iOS 14, *)) {
-            _picker.preferredDatePickerStyle = UIDatePickerStyleWheels;
-        }
-         _reactMinuteInterval = 1;
+        
+        _reactMinuteInterval = 1;
          
         // only allow gregorian calendar
         _picker.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];

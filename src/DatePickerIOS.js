@@ -47,7 +47,7 @@ export default class DatePickerIOS extends React.Component {
 
     if (shouldOpenModal(props, this.previousProps)) {
       this.isClosing = false
-      NativeModules.RNDatePickerManager.openPicker(
+      NativeModules.RNDatePicker.openPicker(
         props,
         this._onConfirm,
         this._onCancel
@@ -55,7 +55,7 @@ export default class DatePickerIOS extends React.Component {
     }
     if (shouldCloseModal(props, this.previousProps, this.isClosing)) {
       this.isClosing = true
-      NativeModules.RNDatePickerManager.closePicker()
+      NativeModules.RNDatePicker.closePicker()
     }
 
     this.previousProps = props

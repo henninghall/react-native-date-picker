@@ -19,6 +19,14 @@
 
 @implementation DatePicker
 
+-(void)setup {
+    if(@available(iOS 13, *)) {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    }
+    if(@available(iOS 14, *)) {
+        self.preferredDatePickerStyle = UIDatePickerStyleWheels;
+    }
+}
 
 #define UIColorFromRGB(rgbHex) [UIColor colorWithRed:((float)((rgbHex & 0xFF0000) >> 16))/255.0 green:((float)((rgbHex & 0xFF00) >> 8))/255.0 blue:((float)(rgbHex & 0xFF))/255.0 alpha:1.0]
 
