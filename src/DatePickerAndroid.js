@@ -1,5 +1,10 @@
 import React from 'react'
-import { NativeModules, requireNativeComponent, Platform } from 'react-native'
+import {
+  NativeModules,
+  requireNativeComponent,
+  Platform,
+  NativeEventEmitter,
+} from 'react-native'
 import { shouldCloseModal, shouldOpenModal } from './modal'
 
 function addMinutes(date, minutesToAdd) {
@@ -16,6 +21,8 @@ const NativeDatePicker =
 const height = 180
 const timeModeWidth = 240
 const defaultWidth = 310
+
+const eventEmitter = new NativeEventEmitter(NativeModules.RNDatePicker)
 
 class DatePickerAndroid extends React.PureComponent {
   render() {
@@ -41,6 +48,14 @@ class DatePickerAndroid extends React.PureComponent {
     return <NativeDatePicker {...props} onChange={this._onChange} />
   }
 
+  componentDidMount = () => {
+    this.eventListener = eventEmitter.addListener('dateChange', this._onChange)
+  }
+
+  componentWillUnmount = () => {
+    this.eventListener.remove()
+  }
+
   getProps = () => ({
     ...this.props,
     date: this._date(),
@@ -61,10 +76,10 @@ class DatePickerAndroid extends React.PureComponent {
   }
 
   _onChange = (e) => {
-    const jsDate = this._fromIsoWithTimeZoneOffset(e.nativeEvent.date)
+    const jsDate = this._fromIsoWithTimeZoneOffset(e.date)
     this.props.onDateChange && this.props.onDateChange(jsDate)
     if (this.props.onDateStringChange) {
-      this.props.onDateStringChange(e.nativeEvent.dateString)
+      this.props.onDateStringChange(e.dateString)
     }
   }
 

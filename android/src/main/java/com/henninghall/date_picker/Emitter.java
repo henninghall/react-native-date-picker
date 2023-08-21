@@ -24,7 +24,8 @@ public class Emitter {
         String dateString = Utils.dateToIso(date);
         event.putString("date", dateString);
         event.putString("dateString", displayValueString);
-        eventEmitter().receiveEvent(view.getId(), "dateChange", event);
+        // TODO: Handle multiple pickers on same screen
+        deviceEventEmitter().emit("dateChange", event);
     }
 
 }

@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 import com.facebook.react.bridge.Dynamic;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.common.MapBuilder;
+import com.facebook.react.fabric.events.EventEmitterWrapper;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactPropGroup;
