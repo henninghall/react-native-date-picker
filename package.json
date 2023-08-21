@@ -52,6 +52,9 @@
   "codegenConfig": {
     "name": "RNDatePickerSpecs",
     "type": "components",
-    "jsSrcsDir": "src/fabric"
+    "jsSrcsDir": "src/fabric",
+    "android": {
+      "javaPackageName": "com.henninghall.date_picker"
+    }
   }
 }

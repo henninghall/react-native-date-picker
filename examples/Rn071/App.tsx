@@ -25,8 +25,8 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
 import DatePicker from 'react-native-date-picker';
+// import CenteredText from 'rtn-centered-text';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -39,7 +39,7 @@ function Section({children, title}: SectionProps): JSX.Element {
   return (
     <View style={styles.sectionContainer}>
       <Button title="open" onPress={() => setOpen(true)} />
-      <DatePicker
+      {/* <DatePicker
         date={new Date('2021-01-01T2:00:00Z')}
         modal
         mode="date"
@@ -52,11 +52,14 @@ function Section({children, title}: SectionProps): JSX.Element {
         }}
         open={open}
         onDateChange={setDate}
-      />
+      /> */}
       <DatePicker
-        date={new Date('2021-01-01T2:00:00Z')}
+        date={new Date()}
         onDateChange={setDate}
+        textColor="#000000"
+        androidVariant="nativeAndroid"
       />
+      {/* <CenteredText text={title}>{title}</CenteredText> */}
       <Text
         style={[
           styles.sectionTitle,
@@ -100,16 +103,6 @@ function App(): JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
           <Section title="Learn More">
             Read the docs to discover what to do next:
           </Section>

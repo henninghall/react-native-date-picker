@@ -27,14 +27,14 @@ import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-public class DatePickerManager extends SimpleViewManager<PickerView>  {
+public class DatePickerManager extends SimpleViewManager<PickerView> {
 
-  private static final String REACT_CLASS = "DatePickerManager";
-  private static final int SCROLL = 1;
+  static final String NAME = "RNDatePicker";
+  private static final String SCROLL = "1";
 
   @Override
   public String getName() {
-    return REACT_CLASS;
+    return NAME;
   }
 
   @Override
@@ -60,7 +60,7 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
   @Override
   public Map<String, Integer> getCommandsMap() {
-    return MapBuilder.of("scroll", SCROLL);
+    return MapBuilder.of("scroll", Integer.parseInt(SCROLL));
   }
 
   @Override
@@ -74,8 +74,8 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
      }
   }
 
-  public void receiveCommand(final PickerView view, int command, final ReadableArray args) {
-    if (command == SCROLL) {
+  public void receiveCommand(final PickerView view, String commandId, final ReadableArray args) {
+    if (commandId == SCROLL) {
       int wheelIndex = args.getInt(0);
       int scrollTimes = args.getInt(1);
       view.scroll(wheelIndex, scrollTimes);

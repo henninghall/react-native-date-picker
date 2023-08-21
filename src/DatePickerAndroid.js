@@ -8,7 +8,7 @@ function addMinutes(date, minutesToAdd) {
 
 const NativeDatePicker =
   Platform.OS === 'android'
-    ? requireNativeComponent(`DatePickerManager`, DatePickerAndroid, {
+    ? requireNativeComponent('RNDatePicker', DatePickerAndroid, {
         nativeOnly: { onChange: true },
       })
     : null

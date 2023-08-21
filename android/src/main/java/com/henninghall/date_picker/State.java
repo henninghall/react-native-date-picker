@@ -100,8 +100,9 @@ public class State {
     }
 
     public TimeZone getTimeZone() {
-        Integer offset = timezoneOffsetInMinutesProp.getValue();
-        if(offset == null) return TimeZone.getDefault();
+        String offsetString = timezoneOffsetInMinutesProp.getValue();
+        if(offsetString == null) return TimeZone.getDefault();
+        int offset = Integer.parseInt(offsetString);
         int totalOffsetMinutes = Math.abs(offset);
         char offsetDirection = offset < 0 ? '-' : '+';
         int offsetHours = (int) Math.floor(totalOffsetMinutes / 60f);
