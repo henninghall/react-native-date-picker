@@ -101,7 +101,7 @@ public class State {
 
     public TimeZone getTimeZone() {
         String offsetString = timezoneOffsetInMinutesProp.getValue();
-        if(offsetString == null) return TimeZone.getDefault();
+        if(offsetString == null || offsetString.equals("")) return TimeZone.getDefault();
         int offset = Integer.parseInt(offsetString);
         int totalOffsetMinutes = Math.abs(offset);
         char offsetDirection = offset < 0 ? '-' : '+';

@@ -8,6 +8,6 @@ public class TimezoneOffsetInMinutesProp extends Prop<String> {
     @Override
     String toValue(Dynamic value) {
         if(value.isNull()) return null;
-        return value.toString();
+        return value.asString();
     }
 }
