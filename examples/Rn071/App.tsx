@@ -5,8 +5,8 @@
  * @format
  */
 
-import React, {useState} from 'react';
 import type {PropsWithChildren} from 'react';
+import React, {useState} from 'react';
 import {
   Button,
   SafeAreaView,
@@ -18,14 +18,12 @@ import {
   View,
 } from 'react-native';
 
+import DatePicker from 'react-native-date-picker';
 import {
   Colors,
-  DebugInstructions,
   Header,
   LearnMoreLinks,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import DatePicker from 'react-native-date-picker';
 // import CenteredText from 'rtn-centered-text';
 
 type SectionProps = PropsWithChildren<{
@@ -39,7 +37,7 @@ function Section({children, title}: SectionProps): JSX.Element {
   return (
     <View style={styles.sectionContainer}>
       <Button title="open" onPress={() => setOpen(true)} />
-      {/* <DatePicker
+      <DatePicker
         date={new Date('2021-01-01T2:00:00Z')}
         modal
         mode="date"
@@ -52,7 +50,7 @@ function Section({children, title}: SectionProps): JSX.Element {
         }}
         open={open}
         onDateChange={setDate}
-      /> */}
+      />
       <DatePicker
         date={new Date('2021-01-04')}
         maximumDate={new Date('2000-02-01')}

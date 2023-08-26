@@ -10,7 +10,9 @@ import com.facebook.react.module.model.ReactModuleInfo;
 import com.facebook.react.module.model.ReactModuleInfoProvider;
 import com.facebook.react.uimanager.ViewManager;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,22 +20,25 @@ import java.util.Map;
 public class DatePickerPackage extends TurboReactPackage implements ReactPackage {
     public static ReactApplicationContext context;
 
+    @Nullable
     @Override
-    public NativeModule getModule(String s, ReactApplicationContext reactContext) {
-        context = reactContext;
-        return new DatePickerModule(reactContext);
+    public NativeModule getModule(String name, ReactApplicationContext reactContext) {
+              if (name.equals(DatePickerModule.NAME)) {
+                      return new DatePickerModule(reactContext);
+                  } else {
+            return null;
+                  }
     }
-
 
     @Override
     public ReactModuleInfoProvider getReactModuleInfoProvider() {
               return () -> {
                       final Map<String, ReactModuleInfo> moduleInfos = new HashMap<>();
                       moduleInfos.put(
-                                      DatePickerManager.NAME,
+                              DatePickerModule.NAME,
                                       new ReactModuleInfo(
-                                                      DatePickerManager.NAME,
-                                                      DatePickerManager.NAME,
+                                                      DatePickerModule.NAME,
+                                                      DatePickerModule.NAME,
                                                       false, // canOverrideExistingModule
                                                       false, // needsEagerInit
                                                       true, // hasConstants
@@ -50,6 +55,14 @@ public class DatePickerPackage extends TurboReactPackage implements ReactPackage
         return Arrays.<ViewManager> asList(
                 new DatePickerManager()
         );
+    }
+
+    @Override
+    public List<NativeModule> createNativeModules(
+            ReactApplicationContext reactContext) {
+        List<NativeModule> modules = new ArrayList<>();
+        modules.add(new DatePickerModule(reactContext));
+        return modules;
     }
 
 }

@@ -4,6 +4,7 @@ import {
   requireNativeComponent,
   Platform,
   NativeEventEmitter,
+  TurboModuleRegistry,
 } from 'react-native'
 import { shouldCloseModal, shouldOpenModal } from './modal'
 
@@ -24,21 +25,23 @@ const defaultWidth = 310
 
 const eventEmitter = new NativeEventEmitter(NativeModules.RNDatePicker)
 
+const NativePicker = TurboModuleRegistry.get('RNDatePicker')
+
 class DatePickerAndroid extends React.PureComponent {
   render() {
     const props = this.getProps()
 
     if (shouldOpenModal(props, this.previousProps)) {
       this.isClosing = false
-      NativeModules.RNDatePicker.openPicker(
-        props,
-        this._onConfirm,
-        this._onCancel
+      NativePicker.openPicker(
+        props
+        // this._onConfirm,
+        // this._onCancel
       )
     }
     if (shouldCloseModal(props, this.previousProps, this.isClosing)) {
       this.closing = true
-      NativeModules.RNDatePicker.closePicker()
+      NativePicker.closePicker()
     }
 
     this.previousProps = props

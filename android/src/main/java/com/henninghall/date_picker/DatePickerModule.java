@@ -3,12 +3,16 @@ package com.henninghall.date_picker;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.telecom.Call;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
+
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Dynamic;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -17,7 +21,9 @@ import com.facebook.react.bridge.ReadableMapKeySetIterator;
 
 import net.time4j.android.ApplicationStarter;
 
-public class DatePickerModule extends ReactContextBaseJavaModule {
+public class DatePickerModule extends NativeRNDatePickerSpec {
+
+    public static final String NAME = "RNDatePicker";
 
     private AlertDialog dialog;
 
@@ -25,6 +31,8 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
         super(context);
         ApplicationStarter.initialize(context, false); // false = no need to prefetch on time data background tread
     }
+
+
 
     @ReactMethod
     public void addListener(String eventName) {
@@ -36,9 +44,24 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
         // Keep: Required for RN built in Event Emitter Calls.
     }
 
-    @ReactMethod
-    public void openPicker(ReadableMap props, Callback onConfirm, Callback onCancel){
+    @Override
+    public void openPicker(ReadableMap props){
         PickerView picker = createPicker(props);
+        // TODO
+        Callback onConfirm = new Callback() {
+            @Override
+            public void invoke(Object... objects) {
+
+            }
+        };
+
+        Callback onCancel = new Callback() {
+            @Override
+            public void invoke(Object... objects) {
+
+            }
+        };
+
         dialog = createDialog(props, picker, onConfirm, onCancel);
         dialog.show();
     }
@@ -125,7 +148,8 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
     }
 
     @Override
+    @NonNull
     public String getName() {
-        return "RNDatePicker";
+        return NAME;
     }
 }
