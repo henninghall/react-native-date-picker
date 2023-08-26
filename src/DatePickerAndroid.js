@@ -1,10 +1,9 @@
 import React from 'react'
 import {
-  NativeModules,
-  requireNativeComponent,
-  Platform,
   NativeEventEmitter,
+  Platform,
   TurboModuleRegistry,
+  requireNativeComponent,
 } from 'react-native'
 import { shouldCloseModal, shouldOpenModal } from './modal'
 
@@ -22,8 +21,6 @@ const NativeDatePicker =
 const height = 180
 const timeModeWidth = 240
 const defaultWidth = 310
-
-const eventEmitter = new NativeEventEmitter(NativeModules.RNDatePicker)
 
 const NativePicker = TurboModuleRegistry.get('RNDatePicker')
 
@@ -52,11 +49,14 @@ class DatePickerAndroid extends React.PureComponent {
   }
 
   componentDidMount = () => {
-    this.eventListener = eventEmitter.addListener('dateChange', this._onChange)
+    this.eventEmitter = new NativeEventEmitter(NativePicker)
+    this.eventEmitter.addListener('dateChange', this._onChange)
+    this.eventEmitter.addListener('onConfirm', this._onConfirm)
+    this.eventEmitter.addListener('onCancel', this._onCancel)
   }
 
   componentWillUnmount = () => {
-    this.eventListener.remove()
+    this.eventEmitter.removeAllListeners()
   }
 
   getProps = () => ({
@@ -104,12 +104,13 @@ class DatePickerAndroid extends React.PureComponent {
     return date.toISOString()
   }
 
-  _onConfirm = (isoDate) => {
+  _onConfirm = ({ date }) => {
     this.isClosing = true
-    this.props.onConfirm(this._fromIsoWithTimeZoneOffset(isoDate))
+    this.props.onConfirm(this._fromIsoWithTimeZoneOffset(date))
   }
 
   _onCancel = () => {
+    console.log('CANCEL')
     this.isClosing = true
     this.props.onCancel()
   }

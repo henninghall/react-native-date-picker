@@ -24,7 +24,6 @@ import net.time4j.android.ApplicationStarter;
 public class DatePickerModule extends NativeRNDatePickerSpec {
 
     public static final String NAME = "RNDatePicker";
-
     private AlertDialog dialog;
 
     DatePickerModule(ReactApplicationContext context) {
@@ -32,15 +31,13 @@ public class DatePickerModule extends NativeRNDatePickerSpec {
         ApplicationStarter.initialize(context, false); // false = no need to prefetch on time data background tread
     }
 
-
-
-    @ReactMethod
+    @Override
     public void addListener(String eventName) {
         // Keep: Required for RN built in Event Emitter Calls.
     }
 
-    @ReactMethod
-    public void removeListeners(Integer count) {
+    @Override
+    public void removeListeners() {
         // Keep: Required for RN built in Event Emitter Calls.
     }
 
@@ -51,14 +48,14 @@ public class DatePickerModule extends NativeRNDatePickerSpec {
         Callback onConfirm = new Callback() {
             @Override
             public void invoke(Object... objects) {
-
+                Emitter.onConfirm(picker.getDate());
             }
         };
 
         Callback onCancel = new Callback() {
             @Override
             public void invoke(Object... objects) {
-
+                Emitter.onCancel();
             }
         };
 

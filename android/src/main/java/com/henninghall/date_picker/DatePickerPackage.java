@@ -6,6 +6,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.TurboReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.model.ReactModuleInfo;
 import com.facebook.react.module.model.ReactModuleInfoProvider;
 import com.facebook.react.uimanager.ViewManager;
@@ -23,30 +24,31 @@ public class DatePickerPackage extends TurboReactPackage implements ReactPackage
     @Nullable
     @Override
     public NativeModule getModule(String name, ReactApplicationContext reactContext) {
-              if (name.equals(DatePickerModule.NAME)) {
-                      return new DatePickerModule(reactContext);
-                  } else {
+        if (name.equals(DatePickerModule.NAME)) {
+            context = reactContext;
+            return new DatePickerModule(reactContext);
+        } else {
             return null;
-                  }
+        }
     }
 
     @Override
     public ReactModuleInfoProvider getReactModuleInfoProvider() {
-              return () -> {
-                      final Map<String, ReactModuleInfo> moduleInfos = new HashMap<>();
-                      moduleInfos.put(
-                              DatePickerModule.NAME,
-                                      new ReactModuleInfo(
-                                                      DatePickerModule.NAME,
-                                                      DatePickerModule.NAME,
-                                                      false, // canOverrideExistingModule
-                                                      false, // needsEagerInit
-                                                      true, // hasConstants
-                                                      false, // isCxxModule
-                                                      true // isTurboModule
-                                              ));
-                      return moduleInfos;
-                  };
+        return () -> {
+            final Map<String, ReactModuleInfo> moduleInfos = new HashMap<>();
+            moduleInfos.put(
+                    DatePickerModule.NAME,
+                    new ReactModuleInfo(
+                            DatePickerModule.NAME,
+                            DatePickerModule.NAME,
+                            false, // canOverrideExistingModule
+                            false, // needsEagerInit
+                            true, // hasConstants
+                            false, // isCxxModule
+                            true // isTurboModule
+                    ));
+            return moduleInfos;
+        };
     }
 
     @Override

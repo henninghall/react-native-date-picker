@@ -19,7 +19,7 @@ public class Emitter {
         return DatePickerPackage.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
     }
 
-    public static void onDateChange(Calendar date, String displayValueString, View view) {
+    public static void onDateChange(Calendar date, String displayValueString) {
         WritableMap event = Arguments.createMap();
         String dateString = Utils.dateToIso(date);
         event.putString("date", dateString);
@@ -27,5 +27,19 @@ public class Emitter {
         // TODO: Handle multiple pickers on same screen
         deviceEventEmitter().emit("dateChange", event);
     }
+    public static void onConfirm(String date) {
+        WritableMap event = Arguments.createMap();
+        event.putString("date", date);
+        // TODO: Handle multiple pickers on same screen
+        deviceEventEmitter().emit("onConfirm", event);
+    }
+
+    public static void onCancel() {
+        WritableMap event = Arguments.createMap();
+        // TODO: Handle multiple pickers on same screen
+        deviceEventEmitter().emit("onCancel", event);
+    }
+
+
 
 }

@@ -51,14 +51,14 @@ function Section({children, title}: SectionProps): JSX.Element {
         open={open}
         onDateChange={setDate}
       />
-      <DatePicker
+      {/* <DatePicker
         date={new Date('2021-01-04')}
         maximumDate={new Date('2000-02-01')}
         minimumDate={new Date('2000-01-01')}
         onDateChange={setDate}
         // textColor="#000000"
         androidVariant="nativeAndroid"
-      />
+      /> */}
       {/* <CenteredText text={title}>{title}</CenteredText> */}
       <Text
         style={[
