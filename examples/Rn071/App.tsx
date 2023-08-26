@@ -35,7 +35,7 @@ function Section({children, title}: SectionProps): JSX.Element {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   return (
-    <View style={styles.sectionContainer}>
+    <View style={styles.sectionContainer} key={title}>
       <Button title="open" onPress={() => setOpen(true)} />
       <DatePicker
         date={new Date('2021-01-01T2:00:00Z')}
@@ -51,14 +51,14 @@ function Section({children, title}: SectionProps): JSX.Element {
         open={open}
         onDateChange={setDate}
       />
-      {/* <DatePicker
+      <DatePicker
         date={new Date('2021-01-04')}
         maximumDate={new Date('2000-02-01')}
         minimumDate={new Date('2000-01-01')}
         onDateChange={setDate}
-        // textColor="#000000"
+        textColor="#000000"
         androidVariant="nativeAndroid"
-      /> */}
+      />
       {/* <CenteredText text={title}>{title}</CenteredText> */}
       <Text
         style={[

@@ -7,10 +7,6 @@ import {
 } from 'react-native'
 import { shouldCloseModal, shouldOpenModal } from './modal'
 
-function addMinutes(date, minutesToAdd) {
-  return new Date(date.valueOf() + minutesToAdd * 60 * 1000)
-}
-
 const NativeDatePicker =
   Platform.OS === 'android'
     ? requireNativeComponent('RNDatePicker', DatePickerAndroid, {
@@ -30,11 +26,7 @@ class DatePickerAndroid extends React.PureComponent {
 
     if (shouldOpenModal(props, this.previousProps)) {
       this.isClosing = false
-      NativePicker.openPicker(
-        props
-        // this._onConfirm,
-        // this._onCancel
-      )
+      NativePicker.openPicker(props)
     }
     if (shouldCloseModal(props, this.previousProps, this.isClosing)) {
       this.closing = true
@@ -49,6 +41,7 @@ class DatePickerAndroid extends React.PureComponent {
   }
 
   componentDidMount = () => {
+    this.id = Math.random().toString()
     this.eventEmitter = new NativeEventEmitter(NativePicker)
     this.eventEmitter.addListener('dateChange', this._onChange)
     this.eventEmitter.addListener('onConfirm', this._onConfirm)
@@ -62,6 +55,7 @@ class DatePickerAndroid extends React.PureComponent {
   getProps = () => ({
     ...this.props,
     date: this._date(),
+    id: this.id,
     minimumDate: this._minimumDate(),
     maximumDate: this._maximumDate(),
     timezoneOffsetInMinutes: this._getTimezoneOffsetInMinutes(),
@@ -78,8 +72,9 @@ class DatePickerAndroid extends React.PureComponent {
     return [{ width, height }, this.props.style]
   }
 
-  _onChange = (e) => {
-    const jsDate = this._fromIsoWithTimeZoneOffset(e.date)
+  _onChange = ({ date, id }) => {
+    if (id !== this.id) return
+    const jsDate = this._fromIsoWithTimeZoneOffset(date)
     this.props.onDateChange && this.props.onDateChange(jsDate)
     if (this.props.onDateStringChange) {
       this.props.onDateStringChange(e.dateString)
@@ -104,13 +99,14 @@ class DatePickerAndroid extends React.PureComponent {
     return date.toISOString()
   }
 
-  _onConfirm = ({ date }) => {
+  _onConfirm = ({ date, id }) => {
+    if (id !== this.id) return
     this.isClosing = true
     this.props.onConfirm(this._fromIsoWithTimeZoneOffset(date))
   }
 
-  _onCancel = () => {
-    console.log('CANCEL')
+  _onCancel = ({ id }) => {
+    if (id !== this.id) return
     this.isClosing = true
     this.props.onCancel()
   }

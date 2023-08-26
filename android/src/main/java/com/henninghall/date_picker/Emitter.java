@@ -1,7 +1,5 @@
 package com.henninghall.date_picker;
 
-import android.view.View;
-
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
@@ -19,24 +17,24 @@ public class Emitter {
         return DatePickerPackage.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
     }
 
-    public static void onDateChange(Calendar date, String displayValueString) {
+    public static void onDateChange(Calendar date, String displayValueString, String id) {
         WritableMap event = Arguments.createMap();
         String dateString = Utils.dateToIso(date);
         event.putString("date", dateString);
         event.putString("dateString", displayValueString);
-        // TODO: Handle multiple pickers on same screen
+        event.putString("id", id);
         deviceEventEmitter().emit("dateChange", event);
     }
-    public static void onConfirm(String date) {
+    public static void onConfirm(String date, String id) {
         WritableMap event = Arguments.createMap();
         event.putString("date", date);
-        // TODO: Handle multiple pickers on same screen
+        event.putString("id", id);
         deviceEventEmitter().emit("onConfirm", event);
     }
 
-    public static void onCancel() {
+    public static void onCancel(String id) {
         WritableMap event = Arguments.createMap();
-        // TODO: Handle multiple pickers on same screen
+        event.putString("id", id);
         deviceEventEmitter().emit("onCancel", event);
     }
 

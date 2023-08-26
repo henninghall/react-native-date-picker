@@ -5,6 +5,7 @@ import com.henninghall.date_picker.models.Is24HourSource;
 import com.henninghall.date_picker.models.Mode;
 import com.henninghall.date_picker.models.Variant;
 import com.henninghall.date_picker.props.DividerHeightProp;
+import com.henninghall.date_picker.props.IdProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
 import com.henninghall.date_picker.props.VariantProp;
 import com.henninghall.date_picker.props.DateProp;
@@ -41,6 +42,7 @@ public class State {
     private final VariantProp variantProp = new VariantProp();
     private final DividerHeightProp dividerHeightProp = new DividerHeightProp();
     private final Is24hourSourceProp is24hourSourceProp = new Is24hourSourceProp();
+    private final IdProp idProp = new IdProp();
 
     private final HashMap props = new HashMap<String, Prop>() {{
         put(DateProp.name, dateProp);
@@ -56,6 +58,7 @@ public class State {
         put(VariantProp.name, variantProp);
         put(DividerHeightProp.name, dividerHeightProp);
         put(Is24hourSourceProp.name, is24hourSourceProp);
+        put(IdProp.name, idProp);
     }};
     public DerivedData derived;
 
@@ -147,6 +150,9 @@ public class State {
 
     public int getDividerHeight() {
         return dividerHeightProp.getValue();
+    }
+    public String getId() {
+        return idProp.getValue();
     }
 
     public Is24HourSource getIs24HourSource() {

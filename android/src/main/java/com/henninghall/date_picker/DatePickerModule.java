@@ -44,18 +44,17 @@ public class DatePickerModule extends NativeRNDatePickerSpec {
     @Override
     public void openPicker(ReadableMap props){
         PickerView picker = createPicker(props);
-        // TODO
         Callback onConfirm = new Callback() {
             @Override
             public void invoke(Object... objects) {
-                Emitter.onConfirm(picker.getDate());
+                Emitter.onConfirm(picker.getDate(), picker.getPickerId());
             }
         };
 
         Callback onCancel = new Callback() {
             @Override
             public void invoke(Object... objects) {
-                Emitter.onCancel();
+                Emitter.onCancel(picker.getPickerId());
             }
         };
 

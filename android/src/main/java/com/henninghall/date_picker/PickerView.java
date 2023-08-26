@@ -111,6 +111,10 @@ public class PickerView extends RelativeLayout {
         return state.derived.getLastDate();
     }
 
+    public String getPickerId() {
+        return state.getId();
+    }
+
     private final Runnable measureAndLayout = new Runnable() {
         @Override
         public void run() {
