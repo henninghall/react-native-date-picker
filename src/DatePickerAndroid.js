@@ -40,8 +40,14 @@ class DatePickerAndroid extends React.PureComponent {
     return <NativeDatePicker {...props} onChange={this._onChange} />
   }
 
+  getId = () => {
+    if (!this.id) {
+      this.id = Math.random().toString()
+    }
+    return this.id
+  }
+
   componentDidMount = () => {
-    this.id = Math.random().toString()
     this.eventEmitter = new NativeEventEmitter(NativePicker)
     this.eventEmitter.addListener('dateChange', this._onChange)
     this.eventEmitter.addListener('onConfirm', this._onConfirm)
@@ -55,7 +61,7 @@ class DatePickerAndroid extends React.PureComponent {
   getProps = () => ({
     ...this.props,
     date: this._date(),
-    id: this.id,
+    id: this.getId(),
     minimumDate: this._minimumDate(),
     maximumDate: this._maximumDate(),
     timezoneOffsetInMinutes: this._getTimezoneOffsetInMinutes(),

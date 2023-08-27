@@ -49,7 +49,6 @@ function Section({children, title}: SectionProps): JSX.Element {
           setOpen(false);
         }}
         open={open}
-        onDateChange={setDate}
       />
       <DatePicker
         date={new Date('2021-01-04')}
