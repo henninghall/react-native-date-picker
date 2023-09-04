@@ -4,7 +4,7 @@
 
 - (void)setup;
 - (void)setTextColorProp:(NSString *)hexColor;
-- (void)setTimeZoneOffsetInMinutes:(NSString *)ofrset;
+- (void)setTimeZoneOffsetInMinutes:(NSString *)offset;
 
 @end
 
