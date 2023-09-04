@@ -9,6 +9,7 @@
 
 #import "RCTUtils.h"
 #import "UIView+React.h"
+#import "RCTConvert.h"
 
 @interface DatePicker ()
 
@@ -97,6 +98,17 @@
     // if ios 12 and earlier -> no need to remove today string since it can be colored.
     else {
         [self setColor:hexColor];
+    }
+}
+
+- (void)setTimeZoneOffsetInMinutes:(NSString *)timeZoneOffsetInMinutes
+{
+    if([timeZoneOffsetInMinutes length] == 0){
+        [self setTimeZone: nil];
+    }
+    else {
+        NSNumber *timezoneMinutesInt = [NSNumber numberWithInt:[timeZoneOffsetInMinutes intValue]];
+        [self setTimeZone:[RCTConvert NSTimeZone: timezoneMinutesInt]];
     }
 }
 

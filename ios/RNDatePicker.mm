@@ -151,14 +151,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     
     //  timeZoneOffsetInMinutes
     if (oldViewProps.timeZoneOffsetInMinutes != newViewProps.timeZoneOffsetInMinutes) {
-        if([RCTNSStringFromString(newViewProps.timeZoneOffsetInMinutes) length] == 0){
-            [_picker setTimeZone: nil];
-        }
-        else {
-            NSString *timezoneOffsetString = RCTNSStringFromString(newViewProps.timeZoneOffsetInMinutes);
-            NSNumber *timezoneMinutesInt = [NSNumber numberWithInt:[timezoneOffsetString intValue]];
-            [_picker setTimeZone:[RCTConvert NSTimeZone: timezoneMinutesInt]];
-        }
+        [_picker setTimeZoneOffetInMinutes:newViewProps.timeZoneOffsetInMinutes]
     }
     
     // text color

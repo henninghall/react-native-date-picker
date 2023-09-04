@@ -54,8 +54,11 @@ RCT_EXPORT_VIEW_PROPERTY(maximumDate, NSDate)
 RCT_EXPORT_VIEW_PROPERTY(minuteInterval, NSInteger)
 RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 RCT_REMAP_VIEW_PROPERTY(mode, datePickerMode, UIDatePickerMode)
-RCT_REMAP_VIEW_PROPERTY(timeZoneOffsetInMinutes, timeZone, NSTimeZone)
 
+RCT_CUSTOM_VIEW_PROPERTY(timeZoneOffsetInMinutes, NSString, DatePicker)
+{
+    [view setTimeZoneOffsetInMinutes:[RCTConvert NSString:json]];
+}
 
 RCT_CUSTOM_VIEW_PROPERTY(textColor, NSString, DatePicker)
 {
@@ -124,9 +127,7 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         [picker setMinuteInterval:minuteInterval];
 
         NSString * timeZoneProp = [props valueForKey:@"timeZoneOffsetInMinutes"];
-        if(timeZoneProp){
-            [picker setTimeZone:[RCTConvert NSTimeZone:timeZoneProp]];
-        }
+        if(timeZoneProp) [picker setTimeZoneOffsetInMinutes:timeZoneProp];
 
         if(@available(iOS 13, *)) {
             NSString * _Nonnull theme = [RCTConvert NSString:[props objectForKey:@"theme"]];
