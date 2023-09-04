@@ -1,25 +1,15 @@
-//#ifdef RCT_NEW_ARCH_ENABLED
-
-// #import "RCTComponent.h"
 #import "RNDatePicker.h"
-
-
-// #import "RCTUtils.h"
-// #import "UIView+React.h"
-//#import <React/RCTConversions.h>
-//#endif
-
 
 #ifdef RCT_NEW_ARCH_ENABLED
 #import "RCTConvert.h"
+#import <React/RCTConversions.h>
+#import <react/renderer/components/RNDatePickerSpecs/ComponentDescriptors.h>
+#import <react/renderer/components/RNDatePickerSpecs/EventEmitters.h>
+#import <react/renderer/components/RNDatePickerSpecs/Props.h>
+#import <react/renderer/components/RNDatePickerSpecs/RCTComponentViewHelpers.h>
+#import "RCTFabricComponentsPlugins.h"
 
-//#import <react/renderer/components/RNDatePickerSpecs/ComponentDescriptors.h>
-//#import <react/renderer/components/RNDatePickerSpecs/EventEmitters.h>
-//#import <react/renderer/components/RNDatePickerSpecs/Props.h>
-//#import <react/renderer/components/RNDatePickerSpecs/RCTComponentViewHelpers.h>
-
-//#import "RCTFabricComponentsPlugins.h"
-//#endif
+using namespace facebook::react;
 
 #else
 #import "RCTUtils.h"
@@ -28,10 +18,7 @@
 #endif
 
 
-//#import "RCTFabricComponentsPlugins.h"
-#import "RNDatePicker.h"
-
-//using namespace facebook::react;
+#import "DatePicker.h"
 
 
 #ifdef RCT_NEW_ARCH_ENABLED
@@ -151,7 +138,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     
     //  timeZoneOffsetInMinutes
     if (oldViewProps.timeZoneOffsetInMinutes != newViewProps.timeZoneOffsetInMinutes) {
-        [_picker setTimeZoneOffetInMinutes:newViewProps.timeZoneOffsetInMinutes]
+        NSString *newString = RCTNSStringFromString(newViewProps.timeZoneOffsetInMinutes);
+        [_picker setTimeZoneOffsetInMinutes:newString];
     }
     
     // text color
