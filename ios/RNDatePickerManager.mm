@@ -16,6 +16,7 @@
 #import "RCTConvert.h"
 
 #import "DatePicker.h"
+#import "RNDatePicker.h"
 
 @implementation RCTConvert(UIDatePicker)
 
@@ -42,7 +43,7 @@ RCT_EXPORT_METHOD(removeListeners : (NSInteger)count) {
 
 - (UIView *)view
 {
-  return [DatePicker new];
+  return [RNDatePicker new];
 }
 
 RCT_EXPORT_VIEW_PROPERTY(text, NSString)

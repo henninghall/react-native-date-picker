@@ -72,6 +72,8 @@ export default class DatePickerIOS extends React.Component {
         onStartShouldSetResponder={() => true}
         onResponderTerminationRequest={() => false}
         {...props}
+        // temp
+        timeZoneOffsetInMinutes={undefined}
       />
     )
   }
