@@ -61,7 +61,7 @@ public class DatePickerManagerImpl {
 
 
 
-  private static void updateProp(String methodName, PickerView view, int index, Dynamic value, Class<? extends com.henninghall.date_picker.DatePickerManager> aClass){
+  public static void updateProp(String methodName, PickerView view, int index, Dynamic value, Class<? extends com.henninghall.date_picker.DatePickerManager> aClass){
     String[] propNames = getMethodAnnotation(methodName, aClass).names();
     String propName = propNames[index];
     view.updateProp(propName, value);
