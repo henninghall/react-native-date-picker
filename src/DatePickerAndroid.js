@@ -1,6 +1,7 @@
 import React from 'react'
 import {
   NativeEventEmitter,
+  NativeModules,
   Platform,
   TurboModuleRegistry,
   requireNativeComponent,
@@ -18,7 +19,9 @@ const height = 180
 const timeModeWidth = 240
 const defaultWidth = 310
 
-const NativePicker = TurboModuleRegistry.get('RNDatePicker')
+const NativePicker = TurboModuleRegistry
+  ? TurboModuleRegistry.get('RNDatePicker')
+  : NativeModules.RNDatePicker
 
 class DatePickerAndroid extends React.PureComponent {
   render() {
@@ -78,12 +81,14 @@ class DatePickerAndroid extends React.PureComponent {
     return [{ width, height }, this.props.style]
   }
 
-  _onChange = ({ date, id }) => {
-    if (id !== this.id) return
+  _onChange = (e) => {
+    const { date, id, dateString } = e.nativeEvent ?? e
+    const newArch = id !== null
+    if (newArch && id !== this.id) return
     const jsDate = this._fromIsoWithTimeZoneOffset(date)
     this.props.onDateChange && this.props.onDateChange(jsDate)
     if (this.props.onDateStringChange) {
-      this.props.onDateStringChange(e.dateString)
+      this.props.onDateStringChange(dateString)
     }
   }
 

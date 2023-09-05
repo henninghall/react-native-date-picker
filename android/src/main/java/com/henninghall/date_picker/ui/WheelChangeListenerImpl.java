@@ -62,7 +62,7 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
         String displayData = uiManager.getDisplayValueString();
 
         uiManager.updateLastSelectedDate(selectedDate);
-        Emitter.onDateChange(selectedDate, displayData, state.getId());
+        Emitter.onDateChange(selectedDate, displayData, state.getId(), rootView);
     }
 
     // Example: Jan 1 returns true, April 31 returns false.

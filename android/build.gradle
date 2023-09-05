@@ -20,8 +20,18 @@ android {
     defaultConfig {
         minSdkVersion safeExtGet('minSdkVersion', 18)
         targetSdkVersion safeExtGet('targetSdkVersion', 25)
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+    }
+
+    sourceSets {
+        main {
+            if (isNewArchitectureEnabled()) {
+                java.srcDirs += ['src/newarch']
+            } else {
+                java.srcDirs += ['src/oldarch']
+            }
+        }
     }
     buildTypes {
         release {
@@ -32,15 +42,35 @@ android {
 }
 
 
-repositories {
-    mavenCentral()
-    google()
+
+if (isNewArchitectureEnabled()) {
+    buildscript {
+        repositories {
+            mavenCentral()
+            google()
+        }
+
+        dependencies {
+            classpath("com.android.tools.build:gradle:7.1.1")
+            classpath("com.facebook.react:react-native-gradle-plugin")
+            classpath("de.undercouch:gradle-download-task:5.0.1")
+        }
+    }
 }
+
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.facebook.react:react-native:+'
+    implementation 'com.facebook.react:react-native:'
     implementation 'com.github.henninghall:numberpickerview:v1.1.5'
     implementation 'org.apache.commons:commons-lang3:3.8'
     implementation group: 'net.time4j', name: 'time4j-android', version: '4.8-2021a'
+}
+
+if (isNewArchitectureEnabled()) {
+    react {
+        jsRootDir = file("../src/")
+        libraryName = "RNDatePicker"
+        codegenJavaPackageName = "com.henninghall.date_picker"
+    }
 }

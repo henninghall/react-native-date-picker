@@ -6,17 +6,17 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.TurboReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.model.ReactModuleInfo;
 import com.facebook.react.module.model.ReactModuleInfoProvider;
 import com.facebook.react.uimanager.ViewManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.henninghall.date_picker.DatePickerModule;
+import com.henninghall.date_picker.DatePickerManager;
 
 public class DatePickerPackage extends TurboReactPackage implements ReactPackage {
     public static ReactApplicationContext context;
@@ -24,7 +24,7 @@ public class DatePickerPackage extends TurboReactPackage implements ReactPackage
     @Nullable
     @Override
     public NativeModule getModule(String name, ReactApplicationContext reactContext) {
-        if (name.equals(DatePickerModule.NAME)) {
+        if (name.equals(DatePickerModuleImpl.NAME)) {
             context = reactContext;
             return new DatePickerModule(reactContext);
         } else {
@@ -35,17 +35,18 @@ public class DatePickerPackage extends TurboReactPackage implements ReactPackage
     @Override
     public ReactModuleInfoProvider getReactModuleInfoProvider() {
         return () -> {
+            boolean isTurboModule = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
             final Map<String, ReactModuleInfo> moduleInfos = new HashMap<>();
             moduleInfos.put(
-                    DatePickerModule.NAME,
+                    DatePickerModuleImpl.NAME,
                     new ReactModuleInfo(
-                            DatePickerModule.NAME,
-                            DatePickerModule.NAME,
+                            DatePickerModuleImpl.NAME,
+                            DatePickerModuleImpl.NAME,
                             false, // canOverrideExistingModule
                             false, // needsEagerInit
                             true, // hasConstants
                             false, // isCxxModule
-                            true // isTurboModule
+                            isTurboModule
                     ));
             return moduleInfos;
         };

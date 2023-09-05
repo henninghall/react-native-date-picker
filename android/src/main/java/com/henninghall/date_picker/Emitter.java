@@ -1,5 +1,7 @@
 package com.henninghall.date_picker;
 
+import android.view.View;
+
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
@@ -17,13 +19,18 @@ public class Emitter {
         return DatePickerPackage.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
     }
 
-    public static void onDateChange(Calendar date, String displayValueString, String id) {
+    public static void onDateChange(Calendar date, String displayValueString, String id, View view) {
         WritableMap event = Arguments.createMap();
         String dateString = Utils.dateToIso(date);
         event.putString("date", dateString);
         event.putString("dateString", displayValueString);
         event.putString("id", id);
-        deviceEventEmitter().emit("dateChange", event);
+        if(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED){
+            deviceEventEmitter().emit("dateChange", event);
+        }
+        else {
+            eventEmitter().receiveEvent(view.getId(),"dateChange",event);
+        }
     }
     public static void onConfirm(String date, String id) {
         WritableMap event = Arguments.createMap();

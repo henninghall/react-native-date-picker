@@ -50,11 +50,11 @@ function Section({children, title}: SectionProps): JSX.Element {
         open={open}
       />
       <DatePicker
-        date={new Date('2021-01-04')}
+        date={date}
         maximumDate={new Date('2000-02-01')}
         minimumDate={new Date('2000-01-01')}
         onDateChange={setDate}
-        textColor="#00ff00"
+        // textColor="#00ff00"
         androidVariant="nativeAndroid"
       />
       <Text
