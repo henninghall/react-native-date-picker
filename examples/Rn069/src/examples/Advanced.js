@@ -196,7 +196,6 @@ export default class Advanced extends Component {
 
   scroll = ({wheelIndex, scrollTimes}) => {
     if (!this.ref) return;
-    // TODO: Deprecated: https://reactnative.dev/docs/new-architecture-library-intro
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.ref),
       UIManager.getViewManagerConfig('DatePickerManager').Commands.scroll,
