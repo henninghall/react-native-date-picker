@@ -17,5 +17,7 @@ Pod::Spec.new do |s|
 
   s.dependency 'React-Core'
 
-  install_modules_dependencies(s)
+  if ENV['RCT_NEW_ARCH_ENABLED'] == '1' then
+    install_modules_dependencies(s)
+  end
 end
