@@ -40,4 +40,15 @@ describe('colorToHex', () => {
   it('return undefined when undefined', () => {
     expect(colorToHex(undefined)).toEqual(undefined)
   })
+
+  it('should transform hsl to hex', () => {
+    expect(colorToHex('hsl(0, 0%, 0%)')).toEqual('#000000')
+    expect(colorToHex('hsl(0, 0%, 100%)')).toEqual('#ffffff')
+    expect(colorToHex('hsl(0, 0%, 50%)')).toEqual('#808080')
+    expect(colorToHex('hsl(34, 87%, 50%)')).toEqual('#ee8e11')
+    expect(colorToHex('hsl(137, 83%, 71%)')).toEqual('#78f29a')
+    expect(colorToHex('hsl(360 100% 100%)')).toEqual('#ffffff')
+    expect(colorToHex('hsla(137, 83%, 71%, 0.5)')).toEqual('#78f29a')
+    expect(colorToHex('hsla(360 100% 100% / 1.0)')).toEqual('#ffffff')
+  })
 })

@@ -54,7 +54,6 @@ function Section({children, title}: SectionProps): JSX.Element {
         maximumDate={new Date('2000-02-01')}
         minimumDate={new Date('2000-01-01')}
         onDateChange={setDate}
-        // textColor="#00ff00"
         androidVariant="nativeAndroid"
       />
       <Text
