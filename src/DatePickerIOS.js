@@ -1,9 +1,9 @@
 import React from 'react'
 import {
-  StyleSheet,
-  requireNativeComponent,
   NativeModules,
   Platform,
+  StyleSheet,
+  requireNativeComponent,
 } from 'react-native'
 import { shouldCloseModal, shouldOpenModal } from './modal'
 
@@ -12,8 +12,6 @@ const RCTDatePickerIOS =
   Platform.OS === 'ios' ? requireNativeComponent('RNDatePicker') : null
 
 export default class DatePickerIOS extends React.Component {
-  _picker = null
-
   _onChange = (event) => {
     const nativeTimeStamp = event.nativeEvent.timestamp
     this.props.onDateChange &&
@@ -65,9 +63,6 @@ export default class DatePickerIOS extends React.Component {
     return (
       <RCTDatePickerIOS
         key={props.textColor} // preventing "Today" string keep old text color when text color changes
-        ref={(picker) => {
-          this._picker = picker
-        }}
         onChange={this._onChange}
         onStartShouldSetResponder={() => true}
         onResponderTerminationRequest={() => false}
