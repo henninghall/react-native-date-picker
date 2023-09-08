@@ -58,7 +58,9 @@ class DatePickerAndroid extends React.PureComponent {
   }
 
   componentWillUnmount = () => {
-    this.eventEmitter.removeAllListeners()
+    this.eventEmitter.removeAllListeners('dateChange')
+    this.eventEmitter.removeAllListeners('onConfirm')
+    this.eventEmitter.removeAllListeners('onCancel')
   }
 
   getProps = () => ({
