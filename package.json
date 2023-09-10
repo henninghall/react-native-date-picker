@@ -1,6 +1,6 @@
 {
   "name": "react-native-date-picker",
-  "version": "4.2.14",
+  "version": "4.3.0-alpha.11",
   "description": "A datetime picker for React Native. In-modal or inlined. Supports Android and iOS.",
   "source": "src/index",
   "main": "src/index.js",
@@ -48,5 +48,13 @@
     "babel-jest": "^26.6.3",
     "jest": "^26.6.3",
     "prettier": "^2.2.1"
+  },
+  "codegenConfig": {
+    "name": "RNDatePickerSpecs",
+    "type": "all",
+    "jsSrcsDir": "src/fabric",
+    "android": {
+      "javaPackageName": "com.henninghall.date_picker"
+    }
   }
 }

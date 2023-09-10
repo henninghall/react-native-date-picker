@@ -2,6 +2,7 @@ package com.henninghall.date_picker;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -9,41 +10,40 @@ import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Dynamic;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 
 import net.time4j.android.ApplicationStarter;
 
-public class DatePickerModule extends ReactContextBaseJavaModule {
+public class DatePickerModuleImpl {
 
+    public static final String NAME = "RNDatePicker";
     private AlertDialog dialog;
 
-    DatePickerModule(ReactApplicationContext context) {
-        super(context);
+    DatePickerModuleImpl(Context context) {
         ApplicationStarter.initialize(context, false); // false = no need to prefetch on time data background tread
     }
 
-    @ReactMethod
-    public void addListener(String eventName) {
-        // Keep: Required for RN built in Event Emitter Calls.
-    }
-
-    @ReactMethod
-    public void removeListeners(Integer count) {
-        // Keep: Required for RN built in Event Emitter Calls.
-    }
-
-    @ReactMethod
-    public void openPicker(ReadableMap props, Callback onConfirm, Callback onCancel){
+    public void openPicker(ReadableMap props){
         PickerView picker = createPicker(props);
+        Callback onConfirm = new Callback() {
+            @Override
+            public void invoke(Object... objects) {
+                Emitter.onConfirm(picker.getDate(), picker.getPickerId());
+            }
+        };
+
+        Callback onCancel = new Callback() {
+            @Override
+            public void invoke(Object... objects) {
+                Emitter.onCancel(picker.getPickerId());
+            }
+        };
+
         dialog = createDialog(props, picker, onConfirm, onCancel);
         dialog.show();
     }
 
-    @ReactMethod
     public void closePicker(){
         dialog.dismiss();
     }
@@ -124,8 +124,4 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
         return linearLayout;
     }
 
-    @Override
-    public String getName() {
-        return "RNDatePicker";
-    }
 }

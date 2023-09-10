@@ -1,3 +1,9 @@
+#import <React/RCTLog.h>
+#import <React/RCTUIManager.h>
+#import <React/RCTViewManager.h>
+
+#import "RNDatePickerManager.h"
+
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
  *
@@ -5,12 +11,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#import "RNDatePickerManager.h"
 #import <React/RCTLog.h>
 
 #import "RCTConvert.h"
 
 #import "DatePicker.h"
+#import "RNDatePicker.h"
 
 @implementation RCTConvert(UIDatePicker)
 
@@ -25,7 +31,7 @@ RCT_ENUM_CONVERTER(UIDatePickerMode, (@{
 
 @implementation RNDatePickerManager
 
-RCT_EXPORT_MODULE()
+RCT_EXPORT_MODULE(RNDatePicker)
 
 RCT_EXPORT_METHOD(addListener : (NSString *)eventName) {
   // Keep: Required for RN built in Event Emitter Calls.
@@ -37,9 +43,10 @@ RCT_EXPORT_METHOD(removeListeners : (NSInteger)count) {
 
 - (UIView *)view
 {
-  return [DatePicker new];
+  return [RNDatePicker new];
 }
 
+RCT_EXPORT_VIEW_PROPERTY(text, NSString)
 RCT_EXPORT_VIEW_PROPERTY(date, NSDate)
 RCT_EXPORT_VIEW_PROPERTY(locale, NSLocale)
 RCT_EXPORT_VIEW_PROPERTY(minimumDate, NSDate)
@@ -47,8 +54,11 @@ RCT_EXPORT_VIEW_PROPERTY(maximumDate, NSDate)
 RCT_EXPORT_VIEW_PROPERTY(minuteInterval, NSInteger)
 RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 RCT_REMAP_VIEW_PROPERTY(mode, datePickerMode, UIDatePickerMode)
-RCT_REMAP_VIEW_PROPERTY(timeZoneOffsetInMinutes, timeZone, NSTimeZone)
 
+RCT_CUSTOM_VIEW_PROPERTY(timeZoneOffsetInMinutes, NSString, DatePicker)
+{
+    [view setTimeZoneOffsetInMinutes:[RCTConvert NSString:json]];
+}
 
 RCT_CUSTOM_VIEW_PROPERTY(textColor, NSString, DatePicker)
 {
@@ -69,6 +79,8 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         NSString * confirmText = [RCTConvert NSString:[props objectForKey:@"confirmText"]];
         NSString * cancelText = [RCTConvert NSString:[props objectForKey:@"cancelText"]];
         DatePicker* picker = [[DatePicker alloc] init];
+        [picker setup];
+        
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         UIView * alertView = alertController.view;
 
@@ -115,9 +127,7 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         [picker setMinuteInterval:minuteInterval];
 
         NSString * timeZoneProp = [props valueForKey:@"timeZoneOffsetInMinutes"];
-        if(timeZoneProp){
-            [picker setTimeZone:[RCTConvert NSTimeZone:timeZoneProp]];
-        }
+        if(timeZoneProp) [picker setTimeZoneOffsetInMinutes:timeZoneProp];
 
         if(@available(iOS 13, *)) {
             NSString * _Nonnull theme = [RCTConvert NSString:[props objectForKey:@"theme"]];
@@ -187,3 +197,5 @@ RCT_EXPORT_METHOD(closePicker)
 }
 
 @end
+
+

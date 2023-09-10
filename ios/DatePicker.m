@@ -9,6 +9,7 @@
 
 #import "RCTUtils.h"
 #import "UIView+React.h"
+#import "RCTConvert.h"
 
 @interface DatePicker ()
 
@@ -19,6 +20,15 @@
 
 @implementation DatePicker
 
+-(void)setup {
+    if(@available(iOS 13, *)) {
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    }
+    if(@available(iOS 14, *)) {
+        self.preferredDatePickerStyle = UIDatePickerStyleWheels;
+    }
+    self.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+}
 
 #define UIColorFromRGB(rgbHex) [UIColor colorWithRed:((float)((rgbHex & 0xFF0000) >> 16))/255.0 green:((float)((rgbHex & 0xFF00) >> 8))/255.0 blue:((float)(rgbHex & 0xFF))/255.0 alpha:1.0]
 
@@ -46,25 +56,6 @@
     return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    if ((self = [super initWithFrame:frame])) {
-        [self addTarget:self action:@selector(didChange)
-       forControlEvents:UIControlEventValueChanged];
-        if(@available(iOS 13, *)) {
-            self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
-        }
-        if(@available(iOS 14, *)) {
-            self.preferredDatePickerStyle = UIDatePickerStyleWheels;
-        }
-         _reactMinuteInterval = 1;
-         
-        // only allow gregorian calendar
-        self.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
-    }
-    return self;
-}
-
 - (void)setColor:(NSString *)hexColor {
     // Hex to int color
     unsigned intColor = 0;
@@ -86,7 +77,6 @@
 
 - (void)setTextColorProp:(NSString *)hexColor
 {
-    
     if(@available(iOS 13, *)) {
 
         // black text -> set light mode
@@ -111,29 +101,16 @@
     }
 }
 
-
-RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
-
-- (void)didChange
+- (void)setTimeZoneOffsetInMinutes:(NSString *)timeZoneOffsetInMinutes
 {
-    if (_onChange) {
-        _onChange(@{ @"timestamp": @(self.date.timeIntervalSince1970 * 1000.0) });
+    if([timeZoneOffsetInMinutes length] == 0){
+        [self setTimeZone: nil];
+    }
+    else {
+        NSNumber *timezoneMinutesInt = [NSNumber numberWithInt:[timeZoneOffsetInMinutes intValue]];
+        [self setTimeZone:[RCTConvert NSTimeZone: timezoneMinutesInt]];
     }
 }
-
-- (void)setDatePickerMode:(UIDatePickerMode)datePickerMode
-{
-  [super setDatePickerMode:datePickerMode];
-  // We need to set minuteInterval after setting datePickerMode, otherwise minuteInterval is invalid in time mode.
-  self.minuteInterval = _reactMinuteInterval;
-}
-
-- (void)setMinuteInterval:(NSInteger)minuteInterval
-{
-  [super setMinuteInterval:minuteInterval];
-  _reactMinuteInterval = minuteInterval;
-}
-
 
 @end
 

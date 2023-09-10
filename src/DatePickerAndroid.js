@@ -1,14 +1,16 @@
 import React from 'react'
-import { NativeModules, requireNativeComponent, Platform } from 'react-native'
+import {
+  NativeEventEmitter,
+  NativeModules,
+  Platform,
+  TurboModuleRegistry,
+  requireNativeComponent,
+} from 'react-native'
 import { shouldCloseModal, shouldOpenModal } from './modal'
-
-function addMinutes(date, minutesToAdd) {
-  return new Date(date.valueOf() + minutesToAdd * 60 * 1000)
-}
 
 const NativeDatePicker =
   Platform.OS === 'android'
-    ? requireNativeComponent(`DatePickerManager`, DatePickerAndroid, {
+    ? requireNativeComponent('RNDatePicker', DatePickerAndroid, {
         nativeOnly: { onChange: true },
       })
     : null
@@ -17,21 +19,21 @@ const height = 180
 const timeModeWidth = 240
 const defaultWidth = 310
 
+const NativePicker = TurboModuleRegistry
+  ? TurboModuleRegistry.get('RNDatePicker')
+  : NativeModules.RNDatePicker
+
 class DatePickerAndroid extends React.PureComponent {
   render() {
     const props = this.getProps()
 
     if (shouldOpenModal(props, this.previousProps)) {
       this.isClosing = false
-      NativeModules.RNDatePicker.openPicker(
-        props,
-        this._onConfirm,
-        this._onCancel
-      )
+      NativePicker.openPicker(props)
     }
     if (shouldCloseModal(props, this.previousProps, this.isClosing)) {
       this.closing = true
-      NativeModules.RNDatePicker.closePicker()
+      NativePicker.closePicker()
     }
 
     this.previousProps = props
@@ -41,9 +43,30 @@ class DatePickerAndroid extends React.PureComponent {
     return <NativeDatePicker {...props} onChange={this._onChange} />
   }
 
+  getId = () => {
+    if (!this.id) {
+      this.id = Math.random().toString()
+    }
+    return this.id
+  }
+
+  componentDidMount = () => {
+    this.eventEmitter = new NativeEventEmitter(NativePicker)
+    this.eventEmitter.addListener('dateChange', this._onChange)
+    this.eventEmitter.addListener('onConfirm', this._onConfirm)
+    this.eventEmitter.addListener('onCancel', this._onCancel)
+  }
+
+  componentWillUnmount = () => {
+    this.eventEmitter.removeAllListeners('dateChange')
+    this.eventEmitter.removeAllListeners('onConfirm')
+    this.eventEmitter.removeAllListeners('onCancel')
+  }
+
   getProps = () => ({
     ...this.props,
     date: this._date(),
+    id: this.getId(),
     minimumDate: this._minimumDate(),
     maximumDate: this._maximumDate(),
     timezoneOffsetInMinutes: this._getTimezoneOffsetInMinutes(),
@@ -61,10 +84,13 @@ class DatePickerAndroid extends React.PureComponent {
   }
 
   _onChange = (e) => {
-    const jsDate = this._fromIsoWithTimeZoneOffset(e.nativeEvent.date)
+    const { date, id, dateString } = e.nativeEvent ?? e
+    const newArch = id !== null
+    if (newArch && id !== this.id) return
+    const jsDate = this._fromIsoWithTimeZoneOffset(date)
     this.props.onDateChange && this.props.onDateChange(jsDate)
     if (this.props.onDateStringChange) {
-      this.props.onDateStringChange(e.nativeEvent.dateString)
+      this.props.onDateStringChange(dateString)
     }
   }
 
@@ -86,12 +112,14 @@ class DatePickerAndroid extends React.PureComponent {
     return date.toISOString()
   }
 
-  _onConfirm = (isoDate) => {
+  _onConfirm = ({ date, id }) => {
+    if (id !== this.id) return
     this.isClosing = true
-    this.props.onConfirm(this._fromIsoWithTimeZoneOffset(isoDate))
+    this.props.onConfirm(this._fromIsoWithTimeZoneOffset(date))
   }
 
-  _onCancel = () => {
+  _onCancel = ({ id }) => {
+    if (id !== this.id) return
     this.isClosing = true
     this.props.onCancel()
   }
