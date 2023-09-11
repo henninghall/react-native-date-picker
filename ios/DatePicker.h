@@ -1,4 +1,5 @@
 #import <UIKit/UIKit.h>
+#import <React/RCTConvert.h>
 
 @interface DatePicker : UIDatePicker
 
