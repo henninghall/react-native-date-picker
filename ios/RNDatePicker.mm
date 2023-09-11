@@ -1,4 +1,7 @@
+#import "RNDatePicker.h"
+
 #ifdef RCT_NEW_ARCH_ENABLED
+#import "RCTConvert.h"
 #import <React/RCTConversions.h>
 #import <react/renderer/components/RNDatePickerSpecs/ComponentDescriptors.h>
 #import <react/renderer/components/RNDatePickerSpecs/EventEmitters.h>
@@ -14,8 +17,7 @@ using namespace facebook::react;
 #import "RCTComponent.h"
 #endif
 
-#import "RCTConvert.h"
-#import "RNDatePicker.h"
+
 #import "DatePicker.h"
 
 
