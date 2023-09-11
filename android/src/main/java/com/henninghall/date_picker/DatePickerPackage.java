@@ -34,21 +34,23 @@ public class DatePickerPackage extends TurboReactPackage implements ReactPackage
 
     @Override
     public ReactModuleInfoProvider getReactModuleInfoProvider() {
-        return () -> {
-            boolean isTurboModule = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
-            final Map<String, ReactModuleInfo> moduleInfos = new HashMap<>();
-            moduleInfos.put(
-                    DatePickerModuleImpl.NAME,
-                    new ReactModuleInfo(
-                            DatePickerModuleImpl.NAME,
-                            DatePickerModuleImpl.NAME,
-                            false, // canOverrideExistingModule
-                            false, // needsEagerInit
-                            true, // hasConstants
-                            false, // isCxxModule
-                            isTurboModule
-                    ));
-            return moduleInfos;
+        return new ReactModuleInfoProvider() {
+            final boolean isTurboModule = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
+            public Map<String, ReactModuleInfo> getReactModuleInfos() {
+                final Map<String, ReactModuleInfo> moduleInfos = new HashMap<>();
+                moduleInfos.put(
+                        DatePickerModuleImpl.NAME,
+                        new ReactModuleInfo(
+                                DatePickerModuleImpl.NAME,
+                                DatePickerModuleImpl.NAME,
+                                false, // canOverrideExistingModule
+                                false, // needsEagerInit
+                                true, // hasConstants
+                                false, // isCxxModule
+                                isTurboModule
+                        ));
+                return moduleInfos;
+            }
         };
     }
 
