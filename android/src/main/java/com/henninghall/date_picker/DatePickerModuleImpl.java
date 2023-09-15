@@ -25,7 +25,7 @@ public class DatePickerModuleImpl {
     }
 
     public void openPicker(ReadableMap props){
-        PickerView picker = createPicker(props);
+        final PickerView picker = createPicker(props);
         Callback onConfirm = new Callback() {
             @Override
             public void invoke(Object... objects) {
