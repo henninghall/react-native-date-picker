@@ -37,7 +37,7 @@ public class DatePickerModule extends NativeRNDatePickerSpec {
     }
 
     @Override
-    public void removeListeners() {
+    public void removeListeners(double type) {
         // Keep: Required for RN built in Event Emitter Calls.
     }
 
