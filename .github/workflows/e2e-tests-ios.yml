@@ -21,6 +21,10 @@ jobs:
         working-directory: ./examples/Rn071/
         run: yarn install --frozen-lockfile
 
+      - name: Install npm dependencies (root)
+        working-directory: ./
+        run: yarn install --frozen-lockfile
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         working-directory: ./examples/Rn071/
