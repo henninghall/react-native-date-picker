@@ -1,15 +1,10 @@
 import React from 'react'
-import {
-  NativeModules,
-  Platform,
-  StyleSheet,
-  requireNativeComponent,
-} from 'react-native'
+import { StyleSheet } from 'react-native'
 import { shouldCloseModal, shouldOpenModal } from './modal'
+import { getNativeComponent, getNativeModule } from './modules'
 
-// TODO: Move to its own file
-const RCTDatePickerIOS =
-  Platform.OS === 'ios' ? requireNativeComponent('RNDatePicker') : null
+const NativeComponent = getNativeComponent()
+const NativeModule = getNativeModule()
 
 export default class DatePickerIOS extends React.Component {
   _onChange = (event) => {
@@ -45,15 +40,11 @@ export default class DatePickerIOS extends React.Component {
 
     if (shouldOpenModal(props, this.previousProps)) {
       this.isClosing = false
-      NativeModules.RNDatePicker.openPicker(
-        props,
-        this._onConfirm,
-        this._onCancel
-      )
+      NativeModule.openPicker(props, this._onConfirm, this._onCancel)
     }
     if (shouldCloseModal(props, this.previousProps, this.isClosing)) {
       this.isClosing = true
-      NativeModules.RNDatePicker.closePicker()
+      NativeModule.closePicker()
     }
 
     this.previousProps = props
@@ -61,7 +52,7 @@ export default class DatePickerIOS extends React.Component {
     if (props.modal) return null
 
     return (
-      <RCTDatePickerIOS
+      <NativeComponent
         key={props.textColor} // preventing "Today" string keep old text color when text color changes
         onChange={this._onChange}
         onStartShouldSetResponder={() => true}

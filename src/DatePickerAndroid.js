@@ -1,27 +1,14 @@
 import React from 'react'
-import {
-  NativeEventEmitter,
-  NativeModules,
-  Platform,
-  TurboModuleRegistry,
-  requireNativeComponent,
-} from 'react-native'
+import { NativeEventEmitter } from 'react-native'
 import { shouldCloseModal, shouldOpenModal } from './modal'
+import { getNativeComponent, getNativeModule } from './modules'
 
-const NativeDatePicker =
-  Platform.OS === 'android'
-    ? requireNativeComponent('RNDatePicker', DatePickerAndroid, {
-        nativeOnly: { onChange: true },
-      })
-    : null
+const NativeComponent = getNativeComponent()
+const NativeModule = getNativeModule()
 
 const height = 180
 const timeModeWidth = 240
 const defaultWidth = 310
-
-const NativePicker = TurboModuleRegistry
-  ? TurboModuleRegistry.get('RNDatePicker')
-  : NativeModules.RNDatePicker
 
 class DatePickerAndroid extends React.PureComponent {
   render() {
@@ -29,18 +16,18 @@ class DatePickerAndroid extends React.PureComponent {
 
     if (shouldOpenModal(props, this.previousProps)) {
       this.isClosing = false
-      NativePicker.openPicker(props)
+      NativeModule.openPicker(props)
     }
     if (shouldCloseModal(props, this.previousProps, this.isClosing)) {
       this.closing = true
-      NativePicker.closePicker()
+      NativeModule.closePicker()
     }
 
     this.previousProps = props
 
     if (props.modal) return null
 
-    return <NativeDatePicker {...props} onChange={this._onChange} />
+    return <NativeComponent {...props} onChange={this._onChange} />
   }
 
   getId = () => {
@@ -51,7 +38,7 @@ class DatePickerAndroid extends React.PureComponent {
   }
 
   componentDidMount = () => {
-    this.eventEmitter = new NativeEventEmitter(NativePicker)
+    this.eventEmitter = new NativeEventEmitter(NativeModule)
     this.eventEmitter.addListener('dateChange', this._onChange)
     this.eventEmitter.addListener('onConfirm', this._onConfirm)
     this.eventEmitter.addListener('onCancel', this._onCancel)
