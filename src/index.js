@@ -1,15 +1,13 @@
 import React from 'react'
 import { Appearance, Platform, Text } from 'react-native'
-import DatePickerAndroid from './DatePickerAndroid'
-import DatePickerIOS from './DatePickerIOS'
 import { colorToHex } from './colorToHex'
 import { throwIfInvalidProps } from './propChecker'
 
 const DatePicker = Platform.select({
-  android: DatePickerAndroid,
-  ios: DatePickerIOS,
+  android: () => require('./DatePickerAndroid').default,
+  ios: () => require('./DatePickerIOS').default,
   default: () => <Text>DatePicker is not supported on this platform.</Text>,
-})
+})()
 
 const DatePickerWrapper = (props) => {
   if (__DEV__) throwIfInvalidProps(props)
