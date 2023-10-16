@@ -32,7 +32,6 @@ jobs:
 
       - name: setup-cocoapods
         uses: maxim-lobanov/setup-cocoapods@v1
-        working-directory: ./examples/Rn071/
         with:
           version: 1.11.3
 
