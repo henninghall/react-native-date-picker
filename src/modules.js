@@ -18,7 +18,6 @@ export const getNativeComponent = () => {
         )
     }
   } catch (e) {
-    console.error(e)
     if (global.ignoreDatePickerWarning) return null
     throw Error(getInstallationErrorMessage())
   }
