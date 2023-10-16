@@ -1,4 +1,4 @@
-name: E2E tests (maestro)
+name: E2E tests (android)
 
 on:
   workflow_dispatch:

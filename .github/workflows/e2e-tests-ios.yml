@@ -1,0 +1,42 @@
+name: E2E tests (ios)
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  e2e-maestro-ios:
+    name: Build
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14.18.1
+          cache: 'yarn'
+
+      - name: Install npm dependencies (example project)
+        working-directory: ./examples/Rn071/
+        run: yarn install --frozen-lockfile
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: setup-cocoapods
+        uses: maxim-lobanov/setup-cocoapods@v1
+        with:
+          version: 1.11.3
+
+      - name: Install CocoaPods
+        run: |
+          yarn pods
+
+      - uses: mobile-dev-inc/action-maestro-cloud@v1.1.1
+        with:
+          api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
+          app-file: Rn071.app
+          mapping-file: Rn071.app.dSYM
