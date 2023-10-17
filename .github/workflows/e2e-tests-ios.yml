@@ -44,7 +44,7 @@ jobs:
       - name: Build
         working-directory: ./examples/Rn071/
         run: |
-          npx react-native run-ios --mode Release --buildFolder output
+          npx react-native run-ios --buildFolder output
 
       - uses: mobile-dev-inc/action-maestro-cloud@v1.1.1
         with:
