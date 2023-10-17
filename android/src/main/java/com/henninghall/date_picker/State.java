@@ -1,5 +1,7 @@
 package com.henninghall.date_picker;
 
+import android.util.Log;
+
 import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.models.Is24HourSource;
 import com.henninghall.date_picker.models.Mode;
@@ -103,16 +105,21 @@ public class State {
     }
 
     public TimeZone getTimeZone() {
-        String offsetString = timezoneOffsetInMinutesProp.getValue();
-        if(offsetString == null || offsetString.equals("")) return TimeZone.getDefault();
-        int offset = Integer.parseInt(offsetString);
-        int totalOffsetMinutes = Math.abs(offset);
-        char offsetDirection = offset < 0 ? '-' : '+';
-        int offsetHours = (int) Math.floor(totalOffsetMinutes / 60f);
-        int offsetMinutes = totalOffsetMinutes - offsetHours * 60;
-        String timeZoneId = "GMT" + offsetDirection + offsetHours + ":" + Utils.toPaddedMinutes(offsetMinutes);
-        TimeZone zone = TimeZone.getTimeZone(timeZoneId);
-        return zone;
+        try{
+            String offsetString = timezoneOffsetInMinutesProp.getValue();
+            if(offsetString == null || offsetString.equals("")) return TimeZone.getDefault();
+            int offset = Integer.parseInt(offsetString);
+            int totalOffsetMinutes = Math.abs(offset);
+            char offsetDirection = offset < 0 ? '-' : '+';
+            int offsetHours = (int) Math.floor(totalOffsetMinutes / 60f);
+            int offsetMinutes = totalOffsetMinutes - offsetHours * 60;
+            String timeZoneId = "GMT" + offsetDirection + offsetHours + ":" + Utils.toPaddedMinutes(offsetMinutes);
+            TimeZone zone = TimeZone.getTimeZone(timeZoneId);
+            return zone;
+        } catch (Exception e){
+            e.printStackTrace();
+            return TimeZone.getDefault();
+        }
     }
 
     public String getIsoDate() {
