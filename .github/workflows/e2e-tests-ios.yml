@@ -44,10 +44,10 @@ jobs:
       - name: Build
         working-directory: ./examples/Rn071/
         run: |
-          yarn ios
+          npx react-native run-ios --mode Release --buildFolder output
 
       - uses: mobile-dev-inc/action-maestro-cloud@v1.1.1
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-          app-file: Rn071.app
-          mapping-file: Rn071.app.dSYM
+          app-file: output/Rn071.app
+          mapping-file: output/Rn071.app.dSYM
