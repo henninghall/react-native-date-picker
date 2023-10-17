@@ -49,5 +49,5 @@ jobs:
       - uses: mobile-dev-inc/action-maestro-cloud@v1.1.1
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-          app-file: output/Rn071.app
-          mapping-file: output/Rn071.app.dSYM
+          app-file: ios/output/Build/Products/Release-iphonesimulator/Rn071.app/Rn071
+          mapping-file: ios/output/Build/Products/Release-iphonesimulator/Rn071.app/Rn071.dSYM
