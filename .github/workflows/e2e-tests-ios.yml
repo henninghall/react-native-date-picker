@@ -45,6 +45,7 @@ jobs:
         run: sudo xcode-select -s /Applications/Xcode_$(<.xcode-version).app/Contents/Developer
 
       - name: Build for tests
+        working-directory: ./examples/Rn071/ios/
         run: |
           set -o pipefail && xcodebuild \
             -workspace "Rn071.xcworkspace" \
