@@ -46,7 +46,7 @@ jobs:
         run: |
           npx react-native run-ios --buildFolder output
 
-      - uses: mobile-dev-inc/action-maestro-cloud@v1.1.1
+      - uses: mobile-dev-inc/action-maestro-cloud@v1.4.0
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
           app-file: ios/output/Build/Products/Release-iphonesimulator/Rn071.app/Rn071
