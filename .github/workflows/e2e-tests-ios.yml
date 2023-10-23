@@ -44,7 +44,7 @@ jobs:
       - name: Select Xcode
         run: sudo xcode-select -s /Applications/Xcode_$(<.xcode-version).app/Contents/Developer
 
-      - name: Build for tests
+      - name: Build
         working-directory: ./examples/Rn071/ios/
         run: |
           set -o pipefail && xcodebuild \
@@ -57,8 +57,8 @@ jobs:
       - uses: mobile-dev-inc/action-maestro-cloud@v1.4.0
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-          app-file: ios/output/Build/Products/Release-iphonesimulator/Rn071.app/Rn071
-          mapping-file: ios/output/Build/Products/Release-iphonesimulator/Rn071.app/Rn071.dSYM
+          app-file: DerivedData/Build/Products/Release-iphonesimulator/Rn071.app
+          mapping-file: DerivedData/Build/Products/Release-iphonesimulator/Rn071.app/Rn071.dSYM
 
       - name: Upload logs when workflow failed
         uses: actions/upload-artifact@v3
