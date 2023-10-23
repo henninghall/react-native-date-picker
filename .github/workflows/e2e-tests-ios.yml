@@ -41,13 +41,29 @@ jobs:
         run: |
           yarn pods
 
-      - name: Build
-        working-directory: ./examples/Rn071/
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_$(<.xcode-version).app/Contents/Developer
+
+      - name: Build for tests
         run: |
-          npx react-native run-ios --buildFolder output
+          set -o pipefail && xcodebuild \
+            -workspace "Rn071.xcworkspace" \
+            -scheme "Rn071" \
+            -destination "platform=iOS Simulator,name=iPhone 14,OS=16.4" \
+            -derivedDataPath "DerivedData" \
+          | tee xcodebuild.log
 
       - uses: mobile-dev-inc/action-maestro-cloud@v1.4.0
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
           app-file: ios/output/Build/Products/Release-iphonesimulator/Rn071.app/Rn071
           mapping-file: ios/output/Build/Products/Release-iphonesimulator/Rn071.app/Rn071.dSYM
+
+      - name: Upload logs when workflow failed
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: BuildLogs
+          path: |
+            xcodebuild.log
+            DerivedData/Logs/Test/*.xcresult
