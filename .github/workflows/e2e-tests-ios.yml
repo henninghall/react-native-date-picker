@@ -54,11 +54,18 @@ jobs:
             -derivedDataPath "DerivedData" \
           | tee xcodebuild.log
 
+      - name: ls
+        run: |
+          ls -la
+          ls -la ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/
+          ls -la ./examples/Rn071/ios/DerivedData/Build/Products
+          ls -la ./examples/Rn071/ios/DerivedData
+
       - uses: mobile-dev-inc/action-maestro-cloud@v1.4.0
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-          app-file: DerivedData/Build/Products/Release-iphonesimulator/Rn071.app
-          mapping-file: DerivedData/Build/Products/Release-iphonesimulator/Rn071.app/Rn071.dSYM
+          app-file: ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app
+          mapping-file: ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app/Rn071.dSYM
 
       - name: Upload logs when workflow failed
         uses: actions/upload-artifact@v3
