@@ -21,6 +21,7 @@ import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.TextColorProp;
 import com.henninghall.date_picker.ui.UIManager;
 import com.henninghall.date_picker.ui.Accessibility;
+import com.henninghall.date_picker.props.ContentFontProp;
 
 import java.util.ArrayList;
 
@@ -53,6 +54,10 @@ public class PickerView extends RelativeLayout {
 
         if (didUpdate(TextColorProp.name)) {
             uiManager.updateTextColor();
+        }
+
+        if (didUpdate(ContentFontProp.name)) {
+            uiManager.updateTextContentFont();
         }
 
         if (didUpdate(ModeProp.name, VariantProp.name, Is24hourSourceProp.name)) {

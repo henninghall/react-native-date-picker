@@ -19,6 +19,7 @@ import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.Prop;
 import com.henninghall.date_picker.props.TextColorProp;
 import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
+import com.henninghall.date_picker.props.ContentFontProp;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -44,6 +45,8 @@ public class State {
     private final Is24hourSourceProp is24hourSourceProp = new Is24hourSourceProp();
     private final IdProp idProp = new IdProp();
 
+    private final ContentFontProp contentFontProp = new ContentFontProp();
+
     private final HashMap props = new HashMap<String, Prop>() {{
         put(DateProp.name, dateProp);
         put(ModeProp.name, modeProp);
@@ -59,6 +62,7 @@ public class State {
         put(DividerHeightProp.name, dividerHeightProp);
         put(Is24hourSourceProp.name, is24hourSourceProp);
         put(IdProp.name, idProp);
+        put(ContentFontProp.name, contentFontProp);
     }};
     public DerivedData derived;
 
@@ -80,6 +84,10 @@ public class State {
 
     public String getFadeToColor() {
         return (String) fadeToColorProp.getValue();
+    }
+
+    public String getContentFont() {
+        return (String) contentFontProp.getValue();
     }
 
     public String getTextColor() {

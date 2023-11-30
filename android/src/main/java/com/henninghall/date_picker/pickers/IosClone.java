@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.MotionEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
+import android.graphics.Typeface;
 
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
@@ -62,6 +63,23 @@ public class IosClone extends NumberPickerView implements Picker {
         int fadedColor = Color.parseColor("#70"+ color.substring(1));
         setNormalTextColor(fadedColor);
         setSelectedTextColor(fullColor);
+    }
+
+    @Override
+    public void setContentFont(String fontPath) {
+        Typeface typeface = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            Typeface.Builder builder = new Typeface.Builder(getContext().getResources().getAssets(), fontPath);
+            typeface = builder.build();
+        } else {
+            try {
+                typeface = Typeface.createFromAsset(getContext().getResources().getAssets(), fontPath);
+            } catch (Exception ignored) {
+            }
+        }
+        if (typeface != null) {
+            super.setContentTextTypeface(typeface);
+        }
     }
 
     @Override

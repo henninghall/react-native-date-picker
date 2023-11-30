@@ -11,6 +11,7 @@ import com.henninghall.date_picker.wheelFunctions.TextColor;
 import com.henninghall.date_picker.wheelFunctions.UpdateVisibility;
 import com.henninghall.date_picker.wheelFunctions.HorizontalPadding;
 import com.henninghall.date_picker.wheels.Wheel;
+import com.henninghall.date_picker.wheelFunctions.SetContentFont;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,6 +32,10 @@ public class UIManager {
 
     public void updateWheelVisibility(){
         wheels.applyOnAll(new UpdateVisibility());
+    }
+
+    public void updateTextContentFont() {
+        wheels.applyOnAll(new SetContentFont(state.getContentFont()));
     }
 
     public void updateTextColor(){
