@@ -16,6 +16,7 @@ const DatePickerWrapper = (props) => {
       ref={props.innerRef}
       {...props}
       textColor={colorToHex(getTextColor(props))}
+      dividerColor={colorToHex(props.dividerColor)}
       theme={getTheme(props)}
       fadeToColor={colorToHex(props.fadeToColor)}
       title={getTitle(props)}

@@ -16,6 +16,7 @@ public interface Picker {
     int getValue();
     void setValue(int value);
     void setTextColor(String value);
+    void setDividerColor(String value);
     void setOnValueChangeListenerInScrolling(Picker.OnValueChangeListenerInScrolling listener);
     void setOnValueChangedListener(Picker.OnValueChangeListener onValueChangeListener);
     void setShownCount(int count);

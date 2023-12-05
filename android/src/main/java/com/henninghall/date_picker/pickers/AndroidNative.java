@@ -91,6 +91,11 @@ public class AndroidNative extends NumberPicker implements Picker {
     }
 
     @Override
+    public void setDividerColor(String color) {
+        // not supported
+    }
+
+    @Override
     public void setDividerHeight(int height) {
         // not supported
     }

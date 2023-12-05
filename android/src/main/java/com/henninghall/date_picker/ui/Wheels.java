@@ -19,7 +19,8 @@ import com.henninghall.date_picker.wheels.MinutesWheel;
 import com.henninghall.date_picker.wheels.MonthWheel;
 import com.henninghall.date_picker.wheels.Wheel;
 import com.henninghall.date_picker.wheels.YearWheel;
-
+import com.henninghall.date_picker.wheelFunctions.SetDividerColor;
+import android.graphics.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -97,6 +98,16 @@ public class Wheels {
         if(state.getVariant() == Variant.iosClone) {
             emptyStart.setDividerHeight(height);
             emptyEnd.setDividerHeight(height);
+        }
+    }
+
+    void updateColorDivider() {
+        String color = state.getDividerColor();
+        applyOnAll(new SetDividerColor(color));
+        if(state.getVariant() == Variant.iosClone) {
+            int parseColor= Color.parseColor(color);
+            emptyStart.setDividerColor(parseColor);
+            emptyEnd.setDividerColor(parseColor);
         }
     }
 

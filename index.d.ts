@@ -70,6 +70,11 @@ export interface DatePickerProps extends ViewProps {
   textColor?: string
 
   /**
+   * Changes the divider color.
+   */
+  dividerColor?: string
+
+  /**
    * Changes the divider height of the android variant iosClone
    */
   dividerHeight?: number

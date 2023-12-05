@@ -65,6 +65,12 @@ public class IosClone extends NumberPickerView implements Picker {
     }
 
     @Override
+    public void setDividerColor(String color) {
+        int parseColor= Color.parseColor(color);
+        super.setDividerColor(parseColor);
+    }
+
+    @Override
     public void setOnValueChangeListenerInScrolling(final Picker.OnValueChangeListenerInScrolling listener) {
         this.mOnValueChangeListenerInScrolling = listener;
     }
