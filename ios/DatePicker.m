@@ -10,6 +10,7 @@
 #import "RCTUtils.h"
 #import "UIView+React.h"
 #import "RCTConvert.h"
+#import <React/RCTView.h>
 
 @interface DatePicker ()
 
