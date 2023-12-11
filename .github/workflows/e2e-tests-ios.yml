@@ -75,7 +75,7 @@ jobs:
         if: always()
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-          app-file: ./examples/Rn071/DerivedData/Build/Products/Debug-iphonesimulator/Rn071.app
+          app-file: ./examples/Rn071/ios/DerivedData/Build/Products/Debug-iphonesimulator/Rn071.app
 
       - name: Upload logs when workflow failed
         uses: actions/upload-artifact@v3
