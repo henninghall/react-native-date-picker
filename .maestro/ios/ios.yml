@@ -1,13 +1,13 @@
 appId: com.rn069
 ---
 # test: can use inline picker
-- runFlow: utils/launch.yml
+- runFlow: ../utils/launch.yml
 - runFlow:
-    file: utils/change-prop.yml
+    file: ../utils/change-prop.yml
     env:
       PROP: locale
       VALUE: vi-VN
-- runFlow: utils/swipe-wheel-1.yml
+- runFlow: ../utils/swipe-wheel-1.yml
 - assertVisible:
     text: '2000-01-01 01:00:00'
 
@@ -15,7 +15,7 @@ appId: com.rn069
 - launchApp
 - tapOn: Modal
 - tapOn: Select date
-- runFlow: utils/swipe-wheel-1-modal.yml
+- runFlow: ../utils/swipe-wheel-1-modal.yml
 - tapOn: Confirm
 - assertVisible:
     text: '2000-01-02'
