@@ -56,11 +56,19 @@ jobs:
 
       - name: ls
         working-directory: ./examples/Rn071/ios/
-        run: |
-          ls -la DerivedData
-          ls -la DerivedData/Build/Products
-          ls -la ./examples/Rn071
-          ls -la ./examples/Rn071/ios
+        run: ls -la DerivedData
+
+      - name: ls
+        working-directory: ./examples/Rn071/ios/
+        run: ls -la DerivedData/Build/Products
+
+      - name: ls
+        working-directory: ./examples/Rn071/ios/
+        run: ls -la DerivedData/Build/Products/Debug-iphonesimulator
+
+      #           ls -la DerivedData/Build/Products
+      # #          ls -la ./examples/Rn071
+      # #          ls -la ./examples/Rn071/ios
 
       - uses: mobile-dev-inc/action-maestro-cloud@v1.4.0
         # Temp
