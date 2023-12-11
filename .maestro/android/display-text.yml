@@ -1,68 +1,68 @@
 appId: com.rn069
 ---
 - runFlow:
-    file: utils/set-timezone.yml
+    file: ../utils/set-timezone.yml
     env:
       REGION: Sweden
       GMT: GMT+01:00
       STATE: ''
 
-- runFlow: utils/launch.yml
+- runFlow: ../utils/launch.yml
 
 # test: minuteInterval rounding should round with floor
 - runFlow:
-    file: utils/change-prop.yml
+    file: ../utils/change-prop.yml
     env:
       PROP: minuteInterval
       VALUE: 5
 - runFlow:
-    file: utils/change-prop.yml
+    file: ../utils/change-prop.yml
     env:
       PROP: date
       VALUE: '2000-01-01T00:34:00+01:00'
-- runFlow: utils/swipe-wheel-1.yml
+- runFlow: ../utils/swipe-wheel-1.yml
 - assertVisible: '2000-01-02 00:30:00'
 
-- runFlow: utils/reset.yml
+- runFlow: ../utils/reset.yml
 
 # test: can have initial date in past
 - runFlow:
-    file: utils/change-prop.yml
+    file: ../utils/change-prop.yml
     env:
       PROP: maximumDate
       VALUE: undefined
 - runFlow:
-    file: utils/change-prop.yml
+    file: ../utils/change-prop.yml
     env:
       PROP: minimumDate
       VALUE: undefined
 - runFlow:
-    file: utils/change-prop.yml
+    file: ../utils/change-prop.yml
     env:
       PROP: date
       VALUE: '1999-01-01'
-- runFlow: utils/swipe-wheel-1.yml
+- runFlow: ../utils/swipe-wheel-1.yml
 - assertVisible: '1999-01-02 01:00:00'
 
-- runFlow: utils/reset.yml
+- runFlow: ../utils/reset.yml
 
 # test: display text
 - runFlow:
-    file: utils/change-prop.yml
+    file: ../utils/change-prop.yml
     env:
       PROP: locale
       VALUE: vi-VN
-- runFlow: utils/swipe-wheel-1.yml
+- runFlow: ../utils/swipe-wheel-1.yml
 - assertVisible:
     id: dateStringOutput
     text: 'CN 2 thg 11200 SA '
 
 # Should be possible to use picker with invalid locale
-- runFlow: utils/launch.yml
+- runFlow: ../utils/launch.yml
 - runFlow:
-    file: utils/change-prop.yml
+    file: ../utils/change-prop.yml
     env:
       PROP: locale
       VALUE: xx
-- runFlow: utils/swipe-wheel-1.yml
+- runFlow: ../utils/swipe-wheel-1.yml
 - assertVisible: '2000-01-02 00:00:00'
