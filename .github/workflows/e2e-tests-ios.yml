@@ -62,7 +62,7 @@ jobs:
             -derivedDataPath "DerivedData" \
           | tee xcodebuild.log
 
-      - uses: mobile-dev-inc/action-maestro-cloud@v1.1.1
+      - uses: mobile-dev-inc/action-maestro-cloud@v1.8.0
         # Temp
         if: always()
         with:
