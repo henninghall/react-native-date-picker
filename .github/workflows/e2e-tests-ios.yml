@@ -17,6 +17,14 @@ jobs:
           node-version: 14.18.1
           cache: 'yarn'
 
+      # TEMP
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ./examples/Rn071/ios/DerivedData/Build/Products/Debug-iphonesimulator/Rn071.app
+            ./examples/Rn071/ios/DerivedData/Build/Products/Debug-iphonesimulator/Rn071.app.dSYM
+          key: ${{ runner.os }}
+
       - name: Install npm dependencies (example project)
         working-directory: ./examples/Rn071/
         run: yarn install --frozen-lockfile
