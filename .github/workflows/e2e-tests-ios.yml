@@ -60,7 +60,7 @@ jobs:
             -scheme "Rn071" \
             -destination "platform=iOS Simulator,name=iPhone 14,OS=16.4" \
             -derivedDataPath "DerivedData" \
-            -configuration Release \
+            -configuration "Release" \
           | tee xcodebuild.log
 
       - uses: mobile-dev-inc/action-maestro-cloud@v1.8.0
