@@ -6,7 +6,7 @@ on:
 
 jobs:
   java_unit_tests:
-    name: 'Android / Unit'
+    name: Android - Unit
     runs-on: ubuntu-latest
 
     steps:
