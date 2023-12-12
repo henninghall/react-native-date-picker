@@ -1,0 +1,77 @@
+name: Build
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+env:
+  APP_PATH: ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app
+  PROJECT_NAME: Rn071
+  EXAMPLE_SRC: ./examples/Rn071/src/**
+
+jobs:
+  build-ios:
+    name: iOS
+    runs-on: macos-13
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            ${{ env.APP_PATH }}
+            ${{ env.APP_PATH }}.dSYM
+          key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', env.EXAMPLE_SRC, env.APP_PATH ) }}
+
+      - uses: actions/setup-node@v3
+        if: steps.cache.outputs.cache-hit != 'true'
+        with:
+          node-version: 14.18.1
+          cache: 'yarn'
+
+      - name: Install npm dependencies (example project)
+        if: steps.cache.outputs.cache-hit != 'true'
+        working-directory: ./examples/${{ env.PROJECT_NAME }}/
+        run: yarn install --frozen-lockfile
+
+      - name: Install npm dependencies (root)
+        if: steps.cache.outputs.cache-hit != 'true'
+        working-directory: ./
+        run: yarn install --frozen-lockfile
+
+      - name: Setup Ruby
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          working-directory: ./examples/${{ env.PROJECT_NAME }}/
+
+      - name: setup-cocoapods
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: maxim-lobanov/setup-cocoapods@v1
+        with:
+          version: 1.11.3
+
+      - name: Install CocoaPods
+        if: steps.cache.outputs.cache-hit != 'true'
+        working-directory: ./examples/${{ env.PROJECT_NAME }}/
+        run: |
+          yarn pods
+
+      - name: Select Xcode
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: sudo xcode-select -s /Applications/Xcode_$(<.xcode-version).app/Contents/Developer
+
+      - name: Build
+        if: steps.cache.outputs.cache-hit != 'true'
+        working-directory: ./examples/${{ env.PROJECT_NAME }}/ios/
+        run: |
+          set -o pipefail && xcodebuild \
+            -workspace "${{ env.PROJECT_NAME }}.xcworkspace" \
+            -scheme "${{ env.PROJECT_NAME }}" \
+            -destination "platform=iOS Simulator,name=iPhone 14,OS=16.4" \
+            -derivedDataPath "DerivedData" \
+            -configuration "Release" \
+          | tee xcodebuild.log

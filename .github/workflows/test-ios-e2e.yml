@@ -1,0 +1,54 @@
+name: E2E tests (ios)
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+env:
+  APP_PATH: ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app
+  EXAMPLE_SRC: ./examples/Rn071/src/**
+
+jobs:
+  test-ios-e2e:
+    name: iOS - e2e
+    runs-on: macos-13
+    environment: e2e iOS
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            ${{ env.APP_PATH }}
+            ${{ env.APP_PATH }}.dSYM
+          key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', env.EXAMPLE_SRC, env.APP_PATH ) }}
+
+      - uses: mobile-dev-inc/action-maestro-cloud@v1.8.0
+        id: upload
+        with:
+          api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
+          app-file: ${{ env.APP_PATH }}
+          mapping-file: ${{ env.APP_PATH }}.dSYM
+          include-tags: ios
+
+      - name: Upload logs when workflow failed
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: BuildLogs
+          path: |
+            xcodebuild.log
+            DerivedData/Logs/Test/*.xcresult
+
+      # Step can be removed when this is fixed:
+      # https://github.com/mobile-dev-inc/action-maestro-cloud/issues/28
+      - name: Check for  maestro errors
+        run: |
+          if [[ "$MAESTRO_CLOUD_FLOW_RESULTS" == *"ERROR"* || "$MAESTRO_CLOUD_FLOW_RESULTS" == *"CANCELED"* ]]; then
+            echo "One or more tests failed or were canceled."
+            exit 1
+          fi
+        env:
+          MAESTRO_CLOUD_FLOW_RESULTS: ${{ steps.upload.outputs.MAESTRO_CLOUD_FLOW_RESULTS }}
