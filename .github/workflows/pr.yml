@@ -1,0 +1,38 @@
+name: PR
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  build-ios:
+    name: Build
+    uses: ./.github/workflows/build-ios.yml
+    secrets: inherit
+
+  build-android:
+    name: Build
+    uses: ./.github/workflows/build-android.yml
+    secrets: inherit
+
+  test-ios-e2e:
+    name: Test
+    uses: ./.github/workflows/test-ios-e2e.yml
+    secrets: inherit
+    needs: [build-ios]
+
+  test-android-e2e:
+    name: Test
+    uses: ./.github/workflows/test-android-e2e.yml
+    secrets: inherit
+    needs: [build-android]
+
+  test-js:
+    name: Test
+    uses: ./.github/workflows/test-js.yml
+    secrets: inherit
+
+  test-android-unit:
+    name: Test
+    uses: ./.github/workflows/test-android-unit.yml
+    secrets: inherit

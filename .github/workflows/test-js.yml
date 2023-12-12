@@ -1,0 +1,24 @@
+name: Test js
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  test-js:
+    name: Javascript
+    runs-on: macos-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Node
+        uses: actions/setup-node@v3
+
+      - name: Install npm dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run unit tests
+        run: yarn test
