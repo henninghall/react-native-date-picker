@@ -18,11 +18,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 14.18.1
-          cache: 'yarn'
-
       - uses: actions/cache@v3
         id: cache
         with:
@@ -30,6 +25,12 @@ jobs:
             ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app
             ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app.dSYM
           key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', 'examples/Rn071/src/**') }}
+
+      - uses: actions/setup-node@v3
+        if: steps.cache.outputs.cache-hit != 'true'
+        with:
+          node-version: 14.18.1
+          cache: 'yarn'
 
       - name: Install npm dependencies (example project)
         if: steps.cache.outputs.cache-hit != 'true'
