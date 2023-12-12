@@ -11,6 +11,7 @@ on:
 env:
   APP_PATH: ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app
   PROJECT_NAME: Rn071
+  EXAMPLE_SRC: ./examples/${{ env.PROJECT_NAME }}/src/**
 
 jobs:
   build-ios:
@@ -23,7 +24,6 @@ jobs:
       - uses: actions/cache@v3
         id: cache
         env:
-          EXAMPLE_SRC: ./examples/${{ env.PROJECT_NAME }}/src
           KEY: hashFiles(format('src/**', 'ios/**', ${{ env.EXAMPLE_SRC }} ))
         with:
           path: |
