@@ -5,9 +5,9 @@ on:
   workflow_dispatch:
 
 env:
-  APP_PATH: ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app
-  PROJECT_NAME: Rn071
-  EXAMPLE_SRC: ./examples/Rn071/src/**
+  APP_PATH: examples/Rn069/android/app/build/outputs/apk/release/app-release.apk
+  PROJECT_NAME: Rn069
+  EXAMPLE_SRC: ./examples/Rn069/src/**
 
 jobs:
   build-android:
@@ -21,7 +21,7 @@ jobs:
       - uses: actions/cache@v3
         id: cache-android
         with:
-          path: examples/Rn069/android/app/build/outputs/apk/release/app-release.apk
+          path: ${{ env.APP_PATH }}
           key: ${{ runner.os }}-${{ hashFiles('src/**', 'android/**', env.EXAMPLE_SRC ) }}
 
       - uses: actions/setup-node@v3
@@ -32,7 +32,7 @@ jobs:
 
       - name: Install npm dependencies (example project)
         if: steps.cache-android.outputs.cache-hit != 'true'
-        working-directory: ./examples/Rn069/
+        working-directory: ./examples/${{ env.PROJECT_NAME }}/
         run: yarn install --frozen-lockfile
 
       - name: Install npm dependencies (root)
@@ -48,5 +48,5 @@ jobs:
 
       - name: build
         if: steps.cache-android.outputs.cache-hit != 'true'
-        working-directory: ./examples/Rn069/android
+        working-directory: ./examples/${{ env.PROJECT_NAME }}/android
         run: ./gradlew assembleRelease

@@ -5,9 +5,9 @@ on:
   workflow_dispatch:
 
 env:
-  APP_PATH: ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app
-  PROJECT_NAME: Rn071
-  EXAMPLE_SRC: ./examples/Rn071/src/**
+  APP_PATH: examples/Rn069/android/app/build/outputs/apk/release/app-release.apk
+  PROJECT_NAME: Rn069
+  EXAMPLE_SRC: ./examples/Rn069/src/**
 
 jobs:
   test-android-e2e:
@@ -19,13 +19,13 @@ jobs:
       - uses: actions/checkout@v3
 
       - uses: actions/cache@v3
-        id: cache
+        id: cache-android
         with:
-          path: examples/Rn069/android/app/build/outputs/apk/release/app-release.apk
+          path: ${{ env.APP_PATH }}
           key: ${{ runner.os }}-${{ hashFiles('src/**', 'android/**', env.EXAMPLE_SRC ) }}
 
       - uses: mobile-dev-inc/action-maestro-cloud@v1.8.0
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-          app-file: examples/Rn069/android/app/build/outputs/apk/release/app-release.apk
+          app-file: ${{ env.APP_PATH }}
           include-tags: android
