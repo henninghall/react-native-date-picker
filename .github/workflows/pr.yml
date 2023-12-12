@@ -32,3 +32,13 @@ jobs:
     uses: ./.github/workflows/test-android-e2e.yml
     secrets: inherit
     needs: [build-android]
+
+  test-js:
+    name: Test js
+    uses: ./.github/workflows/test-js.yml
+    secrets: inherit
+
+  test-android-unit:
+    name: Test js
+    uses: ./.github/workflows/test-android-unit.yml
+    secrets: inherit
