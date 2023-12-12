@@ -17,13 +17,12 @@ jobs:
           node-version: 14.18.1
           cache: 'yarn'
 
-      # TEMP
       - uses: actions/cache@v3
         with:
           path: |
             ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app
             ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app.dSYM
-          key: ${{ runner.os }}
+          key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', 'examples/Rn071/src/**') }}
 
       - name: Install npm dependencies (example project)
         working-directory: ./examples/Rn071/
