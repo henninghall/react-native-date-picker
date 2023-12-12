@@ -24,7 +24,7 @@ jobs:
       - uses: actions/cache@v3
         id: cache
         env:
-          KEY: hashFiles(format('src/**', 'ios/**', ${{ env.EXAMPLE_SRC }} ))
+          KEY: ${{ hashFiles(format('src/**', 'ios/**', ${{ env.EXAMPLE_SRC }} )) }}
         with:
           path: |
             ${{ env.APP_PATH }}
