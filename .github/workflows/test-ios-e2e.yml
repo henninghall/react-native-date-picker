@@ -13,7 +13,7 @@ jobs:
   test-ios-e2e:
     name: e2e tests
     runs-on: macos-13
-    environment: e2e
+    environment: e2e iOS
 
     steps:
       - uses: actions/checkout@v3
