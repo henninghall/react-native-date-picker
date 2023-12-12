@@ -1,0 +1,13 @@
+name: Env test
+
+on:
+  push:
+
+jobs:
+  env-test:
+    name: Env test
+    runs-on: macos-13
+    environment: e2e
+
+    steps:
+      - uses: actions/checkout@v3
