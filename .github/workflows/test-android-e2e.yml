@@ -25,7 +25,19 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('src/**', 'android/**', env.EXAMPLE_SRC ) }}
 
       - uses: mobile-dev-inc/action-maestro-cloud@v1.8.0
+        id: upload
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
           app-file: ${{ env.APP_PATH }}
           include-tags: android
+
+      # Step can be removed when this is fixed:
+      # https://github.com/mobile-dev-inc/action-maestro-cloud/issues/28
+      - name: Check for  maestro errors
+        run: |
+          if [[ "$MAESTRO_CLOUD_FLOW_RESULTS" == *"ERROR"* || "$MAESTRO_CLOUD_FLOW_RESULTS" == *"CANCELED"* ]]; then
+            echo "One or more tests failed or were canceled."
+            exit 1
+          fi
+        env:
+          MAESTRO_CLOUD_FLOW_RESULTS: ${{ steps.upload.outputs.MAESTRO_CLOUD_FLOW_RESULTS }}
