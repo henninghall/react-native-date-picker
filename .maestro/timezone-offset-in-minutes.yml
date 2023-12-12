@@ -1,4 +1,6 @@
 appId: com.rn069
+tags:
+  - android
 ---
 - runFlow:
     file: utils/set-timezone.yml
