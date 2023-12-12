@@ -11,7 +11,7 @@ on:
   push:
 
 jobs:
-  e2e-maestro-ios:
+  build-ios:
     name: Build
     runs-on: macos-13
 
@@ -80,6 +80,7 @@ jobs:
     name: e2e tests
     runs-on: macos-13
     environment: e2e
+    needs: [build-ios]
 
     steps:
       - uses: actions/checkout@v3
