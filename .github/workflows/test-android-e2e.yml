@@ -5,9 +5,8 @@ on:
   workflow_dispatch:
 
 env:
-  APP_PATH: examples/Rn069/android/app/build/outputs/apk/release/app-release.apk
-  PROJECT_NAME: Rn069
-  EXAMPLE_SRC: ./examples/Rn069/src/**
+  APP_PATH: examples/Rn071/android/app/build/outputs/apk/release/app-release.apk
+  EXAMPLE_SRC: ./examples/Rn071/src/**
 
 jobs:
   test-android-e2e:

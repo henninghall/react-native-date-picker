@@ -6,7 +6,6 @@ on:
 
 env:
   APP_PATH: ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app
-  PROJECT_NAME: Rn071
   EXAMPLE_SRC: ./examples/Rn071/src/**
 
 jobs:
