@@ -52,17 +52,20 @@ The second option is to use the inlined picker. Place it in a View or a custom m
 
 ## Installation
 
-1. Download package with npm or yarn
+1. Download package
 
-```
+```sh
+# npm
 npm install react-native-date-picker
-```
 
-```
+# yarn
 yarn add react-native-date-picker
+
+# pnpm
+pnpm add react-native-date-picker
 ```
 
-2. Install pods
+2. Install pods (skip for expo projects)
 
 ```
 cd ios && pod install
@@ -70,7 +73,12 @@ cd ios && pod install
 
 3. Rebuild the project
 
-```
+```sh
+# expo projects
+npx expo run:android
+npx expo run:ios
+
+# non-expo projects
 npx react-native run-android
 npx react-native run-ios
 ```
@@ -195,7 +203,7 @@ This package supports automatic linking. Usually, the only thing you need to do 
 
 ### How do i change the date order? (To YYYY-MM-DD etc)
 
-The order is determined by the `locale` prop. Set for instance `locale='fr'`to get the french preference.
+The order is determined by the `locale` prop. Set for instance `locale='fr'`to get the french preference. ⚠️ Setting the `locale` to a different id won't change the title, confirm button and cancel button texts language.
 
 ### How do i change the 12/24h or AM/PM format?
 
