@@ -1,8 +1,8 @@
-name: E2E tests (android)
+name: Build Android
 
 on:
-  workflow_dispatch:
   workflow_call:
+  workflow_dispatch:
 
 jobs:
   e2e-maestro:
@@ -33,9 +33,3 @@ jobs:
       - name: build
         working-directory: ./examples/Rn069/android
         run: ./gradlew assembleRelease
-
-      - uses: mobile-dev-inc/action-maestro-cloud@v1.1.1
-        with:
-          api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-          app-file: examples/Rn069/android/app/build/outputs/apk/release/app-release.apk
-          include-tags: android

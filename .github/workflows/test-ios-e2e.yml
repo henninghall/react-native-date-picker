@@ -1,12 +1,8 @@
 name: E2E tests (ios)
 
-# Android + iOS maestro tests by environment
-# PR flow that includes all testing + build in a different step from maestro
-
 on:
+  workflow_call:
   workflow_dispatch:
-  pull_request:
-  push: # temp
 
 env:
   APP_PATH: ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app
@@ -14,16 +10,10 @@ env:
   EXAMPLE_SRC: ./examples/Rn071/src/**
 
 jobs:
-  build-ios:
-    name: Build iOS
-    uses: ./.github/workflows/build-ios.yml
-    secrets: inherit
-
   e2e-ios:
     name: e2e tests
     runs-on: macos-13
     environment: e2e
-    needs: [build-ios]
 
     steps:
       - uses: actions/checkout@v3
