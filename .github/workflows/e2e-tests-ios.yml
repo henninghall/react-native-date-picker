@@ -22,11 +22,13 @@ jobs:
 
       - uses: actions/cache@v3
         id: cache
+        env:
+          EXAMPLE_SRC: ./examples/${{ env.PROJECT_NAME }}/src
         with:
           path: |
             ${{ env.APP_PATH }}
             ${{ env.APP_PATH }}.dSYM
-          key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', 'examples/${{ env.PROJECT_NAME }}/src/**') }}
+          key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', ${{ env.EXAMPLE_SRC }}) }}
 
       - uses: actions/setup-node@v3
         if: steps.cache.outputs.cache-hit != 'true'
