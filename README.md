@@ -203,7 +203,7 @@ This package supports automatic linking. Usually, the only thing you need to do 
 
 ### How do i change the date order? (To YYYY-MM-DD etc)
 
-The order is determined by the `locale` prop. Set for instance `locale='fr'`to get the french preference.
+The order is determined by the `locale` prop. Set for instance `locale='fr'`to get the french preference. ⚠️ Setting the `locale` to a different id won't change the title, confirm button and cancel button texts language.
 
 ### How do i change the 12/24h or AM/PM format?
 

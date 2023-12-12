@@ -356,3 +356,5 @@ Temporary Items
 
 
 # End of https://www.gitignore.io/api/xcode,android,reactnative,androidstudio
+
+**/ios/output

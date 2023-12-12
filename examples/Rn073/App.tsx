@@ -5,10 +5,9 @@
  * @format
  */
 
+import React from 'react';
 import type {PropsWithChildren} from 'react';
-import React, {useState} from 'react';
 import {
-  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -18,44 +17,24 @@ import {
   View,
 } from 'react-native';
 
-import DatePicker from 'react-native-date-picker';
 import {
   Colors,
+  DebugInstructions,
   Header,
   LearnMoreLinks,
+  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import DatePicker from 'react-native-date-picker';
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
-function Section({children, title}: SectionProps): JSX.Element {
+function Section({children, title}: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
-  const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
   return (
-    <View style={styles.sectionContainer} key={title}>
-      <Button title="open" onPress={() => setOpen(true)} />
-      <DatePicker
-        date={new Date('2021-01-01T2:00:00Z')}
-        modal
-        mode="date"
-        onConfirm={date => {
-          setDate(date);
-          setOpen(false);
-        }}
-        onCancel={() => {
-          setOpen(false);
-        }}
-        open={open}
-      />
-      <DatePicker
-        date={date}
-        maximumDate={new Date('2000-02-01')}
-        minimumDate={new Date('2000-01-01')}
-        onDateChange={setDate}
-        androidVariant="nativeAndroid"
-      />
+    <View style={styles.sectionContainer}>
+      <DatePicker date={new Date()} />
       <Text
         style={[
           styles.sectionTitle,
@@ -63,7 +42,7 @@ function Section({children, title}: SectionProps): JSX.Element {
             color: isDarkMode ? Colors.white : Colors.black,
           },
         ]}>
-        {date.toISOString()}
+        {title}
       </Text>
       <Text
         style={[
@@ -78,7 +57,7 @@ function Section({children, title}: SectionProps): JSX.Element {
   );
 }
 
-function App(): JSX.Element {
+function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -99,6 +78,16 @@ function App(): JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+          <Section title="Step One">
+            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
+            screen and then come back to see your edits.
+          </Section>
+          <Section title="See Your Changes">
+            <ReloadInstructions />
+          </Section>
+          <Section title="Debug">
+            <DebugInstructions />
+          </Section>
           <Section title="Learn More">
             Read the docs to discover what to do next:
           </Section>
