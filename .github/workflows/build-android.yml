@@ -10,7 +10,7 @@ env:
   EXAMPLE_SRC: ./examples/Rn071/src/**
 
 jobs:
-  e2e-maestro:
+  build-android:
     name: Android
     runs-on: ubuntu-latest
     outputs:

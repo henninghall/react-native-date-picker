@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  javascript_unit_tests:
+  test-js:
     name: Javascript
     runs-on: macos-latest
     timeout-minutes: 5

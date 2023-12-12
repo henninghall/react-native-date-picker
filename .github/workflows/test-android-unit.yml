@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  java_unit_tests:
+  test-android-unit:
     name: Android - Unit
     runs-on: ubuntu-latest
 
