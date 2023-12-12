@@ -12,7 +12,6 @@ env:
 
 jobs:
   build-ios:
-    name: Build iOS
     uses: ./.github/workflows/build-ios.yml
     secrets: inherit
 
@@ -21,24 +20,20 @@ jobs:
     uses: ./.github/workflows/build-android.yml
     secrets: inherit
 
-  test-ios:
-    name: Test iOS e2e
+  test-ios-e2e:
     uses: ./.github/workflows/test-ios-e2e.yml
     secrets: inherit
     needs: [build-ios]
 
-  test-android:
-    name: Test Android e2e
+  test-android-e2e:
     uses: ./.github/workflows/test-android-e2e.yml
     secrets: inherit
     needs: [build-android]
 
   test-js:
-    name: Test js
     uses: ./.github/workflows/test-js.yml
     secrets: inherit
 
   test-android-unit:
-    name: Test js
     uses: ./.github/workflows/test-android-unit.yml
     secrets: inherit

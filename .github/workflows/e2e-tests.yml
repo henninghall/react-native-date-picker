@@ -1,4 +1,4 @@
-name: E2E tests (android)
+name: Test
 
 on:
   workflow_dispatch:
@@ -6,6 +6,7 @@ on:
 
 jobs:
   e2e-maestro:
+    name:
     runs-on: ubuntu-latest
     outputs:
       app: app/build/outputs/apk/release

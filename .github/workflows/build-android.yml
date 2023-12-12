@@ -1,4 +1,4 @@
-name: Build Android
+name: Build
 
 on:
   workflow_call:
@@ -11,6 +11,7 @@ env:
 
 jobs:
   e2e-maestro:
+    name: Android
     runs-on: ubuntu-latest
     outputs:
       app: app/build/outputs/apk/release

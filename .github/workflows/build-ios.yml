@@ -1,4 +1,4 @@
-name: Build iOS
+name: Build
 
 on:
   workflow_call:
@@ -11,7 +11,7 @@ env:
 
 jobs:
   build-ios:
-    name: Build
+    name: iOS
     runs-on: macos-13
 
     steps:
