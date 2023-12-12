@@ -2,11 +2,11 @@ name: E2E tests (ios)
 
 # Android + iOS maestro tests by environment
 # PR flow that includes all testing + build in a different step from maestro
-# Cache pods
 
 on:
   workflow_dispatch:
-  push:
+  pull_request:
+  push: # temp
 
 env:
   APP_PATH: ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app
@@ -95,7 +95,7 @@ jobs:
           path: |
             ${{ env.APP_PATH }}
             ${{ env.APP_PATH }}.dSYM
-          key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', 'examples/${{ env.PROJECT_NAME }}/src/**') }}
+          key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', env.EXAMPLE_SRC ) }}
 
       - uses: mobile-dev-inc/action-maestro-cloud@v1.8.0
         with:
