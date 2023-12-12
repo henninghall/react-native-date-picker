@@ -3,6 +3,7 @@ name: PR
 on:
   workflow_dispatch:
   pull_request:
+  push: #temp
 
 env:
   APP_PATH: ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app
