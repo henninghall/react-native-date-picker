@@ -23,7 +23,7 @@ jobs:
           path: |
             ${{ env.APP_PATH }}
             ${{ env.APP_PATH }}.dSYM
-          key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', env.EXAMPLE_SRC, env.APP_PATH ) }}
+          key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', env.EXAMPLE_SRC, env.APP_PATH ) }}-TEMP
 
       - uses: mobile-dev-inc/action-maestro-cloud@v1.8.0
         id: upload
