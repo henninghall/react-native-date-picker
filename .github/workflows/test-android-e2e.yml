@@ -7,9 +7,16 @@ on:
 jobs:
   test-android-e2e:
     name: Test Android e2e
-    runs-on: macos-13
+    runs-on: ubuntu-latest
+    environment: e2e
 
     steps:
+      - uses: actions/cache@v3
+        id: cache
+        with:
+          path: examples/Rn069/android/app/build/outputs/apk/release/app-release.apk
+          key: ${{ runner.os }}-${{ hashFiles('src/**', 'android/**', env.EXAMPLE_SRC ) }}
+
       - uses: mobile-dev-inc/action-maestro-cloud@v1.1.1
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}

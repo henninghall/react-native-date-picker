@@ -10,7 +10,7 @@ env:
   EXAMPLE_SRC: ./examples/Rn071/src/**
 
 jobs:
-  e2e-ios:
+  test-ios-e2e:
     name: e2e tests
     runs-on: macos-13
     environment: e2e
