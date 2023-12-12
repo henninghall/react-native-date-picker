@@ -6,7 +6,7 @@ on:
 
 jobs:
   javascript_unit_tests:
-    name: Unit tests - javascript
+    name: Javascript
     runs-on: macos-latest
     timeout-minutes: 5
 
