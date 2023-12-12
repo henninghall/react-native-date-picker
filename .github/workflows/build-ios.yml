@@ -23,7 +23,7 @@ jobs:
           path: |
             ${{ env.APP_PATH }}
             ${{ env.APP_PATH }}.dSYM
-          key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', env.EXAMPLE_SRC ) }}
+          key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', env.EXAMPLE_SRC, env.APP_PATH ) }}
 
       - uses: actions/setup-node@v3
         if: steps.cache.outputs.cache-hit != 'true'
