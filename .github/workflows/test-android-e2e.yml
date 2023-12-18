@@ -2,7 +2,17 @@ name: Test Android e2e
 
 on:
   workflow_call:
+    inputs:
+      test-tags:
+        type: string
+        required: false
+        default: 'android'
   workflow_dispatch:
+    inputs:
+      test-tags:
+        description: 'Maestro tags to run (comma separated)'
+        required: false
+        default: 'android'
 
 env:
   APP_PATH: examples/Rn071/android/app/build/outputs/apk/release/app-release.apk
@@ -28,7 +38,7 @@ jobs:
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
           app-file: ${{ env.APP_PATH }}
-          include-tags: android
+          include-tags: ${{ inputs.test-tags }}
 
       # Step can be removed when this is fixed:
       # https://github.com/mobile-dev-inc/action-maestro-cloud/issues/28

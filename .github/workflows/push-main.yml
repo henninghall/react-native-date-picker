@@ -1,0 +1,30 @@
+name: Push main
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  test-js:
+    name: Test
+    uses: ./.github/workflows/test-js.yml
+    secrets: inherit
+
+  test-android-unit:
+    name: Test
+    uses: ./.github/workflows/test-android-unit.yml
+    secrets: inherit
+
+  build-ios:
+    name: Build
+    needs: [test-js, test-android-unit]
+    uses: ./.github/workflows/build-ios.yml
+    secrets: inherit
+
+  build-android:
+    needs: [test-js, test-android-unit]
+    name: Build
+    uses: ./.github/workflows/build-android.yml
+    secrets: inherit
