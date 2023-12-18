@@ -61,6 +61,7 @@ tags:
 - assertVisible: '2000-01-01 00:00:00'
 
 ########## describe: overshooting max date
+- runFlow: utils/reset.yml
 
 ### test: overshooting day wheel should reset to maximum date
 - runFlow:
