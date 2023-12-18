@@ -61,6 +61,7 @@ tags:
 - assertVisible: '2000-01-01 00:00:00'
 
 ########## describe: overshooting max date
+- runFlow: utils/reset.yml
 
 ### test: overshooting day wheel should reset to maximum date
 - runFlow:
@@ -112,9 +113,9 @@ tags:
 - assertVisible: '2000-01-01 00:00:00'
 
 ######### describe: minimumDate/maximumDate combinations
+- runFlow: utils/reset.yml
 
 ## test: correct number of days should be selectable even if min/max days are not set to full days
-- runFlow: utils/reset.yml
 
 - runFlow:
     file: utils/change-minimum-date.yml
