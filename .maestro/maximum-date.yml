@@ -111,3 +111,21 @@ tags:
 
 - runFlow: utils/swipe-wheel-3.yml
 - assertVisible: '2000-01-01 00:00:00'
+
+######### describe: minimumDate/maximumDate combinations
+- runFlow: utils/reset.yml
+
+## test: correct number of days should be selectable even if min/max days are not set to full days
+
+- runFlow:
+    file: utils/change-minimum-date.yml
+    env:
+      VALUE: '2000-01-01 00:00:01'
+
+- runFlow:
+    file: utils/change-maximum-date.yml
+    env:
+      VALUE: '2000-01-02 00:00:00'
+
+- runFlow: utils/swipe-wheel-1.yml
+- assertVisible: '2000-01-02 00:00:00'

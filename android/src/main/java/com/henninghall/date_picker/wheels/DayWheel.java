@@ -32,12 +32,14 @@ public class DayWheel extends Wheel {
         Calendar cal = getStartCal();
         Calendar endCal = getEndCal();
 
-        while (!cal.after(endCal)){
+        while (true){
             String value = getValue(cal);
             values.add(value);
             displayValues.put(value, getDisplayValue(cal));
             if(Utils.isToday(cal)) todayValue = value;
             cal.add(Calendar.DATE, 1);
+            Calendar startOfCurrentDay = toStartOfDay((Calendar) cal.clone());
+            if(startOfCurrentDay.after(endCal)) break;
         }
 
         return values;
@@ -72,6 +74,14 @@ public class DayWheel extends Wheel {
             cal = state.getPickerDate();
             cal.add(Calendar.DATE, defaultNumberOfDays / 2);
         }
+        return cal;
+    }
+
+    private Calendar toStartOfDay(Calendar cal){
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
         return cal;
     }
 
