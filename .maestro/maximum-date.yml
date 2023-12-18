@@ -2,6 +2,7 @@
 appId: com.rn071
 tags:
   - android
+  - maximumDate
 ---
 - runFlow: utils/launch.yml
 
