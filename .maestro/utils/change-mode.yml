@@ -1,0 +1,7 @@
+appId: com.rn071
+---
+- runFlow:
+    file: change-prop.yml
+    env:
+      PROP: mode
+      VALUE: ${VALUE}
