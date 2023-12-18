@@ -3,12 +3,11 @@ name: Test Android e2e
 on:
   workflow_call:
   workflow_dispatch:
-
-inputs:
-  test-tags:
-    description: 'Maestro tags to run (comma separated)'
-    required: false
-    default: 'android'
+    inputs:
+    test-tags:
+      description: 'Maestro tags to run (comma separated)'
+      required: false
+      default: 'android'
 
 env:
   APP_PATH: examples/Rn071/android/app/build/outputs/apk/release/app-release.apk
