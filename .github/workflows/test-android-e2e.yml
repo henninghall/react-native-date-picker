@@ -2,6 +2,11 @@ name: Test Android e2e
 
 on:
   workflow_call:
+    inputs:
+      test-tags:
+        type: string
+        required: false
+        default: 'android'
   workflow_dispatch:
     inputs:
       test-tags:

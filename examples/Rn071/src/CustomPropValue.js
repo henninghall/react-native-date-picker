@@ -33,7 +33,12 @@ export default function CustomPropValue(props) {
             </View>
             <TouchableOpacity
                 testID={"changeProp"}
-                onPress={() => props.changeProp({ propName, propValue: getPropValue() })}
+                onPress={() => {
+                    props.changeProp({ propName, propValue: getPropValue() })
+                    setPropName('');
+                    setPropValue('');
+                }
+            }
             ><Text style={{ color: "blue" }}>Change</Text></TouchableOpacity>
           <View style={{width: 20}}/>
           <TouchableOpacity
