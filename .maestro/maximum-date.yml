@@ -91,6 +91,8 @@ tags:
 - assertVisible: '2001-01-02 00:00:00'
 
 ### test: overshooting in time mode should set other wheels to max date
+- runFlow: utils/reset.yml
+
 - runFlow:
     file: utils/change-maximum-date.yml
     env:
