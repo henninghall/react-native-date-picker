@@ -1,4 +1,3 @@
-#
 appId: com.rn071
 tags:
   - android
@@ -82,7 +81,7 @@ tags:
 - runFlow: utils/swipe-wheel-2.yml
 - assertVisible: '2000-01-02 00:00:00'
 
-test: overshooting year wheel should set other wheels to max date
+### test: overshooting year wheel should set other wheels to max date
 - runFlow:
     file: utils/change-maximum-date.yml
     env:
