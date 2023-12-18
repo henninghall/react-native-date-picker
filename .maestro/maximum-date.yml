@@ -1,0 +1,131 @@
+appId: com.rn071
+tags:
+  - android
+  - maximumDate
+---
+- runFlow: utils/launch.yml
+
+########## describe: cannot pass max date
+
+- runFlow:
+    file: utils/change-maximum-date.yml
+    env:
+      VALUE: '2000-01-01T00:00:00'
+
+### test: datetime mode
+
+- runFlow:
+    file: utils/change-mode.yml
+    env:
+      VALUE: datetime
+
+- runFlow: utils/swipe-wheel-1.yml
+- assertVisible: '2000-01-01 00:00:00'
+
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2000-01-01 00:00:00'
+
+- runFlow: utils/swipe-wheel-3.yml
+- assertVisible: '2000-01-01 00:00:00'
+
+### test: date mode
+
+- runFlow:
+    file: utils/change-mode.yml
+    env:
+      VALUE: date
+
+- runFlow: utils/swipe-wheel-1.yml
+- assertVisible: '2000-01-01 00:00:00'
+
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2000-01-01 00:00:00'
+
+- runFlow: utils/swipe-wheel-3.yml
+- assertVisible: '2000-01-01 00:00:00'
+
+### test: time mode
+
+- runFlow:
+    file: utils/change-mode.yml
+    env:
+      VALUE: time
+
+- runFlow: utils/swipe-wheel-1.yml
+- assertVisible: '2000-01-01 00:00:00'
+
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2000-01-01 00:00:00'
+
+- runFlow: utils/swipe-wheel-3.yml
+- assertVisible: '2000-01-01 00:00:00'
+
+########## describe: overshooting max date
+- runFlow: utils/reset.yml
+
+### test: overshooting day wheel should reset to maximum date
+- runFlow:
+    file: utils/change-maximum-date.yml
+    env:
+      VALUE: '2000-01-02 00:00:00'
+- runFlow: utils/swipe-wheel-1.yml
+- assertVisible: '2000-01-02 00:00:00'
+
+### test: overshooting month wheel should set other wheels to max date
+- runFlow:
+    file: utils/change-mode.yml
+    env:
+      VALUE: date
+- runFlow: utils/swipe-wheel-1.yml
+- assertVisible: '2000-01-02 00:00:00'
+
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2000-01-02 00:00:00'
+
+### test: overshooting year wheel should set other wheels to max date
+- runFlow:
+    file: utils/change-maximum-date.yml
+    env:
+      VALUE: '2001-01-02 00:00:00'
+- runFlow: utils/swipe-wheel-1.yml
+- runFlow: utils/swipe-wheel-3.yml
+- assertVisible: '2001-01-02 00:00:00'
+
+### test: overshooting in time mode should set other wheels to max date
+- runFlow: utils/reset.yml
+
+- runFlow:
+    file: utils/change-maximum-date.yml
+    env:
+      VALUE: '2000-01-01 00:00:00'
+- runFlow:
+    file: utils/change-mode.yml
+    env:
+      VALUE: time
+
+- runFlow: utils/swipe-wheel-1.yml
+- assertVisible: '2000-01-01 00:00:00'
+
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2000-01-01 00:00:00'
+
+- runFlow: utils/swipe-wheel-3.yml
+- assertVisible: '2000-01-01 00:00:00'
+
+######### describe: minimumDate/maximumDate combinations
+- runFlow: utils/reset.yml
+
+## test: correct number of days should be selectable even if min/max days are not set to full days
+
+- runFlow:
+    file: utils/change-minimum-date.yml
+    env:
+      VALUE: '2000-01-01 00:00:01'
+
+- runFlow:
+    file: utils/change-maximum-date.yml
+    env:
+      VALUE: '2000-01-02 00:00:00'
+
+- runFlow: utils/swipe-wheel-1.yml
+- assertVisible: '2000-01-02 00:00:00'
