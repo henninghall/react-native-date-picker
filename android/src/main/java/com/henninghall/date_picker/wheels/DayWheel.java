@@ -56,6 +56,7 @@ public class DayWheel extends Wheel {
             cal = state.getPickerDate();
             cal.add(Calendar.DATE, -defaultNumberOfDays / 2);
         }
+        resetToMidnight(cal);
         return cal;
     }
 
@@ -72,7 +73,15 @@ public class DayWheel extends Wheel {
             cal = state.getPickerDate();
             cal.add(Calendar.DATE, defaultNumberOfDays / 2);
         }
+        resetToMidnight(cal);
         return cal;
+    }
+
+    private void resetToMidnight(Calendar cal){
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
     }
 
     private String getValue(Calendar cal){
