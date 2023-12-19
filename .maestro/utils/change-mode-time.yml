@@ -1,0 +1,6 @@
+appId: com.rn071
+---
+- runFlow:
+    file: change-mode.yml
+    env:
+      VALUE: time
