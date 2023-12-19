@@ -14,10 +14,7 @@ tags:
 
 ### test: datetime mode
 
-- runFlow:
-    file: utils/change-mode.yml
-    env:
-      VALUE: datetime
+- runFlow: utils/change-mode-datetime.yml
 
 - runFlow: utils/swipe-wheel-1.yml
 - assertVisible: '2000-01-01 00:00:00'
@@ -30,10 +27,7 @@ tags:
 
 ### test: date mode
 
-- runFlow:
-    file: utils/change-mode.yml
-    env:
-      VALUE: date
+- runFlow: utils/change-mode-date.yml
 
 - runFlow: utils/swipe-wheel-1.yml
 - assertVisible: '2000-01-01 00:00:00'
@@ -46,10 +40,7 @@ tags:
 
 ### test: time mode
 
-- runFlow:
-    file: utils/change-mode.yml
-    env:
-      VALUE: time
+- runFlow: utils/change-mode-time.yml
 
 - runFlow: utils/swipe-wheel-1.yml
 - assertVisible: '2000-01-01 00:00:00'
@@ -72,10 +63,7 @@ tags:
 - assertVisible: '2000-01-02 00:00:00'
 
 ### test: overshooting month wheel should set other wheels to max date
-- runFlow:
-    file: utils/change-mode.yml
-    env:
-      VALUE: date
+- runFlow: utils/change-mode-date.yml
 - runFlow: utils/swipe-wheel-1.yml
 - assertVisible: '2000-01-02 00:00:00'
 
@@ -98,10 +86,8 @@ tags:
     file: utils/change-maximum-date.yml
     env:
       VALUE: '2000-01-01 00:00:00'
-- runFlow:
-    file: utils/change-mode.yml
-    env:
-      VALUE: time
+
+- runFlow: utils/change-mode-time.yml
 
 - runFlow: utils/swipe-wheel-1.yml
 - assertVisible: '2000-01-01 00:00:00'

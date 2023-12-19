@@ -1,0 +1,5 @@
+appId: com.rn071
+---
+- swipe:
+    start: 50%, 30%
+    end: 50%, 35%
