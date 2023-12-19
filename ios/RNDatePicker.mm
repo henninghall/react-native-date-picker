@@ -77,6 +77,7 @@ NSDate* unixMillisToNSDate (double unixMillis) {
 {
     if ((self = [super initWithFrame:frame])) {
         [self setup];
+        [self addTarget:self action:@selector(handleDatePickerTap) forControlEvents:UIControlEventEditingDidBegin];
         [self addTarget:self action:@selector(didChange)
        forControlEvents:UIControlEventValueChanged];
         _reactMinuteInterval = 1;
@@ -85,6 +86,9 @@ NSDate* unixMillisToNSDate (double unixMillis) {
 }
 #endif
 
+- (void)handleDatePickerTap  {
+    [self resignFirstResponder];
+}
 
 RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 
