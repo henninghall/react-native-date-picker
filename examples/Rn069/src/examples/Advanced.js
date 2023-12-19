@@ -50,7 +50,6 @@ export default class Advanced extends Component {
           }
         />
         <DatePicker
-          innerRef={ref => (this.ref = ref)}
           date={this.state.date}
           onDateChange={this.setDate}
           onDateStringChange={this.setDateString}

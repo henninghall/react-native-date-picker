@@ -15,7 +15,7 @@ import CustomPropValue from '../CustomPropValue'
 import { readableDate } from '../utils'
 import Variant from '../propPickers/Variant'
 
-Date.prototype.addHours = function(h) {
+Date.prototype.addHours = function (h) {
   this.setTime(this.getTime() + h * 60 * 60 * 1000)
   return this
 }
@@ -50,7 +50,6 @@ export default class Advanced extends Component {
           }
         />
         <DatePicker
-          innerRef={ref => (this.ref = ref)}
           date={this.state.date}
           onDateChange={this.setDate}
           onDateStringChange={this.setDateString}
@@ -96,7 +95,7 @@ export default class Advanced extends Component {
       component: (
         <Variant
           selected={this.state.androidVariant}
-          onChange={androidVariant => this.setState({ androidVariant })}
+          onChange={(androidVariant) => this.setState({ androidVariant })}
         />
       ),
     },
@@ -105,7 +104,7 @@ export default class Advanced extends Component {
       component: (
         <ModePicker
           selected={this.state.mode}
-          onChange={mode => this.setState({ mode })}
+          onChange={(mode) => this.setState({ mode })}
         />
       ),
     },
@@ -114,7 +113,7 @@ export default class Advanced extends Component {
       component: (
         <LocalePicker
           locale={this.state.locale}
-          onChange={locale => this.setState({ locale })}
+          onChange={(locale) => this.setState({ locale })}
         />
       ),
     },
@@ -122,7 +121,7 @@ export default class Advanced extends Component {
       name: 'timeZoneOffset',
       component: (
         <TimeZoneOffsetInMinutes
-          onChange={timeZoneOffsetInMinutes =>
+          onChange={(timeZoneOffsetInMinutes) =>
             this.setState({ timeZoneOffsetInMinutes })
           }
         />
@@ -133,7 +132,7 @@ export default class Advanced extends Component {
       component: (
         <DateChange
           value={this.state.date}
-          onChange={date => this.setState({ date })}
+          onChange={(date) => this.setState({ date })}
         />
       ),
     },
@@ -142,7 +141,7 @@ export default class Advanced extends Component {
       component: (
         <MinuteInterval
           value={this.state.minuteInterval}
-          onChange={minuteInterval => this.setState({ minuteInterval })}
+          onChange={(minuteInterval) => this.setState({ minuteInterval })}
         />
       ),
     },
@@ -151,7 +150,7 @@ export default class Advanced extends Component {
       component: (
         <MinMaxDateChange
           value={this.state.minimumDate}
-          onChange={minimumDate => this.setState({ minimumDate })}
+          onChange={(minimumDate) => this.setState({ minimumDate })}
           defaultDate={defaultMinDate}
         />
       ),
@@ -161,7 +160,7 @@ export default class Advanced extends Component {
       component: (
         <MinMaxDateChange
           value={this.state.maximumDate}
-          onChange={maximumDate => {
+          onChange={(maximumDate) => {
             console.log({ maximumDate })
 
             this.setState({ maximumDate })
@@ -173,9 +172,9 @@ export default class Advanced extends Component {
     {
       name: 'fadeToColor',
       component: (
-        <FadeToColor 
-          onChange={() => this.props.setBackground(randomColor())} 
-          setNone={() => this.props.setBackground("none")} 
+        <FadeToColor
+          onChange={() => this.props.setBackground(randomColor())}
+          setNone={() => this.props.setBackground('none')}
         />
       ),
     },
@@ -190,13 +189,13 @@ export default class Advanced extends Component {
   ]
 
   selectedPropData = () => {
-    return this.propertyList().find(p => p.name === this.state.selectedProp)
+    return this.propertyList().find((p) => p.name === this.state.selectedProp)
   }
 
-  onSelect = selectedProp => this.setState({ selectedProp })
+  onSelect = (selectedProp) => this.setState({ selectedProp })
 
-  setDate = date => this.setState({ date })
-  setDateString = dateString => this.setState({ dateString })
+  setDate = (date) => this.setState({ date })
+  setDateString = (dateString) => this.setState({ dateString })
 
   scroll = ({ wheelIndex, scrollTimes }) => {
     if (!this.ref) return
