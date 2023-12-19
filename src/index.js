@@ -13,7 +13,6 @@ const DatePickerWrapper = (props) => {
   if (__DEV__) throwIfInvalidProps(props)
   return (
     <DatePicker
-      ref={props.innerRef}
       {...props}
       textColor={colorToHex(getTextColor(props))}
       theme={getTheme(props)}

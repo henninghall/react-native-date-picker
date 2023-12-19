@@ -16,6 +16,7 @@ const DatePickerIOS = (props) => {
     onDateChange,
     onCancel,
     onConfirm,
+    ...rest
   } = props
   const isClosing = useRef(false)
   const previousProps = useRef()
@@ -52,7 +53,7 @@ const DatePickerIOS = (props) => {
       }}
       onStartShouldSetResponder={() => true}
       onResponderTerminationRequest={() => false}
-      {...props}
+      {...rest}
       maximumDate={maximumDate ? maximumDate.getTime() : undefined}
       minimumDate={minimumDate ? minimumDate.getTime() : undefined}
       date={date ? date.getTime() : undefined}
