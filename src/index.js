@@ -23,6 +23,8 @@ const DatePickerWrapper = (props) => {
       cancelText={props.cancelText ? props.cancelText : 'Cancel'}
       androidVariant={getAndroidVariant(props)}
       minuteInterval={props.minuteInterval ? props.minuteInterval : 1}
+      maximumDate={withoutSecond(props.maximumDate)}
+      minimumDate={withoutSecond(props.minimumDate)}
       mode={props.mode ? props.mode : 'datetime'}
       timeZoneOffsetInMinutes={
         props.timeZoneOffsetInMinutes == null
@@ -58,6 +60,14 @@ const getTitle = (props) => {
   if (title) return title
   if (mode === 'time') return 'Select time'
   return 'Select date'
+}
+
+const withoutSecond = (date) => {
+  if (!date) return date
+
+  date.setSeconds(0)
+  date.setMilliseconds(0)
+  return date
 }
 
 export default React.memo(DatePickerWrapper)
