@@ -6,6 +6,13 @@ import { getNativeComponent, getNativeModule } from './modules'
 const NativeComponent = getNativeComponent()
 const NativeModule = getNativeModule()
 
+/**
+ * @param {{
+ *    maximumDate: Date;
+ *    theme: string;
+ *  }} props
+ * @returns
+ */
 const DatePickerIOS = (props) => {
   const {
     style,
