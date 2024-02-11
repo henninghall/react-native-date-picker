@@ -9,6 +9,13 @@ const DatePicker = Platform.select({
   default: () => <Text>DatePicker is not supported on this platform.</Text>,
 })()
 
+/**
+ * @param {{
+ *    maximumDate: Date;
+ *    theme: string;
+ *  }} props
+ * @returns
+ */
 const DatePickerWrapper = (props) => {
   if (__DEV__) throwIfInvalidProps(props)
   return (
