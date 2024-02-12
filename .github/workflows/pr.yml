@@ -19,7 +19,7 @@ jobs:
     needs: [build-ios]
     secrets: inherit
 
-  test-ios-android:
+  test-android-e2e:
     name: Test
     uses: ./.github/workflows/test-android-e2e.yml
     needs: [build-android]

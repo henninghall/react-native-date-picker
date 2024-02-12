@@ -332,5 +332,3 @@ React Native Date Picker is a cross platform component for iOS and Android. It u
 If you like this package, consider giving it a github star ⭐
 
 Also, PR's are welcome!
-
-.
