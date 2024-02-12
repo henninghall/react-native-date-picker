@@ -55,6 +55,7 @@ import android.widget.LinearLayout;
 import android.widget.Scroller;
 import android.widget.TextView;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -451,6 +452,38 @@ public class NumberPicker extends LinearLayout {
     private int[] getStyleable(String name, String defType){
         return Resources.getSystem().getIntArray(getR(name, defType));
     }
+
+    /*********************************************************************************
+     *   Returns the resource-IDs for all attributes specified in the
+     *   given <declare-styleable>-resource tag as an int array.
+     *
+     *   @param  context     The current application context.
+     *   @param  name        The name of the <declare-styleable>-resource-tag to pick.
+     *   @return             All resource-IDs of the child-attributes for the given
+     *                       <declare-styleable>-resource or <code>null</code> if
+     *                       this tag could not be found or an error occured.
+     *********************************************************************************/
+    public static final int[] getResourceDeclareStyleableIntArray( Context context, String name )
+    {
+        try
+        {
+            Field[] fields2 = Class.forName( context.getPackageName() + ".R$styleable" ).getFields();
+            for ( Field f : fields2 )
+            {
+                if ( f.getName().equals( name ) )
+                {
+                    int[] ret = (int[])f.get( null );
+                    return ret;
+                }
+            }
+        }
+        catch ( Throwable t )
+        {
+            return null;
+        }
+        return null;
+    }
+
     /**
      * Create a new number picker
      *
@@ -461,8 +494,13 @@ public class NumberPicker extends LinearLayout {
     public NumberPicker(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         // process style attributes
+        int styleableNumberPicker1 = getR("styleable", "NumberPicker");
+        int style2 = getR("NumberPicker_internalLayout", "styleable");
+        int[] style3 = getResourceDeclareStyleableIntArray(getContext(),"NumberPicker");
+        int[] styleableNumberPicker = new int[0];
+
         TypedArray attributesArray = context.obtainStyledAttributes(
-                attrs, getStyleable("styleable", "NumberPicker"), defStyle, 0);
+                attrs, styleableNumberPicker, defStyle, 0);
         int DEFAULT_LAYOUT_RESOURCE_ID = getR("number_picker","layout");
         final int layoutResId = attributesArray.getResourceId(
                 getR("NumberPicker_internalLayout", "styleable"),
