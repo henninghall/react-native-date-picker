@@ -23,7 +23,6 @@ jobs:
     name: Test
     uses: ./.github/workflows/test-android-e2e.yml
     needs: [build-android]
-    environment: e2e Android
     secrets: inherit
 
   test-js:
