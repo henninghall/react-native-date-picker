@@ -29,6 +29,14 @@ tags:
 - runFlow: utils/swipe-wheel-3-up.yml
 - assertVisible: '2000-01-01 23:59:00'
 
+### test: should ignore seconds and milliseconds
+- runFlow:
+    file: utils/change-minimum-date.yml
+    env:
+      VALUE: '2000-01-01 23:59:59.999'
+- runFlow: utils/swipe-wheel-2-up.yml
+- assertVisible: '2000-01-01 23:59:00'
+
 ### test: date mode
 
 - runFlow: utils/change-mode-date.yml
