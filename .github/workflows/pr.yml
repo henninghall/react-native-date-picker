@@ -21,11 +21,37 @@ jobs:
     secrets: inherit
 
   test-android-e2e:
-    name: Test
-    uses: ./.github/workflows/test-android-e2e.yml
+    name: Android - e2e
     needs: [build-android]
+    runs-on: ubuntu-latest
     environment: e2e Android
-    secrets: inherit
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/cache@v3
+        id: cache-android
+        with:
+          path: ${{ env.APP_PATH }}
+          key: ${{ runner.os }}-${{ hashFiles('src/**', 'android/**', env.EXAMPLE_SRC, env.APP_PATH ) }}
+
+      - uses: mobile-dev-inc/action-maestro-cloud@v1.8.0
+        id: upload
+        with:
+          api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
+          app-file: ${{ env.APP_PATH }}
+          include-tags: ${{ inputs.test-tags }}
+
+      # Step can be removed when this is fixed:
+      # https://github.com/mobile-dev-inc/action-maestro-cloud/issues/28
+      - name: Check for  maestro errors
+        run: |
+          if [[ "$MAESTRO_CLOUD_FLOW_RESULTS" == *"ERROR"* || "$MAESTRO_CLOUD_FLOW_RESULTS" == *"CANCELED"* ]]; then
+            echo "One or more tests failed or were canceled."
+            exit 1
+          fi
+        env:
+          MAESTRO_CLOUD_FLOW_RESULTS: ${{ steps.upload.outputs.MAESTRO_CLOUD_FLOW_RESULTS }}
 
   test-js:
     name: Test
