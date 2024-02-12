@@ -17,6 +17,7 @@ package com.henninghall.date_picker;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -47,7 +48,13 @@ import android.view.accessibility.AccessibilityNodeProvider;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import com.android.internal.R;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.Scroller;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -434,7 +441,11 @@ public class NumberPicker extends LinearLayout {
      * @param attrs A collection of attributes.
      */
     public NumberPicker(Context context, AttributeSet attrs) {
-        this(context, attrs, R.attr.numberPickerStyle);
+        this(context, attrs, Resources.getSystem().getIdentifier("numberPickerStyle", "attr", "android"));
+    }
+
+    private int getR(String name, String defType){
+        return Resources.getSystem().getIdentifier(name, defType, "android");
     }
     /**
      * Create a new number picker
@@ -806,7 +817,7 @@ public class NumberPicker extends LinearLayout {
         if (!mHasSelectorWheel) {
             return super.dispatchHoverEvent(event);
         }
-        if (AccessibilityManager.getInstance(mContext).isEnabled()) {
+        if (AccessibilityManager.getInstance(getContext()).isEnabled()) {
             final int eventY = (int) event.getY();
             final int hoveredVirtualViewId;
             if (eventY < mTopSelectionDividerTop) {
@@ -1214,20 +1225,20 @@ public class NumberPicker extends LinearLayout {
             super.onDraw(canvas);
             return;
         }
-        float x = (mRight - mLeft) / 2;
+        float x = (getRight() - getLeft()) / 2;
         float y = mCurrentScrollOffset;
         // draw the virtual buttons pressed state if needed
         if (mVirtualButtonPressedDrawable != null
                 && mScrollState == OnScrollListener.SCROLL_STATE_IDLE) {
             if (mDecrementVirtualButtonPressed) {
                 mVirtualButtonPressedDrawable.setState(PRESSED_STATE_SET);
-                mVirtualButtonPressedDrawable.setBounds(0, 0, mRight, mTopSelectionDividerTop);
+                mVirtualButtonPressedDrawable.setBounds(0, 0, getRight(), mTopSelectionDividerTop);
                 mVirtualButtonPressedDrawable.draw(canvas);
             }
             if (mIncrementVirtualButtonPressed) {
                 mVirtualButtonPressedDrawable.setState(PRESSED_STATE_SET);
-                mVirtualButtonPressedDrawable.setBounds(0, mBottomSelectionDividerBottom, mRight,
-                        mBottom);
+                mVirtualButtonPressedDrawable.setBounds(0, mBottomSelectionDividerBottom, getRight(),
+                        getBottom());
                 mVirtualButtonPressedDrawable.draw(canvas);
             }
         }
@@ -1251,12 +1262,12 @@ public class NumberPicker extends LinearLayout {
             // draw the top divider
             int topOfTopDivider = mTopSelectionDividerTop;
             int bottomOfTopDivider = topOfTopDivider + mSelectionDividerHeight;
-            mSelectionDivider.setBounds(0, topOfTopDivider, mRight, bottomOfTopDivider);
+            mSelectionDivider.setBounds(0, topOfTopDivider, getRight(), bottomOfTopDivider);
             mSelectionDivider.draw(canvas);
             // draw the bottom divider
             int bottomOfBottomDivider = mBottomSelectionDividerBottom;
             int topOfBottomDivider = bottomOfBottomDivider - mSelectionDividerHeight;
-            mSelectionDivider.setBounds(0, topOfBottomDivider, mRight, bottomOfBottomDivider);
+            mSelectionDivider.setBounds(0, topOfBottomDivider, getRight(), bottomOfBottomDivider);
             mSelectionDivider.draw(canvas);
         }
     }
@@ -1408,7 +1419,7 @@ public class NumberPicker extends LinearLayout {
         initializeSelectorWheelIndices();
         int[] selectorIndices = mSelectorIndices;
         int totalTextHeight = selectorIndices.length * mTextSize;
-        float totalTextGapHeight = (mBottom - mTop) - totalTextHeight;
+        float totalTextGapHeight = (getBottom() - getTop()) - totalTextHeight;
         float textGapCount = selectorIndices.length;
         mSelectorTextGapHeight = (int) (totalTextGapHeight / textGapCount + 0.5f);
         mSelectorElementHeight = mTextSize + mSelectorTextGapHeight;
@@ -1422,7 +1433,7 @@ public class NumberPicker extends LinearLayout {
     }
     private void initializeFadingEdges() {
         setVerticalFadingEdgeEnabled(true);
-        setFadingEdgeLength((mBottom - mTop - mTextSize) / 2);
+        setFadingEdgeLength((this.getBottom() - this.getTop() - mTextSize) / 2);
     }
     /**
      * Callback invoked upon completion of a given <code>scroller</code>.
@@ -1762,11 +1773,11 @@ public class NumberPicker extends LinearLayout {
             NumberPicker.this.removeCallbacks(this);
             if (mIncrementVirtualButtonPressed) {
                 mIncrementVirtualButtonPressed = false;
-                invalidate(0, mBottomSelectionDividerBottom, mRight, mBottom);
+                invalidate(0, mBottomSelectionDividerBottom, getRight(), getBottom());
             }
             mDecrementVirtualButtonPressed = false;
             if (mDecrementVirtualButtonPressed) {
-                invalidate(0, 0, mRight, mTopSelectionDividerTop);
+                invalidate(0, 0, getRight(), mTopSelectionDividerTop);
             }
         }
         public void buttonPressDelayed(int button) {
@@ -1788,11 +1799,11 @@ public class NumberPicker extends LinearLayout {
                     switch (mManagedButton) {
                         case BUTTON_INCREMENT: {
                             mIncrementVirtualButtonPressed = true;
-                            invalidate(0, mBottomSelectionDividerBottom, mRight, mBottom);
+                            invalidate(0, mBottomSelectionDividerBottom, getRight(), getBottom());
                         } break;
                         case BUTTON_DECREMENT: {
                             mDecrementVirtualButtonPressed = true;
-                            invalidate(0, 0, mRight, mTopSelectionDividerTop);
+                            invalidate(0, 0, getRight(), mTopSelectionDividerTop);
                         }
                     }
                 } break;
@@ -1804,7 +1815,7 @@ public class NumberPicker extends LinearLayout {
                                         ViewConfiguration.getPressedStateDuration());
                             }
                             mIncrementVirtualButtonPressed ^= true;
-                            invalidate(0, mBottomSelectionDividerBottom, mRight, mBottom);
+                            invalidate(0, mBottomSelectionDividerBottom, getRight(), getBottom());
                         } break;
                         case BUTTON_DECREMENT: {
                             if (!mDecrementVirtualButtonPressed) {
@@ -1812,7 +1823,7 @@ public class NumberPicker extends LinearLayout {
                                         ViewConfiguration.getPressedStateDuration());
                             }
                             mDecrementVirtualButtonPressed ^= true;
-                            invalidate(0, 0, mRight, mTopSelectionDividerTop);
+                            invalidate(0, 0, getRight(), mTopSelectionDividerTop);
                         }
                     }
                 } break;
@@ -1883,20 +1894,20 @@ public class NumberPicker extends LinearLayout {
         public AccessibilityNodeInfo createAccessibilityNodeInfo(int virtualViewId) {
             switch (virtualViewId) {
                 case View.NO_ID:
-                    return createAccessibilityNodeInfoForNumberPicker( mScrollX, mScrollY,
-                            mScrollX + (mRight - mLeft), mScrollY + (mBottom - mTop));
+                    return createAccessibilityNodeInfoForNumberPicker( getScrollX(), getScrollY(),
+                            getScrollX() + (getRight() - getLeft()), getScrollY() + (getBottom() - getTop()));
                 case VIRTUAL_VIEW_ID_DECREMENT:
                     return createAccessibilityNodeInfoForVirtualButton(VIRTUAL_VIEW_ID_DECREMENT,
-                            getVirtualDecrementButtonText(), mScrollX, mScrollY,
-                            mScrollX + (mRight - mLeft),
+                            getVirtualDecrementButtonText(), getScrollX(), getScrollY(),
+                            getScrollX() + (getRight() - getLeft()),
                             mTopSelectionDividerTop + mSelectionDividerHeight);
                 case VIRTUAL_VIEW_ID_INPUT:
                     return createAccessibiltyNodeInfoForInputText();
                 case VIRTUAL_VIEW_ID_INCREMENT:
                     return createAccessibilityNodeInfoForVirtualButton(VIRTUAL_VIEW_ID_INCREMENT,
-                            getVirtualIncrementButtonText(), mScrollX,
+                            getVirtualIncrementButtonText(), getScrollX(),
                             mBottomSelectionDividerBottom - mSelectionDividerHeight,
-                            mScrollX + (mRight - mLeft), mScrollY + (mBottom - mTop));
+                            getScrollX() + (getRight() - getLeft()), getScrollY() + (getBottom() - getTop()));
             }
             return super.createAccessibilityNodeInfo(virtualViewId);
         }
@@ -2023,7 +2034,7 @@ public class NumberPicker extends LinearLayout {
                                 mAccessibilityFocusedView = virtualViewId;
                                 sendAccessibilityEventForVirtualView(virtualViewId,
                                         AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED);
-                                invalidate(0, mBottomSelectionDividerBottom, mRight, mBottom);
+                                invalidate(0, mBottomSelectionDividerBottom, getRight(), getBottom());
                                 return true;
                             }
                         } return false;
@@ -2032,7 +2043,7 @@ public class NumberPicker extends LinearLayout {
                                 mAccessibilityFocusedView = UNDEFINED;
                                 sendAccessibilityEventForVirtualView(virtualViewId,
                                         AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUS_CLEARED);
-                                invalidate(0, mBottomSelectionDividerBottom, mRight, mBottom);
+                                invalidate(0, mBottomSelectionDividerBottom, getRight(), getBottom());
                                 return true;
                             }
                         } return false;
@@ -2054,7 +2065,7 @@ public class NumberPicker extends LinearLayout {
                                 mAccessibilityFocusedView = virtualViewId;
                                 sendAccessibilityEventForVirtualView(virtualViewId,
                                         AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED);
-                                invalidate(0, 0, mRight, mTopSelectionDividerTop);
+                                invalidate(0, 0, getRight(), mTopSelectionDividerTop);
                                 return true;
                             }
                         } return false;
@@ -2063,7 +2074,7 @@ public class NumberPicker extends LinearLayout {
                                 mAccessibilityFocusedView = UNDEFINED;
                                 sendAccessibilityEventForVirtualView(virtualViewId,
                                         AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUS_CLEARED);
-                                invalidate(0, 0, mRight, mTopSelectionDividerTop);
+                                invalidate(0, 0, getRight(), mTopSelectionDividerTop);
                                 return true;
                             }
                         } return false;
@@ -2172,7 +2183,7 @@ public class NumberPicker extends LinearLayout {
                                                             String text) {
             AccessibilityEvent event = AccessibilityEvent.obtain(eventType);
             event.setClassName(Button.class.getName());
-            event.setPackageName(mContext.getPackageName());
+            event.setPackageName(getContext().getPackageName());
             event.getText().add(text);
             event.setEnabled(NumberPicker.this.isEnabled());
             event.setSource(NumberPicker.this, virtualViewId);
@@ -2226,7 +2237,7 @@ public class NumberPicker extends LinearLayout {
                                                                                   String text, int left, int top, int right, int bottom) {
             AccessibilityNodeInfo info = AccessibilityNodeInfo.obtain();
             info.setClassName(Button.class.getName());
-            info.setPackageName(mContext.getPackageName());
+            info.setPackageName(getContext().getPackageName());
             info.setSource(NumberPicker.this, virtualViewId);
             info.setParent(NumberPicker.this);
             info.setText(text);
@@ -2257,7 +2268,7 @@ public class NumberPicker extends LinearLayout {
                                                                                  int right, int bottom) {
             AccessibilityNodeInfo info = AccessibilityNodeInfo.obtain();
             info.setClassName(NumberPicker.class.getName());
-            info.setPackageName(mContext.getPackageName());
+            info.setPackageName(getContext().getPackageName());
             info.setSource(NumberPicker.this);
             if (hasVirtualDecrementButton()) {
                 info.addChild(NumberPicker.this, VIRTUAL_VIEW_ID_DECREMENT);
