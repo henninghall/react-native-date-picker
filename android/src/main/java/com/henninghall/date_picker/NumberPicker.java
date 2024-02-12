@@ -15,7 +15,6 @@
  */
 package com.henninghall.date_picker;
 
-import android.annotation.Widget;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -80,7 +79,6 @@ import java.util.List;
  * For an example of using this widget, see {@link android.widget.TimePicker}.
  * </p>
  */
-@Widget
 public class NumberPicker extends LinearLayout {
     /**
      * The number of items show in the selector wheel.
