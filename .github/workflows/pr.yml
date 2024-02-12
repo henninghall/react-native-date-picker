@@ -17,12 +17,14 @@ jobs:
     name: Test
     uses: ./.github/workflows/test-ios-e2e.yml
     needs: [build-ios]
+    environment: e2e iOS
     secrets: inherit
 
   test-android-e2e:
     name: Test
     uses: ./.github/workflows/test-android-e2e.yml
     needs: [build-android]
+    environment: e2e Android
     secrets: inherit
 
   test-js:
