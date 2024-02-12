@@ -23,7 +23,6 @@ jobs:
     name: Android - e2e
     needs: [build-android]
     runs-on: ubuntu-latest
-    environment: e2e Android
 
     steps:
       - uses: actions/checkout@v3
