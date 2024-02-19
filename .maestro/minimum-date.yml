@@ -1,0 +1,86 @@
+appId: com.rn071
+tags:
+  - android
+  - minimumDate
+---
+- runFlow: utils/launch.yml
+
+########## describe: cannot pass min date
+
+- runFlow:
+    file: utils/change-minimum-date.yml
+    env:
+      VALUE: '2000-01-01 23:59:00'
+
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '2000-01-01 23:59:00'
+
+# ### test: datetime mode
+
+- runFlow: utils/swipe-wheel-1-up.yml
+- assertVisible: '2000-01-01 23:59:00'
+
+- runFlow: utils/swipe-wheel-2-up.yml
+- assertVisible: '2000-01-01 23:59:00'
+
+- runFlow: utils/swipe-wheel-3-up.yml
+- assertVisible: '2000-01-01 23:59:00'
+
+### test: should ignore seconds and milliseconds
+- runFlow:
+    file: utils/change-minimum-date.yml
+    env:
+      VALUE: '2000-01-01 23:59:59.999'
+- runFlow: utils/swipe-wheel-2-up.yml
+- assertVisible: '2000-01-01 23:59:00'
+
+### test: date mode
+
+- runFlow: utils/change-mode-date.yml
+
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '2000-01-01 23:59:00'
+- runFlow: utils/swipe-wheel-1-up.yml
+- assertVisible: '2000-01-06 00:00:00'
+
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '2000-01-01 23:59:00'
+- runFlow: utils/swipe-wheel-2-up.yml
+- assertVisible: '2000-01-06 00:00:00'
+
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '2000-01-01 23:59:00'
+- runFlow: utils/swipe-wheel-3-up.yml
+- assertVisible: '2000-01-01 23:59:00'
+
+########## describe: overshooting min date
+
+- runFlow: utils/reset.yml
+- runFlow: utils/change-mode-time.yml
+- runFlow:
+    file: utils/change-minimum-date.yml
+    env:
+      VALUE: '2000-01-01 23:59:00'
+
+### test: overshooting in time mode should set other wheels to max date
+
+- runFlow: utils/swipe-wheel-1-up.yml
+- assertVisible: '2000-01-01 23:59:00'
+
+- runFlow: utils/swipe-wheel-2-up.yml
+- assertVisible: '2000-01-01 23:59:00'
+
+- runFlow: utils/swipe-wheel-3-up.yml
+- assertVisible: '2000-01-01 23:59:00'
