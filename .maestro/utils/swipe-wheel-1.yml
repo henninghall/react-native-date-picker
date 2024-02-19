@@ -1,5 +1,10 @@
 appId: com.rn071
 ---
-- swipe:
-    start: 25%, 40%
-    end: 25%, 35%
+- runFlow:
+    when:
+      true: ${DIRECTION == 'UP'}
+    file: swipe-wheel-1-up.yml
+- runFlow:
+    when:
+      true: ${DIRECTION != 'UP'}
+    file: swipe-wheel-1-down.yml
