@@ -29,7 +29,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         id: cache-android
         with:
           path: ${{ env.APP_PATH }}
