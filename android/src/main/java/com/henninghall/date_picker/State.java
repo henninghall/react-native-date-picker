@@ -97,11 +97,17 @@ public class State {
     }
 
     public Calendar getMinimumDate() {
-        return Utils.isoToCalendar(minimumDateProp.getValue(), getTimeZone());
+        Calendar cal = Utils.isoToCalendar(minimumDateProp.getValue(), getTimeZone());
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal;
     }
 
     public Calendar getMaximumDate() {
-        return Utils.isoToCalendar(maximumDateProp.getValue(), getTimeZone());
+        Calendar cal = Utils.isoToCalendar(maximumDateProp.getValue(), getTimeZone());
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal;
     }
 
     public TimeZone getTimeZone() {
