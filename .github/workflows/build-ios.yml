@@ -15,11 +15,11 @@ jobs:
     runs-on: macos-13
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref }}
+          ref: ${{ github.event.pull_request.head.sha }}
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         id: cache
         with:
           path: |
@@ -27,7 +27,7 @@ jobs:
             ${{ env.APP_PATH }}.dSYM
           key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', env.EXAMPLE_SRC, env.APP_PATH ) }}
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         if: steps.cache.outputs.cache-hit != 'true'
         with:
           node-version: 14.18.1
