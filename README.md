@@ -154,6 +154,7 @@ export default () => {
 | `confirmText`             | Modal only: Confirm button text.                                                                                                                                                                                                                                                                                      |
 | `cancelText`              | Modal only: Cancel button text.                                                                                                                                                                                                                                                                                       |
 | `theme`                   | Modal only: The theme of the modal. `"light"`, `"dark"`, `"auto"`. Defaults to `"auto"`.                                                                                                                                                                                                                              |
+| `onStateChange`           | Spinner state change handler. Triggered on changes between "idle" and "spinning" state (Android inline only)                                                                                                                                                                                                          |
 
 ## Additional android styling
 
@@ -225,6 +226,17 @@ If you have enabled <a href="https://facebook.github.io/react-native/docs/signed
 ### What does it take to upgrade to v4 (4.0.0)?
 
 There are no breaking changes in v4, so just bump the version number in your package json.
+
+### How can we disable confirm button until the wheel has stopped spinning?
+
+Use the `onStateChange` prop to track the state of the spinning wheel.
+
+```jsx
+const [state, setState] = useState("idle")
+...
+<DatePicker onStateChange={setState} />
+<ConfirmButton disabled={state === "spinning"} />
+```
 
 ## Two different Android variants
 
