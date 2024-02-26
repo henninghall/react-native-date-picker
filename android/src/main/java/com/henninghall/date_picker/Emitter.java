@@ -19,6 +19,18 @@ public class Emitter {
         return DatePickerPackage.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
     }
 
+    public static void onSpinnerStateChange(String spinningState, String id, View view) {
+        WritableMap event = Arguments.createMap();
+        event.putString("spinnerState", spinningState);
+        event.putString("id", id);
+        if(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED){
+            deviceEventEmitter().emit("spinnerStateChange", event);
+        }
+        else {
+            eventEmitter().receiveEvent(view.getId(),"spinnerStateChange",event);
+        }
+    }
+
     public static void onDateChange(Calendar date, String displayValueString, String id, View view) {
         WritableMap event = Arguments.createMap();
         String dateString = Utils.dateToIso(date);

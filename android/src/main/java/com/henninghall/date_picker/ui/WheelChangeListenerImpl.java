@@ -17,6 +17,7 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
     private final State state;
     private final UIManager uiManager;
     private final View rootView;
+    private String lastEmittedSpinnerState;
 
     WheelChangeListenerImpl(Wheels wheels, State state, UIManager uiManager, View rootView) {
         this.wheels = wheels;
@@ -63,6 +64,14 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
 
         uiManager.updateLastSelectedDate(selectedDate);
         Emitter.onDateChange(selectedDate, displayData, state.getId(), rootView);
+    }
+
+    @Override
+    public void onStateChange(Wheel picker) {
+        String event = wheels.hasSpinningWheel() ? "spinning" : "idle";
+        if(event.equals(lastEmittedSpinnerState)) return;
+        lastEmittedSpinnerState = event;
+        Emitter.onSpinnerStateChange(event, state.getId(), rootView);
     }
 
     // Example: Jan 1 returns true, April 31 returns false.
