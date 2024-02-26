@@ -16,6 +16,7 @@ import com.henninghall.date_picker.ui.Accessibility;
 
 public class IosClone extends NumberPickerView implements Picker {
     private Picker.OnValueChangeListenerInScrolling mOnValueChangeListenerInScrolling;
+    private Picker.OnValueChangeListener onValueChangedListener;
 
     public IosClone(Context context) {
         super(context);
@@ -54,6 +55,13 @@ public class IosClone extends NumberPickerView implements Picker {
                 }
             }
         });
+
+        super.setOnScrollListener(new OnScrollListener() {
+            @Override
+            public void onScrollStateChange(NumberPickerView view, int scrollState) {
+                onValueChangedListener.onSpinnerStateChange();
+            }
+        });
     }
 
     @Override
@@ -71,6 +79,8 @@ public class IosClone extends NumberPickerView implements Picker {
 
     @Override
     public void setOnValueChangedListener(final Picker.OnValueChangeListener listener) {
+        this.onValueChangedListener = listener;
+
         super.setOnValueChangedListener(new NumberPickerView.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPickerView picker, int oldVal, int newVal) {
