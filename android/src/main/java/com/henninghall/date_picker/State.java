@@ -1,7 +1,5 @@
 package com.henninghall.date_picker;
 
-import android.util.Log;
-
 import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.models.Is24HourSource;
 import com.henninghall.date_picker.models.Mode;
@@ -97,11 +95,23 @@ public class State {
     }
 
     public Calendar getMinimumDate() {
-        return Utils.isoToCalendar(minimumDateProp.getValue(), getTimeZone());
+        return boundaryPropToCal(minimumDateProp);
     }
 
     public Calendar getMaximumDate() {
-        return Utils.isoToCalendar(maximumDateProp.getValue(), getTimeZone());
+        return boundaryPropToCal(maximumDateProp);
+    }
+
+    private Calendar boundaryPropToCal(Prop<String> prop){
+        Calendar cal = Utils.isoToCalendar(prop.getValue(), getTimeZone());
+        clearSecondsAndMilliseconds(cal);
+        return cal;
+    }
+
+    private void clearSecondsAndMilliseconds(Calendar cal) {
+        if (cal == null) return;
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
     }
 
     public TimeZone getTimeZone() {

@@ -27,14 +27,7 @@ class DatePickerAndroid extends React.PureComponent {
 
     if (props.modal) return null
 
-    return (
-      <NativeComponent
-        {...props}
-        maximumDate={this._withoutSecond(props.maximumDate)}
-        minimumDate={this._withoutSecond(props.minimumDate)}
-        onChange={this._onChange}
-      />
-    )
+    return <NativeComponent {...props} onChange={this._onChange} />
   }
 
   getId = () => {
@@ -116,13 +109,6 @@ class DatePickerAndroid extends React.PureComponent {
     if (id !== this.id) return
     this.isClosing = true
     this.props.onCancel()
-  }
-
-  _withoutSecond = (date) => {
-    if (!date) return date
-    date.setSeconds(0)
-    date.setMilliseconds(0)
-    return date
   }
 }
 
