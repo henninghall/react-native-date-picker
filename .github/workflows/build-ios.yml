@@ -27,7 +27,7 @@ jobs:
             ${{ env.APP_PATH }}.dSYM
           key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', env.EXAMPLE_SRC, env.APP_PATH ) }}
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         if: steps.cache.outputs.cache-hit != 'true'
         with:
           node-version: 14.18.1
