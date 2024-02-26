@@ -15,11 +15,11 @@ jobs:
     environment: e2e iOS
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref }}
+          ref: ${{ github.event.pull_request.head.sha }}
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         id: cache
         with:
           path: |
@@ -54,3 +54,5 @@ jobs:
           fi
         env:
           MAESTRO_CLOUD_FLOW_RESULTS: ${{ steps.upload.outputs.MAESTRO_CLOUD_FLOW_RESULTS }}
+
+          #temp
