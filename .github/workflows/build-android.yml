@@ -29,7 +29,7 @@ jobs:
       - uses: actions/setup-node@v4
         if: steps.cache-android.outputs.cache-hit != 'true'
         with:
-          node-version: 14.18.1
+          node-version: 14
           cache: 'yarn'
 
       - name: Install npm dependencies (example project)
