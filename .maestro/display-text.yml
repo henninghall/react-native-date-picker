@@ -1,6 +1,7 @@
 appId: com.rn071
 tags:
   - android
+  - displayText
 ---
 - runFlow:
     file: utils/set-timezone.yml
