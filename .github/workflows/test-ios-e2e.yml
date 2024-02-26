@@ -11,7 +11,7 @@ env:
 jobs:
   test-ios-e2e:
     name: iOS - e2e
-    runs-on: macos-13
+    runs-on: macos-14
     environment: e2e iOS
 
     steps:
