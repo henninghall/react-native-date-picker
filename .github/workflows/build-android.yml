@@ -16,15 +16,17 @@ jobs:
     outputs:
       app: app/build/outputs/apk/release
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         id: cache-android
         with:
           path: ${{ env.APP_PATH }}
           key: ${{ runner.os }}-${{ hashFiles('src/**', 'android/**', env.EXAMPLE_SRC, env.APP_PATH ) }}
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         if: steps.cache-android.outputs.cache-hit != 'true'
         with:
           node-version: 14.18.1
@@ -40,7 +42,7 @@ jobs:
         working-directory: ./
         run: yarn install --frozen-lockfile
 
-      - uses: actions/setup-java@v3
+      - uses: actions/setup-java@v4
         if: steps.cache-android.outputs.cache-hit != 'true'
         with:
           java-version: 11
