@@ -5,19 +5,19 @@ on:
   pull_request_target:
 
 jobs:
-  # build-ios:
-  #   name: Build
-  #   uses: ./.github/workflows/build-ios.yml
+  build-ios:
+    name: Build
+    uses: ./.github/workflows/build-ios.yml
 
   build-android:
     name: Build
     uses: ./.github/workflows/build-android.yml
 
-  # test-ios-e2e:
-  #   name: Test
-  #   uses: ./.github/workflows/test-ios-e2e.yml
-  #   needs: [build-ios]
-  #   secrets: inherit
+  test-ios-e2e:
+    name: Test
+    uses: ./.github/workflows/test-ios-e2e.yml
+    needs: [build-ios]
+    secrets: inherit
 
   test-android-e2e:
     name: Test
@@ -25,10 +25,10 @@ jobs:
     needs: [build-android]
     secrets: inherit
 
-  # test-js:
-  #   name: Test
-  #   uses: ./.github/workflows/test-js.yml
+  test-js:
+    name: Test
+    uses: ./.github/workflows/test-js.yml
 
-  # test-android-unit:
-  #   name: Test
-  #   uses: ./.github/workflows/test-android-unit.yml
+  test-android-unit:
+    name: Test
+    uses: ./.github/workflows/test-android-unit.yml
