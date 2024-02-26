@@ -16,9 +16,7 @@ jobs:
     outputs:
       app: app/build/outputs/apk/release
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref }}
+      - uses: actions/checkout@v4
 
       - uses: actions/cache@v3
         id: cache-android
