@@ -24,6 +24,7 @@ android {
     }
 
     buildFeatures.buildConfig true
+    namespace 'com.henninghall.date_picker'
 
     sourceSets {
         main {
