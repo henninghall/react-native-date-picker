@@ -23,6 +23,8 @@ android {
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
     }
 
+    buildFeatures.buildConfig true
+
     sourceSets {
         main {
             if (isNewArchitectureEnabled()) {
