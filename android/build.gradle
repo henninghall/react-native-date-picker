@@ -23,8 +23,14 @@ android {
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
     }
 
-    buildFeatures.buildConfig true
-    namespace 'com.henninghall.date_picker'
+    def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
+    if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
+        namespace "com.henninghall.date_picker"
+    }
+
+    if (agpVersion.tokenize('.')[0].toInteger() >= 8) {
+        buildFeatures.buildConfig = true
+    }
 
     sourceSets {
         main {
