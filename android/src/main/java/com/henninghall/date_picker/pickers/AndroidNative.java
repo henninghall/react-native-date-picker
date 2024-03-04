@@ -17,16 +17,16 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import static android.widget.NumberPicker.OnScrollListener.SCROLL_STATE_FLING;
 import static android.widget.NumberPicker.OnScrollListener.SCROLL_STATE_IDLE;
 
 public class AndroidNative extends NumberPicker implements Picker {
 
     private Picker.OnValueChangeListener onValueChangedListener;
-    private int state = SCROLL_STATE_IDLE;
+    private int internalSpinState = SCROLL_STATE_IDLE;
     private OnValueChangeListenerInScrolling listenerInScrolling;
     private boolean isAnimating;
     private final Handler handler = new Handler();
+    private boolean spinning;
 
     public AndroidNative(Context context) {
         super(context);
@@ -102,7 +102,7 @@ public class AndroidNative extends NumberPicker implements Picker {
 
     @Override
     public boolean isSpinning() {
-        return state == SCROLL_STATE_FLING || isAnimating;
+        return spinning || isAnimating;
     }
 
     @Override
@@ -116,10 +116,13 @@ public class AndroidNative extends NumberPicker implements Picker {
         int timeBetweenScrollsMs = 100;
         int willStopScrollingInMs = timeBetweenScrollsMs * moves;
         isAnimating = true;
+        onValueChangedListener.onSpinnerStateChange();
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 isAnimating = false;
+                onValueChangedListener.onSpinnerStateChange();
             }
         }, willStopScrollingInMs);
 
@@ -184,7 +187,7 @@ public class AndroidNative extends NumberPicker implements Picker {
                 // onValueChange is triggered also during scrolling. Since we don't want
                 // to send event during scrolling we make sure wheel is still. This particular
                 // case happens when wheel is tapped, not scrolled.
-                if(state == SCROLL_STATE_IDLE) {
+                if(internalSpinState == SCROLL_STATE_IDLE) {
                     sendEventIn500ms();
                 }
             }
@@ -194,13 +197,17 @@ public class AndroidNative extends NumberPicker implements Picker {
             @Override
             public void onScrollStateChange(NumberPicker numberPicker, int nextState) {
                 sendEventIfStopped(nextState);
-                state = nextState;
+                internalSpinState = nextState;
+                if (nextState != SCROLL_STATE_IDLE){
+                  spinning = true;
+                  onValueChangedListener.onSpinnerStateChange();
+                }
             }
         });
     }
 
     private void sendEventIfStopped(int nextState){
-        boolean stoppedScrolling = state != SCROLL_STATE_IDLE && nextState == SCROLL_STATE_IDLE;
+        boolean stoppedScrolling = internalSpinState != SCROLL_STATE_IDLE && nextState == SCROLL_STATE_IDLE;
         if (stoppedScrolling) {
             sendEventIn500ms();
         }
@@ -210,7 +217,9 @@ public class AndroidNative extends NumberPicker implements Picker {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                spinning = false;
                 onValueChangedListener.onValueChange();
+                onValueChangedListener.onSpinnerStateChange();
             }
             // the delay make sure the wheel has stopped before sending the value change event
         }, 500);

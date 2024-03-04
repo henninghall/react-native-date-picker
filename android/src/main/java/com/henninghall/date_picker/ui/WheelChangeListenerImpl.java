@@ -9,6 +9,8 @@ import com.henninghall.date_picker.wheels.Wheel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.TimeZone;
 
 public class WheelChangeListenerImpl implements WheelChangeListener {
@@ -17,6 +19,8 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
     private final State state;
     private final UIManager uiManager;
     private final View rootView;
+    private SpinnerState lastEmittedSpinnerState;
+    private Set<SpinnerStateListener> listeners = new HashSet<>();
 
     WheelChangeListenerImpl(Wheels wheels, State state, UIManager uiManager, View rootView) {
         this.wheels = wheels;
@@ -65,6 +69,15 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
         Emitter.onDateChange(selectedDate, displayData, state.getId(), rootView);
     }
 
+    @Override
+    public void onStateChange(Wheel picker) {
+        SpinnerState event = wheels.hasSpinningWheel() ? SpinnerState.spinning : SpinnerState.idle;
+        if(event.equals(lastEmittedSpinnerState)) return;
+        lastEmittedSpinnerState = event;
+        Emitter.onSpinnerStateChange(event, state.getId(), rootView);
+        for (SpinnerStateListener l: listeners) l.onChange(event);
+    }
+
     // Example: Jan 1 returns true, April 31 returns false.
     private boolean dateExists(){
         SimpleDateFormat dateFormat = getDateFormat();
@@ -111,4 +124,7 @@ public class WheelChangeListenerImpl implements WheelChangeListener {
         return null;
     }
 
+    public void addStateListener(SpinnerStateListener listener) {
+        listeners.add(listener);
+    }
 }

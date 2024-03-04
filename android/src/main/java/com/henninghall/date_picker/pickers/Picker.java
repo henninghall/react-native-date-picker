@@ -32,5 +32,6 @@ public interface Picker {
 
     interface OnValueChangeListener {
         void onValueChange();
+        void onSpinnerStateChange();
     }
 }

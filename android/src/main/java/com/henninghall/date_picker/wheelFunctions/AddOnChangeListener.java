@@ -21,6 +21,11 @@ public class AddOnChangeListener implements WheelFunction {
             public void onValueChange() {
                 onChangeListener.onChange(wheel);
             }
+
+            @Override
+            public void onSpinnerStateChange() {
+                onChangeListener.onStateChange(wheel);
+            }
         });
     }
 }
