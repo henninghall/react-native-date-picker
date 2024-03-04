@@ -3,7 +3,7 @@ import {Button, View, Text} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
 export default class ModalExample extends React.Component {
-  state = {date: new Date('2000-01-01'), open: false};
+  state = {date: new Date('2000-01-01'), open: false, spinnerState: 'idle'};
 
   render = () => (
     <View style={{alignItems: 'center'}}>
@@ -18,8 +18,12 @@ export default class ModalExample extends React.Component {
         date={this.state.date}
         onConfirm={date => this.setState({date, open: false})}
         onCancel={() => this.setState({open: false})}
+        onStateChange={state => this.setState({spinnerState: state})}
         androidVariant="nativeAndroid"
       />
+      <Text style={{marginTop: 20, fontSize: 26}}>
+        {this.state.spinnerState}
+      </Text>
       <Text style={{marginTop: 20, fontSize: 26}}>
         {this.state.date.toISOString().substr(0, 10)}
       </Text>
