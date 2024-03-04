@@ -25,12 +25,12 @@ jobs:
           path: |
             ${{ env.APP_PATH }}
             ${{ env.APP_PATH }}.dSYM
-          key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', env.EXAMPLE_SRC, env.APP_PATH ) }}-temp
+          key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', env.EXAMPLE_SRC, env.APP_PATH ) }}-v2
 
       - uses: actions/setup-node@v4
         if: steps.cache.outputs.cache-hit != 'true'
         with:
-          node-version: 18
+          node-version: 16
           cache: 'yarn'
 
       - name: Install npm dependencies (example project)
