@@ -19,6 +19,7 @@ import com.henninghall.date_picker.props.HeightProp;
 import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.TextColorProp;
+import com.henninghall.date_picker.ui.SpinnerStateListener;
 import com.henninghall.date_picker.ui.UIManager;
 import com.henninghall.date_picker.ui.Accessibility;
 
@@ -105,6 +106,10 @@ public class PickerView extends RelativeLayout {
 
     public void scroll(int wheelIndex, int scrollTimes) {
         uiManager.scroll(wheelIndex, scrollTimes);
+    }
+
+    public void addSpinnerStateListener(SpinnerStateListener listener){
+        uiManager.addStateListener(listener);
     }
 
     public String getDate() {

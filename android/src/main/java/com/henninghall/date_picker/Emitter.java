@@ -6,6 +6,7 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
+import com.henninghall.date_picker.ui.SpinnerState;
 
 import java.util.Calendar;
 
@@ -19,9 +20,9 @@ public class Emitter {
         return DatePickerPackage.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
     }
 
-    public static void onSpinnerStateChange(String spinningState, String id, View view) {
+    public static void onSpinnerStateChange(SpinnerState spinnerState, String id, View view) {
         WritableMap event = Arguments.createMap();
-        event.putString("spinnerState", spinningState);
+        event.putString("spinnerState", spinnerState.toString());
         event.putString("id", id);
         if(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED){
             deviceEventEmitter().emit("spinnerStateChange", event);
