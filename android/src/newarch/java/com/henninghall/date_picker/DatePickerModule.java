@@ -1,6 +1,8 @@
 package com.henninghall.date_picker;
 
 
+import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
@@ -15,6 +17,8 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
+import com.henninghall.date_picker.models.Variant;
+import com.henninghall.date_picker.props.VariantProp;
 import com.henninghall.date_picker.ui.SpinnerState;
 import com.henninghall.date_picker.ui.SpinnerStateListener;
 
@@ -128,25 +132,21 @@ public class DatePickerModule extends NativeRNDatePickerSpec {
             }
         }
         picker.update();
-        picker.addSpinnerStateListener(new SpinnerStateListener() {
-            @Override
-            public void onChange(SpinnerState state) {
-               if(state == SpinnerState.idle){
-                   enableConfirmButton();
-               }
-               if(state == SpinnerState.spinning){
-                   disableConfirmButton();
-               }
-            }
-        });
+
+        boolean canDisableButtonsWithoutCrash = picker.getVariant() == Variant.nativeAndroid;
+        if(canDisableButtonsWithoutCrash){
+            picker.addSpinnerStateListener(new SpinnerStateListener() {
+                @Override
+                public void onChange(SpinnerState state) {
+                    setEnabledConfirmButton(state == SpinnerState.idle);
+                }
+            });
+        }
         return picker;
     }
 
-    private void disableConfirmButton(){
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-    }
-    private void enableConfirmButton(){
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+    private void setEnabledConfirmButton(boolean enabled) {
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(enabled);
     }
 
     private View withTopMargin(PickerView view) {
