@@ -1,8 +1,5 @@
 package com.henninghall.date_picker;
 
-
-import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
@@ -18,7 +15,6 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.henninghall.date_picker.models.Variant;
-import com.henninghall.date_picker.props.VariantProp;
 import com.henninghall.date_picker.ui.SpinnerState;
 import com.henninghall.date_picker.ui.SpinnerStateListener;
 

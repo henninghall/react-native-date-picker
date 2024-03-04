@@ -102,7 +102,7 @@ public class AndroidNative extends NumberPicker implements Picker {
 
     @Override
     public boolean isSpinning() {
-        return spinning;
+        return spinning || isAnimating;
     }
 
     @Override
@@ -116,10 +116,13 @@ public class AndroidNative extends NumberPicker implements Picker {
         int timeBetweenScrollsMs = 100;
         int willStopScrollingInMs = timeBetweenScrollsMs * moves;
         isAnimating = true;
+        onValueChangedListener.onSpinnerStateChange();
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 isAnimating = false;
+                onValueChangedListener.onSpinnerStateChange();
             }
         }, willStopScrollingInMs);
 
