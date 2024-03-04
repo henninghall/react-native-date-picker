@@ -21,6 +21,7 @@ public class UIManager {
     private Wheels wheels;
     private FadingOverlay fadingOverlay;
     private WheelScroller wheelScroller = new WheelScroller();
+    private WheelChangeListenerImpl onWheelChangeListener;
 
     public UIManager(State state, View rootView){
         this.state = state;
@@ -78,8 +79,12 @@ public class UIManager {
     }
 
     private void addOnChangeListener(){
-        WheelChangeListener onWheelChangeListener = new WheelChangeListenerImpl(wheels, state, this, rootView);
+        onWheelChangeListener = new WheelChangeListenerImpl(wheels, state, this, rootView);
         wheels.applyOnAll(new AddOnChangeListener(onWheelChangeListener));
+    }
+
+    public void addStateListener(SpinnerStateListener listener){
+        onWheelChangeListener.addStateListener(listener);
     }
 
     public void updateDividerHeight() {

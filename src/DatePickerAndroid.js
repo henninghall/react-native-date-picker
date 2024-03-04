@@ -27,14 +27,7 @@ class DatePickerAndroid extends React.PureComponent {
 
     if (props.modal) return null
 
-    return (
-      <NativeComponent
-        {...props}
-        maximumDate={this._withoutSecond(props.maximumDate)}
-        minimumDate={this._withoutSecond(props.minimumDate)}
-        onChange={this._onChange}
-      />
-    )
+    return <NativeComponent {...props} onChange={this._onChange} />
   }
 
   getId = () => {
@@ -47,11 +40,16 @@ class DatePickerAndroid extends React.PureComponent {
   componentDidMount = () => {
     this.eventEmitter = new NativeEventEmitter(NativeModule)
     this.eventEmitter.addListener('dateChange', this._onChange)
+    this.eventEmitter.addListener(
+      'spinnerStateChange',
+      this._onSpinnerStateChanged
+    )
     this.eventEmitter.addListener('onConfirm', this._onConfirm)
     this.eventEmitter.addListener('onCancel', this._onCancel)
   }
 
   componentWillUnmount = () => {
+    this.eventEmitter.removeAllListeners('spinnerStateChange')
     this.eventEmitter.removeAllListeners('dateChange')
     this.eventEmitter.removeAllListeners('onConfirm')
     this.eventEmitter.removeAllListeners('onCancel')
@@ -87,6 +85,12 @@ class DatePickerAndroid extends React.PureComponent {
       this.props.onDateStringChange(dateString)
     }
   }
+  _onSpinnerStateChanged = (e) => {
+    const { spinnerState, id } = e.nativeEvent ?? e
+    const newArch = id !== null
+    if (newArch && id !== this.id) return
+    this.props.onStateChange && this.props.onStateChange(spinnerState)
+  }
 
   _maximumDate = () =>
     this.props.maximumDate &&
@@ -116,13 +120,6 @@ class DatePickerAndroid extends React.PureComponent {
     if (id !== this.id) return
     this.isClosing = true
     this.props.onCancel()
-  }
-
-  _withoutSecond = (date) => {
-    if (!date) return date
-    date.setSeconds(0)
-    date.setMilliseconds(0)
-    return date
   }
 }
 

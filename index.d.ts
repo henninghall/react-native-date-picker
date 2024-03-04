@@ -51,6 +51,17 @@ export interface DatePickerProps extends ViewProps {
   onDateChange?: (date: Date) => void
 
   /**
+   * Spinner state change handler.
+   *
+   * This is called when the user start to spin the picker wheel and the spinner stops.
+   * It can be used to disable a confirm button until a spinner comes to a total stop
+   * to ensure the expected date is being selected.
+   *
+   * Android only.
+   */
+  onStateChange?: (state: 'spinning' | 'idle') => void
+
+  /**
    * Timezone offset in minutes.
    *
    * By default, the date picker will use the device's timezone. With this

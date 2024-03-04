@@ -1,9 +1,7 @@
 package com.henninghall.date_picker;
 
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.telecom.Call;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -12,12 +10,13 @@ import androidx.annotation.NonNull;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Dynamic;
-import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
+import com.henninghall.date_picker.models.Variant;
+import com.henninghall.date_picker.ui.SpinnerState;
+import com.henninghall.date_picker.ui.SpinnerStateListener;
 
 import net.time4j.android.ApplicationStarter;
 
@@ -129,7 +128,21 @@ public class DatePickerModule extends NativeRNDatePickerSpec {
             }
         }
         picker.update();
+
+        boolean canDisableButtonsWithoutCrash = picker.getVariant() == Variant.nativeAndroid;
+        if(canDisableButtonsWithoutCrash){
+            picker.addSpinnerStateListener(new SpinnerStateListener() {
+                @Override
+                public void onChange(SpinnerState state) {
+                    setEnabledConfirmButton(state == SpinnerState.idle);
+                }
+            });
+        }
         return picker;
+    }
+
+    private void setEnabledConfirmButton(boolean enabled) {
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(enabled);
     }
 
     private View withTopMargin(PickerView view) {

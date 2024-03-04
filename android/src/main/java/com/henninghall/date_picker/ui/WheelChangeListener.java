@@ -5,6 +5,8 @@ import com.henninghall.date_picker.wheels.Wheel;
 public interface WheelChangeListener {
 
     void onChange(Wheel picker);
+
+    void onStateChange(Wheel picker);
 }
 
 

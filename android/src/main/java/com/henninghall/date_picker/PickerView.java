@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Dynamic;
+import com.henninghall.date_picker.models.Variant;
 import com.henninghall.date_picker.props.DividerHeightProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
@@ -19,6 +20,7 @@ import com.henninghall.date_picker.props.HeightProp;
 import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.TextColorProp;
+import com.henninghall.date_picker.ui.SpinnerStateListener;
 import com.henninghall.date_picker.ui.UIManager;
 import com.henninghall.date_picker.ui.Accessibility;
 
@@ -107,6 +109,10 @@ public class PickerView extends RelativeLayout {
         uiManager.scroll(wheelIndex, scrollTimes);
     }
 
+    public void addSpinnerStateListener(SpinnerStateListener listener){
+        uiManager.addStateListener(listener);
+    }
+
     public String getDate() {
         return state.derived.getLastDate();
     }
@@ -132,4 +138,7 @@ public class PickerView extends RelativeLayout {
     }
 
 
+    public Variant getVariant() {
+        return state.getVariant();
+    }
 }
