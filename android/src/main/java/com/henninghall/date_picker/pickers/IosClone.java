@@ -59,7 +59,9 @@ public class IosClone extends NumberPickerView implements Picker {
         super.setOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChange(NumberPickerView view, int scrollState) {
-                onValueChangedListener.onSpinnerStateChange();
+                if (onValueChangedListener != null) {
+                    onValueChangedListener.onSpinnerStateChange();
+                }
             }
         });
     }
