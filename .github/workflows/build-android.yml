@@ -24,7 +24,7 @@ jobs:
         id: cache-android
         with:
           path: ${{ env.APP_PATH }}
-          key: ${{ runner.os }}-${{ hashFiles('src/**', 'android/**', env.EXAMPLE_SRC, env.APP_PATH ) }}-v3
+          key: ${{ runner.os }}-${{ hashFiles('src/**', 'android/**', env.EXAMPLE_SRC, env.APP_PATH ) }}
 
       - uses: actions/setup-node@v4
         if: steps.cache-android.outputs.cache-hit != 'true'
