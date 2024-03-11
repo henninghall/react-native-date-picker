@@ -25,15 +25,16 @@ import java.util.ArrayList;
 
 public class PickerView extends RelativeLayout {
 
-
-    private final ViewGroup.LayoutParams layoutParams;
     private UIManager uiManager;
     private State state = new State();
     private ArrayList<String> updatedProps = new ArrayList<>();
 
     public PickerView(ViewGroup.LayoutParams layoutParams) {
         super(DatePickerPackage.context);
-        this.layoutParams = layoutParams;
+        LinearLayout layout = new LinearLayout(getContext());
+        LayoutInflater.from(getContext()).inflate(state.derived.getRootLayout(), layout);
+        this.addView(layout, layoutParams);
+        uiManager = new UIManager(state, this);
     }
 
     public void update() {
