@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android:view xmlns:android="http://schemas.android.com/apk/res/android"
+<View xmlns:android="http://schemas.android.com/apk/res/android"
     class="android.widget.NumberPicker$CustomEditText"
-    id="@+id/numberpicker_input"
-    layout_width="320"
-    layout_height="180"
-    gravity="center"
-    singleLine="true"
-    background="@null"
-    textAppearance="@*android:style/TextAppearance.Material.NumberPicker" />
+    android:id="@+id/numberpicker_input"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:singleLine="true"
+    android:background="@null"
+    android:textAppearance="@*android:style/TextAppearance.Material.NumberPicker" />

@@ -636,7 +636,8 @@ public class NumberPicker extends LinearLayout {
                     attrs, attributesArray, defStyleAttr, defStyleRes);
         }
 
-        final int layoutResId = R.layout.number_picker;
+        final int layoutResId = R.layout.number_picker_selector_wheel;
+
 
         mHasSelectorWheel = (layoutResId != DEFAULT_LAYOUT_RESOURCE_ID);
 
@@ -2053,17 +2054,17 @@ public class NumberPicker extends LinearLayout {
             if (!text.equals(beforeText.toString())) {
                 mInputText.setText(text);
 //                if (AccessibilityManager.getInstance(getContext()).isEnabled()) {
-                    AccessibilityEvent event = AccessibilityEvent.obtain(
-                            AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED);
-                    mInputText.onInitializeAccessibilityEvent(event);
-                    mInputText.onPopulateAccessibilityEvent(event);
-                    event.setFromIndex(0);
-                    event.setRemovedCount(beforeText.length());
-                    event.setAddedCount(text.length());
-                    event.setBeforeText(beforeText);
-                    event.setSource(NumberPicker.this,
-                            AccessibilityNodeProviderImpl.VIRTUAL_VIEW_ID_INPUT);
-                    requestSendAccessibilityEvent(NumberPicker.this, event);
+//                    AccessibilityEvent event = AccessibilityEvent.obtain(
+//                            AccessibilityEvent.TYPE_VIEW_TEXT_CHANGED);
+//                    mInputText.onInitializeAccessibilityEvent(event);
+//                    mInputText.onPopulateAccessibilityEvent(event);
+//                    event.setFromIndex(0);
+//                    event.setRemovedCount(beforeText.length());
+//                    event.setAddedCount(text.length());
+//                    event.setBeforeText(beforeText);
+//                    event.setSource(NumberPicker.this,
+//                            AccessibilityNodeProviderImpl.VIRTUAL_VIEW_ID_INPUT);
+//                    requestSendAccessibilityEvent(NumberPicker.this, event);
 //                }
                 return true;
             }

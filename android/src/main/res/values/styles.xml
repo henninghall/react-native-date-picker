@@ -17,4 +17,5 @@
     <style name="android_native_small" parent="android_native">
         <item name="android:layout_width">40dp</item>
     </style>
+
 </resources>
