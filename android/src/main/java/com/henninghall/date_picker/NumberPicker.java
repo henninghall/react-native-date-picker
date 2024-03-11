@@ -650,8 +650,7 @@ public class NumberPicker extends LinearLayout {
 //        final Drawable selectionDivider = attributesArray.getDrawable(
 //                R.styleable.NumberPicker_selectionDivider);
 
-        Drawable selectionDivider = getResources().getDrawable(R.drawable.numberpicker_selection_divider);
-
+        Drawable selectionDivider = getResources().getDrawable(R.drawable.number_picker_divider_material);
 
         if (selectionDivider != null) {
             selectionDivider.setCallback(this);
