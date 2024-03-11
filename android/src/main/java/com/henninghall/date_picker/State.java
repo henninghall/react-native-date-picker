@@ -37,7 +37,6 @@ public class State {
     private final MaximumDateProp maximumDateProp = new MaximumDateProp();
     private final TimezoneOffsetInMinutesProp timezoneOffsetInMinutesProp = new TimezoneOffsetInMinutesProp();
     private final HeightProp heightProp = new HeightProp();
-    private final VariantProp variantProp = new VariantProp();
     private final DividerHeightProp dividerHeightProp = new DividerHeightProp();
     private final Is24hourSourceProp is24hourSourceProp = new Is24hourSourceProp();
     private final IdProp idProp = new IdProp();
@@ -53,7 +52,6 @@ public class State {
         put(MaximumDateProp.name, maximumDateProp);
         put(TimezoneOffsetInMinutesProp.name, timezoneOffsetInMinutesProp);
         put(HeightProp.name, heightProp);
-        put(VariantProp.name, variantProp);
         put(DividerHeightProp.name, dividerHeightProp);
         put(Is24hourSourceProp.name, is24hourSourceProp);
         put(IdProp.name, idProp);

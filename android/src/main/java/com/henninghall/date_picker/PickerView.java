@@ -39,14 +39,6 @@ public class PickerView extends RelativeLayout {
 
     public void update() {
 
-        if (didUpdate(VariantProp.name)) {
-            this.removeAllViewsInLayout();
-            LinearLayout layout = new LinearLayout(getContext());
-            LayoutInflater.from(getContext()).inflate(state.derived.getRootLayout(), layout);
-            this.addView(layout, layoutParams);
-            uiManager = new UIManager(state, this);
-        }
-
         if (didUpdate(FadeToColorProp.name)) {
             uiManager.updateFadeToColor();
         }
@@ -55,7 +47,7 @@ public class PickerView extends RelativeLayout {
             uiManager.updateTextColor();
         }
 
-        if (didUpdate(ModeProp.name, VariantProp.name, Is24hourSourceProp.name)) {
+        if (didUpdate(ModeProp.name, Is24hourSourceProp.name)) {
             uiManager.updateWheelVisibility();
         }
 
@@ -67,7 +59,7 @@ public class PickerView extends RelativeLayout {
             uiManager.updateDividerHeight();
         }
 
-        if (didUpdate(ModeProp.name, LocaleProp.name, VariantProp.name, Is24hourSourceProp.name)) {
+        if (didUpdate(ModeProp.name, LocaleProp.name, Is24hourSourceProp.name)) {
             uiManager.updateWheelOrder();
         }
 
@@ -77,7 +69,7 @@ public class PickerView extends RelativeLayout {
 
         if (didUpdate(DateProp.name, HeightProp.name, LocaleProp.name,
                 MaximumDateProp.name, MinimumDateProp.name, MinuteIntervalProp.name, ModeProp.name,
-                TimezoneOffsetInMinutesProp.name, VariantProp.name
+                TimezoneOffsetInMinutesProp.name
         )) {
             uiManager.updateDisplayValues();
         }

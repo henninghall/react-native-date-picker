@@ -24,8 +24,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import cn.carbswang.android.numberpickerview.library.NumberPickerView;
-
 public class Wheels {
 
     private final State state;

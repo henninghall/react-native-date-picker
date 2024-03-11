@@ -103,11 +103,7 @@ public class DerivedData {
     }
 
     public int getRootLayout() {
-        switch (state.getVariant()){
-            case nativeAndroid: return R.layout.native_picker;
-            case iosClone: return R.layout.ios_clone;
-            default: return R.layout.ios_clone;
-        }
+        return R.layout.native_picker;
     }
 
     public boolean usesAmPm(){

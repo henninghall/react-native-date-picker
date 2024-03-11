@@ -159,11 +159,6 @@ public class NumberPicker extends LinearLayout {
     private static final int UNSCALED_DEFAULT_SELECTION_DIVIDERS_DISTANCE = 48;
 
     /**
-     * The resource id for the default layout.
-     */
-    private static final int DEFAULT_LAYOUT_RESOURCE_ID = R.layout.number_picker;
-
-    /**
      * Constant for unspecified size.
      */
     private static final int SIZE_UNSPECIFIED = -1;

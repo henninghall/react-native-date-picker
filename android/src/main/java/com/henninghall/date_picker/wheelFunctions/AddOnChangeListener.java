@@ -4,7 +4,6 @@ import com.henninghall.date_picker.pickers.Picker;
 import com.henninghall.date_picker.ui.WheelChangeListener;
 import com.henninghall.date_picker.wheels.Wheel;
 
-import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
 public class AddOnChangeListener implements WheelFunction {
 
