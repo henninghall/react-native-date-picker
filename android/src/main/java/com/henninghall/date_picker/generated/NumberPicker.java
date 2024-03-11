@@ -634,7 +634,7 @@ public class NumberPicker extends LinearLayout {
         final int layoutResId = R.layout.number_picker_material;
 
 
-        mHasSelectorWheel = (layoutResId != DEFAULT_LAYOUT_RESOURCE_ID);
+        mHasSelectorWheel = true;
 
         mHideWheelUntilFocused = attributesArray.getBoolean(
                 R.styleable.NumberPicker_hideWheelUntilFocused, false);
@@ -711,11 +711,6 @@ public class NumberPicker extends LinearLayout {
             public void onClick(View v) {
                 hideSoftInput();
                 mInputText.clearFocus();
-                if (v.getId() == R.id.increment) {
-                    changeValueByOne(true);
-                } else {
-                    changeValueByOne(false);
-                }
             }
         };
 
@@ -723,32 +718,13 @@ public class NumberPicker extends LinearLayout {
             public boolean onLongClick(View v) {
                 hideSoftInput();
                 mInputText.clearFocus();
-                if (v.getId() == R.id.increment) {
-                    postChangeCurrentByOneFromLongPress(true, 0);
-                } else {
-                    postChangeCurrentByOneFromLongPress(false, 0);
-                }
                 return true;
             }
         };
 
-        // increment button
-        if (!mHasSelectorWheel) {
-            mIncrementButton = findViewById(R.id.increment);
-            mIncrementButton.setOnClickListener(onClickListener);
-            mIncrementButton.setOnLongClickListener(onLongClickListener);
-        } else {
-            mIncrementButton = null;
-        }
+        mIncrementButton = null;
 
-        // decrement button
-        if (!mHasSelectorWheel) {
-            mDecrementButton = findViewById(R.id.decrement);
-            mDecrementButton.setOnClickListener(onClickListener);
-            mDecrementButton.setOnLongClickListener(onLongClickListener);
-        } else {
-            mDecrementButton = null;
-        }
+        mDecrementButton = null;
 
         // input text
         mInputText = findViewById(R.id.numberpicker_input);
