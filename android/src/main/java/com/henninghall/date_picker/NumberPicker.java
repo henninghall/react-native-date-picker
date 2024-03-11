@@ -17,6 +17,7 @@
 package com.henninghall.date_picker;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -211,6 +212,7 @@ public class NumberPicker extends LinearLayout {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 return DecimalFormatSymbols.getInstance(locale).getZeroDigit();
             }
+            return '0';
         }
 
         private java.util.Formatter createFormatter(Locale locale) {
@@ -529,7 +531,7 @@ public class NumberPicker extends LinearLayout {
      */
     public interface OnScrollListener {
         /** @hide */
-        @IntDef(prefix = { "SCROLL_STATE_" }, value = {
+        @IntDef(value = {
                 SCROLL_STATE_IDLE,
                 SCROLL_STATE_TOUCH_SCROLL,
                 SCROLL_STATE_FLING
@@ -594,7 +596,7 @@ public class NumberPicker extends LinearLayout {
      * @param attrs A collection of attributes.
      */
     public NumberPicker(Context context, AttributeSet attrs) {
-        this(context, attrs, R.attr.numberPickerStyle);
+        this(context, attrs, android.R.attr.numberPickerStyle);
     }
 
     /**
@@ -633,8 +635,8 @@ public class NumberPicker extends LinearLayout {
             saveAttributeDataForStyleable(context, R.styleable.NumberPicker,
                     attrs, attributesArray, defStyleAttr, defStyleRes);
         }
-        final int layoutResId = attributesArray.getResourceId(
-                R.styleable.NumberPicker_internalLayout, DEFAULT_LAYOUT_RESOURCE_ID);
+
+        final int layoutResId = R.layout.number_picker;
 
         mHasSelectorWheel = (layoutResId != DEFAULT_LAYOUT_RESOURCE_ID);
 
@@ -703,6 +705,7 @@ public class NumberPicker extends LinearLayout {
         // the fading edge effect implemented by View and we need our
         // draw() method to be called. Therefore, we declare we will draw.
         setWillNotDraw(!mHasSelectorWheel);
+
 
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
@@ -1631,15 +1634,15 @@ public class NumberPicker extends LinearLayout {
         }
     }
 
-    /** @hide */
-    @Override
-    public void onResolveDrawables(@ResolvedLayoutDir int layoutDirection) {
-        super.onResolveDrawables(layoutDirection);
-
-        if (mSelectionDivider != null) {
-            mSelectionDivider.setLayoutDirection(layoutDirection);
-        }
-    }
+//    /** @hide */
+//    @Override
+//    public void onResolveDrawables(@ResolvedLayoutDir int layoutDirection) {
+//        super.onResolveDrawables(layoutDirection);
+//
+//        if (mSelectionDivider != null) {
+//            mSelectionDivider.setLayoutDirection(layoutDirection);
+//        }
+//    }
 
     @Override
     protected void onDraw(Canvas canvas) {

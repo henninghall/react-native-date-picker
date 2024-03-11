@@ -9,8 +9,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 
+import com.henninghall.date_picker.NumberPicker;
 import com.henninghall.date_picker.Utils;
 
 import java.lang.reflect.Field;
