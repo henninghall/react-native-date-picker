@@ -17,7 +17,6 @@ export interface NativeProps extends ViewProps {
   maximumDate?: Double
   minimumDate?: Double
   minuteInterval?: Int32
-  androidVariant?: WithDefault<'iosClone' | 'nativeAndroid', 'nativeAndroid'>
   mode?: WithDefault<'date' | 'time' | 'datetime', 'datetime'>
   onChange: BubblingEventHandler<DateEvent>
 

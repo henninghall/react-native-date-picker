@@ -6,14 +6,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Dynamic;
-import com.henninghall.date_picker.models.Variant;
 import com.henninghall.date_picker.props.DividerHeightProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
 import com.henninghall.date_picker.props.MinimumDateProp;
 import com.henninghall.date_picker.props.MinuteIntervalProp;
 import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
-import com.henninghall.date_picker.props.VariantProp;
 import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.FadeToColorProp;
 import com.henninghall.date_picker.props.HeightProp;
@@ -138,7 +136,4 @@ public class PickerView extends RelativeLayout {
     }
 
 
-    public Variant getVariant() {
-        return state.getVariant();
-    }
 }

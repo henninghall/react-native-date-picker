@@ -3,11 +3,9 @@ package com.henninghall.date_picker;
 import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.models.Is24HourSource;
 import com.henninghall.date_picker.models.Mode;
-import com.henninghall.date_picker.models.Variant;
 import com.henninghall.date_picker.props.DividerHeightProp;
 import com.henninghall.date_picker.props.IdProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
-import com.henninghall.date_picker.props.VariantProp;
 import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.FadeToColorProp;
 import com.henninghall.date_picker.props.HeightProp;
@@ -159,10 +157,6 @@ public class State {
 
     public String getLocaleLanguageTag() {
         return localeProp.getLanguageTag();
-    }
-
-    public Variant getVariant() {
-        return variantProp.getValue();
     }
 
     public int getDividerHeight() {

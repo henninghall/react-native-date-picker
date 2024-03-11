@@ -21,7 +21,6 @@ const DatePickerWrapper = (props) => {
       title={getTitle(props)}
       confirmText={props.confirmText ? props.confirmText : 'Confirm'}
       cancelText={props.cancelText ? props.cancelText : 'Cancel'}
-      androidVariant={getAndroidVariant(props)}
       minuteInterval={props.minuteInterval ? props.minuteInterval : 1}
       mode={props.mode ? props.mode : 'datetime'}
       timeZoneOffsetInMinutes={
@@ -44,12 +43,6 @@ const getTextColor = (props) => {
   const darkTheme = getTheme(props) === 'dark'
   if (darkTheme) return 'white'
   return undefined
-}
-
-const getAndroidVariant = (props) => {
-  const { modal, androidVariant } = props
-  if (androidVariant) return androidVariant
-  return modal ? 'nativeAndroid' : 'iosClone'
 }
 
 const getTitle = (props) => {

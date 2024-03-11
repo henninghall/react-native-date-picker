@@ -45,25 +45,10 @@ const modeCheck = new PropCheck(
   "Invalid mode. Valid modes: 'datetime', 'date', 'time'"
 )
 
-const androidVariantCheck = new PropCheck(
-  (props) =>
-    props &&
-    props.androidVariant &&
-    !['nativeAndroid', 'iosClone'].includes(props.androidVariant),
-  "Invalid android variant. Valid modes: 'nativeAndroid', 'iosClone'"
-)
-
 const themeCheck = new PropCheck(
   (props) =>
     props && props.theme && !['light', 'dark', 'auto'].includes(props.theme),
   "Invalid theme. Valid options: 'light', 'dark', 'auto'"
 )
 
-const checks = [
-  dateCheck,
-  widthCheck,
-  heightCheck,
-  modeCheck,
-  androidVariantCheck,
-  themeCheck,
-]
+const checks = [dateCheck, widthCheck, heightCheck, modeCheck, themeCheck]

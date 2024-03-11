@@ -14,7 +14,6 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
-import com.henninghall.date_picker.models.Variant;
 import com.henninghall.date_picker.ui.SpinnerState;
 import com.henninghall.date_picker.ui.SpinnerStateListener;
 
@@ -129,15 +128,12 @@ public class DatePickerModule extends NativeRNDatePickerSpec {
         }
         picker.update();
 
-        boolean canDisableButtonsWithoutCrash = picker.getVariant() == Variant.nativeAndroid;
-        if(canDisableButtonsWithoutCrash){
-            picker.addSpinnerStateListener(new SpinnerStateListener() {
-                @Override
-                public void onChange(SpinnerState state) {
-                    setEnabledConfirmButton(state == SpinnerState.idle);
-                }
-            });
-        }
+        picker.addSpinnerStateListener(new SpinnerStateListener() {
+            @Override
+            public void onChange(SpinnerState state) {
+                setEnabledConfirmButton(state == SpinnerState.idle);
+            }
+        });
         return picker;
     }
 

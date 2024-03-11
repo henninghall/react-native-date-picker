@@ -8,7 +8,6 @@ export default class MinimalExample extends Component {
     <DatePicker
       date={this.state.date}
       onDateChange={date => this.setState({date})}
-      androidVariant="nativeAndroid"
     />
   );
 }

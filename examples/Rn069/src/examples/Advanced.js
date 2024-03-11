@@ -13,7 +13,6 @@ import MinuteInterval from '../propPickers/MinuteInterval';
 import Scroll from '../propPickers/Scroll';
 import CustomPropValue from '../CustomPropValue';
 import {readableDate} from '../utils';
-import Variant from '../propPickers/Variant';
 
 Date.prototype.addHours = function (h) {
   this.setTime(this.getTime() + h * 60 * 60 * 1000);
@@ -38,7 +37,6 @@ export default class Advanced extends Component {
     timeZoneOffsetInMinutes: undefined,
     minuteInterval: 1,
     dateString: '',
-    androidVariant: 'iosClone',
   };
 
   render() {
@@ -54,7 +52,6 @@ export default class Advanced extends Component {
           date={this.state.date}
           onDateChange={this.setDate}
           onDateStringChange={this.setDateString}
-          androidVariant={this.state.androidVariant}
           locale={this.state.locale}
           minuteInterval={this.state.minuteInterval}
           minimumDate={this.state.minimumDate}
@@ -88,15 +85,6 @@ export default class Advanced extends Component {
         <Scroll
           scroll={this.scroll}
           reset={() => this.setState({date: getInitialDate()})}
-        />
-      ),
-    },
-    {
-      name: 'androidVariant',
-      component: (
-        <Variant
-          selected={this.state.androidVariant}
-          onChange={androidVariant => this.setState({androidVariant})}
         />
       ),
     },

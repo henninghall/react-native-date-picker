@@ -1,7 +1,5 @@
 package com.henninghall.date_picker;
 
-import com.henninghall.date_picker.models.Variant;
-
 /**
  * This workaround prevents a bug existing in the NativeAndroid variant.
  * The bug displays duplicated "12" hours string when the current time is set to "1".
@@ -21,7 +19,6 @@ public class HourDisplayBugWorkaround {
     }
 
     private boolean shouldApply(String displayValue) {
-        if(state.getVariant() != Variant.nativeAndroid) return false;
         if(displayValue.length() != 1) return false;
         return true;
     }

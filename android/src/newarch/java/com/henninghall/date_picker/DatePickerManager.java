@@ -17,7 +17,6 @@ import com.henninghall.date_picker.props.MinuteIntervalProp;
 import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.TextColorProp;
 import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
-import com.henninghall.date_picker.props.VariantProp;
 
 import java.util.Map;
 
