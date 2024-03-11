@@ -132,7 +132,7 @@ public class NumberPicker extends LinearLayout {
     /**
      * The coefficient by which to adjust (divide) the max fling velocity.
      */
-    private static final int SELECTOR_MAX_FLING_VELOCITY_ADJUSTMENT = 8;
+    private static final int SELECTOR_MAX_FLING_VELOCITY_ADJUSTMENT = 1;
 
     /**
      * The the duration for adjusting the selector wheel.
@@ -646,9 +646,6 @@ public class NumberPicker extends LinearLayout {
                 R.styleable.NumberPicker_hideWheelUntilFocused, false);
 
         mSolidColor = attributesArray.getColor(R.styleable.NumberPicker_solidColor, 0);
-
-//        final Drawable selectionDivider = attributesArray.getDrawable(
-//                R.styleable.NumberPicker_selectionDivider);
 
         Drawable selectionDivider = getResources().getDrawable(R.drawable.number_picker_divider_material);
 
