@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-<view class="android.widget.NumberPicker$CustomEditText"
+<view xmlns:android="http://schemas.android.com/apk/res/android" class="android.widget.NumberPicker$CustomEditText"
     android:id="@+id/numberpicker_input"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -10,5 +9,3 @@
     android:singleLine="true"
     android:background="@null"
     android:textAppearance="@*android:style/TextAppearance.Material.NumberPicker" />
-
-</merge>
