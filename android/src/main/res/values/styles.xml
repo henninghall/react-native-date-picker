@@ -18,4 +18,21 @@
         <item name="android:layout_width">40dp</item>
     </style>
 
+
+<!--    <style name="TextAppearance.Material.NumberPicker" parent="android:TextAppearance.Material.Body1"/>-->
+    <style name="NumberPicker">
+<!--    <style name="NumberPicker" parent="@*android:Widget.NumberPicker">-->
+<!--        <item name="internalLayout">@*android:layout/number_picker_material</item>-->
+        <item name="solidColor">@android:color/transparent</item>
+<!--        <item name="selectionDivider">@*android:drawable/number_picker_divider_material</item>-->
+        <item name="selectionDivider">@drawable/numberpicker_selection_divider</item>
+        <item name="selectionDividerHeight">2dp</item>
+        <item name="selectionDividersDistance">48dp</item>
+        <item name="internalMinWidth">64dp</item>
+        <item name="internalMaxHeight">180dp</item>
+        <item name="virtualButtonPressedDrawable">?attr/selectableItemBackground</item>
+    </style>
+<!--    <style name="Widget.Material.Light.NumberPicker" parent="android:Widget.Material.NumberPicker"/>-->
+
+
 </resources>

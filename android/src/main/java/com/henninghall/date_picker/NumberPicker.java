@@ -65,6 +65,7 @@ import androidx.annotation.FloatRange;
 import androidx.annotation.IntDef;
 import androidx.annotation.IntRange;
 import androidx.annotation.Px;
+import androidx.core.content.ContextCompat;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -646,8 +647,12 @@ public class NumberPicker extends LinearLayout {
 
         mSolidColor = attributesArray.getColor(R.styleable.NumberPicker_solidColor, 0);
 
-        final Drawable selectionDivider = attributesArray.getDrawable(
-                R.styleable.NumberPicker_selectionDivider);
+//        final Drawable selectionDivider = attributesArray.getDrawable(
+//                R.styleable.NumberPicker_selectionDivider);
+
+        Drawable selectionDivider = getResources().getDrawable(R.drawable.numberpicker_selection_divider);
+
+
         if (selectionDivider != null) {
             selectionDivider.setCallback(this);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
