@@ -636,7 +636,7 @@ public class NumberPicker extends LinearLayout {
                     attrs, attributesArray, defStyleAttr, defStyleRes);
         }
 
-        final int layoutResId = R.layout.number_picker_selector_wheel;
+        final int layoutResId = R.layout.number_picker_material;
 
 
         mHasSelectorWheel = (layoutResId != DEFAULT_LAYOUT_RESOURCE_ID);
