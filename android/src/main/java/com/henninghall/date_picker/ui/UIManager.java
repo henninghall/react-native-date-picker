@@ -19,7 +19,6 @@ public class UIManager {
     private final State state;
     private final View rootView;
     private Wheels wheels;
-    private FadingOverlay fadingOverlay;
     private WheelScroller wheelScroller = new WheelScroller();
     private WheelChangeListenerImpl onWheelChangeListener;
 
@@ -36,12 +35,6 @@ public class UIManager {
 
     public void updateTextColor(){
         wheels.applyOnAll(new TextColor(state.getTextColor()));
-    }
-
-    public void updateFadeToColor(){
-        if(state.derived.hasNativeStyle()) return;
-        fadingOverlay = new FadingOverlay(state, rootView);
-        fadingOverlay.updateColor();
     }
 
     public void updateHeight(){

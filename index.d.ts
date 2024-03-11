@@ -66,11 +66,6 @@ export interface DatePickerProps extends ViewProps {
   timeZoneOffsetInMinutes?: number
 
   /**
-   * Android picker is fading towards this background color. { color, 'none' }
-   */
-  fadeToColor?: string
-
-  /**
    * Changes the text color.
    */
   textColor?: string

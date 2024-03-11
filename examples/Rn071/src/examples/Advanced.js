@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, UIManager, findNodeHandle} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import DateChange from '../propPickers/DateChange';
-import FadeToColor from '../propPickers/FadeToColor';
 import LocalePicker from '../propPickers/LocalePicker';
 import MinMaxDateChange from '../propPickers/MinMaxDateChange';
 import ModePicker from '../propPickers/ModePicker';
@@ -56,7 +55,6 @@ export default class Advanced extends Component {
           minuteInterval={this.state.minuteInterval}
           minimumDate={this.state.minimumDate}
           maximumDate={this.state.maximumDate}
-          fadeToColor={this.props.backgroundColor}
           textColor={this.state.textColor}
           mode={this.state.mode}
           timeZoneOffsetInMinutes={this.state.timeZoneOffsetInMinutes}
@@ -153,15 +151,6 @@ export default class Advanced extends Component {
             this.setState({maximumDate});
           }}
           defaultDate={defaultMaxDate}
-        />
-      ),
-    },
-    {
-      name: 'fadeToColor',
-      component: (
-        <FadeToColor
-          onChange={() => this.props.setBackground(randomColor())}
-          setNone={() => this.props.setBackground('none')}
         />
       ),
     },

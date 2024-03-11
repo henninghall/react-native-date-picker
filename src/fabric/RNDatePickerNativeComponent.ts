@@ -23,7 +23,6 @@ export interface NativeProps extends ViewProps {
   // Type has to be string to allow null/undefined as value.
   // For timezoneOffset, undefined and 0 means different things. 0 means GMT and undefined means device timezone.
   timeZoneOffsetInMinutes?: string | null
-  fadeToColor?: string
   textColor?: string
   dividerHeight?: Int32
   is24hourSource?: WithDefault<'locale' | 'device', 'device'>

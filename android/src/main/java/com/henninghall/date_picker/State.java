@@ -7,7 +7,6 @@ import com.henninghall.date_picker.props.DividerHeightProp;
 import com.henninghall.date_picker.props.IdProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
 import com.henninghall.date_picker.props.DateProp;
-import com.henninghall.date_picker.props.FadeToColorProp;
 import com.henninghall.date_picker.props.HeightProp;
 import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
@@ -30,7 +29,6 @@ public class State {
     private final DateProp dateProp = new DateProp();
     private final ModeProp modeProp = new ModeProp();
     private final LocaleProp localeProp = new LocaleProp();
-    private final FadeToColorProp fadeToColorProp = new FadeToColorProp();
     private final TextColorProp textColorProp = new TextColorProp();
     private final MinuteIntervalProp minuteIntervalProp = new MinuteIntervalProp();
     private final MinimumDateProp minimumDateProp = new MinimumDateProp();
@@ -45,7 +43,6 @@ public class State {
         put(DateProp.name, dateProp);
         put(ModeProp.name, modeProp);
         put(LocaleProp.name, localeProp);
-        put(FadeToColorProp.name, fadeToColorProp);
         put(TextColorProp.name, textColorProp);
         put(MinuteIntervalProp.name, minuteIntervalProp);
         put(MinimumDateProp.name, minimumDateProp);
@@ -72,10 +69,6 @@ public class State {
 
     public Mode getMode() {
         return (Mode) modeProp.getValue();
-    }
-
-    public String getFadeToColor() {
-        return (String) fadeToColorProp.getValue();
     }
 
     public String getTextColor() {

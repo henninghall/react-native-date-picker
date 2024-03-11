@@ -13,7 +13,6 @@ import com.henninghall.date_picker.props.MinimumDateProp;
 import com.henninghall.date_picker.props.MinuteIntervalProp;
 import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
 import com.henninghall.date_picker.props.DateProp;
-import com.henninghall.date_picker.props.FadeToColorProp;
 import com.henninghall.date_picker.props.HeightProp;
 import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.ModeProp;
@@ -38,10 +37,6 @@ public class PickerView extends RelativeLayout {
     }
 
     public void update() {
-
-        if (didUpdate(FadeToColorProp.name)) {
-            uiManager.updateFadeToColor();
-        }
 
         if (didUpdate(TextColorProp.name)) {
             uiManager.updateTextColor();

@@ -17,7 +17,6 @@ const DatePickerWrapper = (props) => {
       {...props}
       textColor={colorToHex(getTextColor(props))}
       theme={getTheme(props)}
-      fadeToColor={colorToHex(props.fadeToColor)}
       title={getTitle(props)}
       confirmText={props.confirmText ? props.confirmText : 'Confirm'}
       cancelText={props.cancelText ? props.cancelText : 'Cancel'}
