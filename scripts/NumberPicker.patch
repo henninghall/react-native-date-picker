@@ -1,7 +1,7 @@
-diff --git a/android/src/main/java/com/henninghall/date_picker/generated/NumberPickerOriginal.java b/android/src/main/java/com/henninghall/date_picker/generated/NumberPickerChanged.java
+diff --git a/android/src/main/java/com/henninghall/date_picker/generated/NumberPicker.java b/android/src/main/java/com/henninghall/date_picker/generated/NumberPicker.java
 index e600b4f..0a262b5 100644
---- a/android/src/main/java/com/henninghall/date_picker/generated/NumberPickerOriginal.java
-+++ b/android/src/main/java/com/henninghall/date_picker/generated/NumberPickerChanged.java
+--- a/android/src/main/java/com/henninghall/date_picker/generated/NumberPicker.java
++++ b/android/src/main/java/com/henninghall/date_picker/generated/NumberPicker.java
 @@ -14,17 +14,9 @@
   * limitations under the License.
   */

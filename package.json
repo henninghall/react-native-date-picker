@@ -13,8 +13,8 @@
     "install:debug": "adb install examples/Rn069/android/app/build/outputs/apk/debug/app-debug.apk",
     "build:release": "(cd examples/Rn069/android && ./gradlew assembleRelease) && yarn install:release",
     "build:debug": "(cd examples/Rn069/android && ./gradlew assembleDebug) && yarn install:debug",
-    "generate:number-picker": "bash ./scripts/generate-number-picker.sh",
-    "update-patch": "bash ./scripts/update-patch.sh",
+    "number-picker:generate": "bash ./scripts/generate-number-picker.sh",
+    "number-picker:update-patch": "bash ./scripts/update-patch.sh",
     "emulator": "bash ./scripts/start-android-emulator.sh",
     "maestro:ios": "maestro test --include-tags=ios .maestro/",
     "maestro:android": "maestro test --include-tags=android .maestro/"
