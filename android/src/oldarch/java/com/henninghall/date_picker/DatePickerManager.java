@@ -74,7 +74,12 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
                 .put("dateChange", MapBuilder.of("phasedRegistrationNames",
                                 MapBuilder.of("bubbled", "onChange")
                         )
-                ).build();
+                )
+                .put("spinnerStateChange", MapBuilder.of("phasedRegistrationNames",
+                                MapBuilder.of("bubbled", "onStateChange")
+                        )
+                )
+                .build();
     }
 
 
