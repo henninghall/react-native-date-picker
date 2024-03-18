@@ -26,8 +26,13 @@ public class DatePickerModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void openPicker(ReadableMap props){
+    public void openPicker(ReadableMap props) {
         module.openPicker(props);
+    }
+    
+    @ReactMethod
+    public void closePicker(){
+        module.closePicker();
     }
 
     @Override
