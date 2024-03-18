@@ -12,7 +12,6 @@ export default class MinimalExample extends Component {
         date={this.state.date}
         onDateChange={date => this.setState({date})}
         onStateChange={state => this.setState({state})}
-        style={{height: 400}}
       />
     </>
   );
