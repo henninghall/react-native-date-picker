@@ -5,7 +5,6 @@ import DateChange from '../propPickers/DateChange'
 import LocalePicker from '../propPickers/LocalePicker'
 import MinMaxDateChange from '../propPickers/MinMaxDateChange'
 import ModePicker from '../propPickers/ModePicker'
-import TextColor from '../propPickers/TextColor'
 import TimeZoneOffsetInMinutes from '../propPickers/TimeZoneOffsetInMinutes'
 import PropSlider from '../PropSlider'
 import MinuteInterval from '../propPickers/MinuteInterval'
@@ -27,7 +26,6 @@ export default class Advanced extends Component {
   state = {
     date: getInitialDate(),
     searchTerm: '',
-    textColor: '#000000',
     selectedProp: 'mode',
     locale: 'en-US',
     mode: 'datetime',
@@ -55,7 +53,6 @@ export default class Advanced extends Component {
           minuteInterval={this.state.minuteInterval}
           minimumDate={this.state.minimumDate}
           maximumDate={this.state.maximumDate}
-          textColor={this.state.textColor}
           mode={this.state.mode}
           timeZoneOffsetInMinutes={this.state.timeZoneOffsetInMinutes}
         />
@@ -153,14 +150,6 @@ export default class Advanced extends Component {
             this.setState({ maximumDate })
           }}
           defaultDate={defaultMaxDate}
-        />
-      ),
-    },
-    {
-      name: 'textColor',
-      component: (
-        <TextColor
-          onChange={() => this.setState({ textColor: randomColor() })}
         />
       ),
     },

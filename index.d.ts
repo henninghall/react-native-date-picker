@@ -66,11 +66,6 @@ export interface DatePickerProps extends ViewProps {
   timeZoneOffsetInMinutes?: number
 
   /**
-   * Changes the text color.
-   */
-  textColor?: string
-
-  /**
    * Changes if 24/12-hour format should be determined from the locale or device setting.
    * "device" is default on android and "locale" on iOS. On iOS this cannot be changed.
    */
