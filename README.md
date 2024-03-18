@@ -150,37 +150,13 @@ export default () => {
 | `confirmText`             | Modal only: Confirm button text.                                                                                                                                                                                                                                                                                      |
 | `cancelText`              | Modal only: Cancel button text.                                                                                                                                                                                                                                                                                       |
 | `theme`                   | Modal only: The theme of the modal. `"light"`, `"dark"`, `"auto"`. Defaults to `"auto"`.                                                                                                                                                                                                                              |
+| `buttonColor`             | Color of the confirm and cancel buttons. (android modal only)                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                | <img src="docs/button-colors.png" alt="date picker button colors on android" width="200px" />                                                                                                                                                                                                      |
+| `dividerColor`            | Color of the divider / separator. (android only)                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                | <img src="docs/divider-color.png" alt="react native date picker divider separator color" width="200px" />                                                                                                                                                                                          |
 | `onStateChange`           | Spinner state change handler. Triggered on changes between "idle" and "spinning" state (Android inline only)                                                                                                                                                                                                          |
 
-## Additional android styling
+## Font size
 
-There are some additional styling possibilities for the "androidNative" picker variant.
-
-### Divider color
-
-<img src="docs/divider-color.png" alt="react native date picker divider separator color" width="200px" />
-
-To change the divider color, open `styles.xml` and place this code right above the `</resources>`.
-
-```xml
-<style name="DatePickerTheme" parent="DatePickerBaseTheme">
-    <item name="android:colorControlNormal">#dd00ff</item>
-</style>
-```
-
-### Button colors
-
-<img src="docs/button-colors.png" alt="date picker button colors on android" width="200px" />
-
-To change the confirm and cancel button colors. Open `styles.xml` and place this code within your theme.
-
-```xml
-  <item name="colorAccent">#dd00ff</item>
-```
-
-### Font size
-
-To change the font size on Android `nativeAndroid` variant. Open `styles.xml` and place this code right above the `</resources>`. The font size is not possible to change in iOS out of the box, but there are some [iOS workarounds](https://github.com/henninghall/react-native-date-picker/discussions/171).
+To change the font size on Android. Open `styles.xml` and place this code right above the `</resources>`. The font size is not possible to change in iOS out of the box, but there are some [iOS workarounds](https://github.com/henninghall/react-native-date-picker/discussions/171).
 
 ```xml
 <style name="DatePickerTheme" parent="DatePickerBaseTheme">
