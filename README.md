@@ -1,4 +1,5 @@
-# React Native Date Picker [![npm](https://img.shields.io/npm/v/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) [![Build status](https://img.shields.io/github/actions/workflow/status/henninghall/react-native-date-picker/push-main.yml?branch=master&label=tests)](https://github.com/henninghall/react-native-date-picker/actions) [![npm](https://img.shields.io/npm/dm/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker)
+# React Native Date Picker [![npm](https://img.shields.io/npm/v/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) [![Build status](https://img.shields.io/github/actions/workflow/status/henninghall/react-native-date-picker/push-main.yml?branch=master&label=tests)](https://github.com/henninghall/react-native-date-picker/actions) [![npm](https://img.shields.io/npm/dm/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23c96198)](https://github.com/sponsors/henninghall)
+
 
 This is a React Native Date Picker with following main features:
 
@@ -341,6 +342,4 @@ React Native Date Picker is a cross platform component for iOS and Android. It u
 
 ## Support this package!
 
-If you like this package, consider giving it a github star ⭐
-
-Also, PR's are welcome!
+If you like this package, consider [becoming a sponsor](https://github.com/sponsors/henninghall) 🩷
