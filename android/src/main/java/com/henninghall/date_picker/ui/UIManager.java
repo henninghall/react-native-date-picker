@@ -7,6 +7,7 @@ import com.henninghall.date_picker.wheelFunctions.AddOnChangeListener;
 import com.henninghall.date_picker.wheelFunctions.AnimateToDate;
 import com.henninghall.date_picker.wheelFunctions.Refresh;
 import com.henninghall.date_picker.wheelFunctions.SetDate;
+import com.henninghall.date_picker.wheelFunctions.SetDividerColor;
 import com.henninghall.date_picker.wheelFunctions.TextColor;
 import com.henninghall.date_picker.wheelFunctions.UpdateVisibility;
 import com.henninghall.date_picker.wheels.Wheel;
@@ -77,5 +78,9 @@ public class UIManager {
 
     public void updateLastSelectedDate(Calendar date) {
         state.setLastSelectedDate(date);
+    }
+
+    public void setDividerColor(String color) {
+        wheels.applyOnAll(new SetDividerColor(color));
     }
 }

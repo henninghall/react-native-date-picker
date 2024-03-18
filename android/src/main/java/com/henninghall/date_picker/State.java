@@ -3,6 +3,7 @@ package com.henninghall.date_picker;
 import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.models.Is24HourSource;
 import com.henninghall.date_picker.models.Mode;
+import com.henninghall.date_picker.props.DividerColorProp;
 import com.henninghall.date_picker.props.HeightProp;
 import com.henninghall.date_picker.props.IdProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
@@ -37,6 +38,8 @@ public class State {
     private final Is24hourSourceProp is24hourSourceProp = new Is24hourSourceProp();
     private final IdProp idProp = new IdProp();
 
+    private final DividerColorProp dividerColorProp = new DividerColorProp();
+
     private final HashMap props = new HashMap<String, Prop>() {{
         put(DateProp.name, dateProp);
         put(ModeProp.name, modeProp);
@@ -49,6 +52,7 @@ public class State {
         put(HeightProp.name, heightProp);
         put(Is24hourSourceProp.name, is24hourSourceProp);
         put(IdProp.name, idProp);
+        put(DividerColorProp.name, dividerColorProp);
     }};
     public DerivedData derived;
 
@@ -157,5 +161,9 @@ public class State {
 
     public void setLastSelectedDate(Calendar date) {
         lastSelectedDate = date;
+    }
+
+    public String getDividerColor() {
+        return dividerColorProp.getValue();
     }
 }

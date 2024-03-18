@@ -86,6 +86,7 @@ public class AndroidNative extends NumberPicker implements Picker {
     }
 
 
+    @Override
     public void setDividerColor(String color){
         int intColor = Color.parseColor(color);
         super.setDividerTint(intColor);

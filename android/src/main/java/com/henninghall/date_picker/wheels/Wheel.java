@@ -124,4 +124,7 @@ public abstract class Wheel {
         return getFormat(locale).format(cal.getTime());
     }
 
+    public void setDividerColor(String color) {
+        picker.setDividerColor(color);
+    }
 }

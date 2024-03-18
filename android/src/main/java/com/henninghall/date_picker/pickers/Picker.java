@@ -22,6 +22,7 @@ public interface Picker {
     void setVisibility(int visibility);
     void setWrapSelectorWheel(boolean wrapSelectorWheel);
     boolean isSpinning();
+    void setDividerColor(String color);
     interface OnValueChangeListenerInScrolling {
         void onValueChangeInScrolling(Picker picker, int oldVal, int newVal);
     }

@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Dynamic;
+import com.henninghall.date_picker.props.DividerColorProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
 import com.henninghall.date_picker.props.MinimumDateProp;
@@ -58,6 +59,10 @@ public class PickerView extends RelativeLayout {
 
         if (didUpdate(LocaleProp.name)) {
             Accessibility.setLocale(state.getLocale());
+        }
+
+        if (didUpdate(DividerColorProp.name)) {
+            uiManager.setDividerColor(state.getDividerColor());
         }
 
         uiManager.setWheelsToDate();
