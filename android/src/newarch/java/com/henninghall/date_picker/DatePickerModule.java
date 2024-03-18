@@ -2,10 +2,12 @@ package com.henninghall.date_picker;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 import com.facebook.react.bridge.Callback;
@@ -70,9 +72,10 @@ public class DatePickerModule extends NativeRNDatePickerSpec {
         String title = props.getString("title");
         String confirmText = props.getString("confirmText");
         final String cancelText = props.getString("cancelText");
+        String buttonColor = props.getString("buttonColor");
         final View pickerWithMargin = withTopMargin(picker);
 
-        return new AlertDialog.Builder(DatePickerPackage.context.getCurrentActivity(), getTheme(props))
+        AlertDialog dialog = new AlertDialog.Builder(DatePickerPackage.context.getCurrentActivity(), getTheme(props))
                 .setTitle(title)
                 .setCancelable(true)
                 .setView(pickerWithMargin)
@@ -95,6 +98,19 @@ public class DatePickerModule extends NativeRNDatePickerSpec {
                     }
                 })
                 .create();
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialoga) {
+                if(buttonColor != null){
+                    int color = Color.parseColor(buttonColor);
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(color);
+                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(color);
+                }
+
+            }
+        });
+        return dialog;
     }
 
     private int getTheme(ReadableMap props) {
