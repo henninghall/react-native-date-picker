@@ -95,8 +95,11 @@ export interface DatePickerProps extends ViewProps {
   /** Color theme. Defaults to 'auto' */
   theme?: 'light' | 'dark' | 'auto'
 
-  /** Color of the divider on Android. */
+  /** Color of the divider on Android */
   dividerColor?: string
+
+  /** Color of the android modal buttons */
+  buttonColor?: string
 }
 
 export default class DatePicker extends Component<DatePickerProps> {}
