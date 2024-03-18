@@ -81,23 +81,14 @@ public class AndroidNative extends NumberPicker implements Picker {
     }
 
     @Override
-    public void setShownCount(int count) {
-        // always 3 date rows -> nothing needs to be done here
-    }
-
-    @Override
     public View getView() {
         return this;
     }
 
-    @Override
-    public void setDividerHeight(int height) {
-        // not supported
-    }
 
-    @Override
-    public void setItemPaddingHorizontal(int padding) {
-        // Not needed for this picker
+    public void setDividerColor(String color){
+        int intColor = Color.parseColor(color);
+        super.setDividerTint(intColor);
     }
 
     @Override

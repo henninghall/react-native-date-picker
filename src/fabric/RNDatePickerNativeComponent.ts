@@ -24,7 +24,6 @@ export interface NativeProps extends ViewProps {
   // For timezoneOffset, undefined and 0 means different things. 0 means GMT and undefined means device timezone.
   timeZoneOffsetInMinutes?: string | null
   textColor?: string
-  dividerHeight?: Int32
   is24hourSource?: WithDefault<'locale' | 'device', 'device'>
   theme?: WithDefault<'light' | 'dark' | 'auto', 'auto'>
 

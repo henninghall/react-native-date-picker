@@ -7,8 +7,6 @@ import com.henninghall.date_picker.R;
 import com.henninghall.date_picker.State;
 import com.henninghall.date_picker.models.WheelType;
 import com.henninghall.date_picker.models.Mode;
-import com.henninghall.date_picker.wheelFunctions.SetDividerHeight;
-import com.henninghall.date_picker.wheelFunctions.SetShowCount;
 import com.henninghall.date_picker.wheelFunctions.WheelFunction;
 import com.henninghall.date_picker.wheels.AmPmWheel;
 import com.henninghall.date_picker.wheels.DateWheel;
@@ -73,16 +71,6 @@ public class Wheels {
         for(Wheel wheel: getAll()) {
             if(!wheel.visible()) function.apply(wheel);
         }
-    }
-
-    void updateHeight() {
-        int shownCount = state.derived.getShownCount();
-        applyOnAll(new SetShowCount(shownCount));
-    }
-
-    void updateDividerHeight() {
-        int height = state.getDividerHeight();
-        applyOnAll(new SetDividerHeight(height));
     }
 
     void updateWheelOrder() {

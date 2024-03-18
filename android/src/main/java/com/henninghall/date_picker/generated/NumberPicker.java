@@ -168,6 +168,10 @@ public class NumberPicker extends LinearLayout {
      */
     private boolean mWrapSelectorWheelPreferred = true;
 
+    protected void setDividerTint(@ColorInt int color) {
+        mSelectionDivider.setTint(color);
+    }
+
     /**
      * Use a custom NumberPicker formatting callback to use two-digit minutes
      * strings like "01". Keeping a static formatter etc. is the most efficient

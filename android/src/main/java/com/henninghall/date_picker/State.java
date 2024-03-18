@@ -3,11 +3,10 @@ package com.henninghall.date_picker;
 import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.models.Is24HourSource;
 import com.henninghall.date_picker.models.Mode;
-import com.henninghall.date_picker.props.DividerHeightProp;
+import com.henninghall.date_picker.props.HeightProp;
 import com.henninghall.date_picker.props.IdProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
 import com.henninghall.date_picker.props.DateProp;
-import com.henninghall.date_picker.props.HeightProp;
 import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
 import com.henninghall.date_picker.props.MinimumDateProp;
@@ -35,7 +34,6 @@ public class State {
     private final MaximumDateProp maximumDateProp = new MaximumDateProp();
     private final TimezoneOffsetInMinutesProp timezoneOffsetInMinutesProp = new TimezoneOffsetInMinutesProp();
     private final HeightProp heightProp = new HeightProp();
-    private final DividerHeightProp dividerHeightProp = new DividerHeightProp();
     private final Is24hourSourceProp is24hourSourceProp = new Is24hourSourceProp();
     private final IdProp idProp = new IdProp();
 
@@ -49,7 +47,6 @@ public class State {
         put(MaximumDateProp.name, maximumDateProp);
         put(TimezoneOffsetInMinutesProp.name, timezoneOffsetInMinutesProp);
         put(HeightProp.name, heightProp);
-        put(DividerHeightProp.name, dividerHeightProp);
         put(Is24hourSourceProp.name, is24hourSourceProp);
         put(IdProp.name, idProp);
     }};
@@ -142,17 +139,10 @@ public class State {
         return (Calendar) cal.clone();
     }
 
-    public Integer getHeight() {
-        return (Integer) heightProp.getValue();
-    }
-
     public String getLocaleLanguageTag() {
         return localeProp.getLanguageTag();
     }
 
-    public int getDividerHeight() {
-        return dividerHeightProp.getValue();
-    }
     public String getId() {
         return idProp.getValue();
     }

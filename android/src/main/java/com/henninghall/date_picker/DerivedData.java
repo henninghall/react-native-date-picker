@@ -95,13 +95,6 @@ public class DerivedData {
         return orderedWheels;
     }
 
-    public int getShownCount() {
-        int DP_PER_SHOW_SHOW_COUNT = 35;
-        int showCount = state.getHeight() / DP_PER_SHOW_SHOW_COUNT;
-        int oddShowCount = showCount % 2 == 0 ? showCount + 1 : showCount;
-        return oddShowCount;
-    }
-
     public int getRootLayout() {
         return R.layout.native_picker;
     }

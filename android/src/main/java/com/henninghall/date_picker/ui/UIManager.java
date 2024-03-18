@@ -9,7 +9,6 @@ import com.henninghall.date_picker.wheelFunctions.Refresh;
 import com.henninghall.date_picker.wheelFunctions.SetDate;
 import com.henninghall.date_picker.wheelFunctions.TextColor;
 import com.henninghall.date_picker.wheelFunctions.UpdateVisibility;
-import com.henninghall.date_picker.wheelFunctions.HorizontalPadding;
 import com.henninghall.date_picker.wheels.Wheel;
 
 import java.text.SimpleDateFormat;
@@ -35,10 +34,6 @@ public class UIManager {
 
     public void updateTextColor(){
         wheels.applyOnAll(new TextColor(state.getTextColor()));
-    }
-
-    public void updateHeight(){
-        wheels.updateHeight();
     }
 
     public void updateWheelOrder() {
@@ -78,14 +73,6 @@ public class UIManager {
 
     public void addStateListener(SpinnerStateListener listener){
         onWheelChangeListener.addStateListener(listener);
-    }
-
-    public void updateDividerHeight() {
-        wheels.updateDividerHeight();
-    }
-
-    public void updateWheelPadding() {
-        wheels.applyOnVisible(new HorizontalPadding());
     }
 
     public void updateLastSelectedDate(Calendar date) {
