@@ -90,6 +90,12 @@ public class AndroidNative extends NumberPicker implements Picker {
         return this;
     }
 
+
+    @Override
+    public void setContentFont(String fontPath) {
+        // not supported
+    }
+
     @Override
     public void setDividerHeight(int height) {
         // not supported

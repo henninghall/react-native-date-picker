@@ -26,7 +26,7 @@ import com.henninghall.date_picker.props.MinuteIntervalProp;
 import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.TextColorProp;
 import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
-
+import com.henninghall.date_picker.props.ContentFontProp;
 
 import java.util.Map;
 
@@ -44,7 +44,7 @@ public class DatePickerManager extends SimpleViewManager<PickerView>  {
 
     @ReactPropGroup(names = { DateProp.name, ModeProp.name, LocaleProp.name, MaximumDateProp.name,
             MinimumDateProp.name, FadeToColorProp.name, TextColorProp.name, TimezoneOffsetInMinutesProp.name, MinuteIntervalProp.name,
-            VariantProp.name, DividerHeightProp.name, Is24hourSourceProp.name
+            VariantProp.name, DividerHeightProp.name, Is24hourSourceProp.name, ContentFontProp.name
     })
     public void setProps(PickerView view, int index, Dynamic value) {
         DatePickerManagerImpl.setProps(view, index, value, getClass());
