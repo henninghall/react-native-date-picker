@@ -51,7 +51,7 @@ tags:
       VALUE: -180
 - runFlow: utils/swipe-wheel-3.yml
 - assertVisible: '2000-01-01 00:01:00'
-- assertVisible: 'Fri Dec 31801 PM '
+- assertVisible: 'Fri Dec 31 8 01 PM '
 - runFlow: utils/reset.yml
 
 # test: timezoneOffsetInMinutes combined with maximumDate/minimumDate in another timezone than current device.
