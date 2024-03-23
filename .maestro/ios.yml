@@ -9,7 +9,7 @@ tags:
     env:
       PROP: locale
       VALUE: vi-VN
-- runFlow: utils/swipe-wheel-1.yml
+- runFlow: utils/swipe-wheel-1-down-ios.yml
 - assertVisible:
     text: '2000-01-01 01:00:00'
 
