@@ -124,19 +124,7 @@ public abstract class Wheel {
         return getFormat(locale).format(cal.getTime());
     }
 
-    public void setHorizontalPadding(){
-        picker.setItemPaddingHorizontal(getHorizontalPadding());
-    }
-
-    public int getHorizontalPadding() {
-        Mode mode = state.getMode();
-        if(state.derived.hasOnly2Wheels()) return 10;
-        switch (mode){
-            case date: return 15;
-            case time:
-            case datetime:
-            default:
-                return 5;
-        }
+    public void setDividerColor(String color) {
+        picker.setDividerColor(color);
     }
 }

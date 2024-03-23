@@ -136,16 +136,12 @@ export default () => {
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `date`                    | The currently selected date.                                                                                                                                                                                                                                                                                          |
 | `onDateChange`            | Date change handler ( Inline only )                                                                                                                                                                                                                                                                                   |
-| `fadeToColor`             | Android picker is fading towards this background color. {color, 'none'}                                                                                                                                                                                                                                               |
 | `maximumDate`             | Maximum selectable date. <br/> Example: `new Date("2021-12-31")`                                                                                                                                                                                                                                                      |
 | `minimumDate`             | Minimum selectable date. <br/> Example: `new Date("2021-01-01")`                                                                                                                                                                                                                                                      |
-| `androidVariant`          | Choose from 2 android style variants. `"iosClone"`, `"nativeAndroid"`                                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                | <img src="docs/datetime-mode-android.png" alt="Datepicker ios clone variant" height="120px" /><img src="docs/react-native-date-picker-android.png" alt="Datepicker android native variant"/>                                                                                                       |
 | `minuteInterval`          | The interval at which minutes can be selected.                                                                                                                                                                                                                                                                        | <img src="docs/minute-interval-ios.png" alt="Date picker minute interval IOS" height="120px" />                                                                                                                                                                | <img src="docs/minute-interval-android.png" alt="Date picker minute interval Android" height="120px" />                                                                                                                                                                                            |
 | `mode`                    | The date picker mode. `"datetime"`, `"date"`, `"time"`                                                                                                                                                                                                                                                                | <img src="docs/datetime-mode-ios.png" alt="React native date time picker" height="120px" /><img src="docs/date-mode-ios.png" alt="React native datepicker" height="120px" /><img src="docs/time-mode-ios.png" alt="React native time picker" height="120px" /> | <img src="docs/datetime-mode-android.png" alt="react native date time picker android" height="120px" /><img src="docs/date-mode-android.png" alt="react native datepicker android" height="120px" /><img src="docs/time-mode-android.png" alt="react native time picker android" height="120px" /> |
 | `locale`                  | The locale for the date picker. Changes language, date order and am/pm preferences. Value needs to be a <a title="react native datepicker locale id" href="https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html">Locale ID.</a> | <img src="docs/locale-ios.png" alt="React Native Date picker locale language ios" height="120px" />                                                                                                                                                            | <img src="docs/locale-android.png" alt="React Native Date picker locale language android" height="120px" />                                                                                                                                                                                        |
-| `textColor`               | Changes the text color. ⚠ Colors other than black (#000000) or white (#ffffff) will replace the "Today" string with a date on iOS 13 or higher.                                                                                                                                                                       | <img src="docs/colors-ios.png" alt="react native datepicker text color background color ios" height="120px" />                                                                                                                                                 | <img src="docs/colors-android.png" alt="Text color background color android" height="120px" />                                                                                                                                                                                                     |
 | `timeZoneOffsetInMinutes` | Timezone offset in minutes (default: device's timezone)                                                                                                                                                                                                                                                               |
-| `dividerHeight`           | Change the divider height (only supported for iosClone)                                                                                                                                                                                                                                                               |
 | `is24hourSource`          | Change how the 24h mode (am/pm) should be determined, by device settings or by locale. {'locale', 'device'} (android only, default: 'device')                                                                                                                                                                         |
 | `modal`                   | Boolean indicating if modal should be used. Default: `"false"`. When enabled, the other modal props needs to be used. <a href="#modal">See example</a>.                                                                                                                                                               |
 | `open`                    | Modal only: Boolean indicating if modal should be open.                                                                                                                                                                                                                                                               |
@@ -155,37 +151,13 @@ export default () => {
 | `confirmText`             | Modal only: Confirm button text.                                                                                                                                                                                                                                                                                      |
 | `cancelText`              | Modal only: Cancel button text.                                                                                                                                                                                                                                                                                       |
 | `theme`                   | Modal only: The theme of the modal. `"light"`, `"dark"`, `"auto"`. Defaults to `"auto"`.                                                                                                                                                                                                                              |
+| `buttonColor`             | Color of the confirm and cancel buttons. (android modal only)                                                                                                                                                                                                                                                         |                                                                                                                                                                                                                                                                | <img src="docs/button-colors.png" alt="date picker button colors on android" width="200px" />                                                                                                                                                                                                      |
+| `dividerColor`            | Color of the divider / separator. (android only)                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                | <img src="docs/divider-color.png" alt="react native date picker divider separator color" width="200px" />                                                                                                                                                                                          |
 | `onStateChange`           | Spinner state change handler. Triggered on changes between "idle" and "spinning" state (Android inline only)                                                                                                                                                                                                          |
 
-## Additional android styling
+## Font size
 
-There are some additional styling possibilities for the "androidNative" picker variant.
-
-### Divider color
-
-<img src="docs/divider-color.png" alt="react native date picker divider separator color" width="200px" />
-
-To change the divider color, open `styles.xml` and place this code right above the `</resources>`.
-
-```xml
-<style name="DatePickerTheme" parent="DatePickerBaseTheme">
-    <item name="android:colorControlNormal">#dd00ff</item>
-</style>
-```
-
-### Button colors
-
-<img src="docs/button-colors.png" alt="date picker button colors on android" width="200px" />
-
-To change the confirm and cancel button colors. Open `styles.xml` and place this code within your theme.
-
-```xml
-  <item name="colorAccent">#dd00ff</item>
-```
-
-### Font size
-
-To change the font size on Android `nativeAndroid` variant. Open `styles.xml` and place this code right above the `</resources>`. The font size is not possible to change in iOS out of the box, but there are some [iOS workarounds](https://github.com/henninghall/react-native-date-picker/discussions/171).
+To change the font size on Android. Open `styles.xml` and place this code right above the `</resources>`. The font size is not possible to change in iOS out of the box, but there are some [iOS workarounds](https://github.com/henninghall/react-native-date-picker/discussions/171).
 
 ```xml
 <style name="DatePickerTheme" parent="DatePickerBaseTheme">
@@ -238,36 +210,6 @@ const [state, setState] = useState("idle")
 <DatePicker onStateChange={setState} />
 <ConfirmButton disabled={state === "spinning"} />
 ```
-
-## Two different Android variants
-
-On Android there are two design variants to choose from:
-
-<table>
-<tr><td align="center"><b>iOS clone</b></td><td align="center"><b>Native Android</b></td>  
-  </tr><tr><td align="center">
- <img src="docs/react-native-date-picker-android.gif" alt="date time picker" height="150px" />
-</td><td align="center">
- <img src="docs/react-native-date-picker-android-native.gif" alt="date time picker" height="150px" />
-</td></tr>
-
-<tr><td>The so called "iOS clone" looks and works similar to the ios version. It shows normally 5 lines of dates. It is enabled by default.</td><td>
-The "Android Native" version looks more like a standard native implementation on Android.
-</td></tr>
-<tr><td>
-
-```js
-androidVariant = 'iosClone'
-```
-
-</td><td>
-
-```js
-androidVariant = 'nativeAndroid'
-```
-
-</td></tr>
-</table>
 
 ## Three different modes
 

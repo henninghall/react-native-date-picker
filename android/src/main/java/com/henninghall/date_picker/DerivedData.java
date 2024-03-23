@@ -1,14 +1,10 @@
 package com.henninghall.date_picker;
 
-import android.text.format.DateFormat;
 import android.util.Log;
-import android.util.TimeUtils;
 
 import com.henninghall.date_picker.models.Mode;
-import com.henninghall.date_picker.models.Variant;
 import com.henninghall.date_picker.models.WheelType;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -99,23 +95,8 @@ public class DerivedData {
         return orderedWheels;
     }
 
-    public int getShownCount() {
-        int DP_PER_SHOW_SHOW_COUNT = 35;
-        int showCount = state.getHeight() / DP_PER_SHOW_SHOW_COUNT;
-        int oddShowCount = showCount % 2 == 0 ? showCount + 1 : showCount;
-        return oddShowCount;
-    }
-
-    public boolean hasNativeStyle() {
-        return state.getVariant() == Variant.nativeAndroid;
-    }
-
     public int getRootLayout() {
-        switch (state.getVariant()){
-            case nativeAndroid: return R.layout.native_picker;
-            case iosClone: return R.layout.ios_clone;
-            default: return R.layout.ios_clone;
-        }
+        return R.layout.native_picker;
     }
 
     public boolean usesAmPm(){

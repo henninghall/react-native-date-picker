@@ -3,14 +3,11 @@ package com.henninghall.date_picker;
 import com.facebook.react.bridge.Dynamic;
 import com.henninghall.date_picker.models.Is24HourSource;
 import com.henninghall.date_picker.models.Mode;
-import com.henninghall.date_picker.models.Variant;
-import com.henninghall.date_picker.props.DividerHeightProp;
+import com.henninghall.date_picker.props.DividerColorProp;
+import com.henninghall.date_picker.props.HeightProp;
 import com.henninghall.date_picker.props.IdProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
-import com.henninghall.date_picker.props.VariantProp;
 import com.henninghall.date_picker.props.DateProp;
-import com.henninghall.date_picker.props.FadeToColorProp;
-import com.henninghall.date_picker.props.HeightProp;
 import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
 import com.henninghall.date_picker.props.MinimumDateProp;
@@ -32,33 +29,30 @@ public class State {
     private final DateProp dateProp = new DateProp();
     private final ModeProp modeProp = new ModeProp();
     private final LocaleProp localeProp = new LocaleProp();
-    private final FadeToColorProp fadeToColorProp = new FadeToColorProp();
     private final TextColorProp textColorProp = new TextColorProp();
     private final MinuteIntervalProp minuteIntervalProp = new MinuteIntervalProp();
     private final MinimumDateProp minimumDateProp = new MinimumDateProp();
     private final MaximumDateProp maximumDateProp = new MaximumDateProp();
     private final TimezoneOffsetInMinutesProp timezoneOffsetInMinutesProp = new TimezoneOffsetInMinutesProp();
     private final HeightProp heightProp = new HeightProp();
-    private final VariantProp variantProp = new VariantProp();
-    private final DividerHeightProp dividerHeightProp = new DividerHeightProp();
     private final Is24hourSourceProp is24hourSourceProp = new Is24hourSourceProp();
     private final IdProp idProp = new IdProp();
+
+    private final DividerColorProp dividerColorProp = new DividerColorProp();
 
     private final HashMap props = new HashMap<String, Prop>() {{
         put(DateProp.name, dateProp);
         put(ModeProp.name, modeProp);
         put(LocaleProp.name, localeProp);
-        put(FadeToColorProp.name, fadeToColorProp);
         put(TextColorProp.name, textColorProp);
         put(MinuteIntervalProp.name, minuteIntervalProp);
         put(MinimumDateProp.name, minimumDateProp);
         put(MaximumDateProp.name, maximumDateProp);
         put(TimezoneOffsetInMinutesProp.name, timezoneOffsetInMinutesProp);
         put(HeightProp.name, heightProp);
-        put(VariantProp.name, variantProp);
-        put(DividerHeightProp.name, dividerHeightProp);
         put(Is24hourSourceProp.name, is24hourSourceProp);
         put(IdProp.name, idProp);
+        put(DividerColorProp.name, dividerColorProp);
     }};
     public DerivedData derived;
 
@@ -76,10 +70,6 @@ public class State {
 
     public Mode getMode() {
         return (Mode) modeProp.getValue();
-    }
-
-    public String getFadeToColor() {
-        return (String) fadeToColorProp.getValue();
     }
 
     public String getTextColor() {
@@ -153,21 +143,10 @@ public class State {
         return (Calendar) cal.clone();
     }
 
-    public Integer getHeight() {
-        return (Integer) heightProp.getValue();
-    }
-
     public String getLocaleLanguageTag() {
         return localeProp.getLanguageTag();
     }
 
-    public Variant getVariant() {
-        return variantProp.getValue();
-    }
-
-    public int getDividerHeight() {
-        return dividerHeightProp.getValue();
-    }
     public String getId() {
         return idProp.getValue();
     }
@@ -182,5 +161,9 @@ public class State {
 
     public void setLastSelectedDate(Calendar date) {
         lastSelectedDate = date;
+    }
+
+    public String getDividerColor() {
+        return dividerColorProp.getValue();
     }
 }

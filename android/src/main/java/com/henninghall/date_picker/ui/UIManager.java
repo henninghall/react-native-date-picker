@@ -7,9 +7,9 @@ import com.henninghall.date_picker.wheelFunctions.AddOnChangeListener;
 import com.henninghall.date_picker.wheelFunctions.AnimateToDate;
 import com.henninghall.date_picker.wheelFunctions.Refresh;
 import com.henninghall.date_picker.wheelFunctions.SetDate;
+import com.henninghall.date_picker.wheelFunctions.SetDividerColor;
 import com.henninghall.date_picker.wheelFunctions.TextColor;
 import com.henninghall.date_picker.wheelFunctions.UpdateVisibility;
-import com.henninghall.date_picker.wheelFunctions.HorizontalPadding;
 import com.henninghall.date_picker.wheels.Wheel;
 
 import java.text.SimpleDateFormat;
@@ -19,7 +19,6 @@ public class UIManager {
     private final State state;
     private final View rootView;
     private Wheels wheels;
-    private FadingOverlay fadingOverlay;
     private WheelScroller wheelScroller = new WheelScroller();
     private WheelChangeListenerImpl onWheelChangeListener;
 
@@ -36,16 +35,6 @@ public class UIManager {
 
     public void updateTextColor(){
         wheels.applyOnAll(new TextColor(state.getTextColor()));
-    }
-
-    public void updateFadeToColor(){
-        if(state.derived.hasNativeStyle()) return;
-        fadingOverlay = new FadingOverlay(state, rootView);
-        fadingOverlay.updateColor();
-    }
-
-    public void updateHeight(){
-        wheels.updateHeight();
     }
 
     public void updateWheelOrder() {
@@ -87,15 +76,11 @@ public class UIManager {
         onWheelChangeListener.addStateListener(listener);
     }
 
-    public void updateDividerHeight() {
-        wheels.updateDividerHeight();
-    }
-
-    public void updateWheelPadding() {
-        wheels.applyOnVisible(new HorizontalPadding());
-    }
-
     public void updateLastSelectedDate(Calendar date) {
         state.setLastSelectedDate(date);
+    }
+
+    public void setDividerColor(String color) {
+        wheels.applyOnAll(new SetDividerColor(color));
     }
 }

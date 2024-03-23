@@ -2,18 +2,15 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, UIManager, findNodeHandle} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import DateChange from '../propPickers/DateChange';
-import FadeToColor from '../propPickers/FadeToColor';
 import LocalePicker from '../propPickers/LocalePicker';
 import MinMaxDateChange from '../propPickers/MinMaxDateChange';
 import ModePicker from '../propPickers/ModePicker';
-import TextColor from '../propPickers/TextColor';
 import TimeZoneOffsetInMinutes from '../propPickers/TimeZoneOffsetInMinutes';
 import PropSlider from '../PropSlider';
 import MinuteInterval from '../propPickers/MinuteInterval';
 import Scroll from '../propPickers/Scroll';
 import CustomPropValue from '../CustomPropValue';
 import {readableDate} from '../utils';
-import Variant from '../propPickers/Variant';
 
 Date.prototype.addHours = function (h) {
   this.setTime(this.getTime() + h * 60 * 60 * 1000);
@@ -29,7 +26,6 @@ export default class Advanced extends Component {
   state = {
     date: getInitialDate(),
     searchTerm: '',
-    textColor: '#000000',
     selectedProp: 'mode',
     locale: 'en-US',
     mode: 'datetime',
@@ -38,7 +34,6 @@ export default class Advanced extends Component {
     timeZoneOffsetInMinutes: undefined,
     minuteInterval: 1,
     dateString: '',
-    androidVariant: 'iosClone',
   };
 
   render() {
@@ -54,13 +49,10 @@ export default class Advanced extends Component {
           date={this.state.date}
           onDateChange={this.setDate}
           onDateStringChange={this.setDateString}
-          androidVariant={this.state.androidVariant}
           locale={this.state.locale}
           minuteInterval={this.state.minuteInterval}
           minimumDate={this.state.minimumDate}
           maximumDate={this.state.maximumDate}
-          fadeToColor={this.props.backgroundColor}
-          textColor={this.state.textColor}
           mode={this.state.mode}
           timeZoneOffsetInMinutes={this.state.timeZoneOffsetInMinutes}
         />
@@ -88,15 +80,6 @@ export default class Advanced extends Component {
         <Scroll
           scroll={this.scroll}
           reset={() => this.setState({date: getInitialDate()})}
-        />
-      ),
-    },
-    {
-      name: 'androidVariant',
-      component: (
-        <Variant
-          selected={this.state.androidVariant}
-          onChange={androidVariant => this.setState({androidVariant})}
         />
       ),
     },
@@ -166,21 +149,6 @@ export default class Advanced extends Component {
           }}
           defaultDate={defaultMaxDate}
         />
-      ),
-    },
-    {
-      name: 'fadeToColor',
-      component: (
-        <FadeToColor
-          onChange={() => this.props.setBackground(randomColor())}
-          setNone={() => this.props.setBackground('none')}
-        />
-      ),
-    },
-    {
-      name: 'textColor',
-      component: (
-        <TextColor onChange={() => this.setState({textColor: randomColor()})} />
       ),
     },
   ];

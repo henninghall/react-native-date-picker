@@ -18,14 +18,11 @@ public interface Picker {
     void setTextColor(String value);
     void setOnValueChangeListenerInScrolling(Picker.OnValueChangeListenerInScrolling listener);
     void setOnValueChangedListener(Picker.OnValueChangeListener onValueChangeListener);
-    void setShownCount(int count);
     View getView();
     void setVisibility(int visibility);
     void setWrapSelectorWheel(boolean wrapSelectorWheel);
-    void setDividerHeight(int height);
-    void setItemPaddingHorizontal(int padding);
     boolean isSpinning();
-
+    void setDividerColor(String color);
     interface OnValueChangeListenerInScrolling {
         void onValueChangeInScrolling(Picker picker, int oldVal, int newVal);
     }

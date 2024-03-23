@@ -32,11 +32,6 @@ export interface DatePickerProps extends ViewProps {
   minuteInterval?: 1 | 2 | 3 | 4 | 5 | 6 | 10 | 12 | 15 | 20 | 30
 
   /**
-   * The Android style variant.
-   */
-  androidVariant?: 'iosClone' | 'nativeAndroid'
-
-  /**
    * The date picker mode.
    */
   mode?: 'date' | 'time' | 'datetime'
@@ -71,21 +66,6 @@ export interface DatePickerProps extends ViewProps {
   timeZoneOffsetInMinutes?: number
 
   /**
-   * Android picker is fading towards this background color. { color, 'none' }
-   */
-  fadeToColor?: string
-
-  /**
-   * Changes the text color.
-   */
-  textColor?: string
-
-  /**
-   * Changes the divider height of the android variant iosClone
-   */
-  dividerHeight?: number
-
-  /**
    * Changes if 24/12-hour format should be determined from the locale or device setting.
    * "device" is default on android and "locale" on iOS. On iOS this cannot be changed.
    */
@@ -112,8 +92,14 @@ export interface DatePickerProps extends ViewProps {
   /** Modal title. Set to null to remove */
   title?: string | null
 
-  /** Modal color theme on iOS. Defaults to 'auto' */
+  /** Color theme. Defaults to 'auto' */
   theme?: 'light' | 'dark' | 'auto'
+
+  /** Color of the divider on Android */
+  dividerColor?: string
+
+  /** Color of the android modal buttons */
+  buttonColor?: string
 }
 
 export default class DatePicker extends Component<DatePickerProps> {}

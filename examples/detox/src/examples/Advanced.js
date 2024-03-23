@@ -2,20 +2,17 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, UIManager, findNodeHandle } from 'react-native'
 import DatePicker from 'react-native-date-picker'
 import DateChange from '../propPickers/DateChange'
-import FadeToColor from '../propPickers/FadeToColor'
 import LocalePicker from '../propPickers/LocalePicker'
 import MinMaxDateChange from '../propPickers/MinMaxDateChange'
 import ModePicker from '../propPickers/ModePicker'
-import TextColor from '../propPickers/TextColor'
 import TimeZoneOffsetInMinutes from '../propPickers/TimeZoneOffsetInMinutes'
 import PropSlider from '../PropSlider'
 import MinuteInterval from '../propPickers/MinuteInterval'
 import Scroll from '../propPickers/Scroll'
 import CustomPropValue from '../CustomPropValue'
 import { readableDate } from '../utils'
-import Variant from '../propPickers/Variant'
 
-Date.prototype.addHours = function(h) {
+Date.prototype.addHours = function (h) {
   this.setTime(this.getTime() + h * 60 * 60 * 1000)
   return this
 }
@@ -29,7 +26,6 @@ export default class Advanced extends Component {
   state = {
     date: getInitialDate(),
     searchTerm: '',
-    textColor: '#000000',
     selectedProp: 'mode',
     locale: 'en-US',
     mode: 'datetime',
@@ -38,7 +34,6 @@ export default class Advanced extends Component {
     timeZoneOffsetInMinutes: undefined,
     minuteInterval: 1,
     dateString: '',
-    androidVariant: 'iosClone',
   }
 
   render() {
@@ -50,17 +45,14 @@ export default class Advanced extends Component {
           }
         />
         <DatePicker
-          innerRef={ref => (this.ref = ref)}
+          innerRef={(ref) => (this.ref = ref)}
           date={this.state.date}
           onDateChange={this.setDate}
           onDateStringChange={this.setDateString}
-          androidVariant={this.state.androidVariant}
           locale={this.state.locale}
           minuteInterval={this.state.minuteInterval}
           minimumDate={this.state.minimumDate}
           maximumDate={this.state.maximumDate}
-          fadeToColor={this.props.backgroundColor}
-          textColor={this.state.textColor}
           mode={this.state.mode}
           timeZoneOffsetInMinutes={this.state.timeZoneOffsetInMinutes}
         />
@@ -92,20 +84,11 @@ export default class Advanced extends Component {
       ),
     },
     {
-      name: 'androidVariant',
-      component: (
-        <Variant
-          selected={this.state.androidVariant}
-          onChange={androidVariant => this.setState({ androidVariant })}
-        />
-      ),
-    },
-    {
       name: 'mode',
       component: (
         <ModePicker
           selected={this.state.mode}
-          onChange={mode => this.setState({ mode })}
+          onChange={(mode) => this.setState({ mode })}
         />
       ),
     },
@@ -114,7 +97,7 @@ export default class Advanced extends Component {
       component: (
         <LocalePicker
           locale={this.state.locale}
-          onChange={locale => this.setState({ locale })}
+          onChange={(locale) => this.setState({ locale })}
         />
       ),
     },
@@ -122,7 +105,7 @@ export default class Advanced extends Component {
       name: 'timeZoneOffset',
       component: (
         <TimeZoneOffsetInMinutes
-          onChange={timeZoneOffsetInMinutes =>
+          onChange={(timeZoneOffsetInMinutes) =>
             this.setState({ timeZoneOffsetInMinutes })
           }
         />
@@ -133,7 +116,7 @@ export default class Advanced extends Component {
       component: (
         <DateChange
           value={this.state.date}
-          onChange={date => this.setState({ date })}
+          onChange={(date) => this.setState({ date })}
         />
       ),
     },
@@ -142,7 +125,7 @@ export default class Advanced extends Component {
       component: (
         <MinuteInterval
           value={this.state.minuteInterval}
-          onChange={minuteInterval => this.setState({ minuteInterval })}
+          onChange={(minuteInterval) => this.setState({ minuteInterval })}
         />
       ),
     },
@@ -151,7 +134,7 @@ export default class Advanced extends Component {
       component: (
         <MinMaxDateChange
           value={this.state.minimumDate}
-          onChange={minimumDate => this.setState({ minimumDate })}
+          onChange={(minimumDate) => this.setState({ minimumDate })}
           defaultDate={defaultMinDate}
         />
       ),
@@ -161,7 +144,7 @@ export default class Advanced extends Component {
       component: (
         <MinMaxDateChange
           value={this.state.maximumDate}
-          onChange={maximumDate => {
+          onChange={(maximumDate) => {
             console.log({ maximumDate })
 
             this.setState({ maximumDate })
@@ -170,33 +153,16 @@ export default class Advanced extends Component {
         />
       ),
     },
-    {
-      name: 'fadeToColor',
-      component: (
-        <FadeToColor 
-          onChange={() => this.props.setBackground(randomColor())} 
-          setNone={() => this.props.setBackground("none")} 
-        />
-      ),
-    },
-    {
-      name: 'textColor',
-      component: (
-        <TextColor
-          onChange={() => this.setState({ textColor: randomColor() })}
-        />
-      ),
-    },
   ]
 
   selectedPropData = () => {
-    return this.propertyList().find(p => p.name === this.state.selectedProp)
+    return this.propertyList().find((p) => p.name === this.state.selectedProp)
   }
 
-  onSelect = selectedProp => this.setState({ selectedProp })
+  onSelect = (selectedProp) => this.setState({ selectedProp })
 
-  setDate = date => this.setState({ date })
-  setDateString = dateString => this.setState({ dateString })
+  setDate = (date) => this.setState({ date })
+  setDateString = (dateString) => this.setState({ dateString })
 
   scroll = ({ wheelIndex, scrollTimes }) => {
     if (!this.ref) return

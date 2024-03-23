@@ -9,8 +9,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 
+import com.henninghall.date_picker.generated.NumberPicker;
 import com.henninghall.date_picker.Utils;
 
 import java.lang.reflect.Field;
@@ -81,23 +81,15 @@ public class AndroidNative extends NumberPicker implements Picker {
     }
 
     @Override
-    public void setShownCount(int count) {
-        // always 3 date rows -> nothing needs to be done here
-    }
-
-    @Override
     public View getView() {
         return this;
     }
 
-    @Override
-    public void setDividerHeight(int height) {
-        // not supported
-    }
 
     @Override
-    public void setItemPaddingHorizontal(int padding) {
-        // Not needed for this picker
+    public void setDividerColor(String color){
+        int intColor = Color.parseColor(color);
+        super.setDividerTint(intColor);
     }
 
     @Override

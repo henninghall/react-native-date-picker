@@ -18,7 +18,6 @@ export default class ModalExample extends React.Component {
         date={this.state.date}
         onConfirm={date => this.setState({date, open: false})}
         onCancel={() => this.setState({open: false})}
-        androidVariant="nativeAndroid"
       />
       <Text style={{marginTop: 20, fontSize: 26}}>
         {this.state.date.toISOString().substr(0, 10)}

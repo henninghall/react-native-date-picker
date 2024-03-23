@@ -53,7 +53,6 @@ export default class DatePickerIOS extends React.Component {
 
     return (
       <NativeComponent
-        key={props.textColor} // preventing "Today" string keep old text color when text color changes
         onChange={this._onChange}
         onStartShouldSetResponder={() => true}
         onResponderTerminationRequest={() => false}
