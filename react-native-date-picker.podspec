@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.license      = package['license']
   s.platform     = :ios, "8.0"
 
-  s.source       = { :git => "https://github.com/henninghall/react-native-date-picker.git" }
+  s.source       = { :git => "https://github.com/henninghall/react-native-date-picker.git", :tag => "v#{s.version.to_s}" }
   s.source_files    = "ios/**/*.{h,m,mm,swift}"
 
   s.dependency 'React-Core'
