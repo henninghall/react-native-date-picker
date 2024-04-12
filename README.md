@@ -12,7 +12,7 @@ This is a React Native Date Picker with following main features:
 
 Thanks to our sponsors 🩷
 
-<table align="center" border="1">
+<table border="1">
   <tr align="center">
     <td>
     <a href="https://github.com/expo">
