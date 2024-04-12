@@ -14,13 +14,25 @@ Thanks to our sponsors 🩷
 
 <table align="center" border="1">
   <tr align="center">
-    <td><picture><img height="75" src="https://avatars.githubusercontent.com/u/12504344?s=200&v=4"  /></picture></td>
-    <td><picture><img height="75" src="https://avatars.githubusercontent.com/u/54108407?s=200&v=4"  /></picture></td>
-    <td><picture><img height="75" src="https://avatars.githubusercontent.com/u/72290128?s=200&v=4"  /></picture></td>
-    <td><picture><img height="75" src="https://avatars.githubusercontent.com/u/87653737?s=200&v=4"  /></picture></td>
+    <td>
+    <a href="https://github.com/expo">
+    <img height="75" src="https://avatars.githubusercontent.com/u/12504344?s=200&v=4"  /></a>
+    </td>
+    <td>
+    <a href="https://github.com/nordicbraintech">
+    <img height="75" src="https://avatars.githubusercontent.com/u/54108407?s=200&v=4"  /></a>
+    </td>
+    <td>
+    <a href="https://github.com/hamxahussain">
+    <img height="75" src="https://avatars.githubusercontent.com/u/72290128?s=200&v=4"  /></a>
+    </td>
+    <td>
+    <a href="https://github.com/lepadatumihail">
+    <img height="75" src="https://avatars.githubusercontent.com/u/87653737?s=200&v=4"  /></a>
+    </td>
   </tr>
   <tr align="center">
-    <td><a href="https://github.com/expo/expo">Expo</a></td>
+    <td><a href="https://github.com/expo">Expo</a></td>
     <td><a href="https://github.com/nordicbraintech">Nordic Brain Tech</a></td>
     <td><a href="https://github.com/hamxahussain">hamxahussain</a></td>
     <td><a href="https://github.com/lepadatumihail">lepadatumihail</a></td>
