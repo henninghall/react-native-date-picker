@@ -32,10 +32,10 @@ Thanks to our sponsors 🩷
     </td>
   </tr>
   <tr align="center">
-    <td><a href="https://github.com/expo">Expo</a></td>
-    <td><a href="https://github.com/nordicbraintech">Nordic Brain Tech</a></td>
-    <td><a href="https://github.com/hamxahussain">hamxahussain</a></td>
-    <td><a href="https://github.com/lepadatumihail">lepadatumihail</a></td>
+    <td><b>Expo</b></td>
+    <td><b>Nordic Brain Tech</b></td>
+    <td><b>hamxahussain</b></td>
+    <td><b>lepadatumihail</b></td>
   </tr>
 </table>
 
