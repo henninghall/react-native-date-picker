@@ -1,5 +1,4 @@
-# React Native Date Picker [![npm](https://img.shields.io/npm/v/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) [![Build status](https://img.shields.io/github/actions/workflow/status/henninghall/react-native-date-picker/push-main.yml?branch=master&label=tests)](https://github.com/henninghall/react-native-date-picker/actions) [![npm](https://img.shields.io/npm/dm/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23c96198)](https://github.com/sponsors/henninghall)
-
+# React Native Date Picker [![npm](https://img.shields.io/npm/v/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker) [![Build status](https://img.shields.io/github/actions/workflow/status/henninghall/react-native-date-picker/push-main.yml?branch=master&label=tests)](https://github.com/henninghall/react-native-date-picker/actions) [![npm](https://img.shields.io/npm/dm/react-native-date-picker.svg)](https://www.npmjs.com/package/react-native-date-picker)
 
 This is a React Native Date Picker with following main features:
 
@@ -8,6 +7,25 @@ This is a React Native Date Picker with following main features:
 🌍&nbsp; Various languages<br>
 🎨&nbsp; Customizable<br>
 🖼&nbsp; Modal or Inlined<br>
+
+## Sponsors
+
+Thanks to our sponsors 🩷
+
+<table align="center" border="1">
+  <tr align="center">
+    <td><img height="75" src="https://avatars.githubusercontent.com/u/12504344?s=200&v=4"  /></td>
+    <td><img height="75" src="https://avatars.githubusercontent.com/u/54108407?s=200&v=4"  /></td>
+    <td><img height="75" src="https://avatars.githubusercontent.com/u/72290128?s=200&v=4"  /></td>
+    <td><img height="75" src="https://avatars.githubusercontent.com/u/87653737?s=200&v=4"  /></td>
+  </tr>
+  <tr align="center">
+    <td><a href="https://github.com/expo/expo">Expo</a></td>
+    <td><a href="https://github.com/nordicbraintech">Nordic Brain Tech</a></td>
+    <td><a href="https://github.com/hamxahussain">hamxahussain</a></td>
+    <td><a href="https://github.com/lepadatumihail">lepadatumihail</a></td>
+  </tr>
+</table>
 
 ## Modal
 
@@ -37,7 +55,7 @@ The second option is to use the inlined picker. Place it in a View or a custom m
       <tr>
   <td align="center">iOS</td><td align="center">Android</td>
   </tr>
-  </table>
+</table>
 
 ## Requirements
 
