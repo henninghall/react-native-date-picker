@@ -39,6 +39,8 @@ Thanks to our sponsors 🩷
   </tr>
 </table>
 
+[Become a sponsor](https://github.com/sponsors/henninghall)
+
 ## Modal
 
 The first option is to use the built-in modal. <a href="#example-1-modal">See code</a>.
