@@ -27,7 +27,13 @@ class DatePickerAndroid extends React.PureComponent {
 
     if (props.modal) return null
 
-    return <NativeComponent {...props} onChange={this._onChange} />
+    return (
+      <NativeComponent
+        {...props}
+        onChange={this._onChange}
+        onStateChange={this._onSpinnerStateChanged}
+      />
+    )
   }
 
   getId = () => {
