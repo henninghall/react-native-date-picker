@@ -14,10 +14,10 @@ Thanks to our sponsors 🩷
 
 <table align="center" border="1">
   <tr align="center">
-    <td><img height="75" src="https://avatars.githubusercontent.com/u/12504344?s=200&v=4"  /></td>
-    <td><img height="75" src="https://avatars.githubusercontent.com/u/54108407?s=200&v=4"  /></td>
-    <td><img height="75" src="https://avatars.githubusercontent.com/u/72290128?s=200&v=4"  /></td>
-    <td><img height="75" src="https://avatars.githubusercontent.com/u/87653737?s=200&v=4"  /></td>
+    <td><picture><img height="75" src="https://avatars.githubusercontent.com/u/12504344?s=200&v=4"  /></picture></td>
+    <td><picture><img height="75" src="https://avatars.githubusercontent.com/u/54108407?s=200&v=4"  /></picture></td>
+    <td><picture><img height="75" src="https://avatars.githubusercontent.com/u/72290128?s=200&v=4"  /></picture></td>
+    <td><picture><img height="75" src="https://avatars.githubusercontent.com/u/87653737?s=200&v=4"  /></picture></td>
   </tr>
   <tr align="center">
     <td><a href="https://github.com/expo/expo">Expo</a></td>
