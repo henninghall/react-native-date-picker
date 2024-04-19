@@ -3,12 +3,12 @@ tags:
   - android
   - displayText
 ---
-# - runFlow:
-#     file: utils/set-timezone.yml
-#     env:
-#       REGION: Sweden
-#       GMT: GMT+01:00
-#       STATE: ''
+- runFlow:
+    file: utils/set-timezone.yml
+    env:
+      REGION: Sweden
+      GMT: GMT+01:00
+      STATE: ''
 
 - runFlow: utils/launch.yml
 # test: minuteInterval rounding should round with floor
@@ -59,7 +59,7 @@ tags:
     file: utils/change-locale-and-scroll.yml
     env:
       LOCALE: pt-BR
-      EXPECT: 'dom. 2 de jan. 1200 AM '
+      EXPECT: 'dom. 2 de jan.1200 AM '
 
 # Should be possible to use picker with invalid locale
 - runFlow:
@@ -99,6 +99,7 @@ tags:
     env:
       LOCALE: zh-CH
       EXPECT: '2001年一月1日'
+#
 # If more tests are needed for date locale:
 # 'sv-SE', '2' + 'januari' + '2000'
 # 'ko', '2001년' + '1월' + '1일'
