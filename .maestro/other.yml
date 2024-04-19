@@ -1,0 +1,35 @@
+appId: com.rn071
+tags:
+  - modal
+  - minuteInterval
+---
+# test: can use modal
+
+- launchApp
+- tapOn: Modal
+- tapOn: Select date
+- runFlow: utils/swipe-wheel-1.yml
+- tapOn: Confirm
+- assertVisible: '2000-01-02'
+
+# test: minuteInterval
+
+- runFlow: utils/launch.yml
+
+# 1min
+- tapOn: 1min interval
+- runFlow: utils/swipe-wheel-3.yml
+- assertVisible: '2000-01-01 00:01:00'
+- tapOn: reset date
+
+# 5min
+- tapOn: 5min interval
+- runFlow: utils/swipe-wheel-3.yml
+- assertVisible: '2000-01-01 00:05:00'
+- tapOn: reset date
+
+# 15min
+- tapOn: 15min interval
+- runFlow: utils/swipe-wheel-3.yml
+- assertVisible: '2000-01-01 00:15:00'
+- tapOn: reset date
