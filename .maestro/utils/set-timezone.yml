@@ -22,7 +22,6 @@ appId: com.android.settings
     file: select-utc-offset.yml
     env:
       GMT: ${GMT}
-
 # on most(?) devices timezone is selected by picking region
 - runFlow:
     when:
