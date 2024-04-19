@@ -4,6 +4,8 @@ tags:
 ---
 - runFlow: utils/launch.yml
 
+# test: 12h time
+
 # datetime
 - tapOn: datetime mode
 - runFlow: utils/swipe-wheel-1.yml
@@ -28,4 +30,29 @@ tags:
 - runFlow: utils/swipe-wheel-2.yml
 - runFlow: utils/swipe-wheel-3.yml
 - assertVisible: '2000-01-01 13:01:00'
+- tapOn: reset date
+
+# test: 24h time
+- runFlow:
+    when:
+      visible: 'time format: 12h'
+    file: utils/set-hour-format.yml
+
+- runFlow: utils/launch.yml
+
+# datetime
+- tapOn: datetime mode
+- runFlow: utils/swipe-wheel-4.yml # expected not to exist (check needed so that )
+- runFlow: utils/swipe-wheel-1.yml
+- runFlow: utils/swipe-wheel-2.yml
+- runFlow: utils/swipe-wheel-3.yml
+- assertVisible: '2000-01-02 01:01:00'
+- tapOn: reset date
+
+# time
+- tapOn: time mode
+- runFlow: utils/swipe-wheel-3.yml # expected not to exist
+- runFlow: utils/swipe-wheel-1-no-ampm.yml
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2000-01-01 01:01:00'
 - tapOn: reset date

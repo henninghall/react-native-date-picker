@@ -1,0 +1,16 @@
+appId: com.android.settings
+---
+- launchApp
+- runFlow:
+    when:
+      visible: 'App info'
+    file: goto-settings-from-app-info.yml
+- tapOn: 'Search settings'
+- inputText: 'Date'
+- tapOn: 'Date & time'
+- tapOn: 'Date & time'
+
+- runFlow:
+    commands:
+      - tapOn: 'Use locale default'
+      - tapOn: 'Use 24-hour format'
