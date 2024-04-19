@@ -106,6 +106,18 @@ export default class Advanced extends Component {
             onPress={() => this.setState({mode: 'time'})}
             text={'time mode'}
           />
+          <MicroButton
+            onPress={() => this.setState({minuteInterval: 1})}
+            text={'1min interval'}
+          />
+          <MicroButton
+            onPress={() => this.setState({minuteInterval: 5})}
+            text={'5min interval'}
+          />
+          <MicroButton
+            onPress={() => this.setState({minuteInterval: 15})}
+            text={'15min interval'}
+          />
           <View style={{width: '100%', height: 2, backgroundColor: '#eee'}} />
           <View style={{}}>
             <MicroText
