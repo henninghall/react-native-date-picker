@@ -11,7 +11,6 @@ tags:
       STATE: ''
 
 - runFlow: utils/launch.yml
-
 # test: minuteInterval rounding should round with floor
 - runFlow:
     file: utils/change-prop.yml
@@ -29,16 +28,8 @@ tags:
 - runFlow: utils/reset.yml
 
 # test: can have initial date in past
-- runFlow:
-    file: utils/change-prop.yml
-    env:
-      PROP: maximumDate
-      VALUE: undefined
-- runFlow:
-    file: utils/change-prop.yml
-    env:
-      PROP: minimumDate
-      VALUE: undefined
+- tapOn: clear maximumDate 
+- tapOn: clear minimumDate
 - runFlow:
     file: utils/change-prop.yml
     env:
@@ -49,23 +40,74 @@ tags:
 
 - runFlow: utils/reset.yml
 
-# test: display text
 - runFlow:
-    file: utils/change-prop.yml
+    file: utils/change-locale-and-scroll.yml
     env:
-      PROP: locale
-      VALUE: vi-VN
-- runFlow: utils/swipe-wheel-1.yml
-- assertVisible:
-    id: dateStringOutput
-    text: 'CN 2 thg 11200 SA '
+      LOCALE: en-US
+      EXPECT: 'Sun Jan 21200 AM '
+
+# test: translates the display text - datetime
+- runFlow: reset.yml
+
+test: display text - datetime
+- runFlow:
+    file: utils/change-locale-and-scroll.yml
+    env:
+      LOCALE: vi-VN
+      EXPECT: 'CN 2 thg 11200 SA '
+
+- runFlow: reset.yml
+- runFlow:
+    file: utils/change-locale-and-scroll.yml
+    env:
+      LOCALE: pt-BR
+      EXPECT: 'dom. 2 de jan. 1200 AM'
+
+- runFlow: reset.yml
+
+# If more tests are needed on datetime locale:
+# 'sv-SE', 'sön 2 jan.' + '1200 fm '
+# 'ru-RU', 'вс 2 янв.' + '1200 AM '
+# 'ko', '1월 2일 일 오전 1200'
+# 'ja', '1月2日 日' + '1200 午前 '
+# 'zh-CH', '1月2日周日 上午 1200'
+# 'eu', 'urt. 2 ig.' + ' AM 1200'
 
 # Should be possible to use picker with invalid locale
-- runFlow: utils/launch.yml
 - runFlow:
-    file: utils/change-prop.yml
+    file: utils/change-locale-and-scroll.yml
     env:
-      PROP: locale
-      VALUE: xx
-- runFlow: utils/swipe-wheel-1.yml
-- assertVisible: '2000-01-02 00:00:00'
+      LOCALE: xx
+      EXPECT: '2000-01-02 00:00:00'
+
+# test: translates the display text - datetime
+test: display text - date
+
+- tapOn: date mode
+- tapOn: clear minimumDate
+- tapOn: clear maximumDate
+
+- runFlow:
+    file: utils/change-locale-and-scroll.yml
+    env:
+      LOCALE: en-US
+      EXPECT: 'February12000'
+
+- runFlow:
+    file: utils/change-locale-and-scroll.yml
+    env:
+      LOCALE: pt-BR
+      EXPECT: '2janeiro2000'
+
+- runFlow:
+    file: utils/change-locale-and-scroll.yml
+    env:
+      LOCALE: zh-CH
+      EXPECT: '2001年一月1日'
+
+# If more tests are needed for date locale:
+# 'sv-SE', '2' + 'januari' + '2000'
+# 'ko', '2001년' + '1월' + '1일'
+# 'ja', '2001年' + '1月' + '1日'
+# 'zh-CH', '2001年' + '一月' + '1日'
+# 'eu', '2001' + 'urtarrila' + '1'

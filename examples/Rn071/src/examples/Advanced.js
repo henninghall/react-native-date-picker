@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, UIManager, findNodeHandle} from 'react-native';
+import {StyleSheet, Text, UIManager, View, findNodeHandle} from 'react-native';
 import DatePicker from 'react-native-date-picker';
+import CustomPropValue from '../CustomPropValue';
+import {MicroButton} from '../MicroButton';
+import PropSlider from '../PropSlider';
 import DateChange from '../propPickers/DateChange';
 import LocalePicker from '../propPickers/LocalePicker';
 import MinMaxDateChange from '../propPickers/MinMaxDateChange';
-import ModePicker from '../propPickers/ModePicker';
-import TimeZoneOffsetInMinutes from '../propPickers/TimeZoneOffsetInMinutes';
-import PropSlider from '../PropSlider';
 import MinuteInterval from '../propPickers/MinuteInterval';
+import ModePicker from '../propPickers/ModePicker';
 import Scroll from '../propPickers/Scroll';
-import CustomPropValue from '../CustomPropValue';
+import TimeZoneOffsetInMinutes from '../propPickers/TimeZoneOffsetInMinutes';
 import {readableDate} from '../utils';
 
 Date.prototype.addHours = function (h) {
@@ -17,7 +18,7 @@ Date.prototype.addHours = function (h) {
   return this;
 };
 
-const getInitialDate = () => new Date(2000, 0, 1, 0, 0);
+export const getInitialDate = () => new Date(2000, 0, 1, 0, 0);
 
 export const defaultMinDate = getInitialDate().addHours(-24 * 5);
 export const defaultMaxDate = getInitialDate().addHours(24 * 5);
@@ -69,6 +70,40 @@ export default class Advanced extends Component {
         />
         <Text>Prop value:</Text>
         {this.selectedPropData().component}
+        <View style={{width: '100%', height: 2, backgroundColor: '#eee'}} />
+        <View
+          style={{
+            flexDirection: 'row',
+            columnGap: 5,
+            rowGap: 2,
+            padding: 2,
+            flexWrap: 'wrap',
+          }}>
+          <MicroButton
+            onPress={() => this.setState({date: getInitialDate()})}
+            text={'reset date'}
+          />
+          <MicroButton
+            onPress={() => this.setState({minimumDate: undefined})}
+            text={'clear minimumDate'}
+          />
+          <MicroButton
+            onPress={() => this.setState({maximumDate: undefined})}
+            text={'clear maximumDate'}
+          />
+          <MicroButton
+            onPress={() => this.setState({mode: 'date'})}
+            text={'date mode'}
+          />
+          <MicroButton
+            onPress={() => this.setState({mode: 'datetime'})}
+            text={'datetime mode'}
+          />
+          <MicroButton
+            onPress={() => this.setState({mode: 'time'})}
+            text={'time mode'}
+          />
+        </View>
       </View>
     );
   }

@@ -1,0 +1,14 @@
+appId: com.android.settings
+---
+- tapOn: Clear
+- tapOn: reset date
+- tapOn: change locale
+- tapOn:
+    id: propValue
+- inputText: ${LOCALE}
+- hideKeyboard
+- tapOn: Change
+- runFlow: swipe-wheel-1.yml
+- assertVisible:
+    id: dateStringOutput
+    text: ${EXPECT}

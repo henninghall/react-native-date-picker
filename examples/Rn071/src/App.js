@@ -20,8 +20,7 @@ export default class App extends Component {
           styles.container,
           {backgroundColor: this.state.backgroundColor || 'white'},
         ]}
-        contentContainerStyle={styles.content}
-      >
+        contentContainerStyle={styles.content}>
         <SafeAreaView>
           <Text style={styles.header}>{!this.state.picker && 'Examples'}</Text>
           {!this.state.picker && this.renderButtons()}
@@ -53,8 +52,7 @@ export default class App extends Component {
     <TouchableOpacity
       key={key}
       onPress={() => this.setState({picker: key})}
-      style={{margin: 10}}
-    >
+      style={{margin: 10}}>
       <Text style={styles.text}>{examples[key].buttonTitle}</Text>
     </TouchableOpacity>
   );
@@ -62,8 +60,7 @@ export default class App extends Component {
   renderBackButton = key => (
     <TouchableOpacity
       onPress={() => this.setState({picker: undefined})}
-      style={{margin: 10, position: 'absolute', top: 30, left: 0}}
-    >
+      style={{margin: 10, position: 'absolute', top: 30, left: 0}}>
       <Text style={styles.text}>Go back</Text>
     </TouchableOpacity>
   );
