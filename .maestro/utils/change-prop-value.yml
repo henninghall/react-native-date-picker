@@ -1,9 +1,6 @@
 appId: com.rn071
 ---
-- tapOn: clear
-- tapOn:
-    id: propName
-- inputText: ${PROP}
+- tapOn: clear prop value
 - tapOn:
     id: propValue
 - inputText: ${VALUE}
