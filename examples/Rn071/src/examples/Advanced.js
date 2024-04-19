@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, UIManager, View, findNodeHandle} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import CustomPropValue from '../CustomPropValue';
-import {MicroButton} from '../MicroButton';
+import {MicroButton, MicroText} from '../MicroButton';
 import PropSlider from '../PropSlider';
 import DateChange from '../propPickers/DateChange';
 import LocalePicker from '../propPickers/LocalePicker';
@@ -12,6 +12,7 @@ import ModePicker from '../propPickers/ModePicker';
 import Scroll from '../propPickers/Scroll';
 import TimeZoneOffsetInMinutes from '../propPickers/TimeZoneOffsetInMinutes';
 import {readableDate} from '../utils';
+import {uses24HourClock} from 'react-native-localize';
 
 Date.prototype.addHours = function (h) {
   this.setTime(this.getTime() + h * 60 * 60 * 1000);
@@ -105,6 +106,30 @@ export default class Advanced extends Component {
             onPress={() => this.setState({mode: 'time'})}
             text={'time mode'}
           />
+          <MicroButton
+            onPress={() => this.setState({minuteInterval: 1})}
+            text={'1min interval'}
+          />
+          <MicroButton
+            onPress={() => this.setState({minuteInterval: 5})}
+            text={'5min interval'}
+          />
+          <MicroButton
+            onPress={() => this.setState({minuteInterval: 15})}
+            text={'15min interval'}
+          />
+          <View style={{width: '100%', height: 2, backgroundColor: '#eee'}} />
+          <View style={{}}>
+            <MicroText
+              text={`time format: ${uses24HourClock() ? '24h' : '12h'}`}
+            />
+            <MicroText
+              text={`minimumDate: ${readableDate(this.state.minimumDate)}`}
+            />
+            <MicroText
+              text={`maximumDate: ${readableDate(this.state.maximumDate)}`}
+            />
+          </View>
         </View>
       </View>
     );
