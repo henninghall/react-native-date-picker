@@ -58,7 +58,9 @@ export default class Advanced extends Component {
           timeZoneOffsetInMinutes={this.state.timeZoneOffsetInMinutes}
         />
         <Text testID={'dateOutput'}>{readableDate(this.state.date)}</Text>
-        <Text testID={'dateStringOutput'}>{this.state.dateString}</Text>
+        <Text testID={'dateStringOutput'} style={{backgroundColor: '#eee'}}>
+          {this.state.dateString}
+        </Text>
         <Text />
         <Text>Change prop: </Text>
         <Text />

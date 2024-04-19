@@ -10,5 +10,5 @@ appId: com.android.settings
 - tapOn: Change
 - runFlow: swipe-wheel-1.yml
 - assertVisible:
-    id: dateStringOutput
+    id: dateStringOutput|dateOutput
     text: ${EXPECT}
