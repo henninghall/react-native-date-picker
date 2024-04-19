@@ -1,0 +1,9 @@
+appId: com.rn071
+---
+- tapOn: clear prop value
+- tapOn:
+    id: propValue
+- inputText: ${VALUE}
+- hideKeyboard
+- tapOn:
+    id: changeProp

@@ -3,12 +3,12 @@ tags:
   - android
   - displayText
 ---
-- runFlow:
-    file: utils/set-timezone.yml
-    env:
-      REGION: Sweden
-      GMT: GMT+01:00
-      STATE: ''
+# - runFlow:
+#     file: utils/set-timezone.yml
+#     env:
+#       REGION: Sweden
+#       GMT: GMT+01:00
+#       STATE: ''
 
 - runFlow: utils/launch.yml
 # test: minuteInterval rounding should round with floor
@@ -17,10 +17,10 @@ tags:
     env:
       PROP: minuteInterval
       VALUE: 5
+- tapOn: change date
 - runFlow:
-    file: utils/change-prop.yml
+    file: utils/change-prop-value.yml
     env:
-      PROP: date
       VALUE: '2000-01-01T00:34:00+01:00'
 - runFlow: utils/swipe-wheel-1.yml
 - assertVisible: '2000-01-02 00:30:00'
@@ -28,12 +28,12 @@ tags:
 - runFlow: utils/reset.yml
 
 # test: can have initial date in past
-- tapOn: clear maximumDate 
+- tapOn: clear maximumDate
 - tapOn: clear minimumDate
+- tapOn: change date
 - runFlow:
-    file: utils/change-prop.yml
+    file: utils/change-prop-value.yml
     env:
-      PROP: date
       VALUE: '1999-01-01'
 - runFlow: utils/swipe-wheel-1.yml
 - assertVisible: '1999-01-02 01:00:00'
@@ -46,24 +46,27 @@ tags:
       LOCALE: en-US
       EXPECT: 'Sun Jan 21200 AM '
 
-# test: translates the display text - datetime
-- runFlow: reset.yml
+- runFlow: utils/reset.yml
 
-test: display text - datetime
+# test: display text - datetime
 - runFlow:
     file: utils/change-locale-and-scroll.yml
     env:
       LOCALE: vi-VN
       EXPECT: 'CN 2 thg 11200 SA '
 
-- runFlow: reset.yml
 - runFlow:
     file: utils/change-locale-and-scroll.yml
     env:
       LOCALE: pt-BR
-      EXPECT: 'dom. 2 de jan. 1200 AM'
+      EXPECT: 'dom. 2 de jan. 1200 AM '
 
-- runFlow: reset.yml
+# Should be possible to use picker with invalid locale
+- runFlow:
+    file: utils/change-locale-and-scroll.yml
+    env:
+      LOCALE: xx
+      EXPECT: '2000-01-02 00:00:00'
 
 # If more tests are needed on datetime locale:
 # 'sv-SE', 'sön 2 jan.' + '1200 fm '
@@ -73,15 +76,7 @@ test: display text - datetime
 # 'zh-CH', '1月2日周日 上午 1200'
 # 'eu', 'urt. 2 ig.' + ' AM 1200'
 
-# Should be possible to use picker with invalid locale
-- runFlow:
-    file: utils/change-locale-and-scroll.yml
-    env:
-      LOCALE: xx
-      EXPECT: '2000-01-02 00:00:00'
-
-# test: translates the display text - datetime
-test: display text - date
+# test: display text - date
 
 - tapOn: date mode
 - tapOn: clear minimumDate
@@ -104,7 +99,6 @@ test: display text - date
     env:
       LOCALE: zh-CH
       EXPECT: '2001年一月1日'
-
 # If more tests are needed for date locale:
 # 'sv-SE', '2' + 'januari' + '2000'
 # 'ko', '2001년' + '1월' + '1일'

@@ -53,6 +53,12 @@ export default function CustomPropValue(props) {
           <Text style={{color: 'blue'}}>Clear</Text>
         </TouchableOpacity>
         <MicroButton
+          text={'clear prop value'}
+          onPress={() => {
+            setPropName('date');
+          }}
+        />
+        <MicroButton
           text={'reset date'}
           onPress={() =>
             props.changeProp({propName: 'date', propValue: getInitialDate()})
@@ -62,6 +68,12 @@ export default function CustomPropValue(props) {
           text={'change locale'}
           onPress={() => {
             setPropName('locale');
+          }}
+        />
+        <MicroButton
+          text={'change date'}
+          onPress={() => {
+            setPropName('date');
           }}
         />
       </View>
