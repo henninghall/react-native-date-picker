@@ -1,0 +1,31 @@
+appId: com.rn071
+tags:
+  - mode
+---
+- runFlow: utils/launch.yml
+
+# datetime
+- tapOn: datetime mode
+- runFlow: utils/swipe-wheel-1.yml
+- runFlow: utils/swipe-wheel-2.yml
+- runFlow: utils/swipe-wheel-3.yml
+- runFlow: utils/swipe-wheel-4.yml
+- assertVisible: '2000-01-02 13:01:00'
+- tapOn: reset date
+
+# date
+- tapOn: date mode
+- tapOn: clear maximumDate
+- runFlow: utils/swipe-wheel-1.yml
+- runFlow: utils/swipe-wheel-2.yml
+- runFlow: utils/swipe-wheel-3.yml
+- assertVisible: '2001-02-02 00:00:00'
+- tapOn: reset date
+
+# time
+- tapOn: time mode
+- runFlow: utils/swipe-wheel-1.yml
+- runFlow: utils/swipe-wheel-2.yml
+- runFlow: utils/swipe-wheel-3.yml
+- assertVisible: '2000-01-01 13:01:00'
+- tapOn: reset date
