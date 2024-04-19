@@ -107,9 +107,17 @@ export default class Advanced extends Component {
             text={'time mode'}
           />
           <View style={{width: '100%', height: 2, backgroundColor: '#eee'}} />
-          <MicroText
-            text={`time format: ${uses24HourClock() ? '24h' : '12h'}`}
-          />
+          <View style={{}}>
+            <MicroText
+              text={`time format: ${uses24HourClock() ? '24h' : '12h'}`}
+            />
+            <MicroText
+              text={`minimumDate: ${readableDate(this.state.minimumDate)}`}
+            />
+            <MicroText
+              text={`maximumDate: ${readableDate(this.state.maximumDate)}`}
+            />
+          </View>
         </View>
       </View>
     );
