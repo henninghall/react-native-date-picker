@@ -4,6 +4,7 @@ tags:
   - modal
   - minuteInterval
   - scrollAround
+  - invalidDates
 ---
 # test: can use modal
 
@@ -53,3 +54,55 @@ tags:
 - runFlow: utils/swipe-wheel-1.yml
 - assertVisible: '2000-01-01 00:00:00'
 - tapOn: reset date
+
+# invalid dates
+- runFlow: utils/launch.yml
+- tapOn: clear minimumDate
+- tapOn: clear maximumDate
+- tapOn: date mode
+
+## test: scrolls back to last valid date
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '2001-02-28 00:00'
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2001-02-28 00:00:00'
+
+# scrolls back after scrolling multiple dates
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '2001-02-27 00:00'
+- runFlow: utils/swipe-wheel-2.yml
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2001-02-28 00:00:00'
+
+# not scrolling back on unusual valid dates
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '2000-02-28 00:00'
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2000-02-29 00:00:00'
+
+# works on months with 30 days
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '2001-04-30 00:00'
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2001-04-30 00:00:00'
+
+# works on months with 31 days
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '2001-05-30 00:00'
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2001-05-31 00:00:00'
