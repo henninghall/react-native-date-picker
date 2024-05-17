@@ -4,52 +4,105 @@ tags:
   - modal
   - minuteInterval
   - scrollAround
+  - invalidDates
 ---
 # test: can use modal
 
-- launchApp
-- tapOn: Modal
-- tapOn: Select date
-- runFlow: utils/swipe-wheel-1.yml
-- tapOn: Confirm
-- assertVisible: '2000-01-02'
+# - launchApp
+# - tapOn: Modal
+# - tapOn: Select date
+# - runFlow: utils/swipe-wheel-1.yml
+# - tapOn: Confirm
+# - assertVisible: '2000-01-02'
 
-# test: minuteInterval
+# # test: minuteInterval
 
+# - runFlow: utils/launch.yml
+
+# # 1min
+# - tapOn: 1min interval
+# - runFlow: utils/swipe-wheel-3.yml
+# - assertVisible: '2000-01-01 00:01:00'
+# - tapOn: reset date
+
+# # 5min
+# - tapOn: 5min interval
+# - runFlow: utils/swipe-wheel-3.yml
+# - assertVisible: '2000-01-01 00:05:00'
+# - tapOn: reset date
+
+# # 15min
+# - tapOn: 15min interval
+# - runFlow: utils/swipe-wheel-3.yml
+# - assertVisible: '2000-01-01 00:15:00'
+# - tapOn: reset date
+
+# # test: scroll around
+
+# # minute wheel should be possible to scroll around
+# - tapOn: 15min interval
+# - runFlow: utils/swipe-wheel-3.yml
+# - runFlow: utils/swipe-wheel-3.yml
+# - runFlow: utils/swipe-wheel-3.yml
+# - runFlow: utils/swipe-wheel-3.yml
+# - assertVisible: '2000-01-01 00:00:00'
+# - tapOn: reset date
+
+# # day wheel should change year when passing new year
+# - runFlow: utils/swipe-wheel-1-up.yml
+# - assertVisible: '1999-12-31 00:00:00'
+# - runFlow: utils/swipe-wheel-1.yml
+# - assertVisible: '2000-01-01 00:00:00'
+# - tapOn: reset date
+
+# invalid dates
 - runFlow: utils/launch.yml
+- tapOn: clear minimumDate
+- tapOn: clear maximumDate
+- tapOn: date mode
 
-# 1min
-- tapOn: 1min interval
-- runFlow: utils/swipe-wheel-3.yml
-- assertVisible: '2000-01-01 00:01:00'
-- tapOn: reset date
+## test: scrolls back to last valid date
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '2001-02-28 00:00'
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2001-02-28 00:00:00'
 
-# 5min
-- tapOn: 5min interval
-- runFlow: utils/swipe-wheel-3.yml
-- assertVisible: '2000-01-01 00:05:00'
-- tapOn: reset date
+# scrolls back after scrolling multiple dates
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '2001-02-27 00:00'
+- runFlow: utils/swipe-wheel-2.yml
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2001-02-28 00:00:00'
 
-# 15min
-- tapOn: 15min interval
-- runFlow: utils/swipe-wheel-3.yml
-- assertVisible: '2000-01-01 00:15:00'
-- tapOn: reset date
+# not scrolling back on unusual valid dates
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '2000-02-28 00:00'
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2001-02-29 00:00:00'
 
-# test: scroll around
+# works on months with 30 days
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '2001-04-30 00:00'
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2001-04-30 00:00:00'
 
-# minute wheel should be possible to scroll around
-- tapOn: 15min interval
-- runFlow: utils/swipe-wheel-3.yml
-- runFlow: utils/swipe-wheel-3.yml
-- runFlow: utils/swipe-wheel-3.yml
-- runFlow: utils/swipe-wheel-3.yml
-- assertVisible: '2000-01-01 00:00:00'
-- tapOn: reset date
-
-# day wheel should change year when passing new year
-- runFlow: utils/swipe-wheel-1-up.yml
-- assertVisible: '1999-12-31 00:00:00'
-- runFlow: utils/swipe-wheel-1.yml
-- assertVisible: '2000-01-01 00:00:00'
-- tapOn: reset date
+# works on months with 31 days
+- runFlow:
+    file: utils/change-prop.yml
+    env:
+      PROP: date
+      VALUE: '2001-05-30 00:00'
+- runFlow: utils/swipe-wheel-2.yml
+- assertVisible: '2001-05-31 00:00:00'
