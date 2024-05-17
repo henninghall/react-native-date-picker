@@ -6,6 +6,7 @@ tags:
   - scrollAround
 ---
 # test: can use modal
+
 - launchApp
 - tapOn: Modal
 - tapOn: Select date
@@ -17,19 +18,19 @@ tags:
 
 - runFlow: utils/launch.yml
 
-# # 1min
+# 1min
 - tapOn: 1min interval
 - runFlow: utils/swipe-wheel-3.yml
 - assertVisible: '2000-01-01 00:01:00'
 - tapOn: reset date
 
-# # 5min
+# 5min
 - tapOn: 5min interval
 - runFlow: utils/swipe-wheel-3.yml
 - assertVisible: '2000-01-01 00:05:00'
 - tapOn: reset date
 
-# # 15min
+# 15min
 - tapOn: 15min interval
 - runFlow: utils/swipe-wheel-3.yml
 - assertVisible: '2000-01-01 00:15:00'
