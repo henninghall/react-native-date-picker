@@ -87,7 +87,7 @@ tags:
       PROP: date
       VALUE: '2000-02-28 00:00'
 - runFlow: utils/swipe-wheel-2.yml
-- assertVisible: '2001-02-29 00:00:00'
+- assertVisible: '2000-02-29 00:00:00'
 
 # works on months with 30 days
 - runFlow:
