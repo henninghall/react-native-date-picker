@@ -108,7 +108,7 @@ tags:
 - tapOn: reset date
 
 - runFlow: utils/swipe-wheel-2.yml
-- assertVisible: '2000-01-00 01:00:00'
+- assertVisible: '2000-01-01 01:00:00'
 - tapOn: reset date
 
 - runFlow: utils/swipe-wheel-3.yml
