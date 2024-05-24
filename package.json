@@ -18,7 +18,8 @@
     "emulator": "bash ./scripts/start-android-emulator.sh",
     "maestro:ios": "maestro test --include-tags=ios .maestro/",
     "maestro:android": "maestro test --include-tags=android .maestro/",
-    "typecheck": "yarn tsc"
+    "typecheck": "yarn tsc",
+    "lint": "yarn eslint ./src"
   },
   "repository": {
     "type": "git",
