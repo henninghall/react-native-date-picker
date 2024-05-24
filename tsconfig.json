@@ -4,7 +4,10 @@
     "noEmit": true,
     "checkJs": true,
     "moduleResolution": "node",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
   },
   "include": ["src/**/*"]
 

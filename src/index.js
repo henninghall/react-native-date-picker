@@ -1,6 +1,6 @@
 /**
  * @typedef {import("../index").DatePickerProps} Props
- * @typedef {Omit<Props, "timeZoneOffsetInMinutes"> & { timeZoneOffsetInMinutes: string, textColor: string}} PlatformPickerProps
+ * @typedef {Omit<Props, "timeZoneOffsetInMinutes"> & { timeZoneOffsetInMinutes: string, textColor: string | undefined }} PlatformPickerProps
  */
 import React from 'react'
 import { Appearance, Platform } from 'react-native'
@@ -41,7 +41,9 @@ const DatePickerWrapper = (props) => {
 const getTheme = (props) => {
   if (props.theme) return props.theme
   if (!Appearance) return 'auto'
-  return Appearance.getColorScheme()
+  const scheme = Appearance.getColorScheme()
+  if (scheme === null) return undefined
+  return scheme
 }
 
 /** @param {Props} props **/

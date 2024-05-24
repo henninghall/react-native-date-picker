@@ -1,4 +1,4 @@
-/** @param {string} c **/
+/** @param {string | undefined} c **/
 export function colorToHex(c) {
   if (c === undefined) return c
   if (c === 'none') return c
@@ -21,11 +21,11 @@ function isValidHex(color) {
 
 /** @param {string} rgb **/
 function parseRgb(rgb) {
-  return rgb
-    .match(
-      /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i
-    )
-    .slice(1)
+  const match = rgb.match(
+    /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i
+  )
+  if (!match) throw Error('Invalid color: ' + rgb)
+  return match.slice(1)
 }
 
 /** @param {string[]} rgbArray **/
