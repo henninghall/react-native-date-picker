@@ -85,7 +85,6 @@ export const useModal = ({ props, id }) => {
 
   // open
   useEffect(() => {
-    console.log('should open', shouldOpenModal(props, previousProps))
     if (shouldOpenModal(props, previousProps)) {
       closing.current = false
       const params = Platform.select({
