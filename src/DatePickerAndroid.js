@@ -93,9 +93,12 @@ const getTimezoneOffsetInMinutes = (props) => {
 /**
  * @template {Date | undefined} T
  * @param {T} date
+ * @returns {T extends Date ? string : undefined}
  * */
 const toIsoWithTimeZoneOffset = (date) => {
+  /** @ts-ignore */
   if (!date) return undefined
+  /** @ts-ignore */
   return date.toISOString()
 }
 

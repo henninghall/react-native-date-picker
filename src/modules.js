@@ -1,5 +1,16 @@
 /**
- * @typedef {Omit<Props, "timeZoneOffsetInMinutes"> & { timeZoneOffsetInMinutes: string, textColor: string | undefined }} PlatformPickerProps
+ * Should be using fabric props directly when api is aligned between platforms.
+ * {import("./fabric/RNDatePickerNativeComponent").NativeProps} NativeProps
+ * @typedef {{
+ * timeZoneOffsetInMinutes: string,
+ * date: string, id: string,
+ * minimumDate: string | undefined,
+ * maximumDate: string | undefined,
+ * timezoneOffsetInMinutes: string | undefined,
+ * style: import('react-native').StyleProp<import('react-native').ViewStyle>,
+ * onChange: (e: { nativeEvent: {date: string, id: string, dateString: string} }) => void,
+ * onStateChange: (e: *) => void,
+ * }} NativeProps
  */
 import {
   NativeModules,
@@ -9,7 +20,7 @@ import {
 } from 'react-native'
 import { getInstallationErrorMessage } from './installationError'
 
-/** @returns {import('react-native').HostComponent<PlatformPickerProps>} */
+/** @returns {import('react-native').HostComponent<NativeProps>} */
 export const getNativeComponent = () => {
   try {
     switch (Platform.OS) {
