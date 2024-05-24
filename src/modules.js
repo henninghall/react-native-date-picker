@@ -3,13 +3,18 @@
  * {import("./fabric/RNDatePickerNativeComponent").NativeProps} NativeProps
  * @typedef {{
  * timeZoneOffsetInMinutes: string,
- * date: string, id: string,
- * minimumDate: string | undefined,
- * maximumDate: string | undefined,
- * timezoneOffsetInMinutes: string | undefined,
+ * date: string | number | undefined,
+ * id?: string ,
+ * minimumDate?: string | number | undefined,
+ * maximumDate?: string | number | undefined,
+ * timezoneOffsetInMinutes?: string | undefined,
  * style: import('react-native').StyleProp<import('react-native').ViewStyle>,
- * onChange: (e: { nativeEvent: {date: string, id: string, dateString: string} }) => void,
- * onStateChange: (e: *) => void,
+ * onChange: (e: *) => void,
+ * onStateChange?: (e?: *) => void,
+ * onStartShouldSetResponder?: (e?: *) => void,
+ * onResponderTerminationRequest?: (e?: *) => void,
+ * locale?: string | undefined,
+ * theme?: string | undefined,
  * }} NativeProps
  */
 import {

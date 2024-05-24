@@ -36,7 +36,7 @@ export const DatePickerAndroid = React.memo((props) => {
 
   const onSpinnerStateChanged = useCallback(
     /**
-     * @typedef {{ spinnerState: Parameters<Props['onStateChange']>[0], id: string }} SpinnerStateData
+     * @typedef {{ spinnerState: "spinning" | "idle", id: string }} SpinnerStateData
      * @param {{ nativeEvent: SpinnerStateData } | SpinnerStateData & { nativeEvent: undefined }} e
      */
     (e) => {
