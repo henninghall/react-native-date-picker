@@ -13,6 +13,8 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Dynamic;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
+import com.henninghall.date_picker.ui.SpinnerState;
+import com.henninghall.date_picker.ui.SpinnerStateListener;
 
 import net.time4j.android.ApplicationStarter;
 
@@ -126,7 +128,19 @@ public class DatePickerModuleImpl {
             }
         }
         picker.update();
+
+        picker.addSpinnerStateListener(new SpinnerStateListener() {
+            @Override
+            public void onChange(SpinnerState state) {
+                setEnabledConfirmButton(state == SpinnerState.idle);
+            }
+        });
+
         return picker;
+    }
+
+    private void setEnabledConfirmButton(boolean enabled) {
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(enabled);
     }
 
     private View withTopMargin(PickerView view) {
