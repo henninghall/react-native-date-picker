@@ -3,7 +3,6 @@ name: Lint
 on:
   workflow_call:
   workflow_dispatch:
-  push:
 
 jobs:
   lint-js:
