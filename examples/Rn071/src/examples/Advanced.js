@@ -118,6 +118,18 @@ export default class Advanced extends Component {
             onPress={() => this.setState({minuteInterval: 15})}
             text={'15min interval'}
           />
+          <MicroButton
+            onPress={() => this.setState({locale: 'en-US'})}
+            text={'locale en-US'}
+          />
+          <MicroButton
+            onPress={() => this.setState({locale: 'en-GB'})}
+            text={'locale en-GB'}
+          />
+          <MicroButton
+            onPress={() => this.setState({locale: 'ko-KR'})}
+            text={'locale ko-KR'}
+          />
           <View style={{width: '100%', height: 2, backgroundColor: '#eee'}} />
           <View style={{}}>
             <MicroText

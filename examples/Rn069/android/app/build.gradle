@@ -136,7 +136,6 @@ android {
     defaultConfig {
       testBuildType System.getProperty('testBuildType', 'debug')  // This will later be used to control the test apk build type
       testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-      missingDimensionStrategy 'detox', 'full'
 
         applicationId "com.rn069"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -289,9 +288,6 @@ dependencies {
         implementation jscFlavor
     }
     
-    androidTestImplementation(project(path: ":detox"))
-    // androidTestImplementation('com.wix:detox:+')
-    androidTestImplementation 'com.linkedin.testbutler:test-butler-library:2.2.1'
     // implementation 'androidx.appcompat:appcompat:1.1.0' // (check what the latest version is!)
     testImplementation 'junit:junit:4.13.2'
 }
