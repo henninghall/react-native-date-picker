@@ -1,3 +1,6 @@
+/**
+ * @typedef {Omit<Props, "timeZoneOffsetInMinutes"> & { timeZoneOffsetInMinutes: string, textColor: string | undefined }} PlatformPickerProps
+ */
 import {
   NativeModules,
   Platform,
@@ -6,6 +9,7 @@ import {
 } from 'react-native'
 import { getInstallationErrorMessage } from './installationError'
 
+/** @returns {import('react-native').HostComponent<PlatformPickerProps>} */
 export const getNativeComponent = () => {
   try {
     switch (Platform.OS) {
@@ -18,7 +22,8 @@ export const getNativeComponent = () => {
         )
     }
   } catch (e) {
-    if (global.ignoreDatePickerWarning) return null
+    // TODO: uncomment this line
+    // if (global.ignoreDatePickerWarning) return null
     throw Error(getInstallationErrorMessage())
   }
 }

@@ -1,17 +1,20 @@
 /**
  * @typedef {import("../index").DatePickerProps} Props
- * @typedef {Omit<Props, "timeZoneOffsetInMinutes"> & { timeZoneOffsetInMinutes: string, textColor: string | undefined }} PlatformPickerProps
+ * @typedef {Omit<Props, "timeZoneOffsetInMinutes"> & { timeZoneOffsetInMinutes: string, textColor: string | undefined, onDateStringChange?: (date: string) => void }} PlatformPickerProps
  */
 import React from 'react'
 import { Appearance, Platform } from 'react-native'
 import { colorToHex } from './colorToHex'
 import { throwIfInvalidProps } from './propChecker'
+import { Text } from 'react-native'
 
 /** @type {React.FC<PlatformPickerProps>} */
 const DatePicker = Platform.select({
   android: () => require('./DatePickerAndroid').DatePickerAndroid,
   // ios: () => require('./DatePickerIOS').default,
-  // default: () => <Text>DatePicker is not supported on this platform.</Text>,
+  default: () => () => (
+    <Text>DatePicker is not supported on this platform.</Text>
+  ),
 })()
 
 /** @type {React.FC<Props>} */

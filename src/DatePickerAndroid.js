@@ -1,10 +1,10 @@
 /**
  * @typedef {import("../index").DatePickerProps} Props
- * @typedef {Omit<Props, "timeZoneOffsetInMinutes"> & { timeZoneOffsetInMinutes: string, textColor: string | undefined }} PlatformPickerProps
+ * @typedef {Omit<Props, "timeZoneOffsetInMinutes"> & { timeZoneOffsetInMinutes: string, textColor: string | undefined, onDateStringChange?: (date: string) => void }} PlatformPickerProps
  */
-import React, { useRef } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { NativeEventEmitter } from 'react-native'
-import { shouldCloseModal, shouldOpenModal } from './modal'
+import { shouldCloseModal, shouldOpenModal, usePrevious } from './modal'
 import { getNativeComponent, getNativeModule } from './modules'
 
 const NativeComponent = getNativeComponent()
@@ -18,19 +18,80 @@ const defaultWidth = 310
  * @type {React.FC<PlatformPickerProps>}
  **/
 export const DatePickerAndroid = (props) => {
-  const id = useRef(Math.random().toString()).current
+  const previousProps = usePrevious(props)
+  const thisId = useRef(Math.random().toString()).current
+  const closing = useRef(false)
+
+  const onChange = useCallback(
+    (e) => {
+      const { date, id, dateString } = e.nativeEvent ?? e
+      const newArch = id !== null
+      if (newArch && id !== thisId) return
+      const jsDate = fromIsoWithTimeZoneOffset(date)
+      if (props.onDateChange) props.onDateChange(jsDate)
+      if (props.onDateStringChange) props.onDateStringChange(dateString)
+    },
+    [props, thisId]
+  )
+
+  // open picker
+  useEffect(() => {
+    if (shouldOpenModal(props, previousProps)) {
+      closing.current = false
+      NativeModule.openPicker(props)
+    }
+  }, [previousProps, props])
+
+  // close picker
+  useEffect(() => {
+    if (shouldCloseModal(props, previousProps, closing.current)) {
+      closing.current = true
+      NativeModule.closePicker()
+    }
+  }, [previousProps, props])
+
+  useEffect(() => {
+    const eventEmitter = new NativeEventEmitter(NativeModule)
+    eventEmitter.addListener('dateChange', onChange)
+    eventEmitter.addListener('spinnerStateChange', this._onSpinnerStateChanged)
+    this.eventEmitter.addListener('onConfirm', this._onConfirm)
+    this.eventEmitter.addListener('onCancel', this._onCancel)
+
+    return () => {
+      this.eventEmitter.removeAllListeners('spinnerStateChange')
+      this.eventEmitter.removeAllListeners('dateChange')
+      this.eventEmitter.removeAllListeners('onConfirm')
+      this.eventEmitter.removeAllListeners('onCancel')
+    }
+  }, [])
+
+  if (props.modal) return null
 
   return (
     <NativeComponent
       {...props}
       date={toIsoWithTimeZoneOffset(props.date)}
-      id={id}
-      minimumDate={this._minimumDate()}
-      maximumDate={this._maximumDate()}
-      timezoneOffsetInMinutes={this._getTimezoneOffsetInMinutes()}
-      style={this._getStyle()}
+      id={thisId}
+      minimumDate={toIsoWithTimeZoneOffset(props.minimumDate)}
+      maximumDate={toIsoWithTimeZoneOffset(props.maximumDate)}
+      timezoneOffsetInMinutes={getTimezoneOffsetInMinutes(props)}
+      style={getStyle(props)}
+      onChange={this._onChange}
+      onStateChange={this._onSpinnerStateChanged}
     />
   )
+}
+
+/** @param {PlatformPickerProps} props */
+const getStyle = (props) => {
+  const width = props.mode === 'time' ? timeModeWidth : defaultWidth
+  return [{ width, height }, props.style]
+}
+
+/** @param {PlatformPickerProps} props */
+const getTimezoneOffsetInMinutes = (props) => {
+  if (props.timeZoneOffsetInMinutes == undefined) return undefined
+  return props.timeZoneOffsetInMinutes
 }
 
 /**
@@ -40,6 +101,11 @@ export const DatePickerAndroid = (props) => {
 const toIsoWithTimeZoneOffset = (date) => {
   if (!date) return undefined
   return date.toISOString()
+}
+
+/** @param {string} timestamp */
+const fromIsoWithTimeZoneOffset = (timestamp) => {
+  return new Date(timestamp)
 }
 
 // class DatePickerAndroid extends React.PureComponent {
