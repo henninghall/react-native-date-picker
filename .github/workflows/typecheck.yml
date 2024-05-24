@@ -3,12 +3,12 @@ name: Types
 on:
   workflow_call:
   workflow_dispatch:
+  push:
 
 jobs:
   lint-js:
     name: Types
     runs-on: ubuntu-latest
-    timeout-minutes: 5
 
     steps:
       - name: Checkout
