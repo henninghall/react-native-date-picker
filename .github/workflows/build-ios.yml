@@ -3,7 +3,6 @@ name: Build
 on:
   workflow_call:
   workflow_dispatch:
-  push:
 
 env:
   APP_PATH: ./examples/Rn071/ios/DerivedData/Build/Products/Release-iphonesimulator/Rn071.app

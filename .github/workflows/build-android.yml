@@ -3,7 +3,6 @@ name: Build
 on:
   workflow_call:
   workflow_dispatch:
-  push:
 
 env:
   APP_PATH: examples/Rn071/android/app/build/outputs/apk/release/app-release.apk
