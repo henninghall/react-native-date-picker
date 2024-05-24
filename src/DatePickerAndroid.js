@@ -14,13 +14,12 @@ const defaultWidth = 310
 export const DatePickerAndroid = React.memo((props) => {
   const thisId = useRef(Math.random().toString()).current
 
+  /** @type {NativeComponentProps['onChange']} props */
   const onChange = useCallback(
-    /**
-     * @typedef {{date: string, id: string, dateString: string}} Data
-     * @param {{ nativeEvent: Data } | Data & { nativeEvent: undefined }} e
-     */
     (e) => {
       const { date, id, dateString } = e.nativeEvent ?? e
+      if (!date) throw new Error('invalid date from fabric component')
+      if (!dateString) throw new Error('invalid date from fabric component')
       const newArch = id !== null
       if (newArch && id !== thisId) return
       const jsDate = fromIsoWithTimeZoneOffset(date)
@@ -30,11 +29,8 @@ export const DatePickerAndroid = React.memo((props) => {
     [props, thisId]
   )
 
+  /** @type {NativeComponentProps['onStateChange']} props */
   const onSpinnerStateChanged = useCallback(
-    /**
-     * @typedef {{ spinnerState: "spinning" | "idle", id: string }} SpinnerStateData
-     * @param {{ nativeEvent: SpinnerStateData } | SpinnerStateData & { nativeEvent: undefined }} e
-     */
     (e) => {
       const { spinnerState, id } = e.nativeEvent ?? e
       const newArch = id !== null
@@ -54,17 +50,32 @@ export const DatePickerAndroid = React.memo((props) => {
     }
   }, [onChange, onSpinnerStateChanged])
 
-  /** @type {NativeProps}  */
+  /** @type {NativeComponentProps}  */
   const modifiedProps = {
     ...props,
     date: toIsoWithTimeZoneOffset(props.date),
     id: thisId,
     minimumDate: toIsoWithTimeZoneOffset(props.minimumDate),
     maximumDate: toIsoWithTimeZoneOffset(props.maximumDate),
-    timezoneOffsetInMinutes: getTimezoneOffsetInMinutes(props),
+    timeZoneOffsetInMinutes: getTimeZoneOffsetInMinutes(props),
     style: getStyle(props),
     onChange,
     onStateChange: onSpinnerStateChanged,
+  }
+
+  /** @type {NativeModuleProps}  */
+  const modalProps = {
+    ...props,
+    // date: toIsoWithTimeZoneOffset(props.date),
+    // id: thisId,
+    // minimumDate: toIsoWithTimeZoneOffset(props.minimumDate),
+    // maximumDate: toIsoWithTimeZoneOffset(props.maximumDate),
+    // timeZoneOffsetInMinutes: getTimeZoneOffsetInMinutes(props),
+    // style: getStyle(props),
+    // onChange,
+    // onStateChange: onSpinnerStateChanged,
+    onCancel: props.onCancel,
+    onConfirm: props.onConfirm,
   }
 
   useModal({ props: modifiedProps, id: thisId })
@@ -81,7 +92,7 @@ const getStyle = (props) => {
 }
 
 /** @param {PlatformPickerProps} props */
-const getTimezoneOffsetInMinutes = (props) => {
+const getTimeZoneOffsetInMinutes = (props) => {
   // eslint-disable-next-line eqeqeq
   if (props.timeZoneOffsetInMinutes == undefined) return undefined
   return props.timeZoneOffsetInMinutes

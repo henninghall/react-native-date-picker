@@ -15,7 +15,7 @@ import com.henninghall.date_picker.props.MinuteIntervalProp;
 import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.Prop;
 import com.henninghall.date_picker.props.TextColorProp;
-import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
+import com.henninghall.date_picker.props.TimeZoneOffsetInMinutesProp;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -33,7 +33,7 @@ public class State {
     private final MinuteIntervalProp minuteIntervalProp = new MinuteIntervalProp();
     private final MinimumDateProp minimumDateProp = new MinimumDateProp();
     private final MaximumDateProp maximumDateProp = new MaximumDateProp();
-    private final TimezoneOffsetInMinutesProp timezoneOffsetInMinutesProp = new TimezoneOffsetInMinutesProp();
+    private final TimeZoneOffsetInMinutesProp timeZoneOffsetInMinutesProp = new TimeZoneOffsetInMinutesProp();
     private final HeightProp heightProp = new HeightProp();
     private final Is24hourSourceProp is24hourSourceProp = new Is24hourSourceProp();
     private final IdProp idProp = new IdProp();
@@ -48,7 +48,7 @@ public class State {
         put(MinuteIntervalProp.name, minuteIntervalProp);
         put(MinimumDateProp.name, minimumDateProp);
         put(MaximumDateProp.name, maximumDateProp);
-        put(TimezoneOffsetInMinutesProp.name, timezoneOffsetInMinutesProp);
+        put(TimeZoneOffsetInMinutesProp.name, timeZoneOffsetInMinutesProp);
         put(HeightProp.name, heightProp);
         put(Is24hourSourceProp.name, is24hourSourceProp);
         put(IdProp.name, idProp);
@@ -106,7 +106,7 @@ public class State {
 
     public TimeZone getTimeZone() {
         try{
-            String offsetString = timezoneOffsetInMinutesProp.getValue();
+            String offsetString = timeZoneOffsetInMinutesProp.getValue();
             if(offsetString == null || offsetString.equals("")) return TimeZone.getDefault();
             int offset = Integer.parseInt(offsetString);
             int totalOffsetMinutes = Math.abs(offset);

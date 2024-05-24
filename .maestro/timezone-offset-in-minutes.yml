@@ -1,7 +1,7 @@
 appId: com.rn071
 tags:
   - android
-  - timezoneOffsetInMinutes
+  - timeZoneOffsetInMinutes
 ---
 - runFlow:
     file: utils/set-timezone.yml
@@ -54,7 +54,7 @@ tags:
 - assertVisible: 'Fri Dec 31 8 01 PM '
 - runFlow: utils/reset.yml
 
-# test: timezoneOffsetInMinutes combined with maximumDate/minimumDate in another timezone than current device.
+# test: timeZoneOffsetInMinutes combined with maximumDate/minimumDate in another timezone than current device.
 # Bug was reported here: https://github.com/henninghall/react-native-date-picker/issues/613
 - runFlow:
     file: utils/set-timezone.yml

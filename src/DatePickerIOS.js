@@ -16,7 +16,7 @@ export const DatePickerIOS = (props) => {
     [props]
   )
 
-  /** @type {NativeProps}  */
+  /** @type {NativeComponentProps}  */
   const modifiedProps = {
     ...props,
     onChange,

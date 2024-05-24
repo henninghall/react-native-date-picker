@@ -5,8 +5,8 @@ import { getNativeModule } from './modules'
 const NativeModule = getNativeModule()
 
 /**
- * @param {ModalProps} props
- * @param {ModalProps | undefined} prevProps
+ * @param {NativeModuleProps} props
+ * @param {NativeModuleProps | undefined} prevProps
  */
 const shouldOpenModal = (props, prevProps) => {
   if (!props.modal) return false
@@ -17,8 +17,8 @@ const shouldOpenModal = (props, prevProps) => {
 }
 
 /**
- * @param {ModalProps} props
- * @param {ModalProps | undefined} prevProps
+ * @param {NativeModuleProps} props
+ * @param {NativeModuleProps | undefined} prevProps
  * @param {boolean} isClosing
  */
 const shouldCloseModal = (props, prevProps, isClosing) => {
@@ -45,7 +45,7 @@ const usePrevious = (value) => {
   return ref.current
 }
 
-/** @param {{props: ModalProps, id: string | undefined }} props */
+/** @param {{props: NativeModuleProps, id: string | undefined }} props */
 export const useModal = ({ props, id }) => {
   const closing = useRef(false)
   const previousProps = usePrevious(props)

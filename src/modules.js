@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 import { getInstallationErrorMessage } from './installationError'
 
-/** @returns {import('react-native').HostComponent<NativeProps>} */
+/** @returns {import('react-native').HostComponent<NativeComponentProps>} */
 export const getNativeComponent = () => {
   try {
     switch (Platform.OS) {

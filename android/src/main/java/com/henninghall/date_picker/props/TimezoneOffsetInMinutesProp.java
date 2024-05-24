@@ -2,8 +2,8 @@ package com.henninghall.date_picker.props;
 
 import com.facebook.react.bridge.Dynamic;
 
-public class TimezoneOffsetInMinutesProp extends Prop<String> {
-    public static final String name = "timezoneOffsetInMinutes";
+public class TimeZoneOffsetInMinutesProp extends Prop<String> {
+    public static final String name = "timeZoneOffsetInMinutes";
 
     @Override
     String toValue(Dynamic value) {
