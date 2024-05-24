@@ -1,7 +1,3 @@
-/**
- * @typedef {import("../index").DatePickerProps} Props
- * @typedef {Omit<Props, "timeZoneOffsetInMinutes"> & { timeZoneOffsetInMinutes: string, textColor: string | undefined, onDateStringChange?: (date: string) => void }} PlatformPickerProps
- */
 import React, { useCallback, useEffect, useRef } from 'react'
 import { NativeEventEmitter } from 'react-native'
 import { useModal } from './modal'
@@ -58,7 +54,7 @@ export const DatePickerAndroid = React.memo((props) => {
     }
   }, [onChange, onSpinnerStateChanged])
 
-  /** @type {import('./modules').NativeProps & {onConfirm?:PlatformPickerProps['onConfirm'], onCancel?:PlatformPickerProps['onCancel']}}  */
+  /** @type {NativeProps}  */
   const modifiedProps = {
     ...props,
     date: toIsoWithTimeZoneOffset(props.date),

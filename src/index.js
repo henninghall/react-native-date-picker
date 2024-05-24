@@ -1,7 +1,3 @@
-/**
- * @typedef {import("../index").DatePickerProps} Props
- * @typedef {Omit<Props, "timeZoneOffsetInMinutes"> & { timeZoneOffsetInMinutes: string, textColor: string | undefined, onDateStringChange?: (date: string) => void }} PlatformPickerProps
- */
 import React from 'react'
 import { Appearance, Platform, Text } from 'react-native'
 import { colorToHex } from './colorToHex'

@@ -1,14 +1,3 @@
-/**
- * @typedef {import("../index").DatePickerProps} Props
- * @typedef {Omit<Props, "timeZoneOffsetInMinutes"> & { timeZoneOffsetInMinutes: string, textColor: string | undefined }} PlatformPickerProps
- * @typedef {import('./modules').NativeProps & {
- * onConfirm?:PlatformPickerProps['onConfirm'],
- * onCancel?:PlatformPickerProps['onCancel'],
- * modal?: boolean,
- * open?: boolean,
- * }} ModalProps
- */
-
 import { useCallback, useEffect, useRef } from 'react'
 import { NativeEventEmitter, Platform } from 'react-native'
 import { getNativeModule } from './modules'
