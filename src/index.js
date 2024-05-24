@@ -1,19 +1,23 @@
+/**
+ * @typedef {import("../index").DatePickerProps} Props
+ */
 import React from 'react'
 import { Appearance, Platform, Text } from 'react-native'
 import { colorToHex } from './colorToHex'
 import { throwIfInvalidProps } from './propChecker'
 
+/** @type {React.FC<Props>} */
 const DatePicker = Platform.select({
-  android: () => require('./DatePickerAndroid').default,
-  ios: () => require('./DatePickerIOS').default,
-  default: () => <Text>DatePicker is not supported on this platform.</Text>,
+  android: () => require('./DatePickerAndroid').DatePickerAndroid,
+  // ios: () => require('./DatePickerIOS').default,
+  // default: () => <Text>DatePicker is not supported on this platform.</Text>,
 })()
 
+/** @type {React.FC<Props>} */
 const DatePickerWrapper = (props) => {
   if (__DEV__) throwIfInvalidProps(props)
   return (
     <DatePicker
-      ref={props.innerRef}
       {...props}
       textColor={colorToHex(getTextColor(props))}
       dividerColor={colorToHex(props.dividerColor)}
@@ -32,6 +36,10 @@ const DatePickerWrapper = (props) => {
   )
 }
 
+/**
+ * @param {Props['theme']} props
+ * @returns {string}
+ **/
 const getTheme = (props) => {
   if (props.theme) return props.theme
   if (!Appearance) return 'auto'

@@ -1,3 +1,6 @@
+/**
+ * @typedef {import("../index.d.ts").DatePickerProps} Props
+ */
 import React from 'react'
 import { NativeEventEmitter } from 'react-native'
 import { shouldCloseModal, shouldOpenModal } from './modal'
@@ -9,6 +12,31 @@ const NativeModule = getNativeModule()
 const height = 180
 const timeModeWidth = 240
 const defaultWidth = 310
+
+/**
+ * @type {React.FC<Props>}
+ **/
+export const DatePickerAndroid = (props) => {
+  /** @type {string} */
+  const id = useRef(Math.random().toString()).current
+
+  return (
+    <NativeComponent
+      {...props}
+      date={toIsoWithTimeZoneOffset(props.date)}
+      id={id}
+      minimumDate={this._minimumDate()}
+      maximumDate={this._maximumDate()}
+      timezoneOffsetInMinutes={this._getTimezoneOffsetInMinutes()}
+      style={this._getStyle()}
+    />
+  )
+}
+
+/**
+ * @param {Date} date
+ */
+const toIsoWithTimeZoneOffset = (date) => date.toISOString()
 
 class DatePickerAndroid extends React.PureComponent {
   render() {

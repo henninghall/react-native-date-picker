@@ -17,7 +17,8 @@
     "number-picker:update-patch": "bash ./scripts/update-patch.sh",
     "emulator": "bash ./scripts/start-android-emulator.sh",
     "maestro:ios": "maestro test --include-tags=ios .maestro/",
-    "maestro:android": "maestro test --include-tags=android .maestro/"
+    "maestro:android": "maestro test --include-tags=android .maestro/",
+    "typecheck": "yarn tsc"
   },
   "repository": {
     "type": "git",
@@ -49,7 +50,9 @@
     "@babel/preset-env": "^7.12.11",
     "babel-jest": "^26.6.3",
     "jest": "^26.6.3",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "typescript": "^5.4.5",
+    "react-native": "*"
   },
   "codegenConfig": {
     "name": "RNDatePickerSpecs",
