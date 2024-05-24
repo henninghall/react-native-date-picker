@@ -9,7 +9,7 @@ export function colorToHex(c) {
     if (c.length === 4) return '#' + c[1] + c[1] + c[2] + c[2] + c[3] + c[3]
     if (c.length === 7) return c
   }
-  const colorFromName = colourNameToHex(c)
+  const colorFromName = colorNameToHex(c)
   if (colorFromName) return colorFromName
   throw Error('Invalid color: ' + c)
 }
@@ -30,14 +30,14 @@ function parseRgb(rgb) {
 
 /** @param {string[]} rgbArray **/
 function rgb2hex(rgbArray) {
-  if (rgbArray.length != 3) {
+  if (rgbArray.length !== 3) {
     return ''
   }
   return (
     '#' +
-    parseInt(rgbArray[0]).toString(16).padStart(2, '0') +
-    parseInt(rgbArray[1]).toString(16).padStart(2, '0') +
-    parseInt(rgbArray[2]).toString(16).padStart(2, '0')
+    parseInt(rgbArray[0], 10).toString(16).padStart(2, '0') +
+    parseInt(rgbArray[1], 10).toString(16).padStart(2, '0') +
+    parseInt(rgbArray[2], 10).toString(16).padStart(2, '0')
   )
 }
 
@@ -64,7 +64,7 @@ function parseHsl(hsl) {
 
 /** @param {(number)[]} hslArray **/
 function hsl2hex(hslArray) {
-  if (hslArray.length != 3) {
+  if (hslArray.length !== 3) {
     return ''
   }
 
@@ -105,7 +105,7 @@ function hsl2hex(hslArray) {
  * @param {string} color
  * @returns {string | undefined}
  *  */
-function colourNameToHex(color) {
+function colorNameToHex(color) {
   var colors = {
     aliceblue: '#f0f8ff',
     antiquewhite: '#faebd7',
