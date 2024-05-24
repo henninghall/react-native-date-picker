@@ -3,13 +3,17 @@
  * @typedef {Omit<Props, "timeZoneOffsetInMinutes"> & { timeZoneOffsetInMinutes: string, textColor: string | undefined }} PlatformPickerProps
  */
 
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
+import { NativeEventEmitter, Platform } from 'react-native'
+import { getNativeModule } from './modules'
+
+const NativeModule = getNativeModule()
 
 /**
  * @param {PlatformPickerProps} props
  * @param {PlatformPickerProps | undefined} prevProps
  */
-export const shouldOpenModal = (props, prevProps) => {
+const shouldOpenModal = (props, prevProps) => {
   if (!props.modal) return false
   if (!props.open) return false
   const currentlyOpen = prevProps?.open
@@ -22,7 +26,7 @@ export const shouldOpenModal = (props, prevProps) => {
  * @param {PlatformPickerProps | undefined} prevProps
  * @param {boolean} isClosing
  */
-export const shouldCloseModal = (props, prevProps, isClosing) => {
+const shouldCloseModal = (props, prevProps, isClosing) => {
   if (!props.modal) return false
   if (props.open) return false
   const currentlyOpen = prevProps?.open
@@ -37,11 +41,71 @@ export const shouldCloseModal = (props, prevProps, isClosing) => {
  * @param {T} value
  * @returns {T | undefined}
  */
-export const usePrevious = (value) => {
+const usePrevious = (value) => {
   /** @type {React.MutableRefObject<T | undefined>} */
   const ref = useRef()
   useEffect(() => {
     ref.current = value
   })
   return ref.current
+}
+
+/** @param {{props: PlatformPickerProps, id: string | undefined }} props */
+export const useModal = ({ props, id }) => {
+  const closing = useRef(false)
+  const previousProps = usePrevious(props)
+
+  const onConfirm = useCallback(
+    (params) => {
+      if (params.id !== id) return
+      closing.current = true
+      Platform.select({
+        ios: () => {
+          if (props.onConfirm) props.onConfirm(new Date(params.timestamp))
+        },
+        android: () => {
+          if (props.onConfirm) props.onConfirm(new Date(params.date))
+        },
+      })
+    },
+    [id, props]
+  )
+
+  const onCancel = useCallback(
+    (params) => {
+      if (params.id !== id) return
+      closing.current = true
+      if (props.onCancel) props.onCancel()
+    },
+    [id, props]
+  )
+
+  // open picker
+  useEffect(() => {
+    if (shouldOpenModal(props, previousProps)) {
+      closing.current = false
+      Platform.select({
+        ios: () => NativeModule.openPicker(props, onConfirm, onCancel),
+        android: () => NativeModule.openPicker(props),
+      })
+    }
+  }, [onCancel, onConfirm, previousProps, props])
+
+  // close picker
+  useEffect(() => {
+    if (shouldCloseModal(props, previousProps, closing.current)) {
+      closing.current = true
+      NativeModule.closePicker()
+    }
+  }, [previousProps, props])
+
+  useEffect(() => {
+    const eventEmitter = new NativeEventEmitter(NativeModule)
+    eventEmitter.addListener('onConfirm', onConfirm)
+    eventEmitter.addListener('onCancel', onCancel)
+    return () => {
+      eventEmitter.removeAllListeners('onConfirm')
+      eventEmitter.removeAllListeners('onCancel')
+    }
+  }, [onCancel, onConfirm])
 }
