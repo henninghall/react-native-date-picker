@@ -38,6 +38,7 @@ export const getNativeComponent = () => {
         )
     }
   } catch (e) {
+    // @ts-ignore
     if (global.ignoreDatePickerWarning) return null
     throw Error(getInstallationErrorMessage())
   }
@@ -58,6 +59,7 @@ export const getNativeModule = () => {
         )
     }
   } catch (e) {
+    // @ts-ignore
     if (global.ignoreDatePickerWarning) return null
     throw Error(getInstallationErrorMessage())
   }

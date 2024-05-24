@@ -39,6 +39,7 @@ const messages = {
 
 export const getInstallationErrorMessage = () => {
   try {
+    // @ts-ignore
     require('expo-constants').default
     return messages[Platform.OS].expo
   } catch (e) {
