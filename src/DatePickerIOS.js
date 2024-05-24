@@ -10,7 +10,7 @@ import { getNativeComponent } from './modules'
 const NativeComponent = getNativeComponent()
 
 /** @type {React.FC<PlatformPickerProps>} */
-const DatePickerIOS = (props) => {
+export const DatePickerIOS = (props) => {
   const onChange = useCallback(
     /** @param {{ nativeEvent: { timestamp: string } }} event */
     (event) => {
@@ -51,5 +51,3 @@ const styles = StyleSheet.create({
     width: 310,
   },
 })
-
-export default DatePickerIOS
