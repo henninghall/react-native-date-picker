@@ -53,5 +53,3 @@ const getTitle = (props) => {
 }
 
 export default React.memo(DatePickerWrapper)
-
-// trigger build
