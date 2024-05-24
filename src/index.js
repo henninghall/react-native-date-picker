@@ -12,9 +12,8 @@ import { Text } from 'react-native'
 const DatePicker = Platform.select({
   android: () => require('./DatePickerAndroid').DatePickerAndroid,
   // ios: () => require('./DatePickerIOS').default,
-  default: () => () => (
-    <Text>DatePicker is not supported on this platform.</Text>
-  ),
+  default: () => () =>
+    <Text>DatePicker is not supported on this platform.</Text>,
 })()
 
 /** @type {React.FC<Props>} */
