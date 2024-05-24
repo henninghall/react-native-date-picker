@@ -20,22 +20,27 @@ const DatePickerIOS = (props) => {
     [props]
   )
 
-  useModal({ props, id: undefined })
+  /** @type {import('./modules').NativeProps & {onConfirm?:PlatformPickerProps['onConfirm'], onCancel?:PlatformPickerProps['onCancel']}}  */
+  const modifiedProps = {
+    ...props,
+    onChange,
+    style: [styles.datePickerIOS, props.style],
+    date: props.date ? props.date.getTime() : undefined,
+    locale: props.locale ? props.locale : undefined,
+    maximumDate: props.maximumDate ? props.maximumDate.getTime() : undefined,
+    minimumDate: props.minimumDate ? props.minimumDate.getTime() : undefined,
+    theme: props.theme ? props.theme : 'auto',
+  }
+
+  useModal({ props: modifiedProps, id: undefined })
 
   if (props.modal) return null
 
   return (
     <NativeComponent
-      {...props}
-      onChange={onChange}
+      {...modifiedProps}
       onStartShouldSetResponder={() => true}
       onResponderTerminationRequest={() => false}
-      style={[styles.datePickerIOS, props.style]}
-      date={props.date ? props.date.getTime() : undefined}
-      locale={props.locale ? props.locale : undefined}
-      maximumDate={props.maximumDate ? props.maximumDate.getTime() : undefined}
-      minimumDate={props.minimumDate ? props.minimumDate.getTime() : undefined}
-      theme={props.theme ? props.theme : 'auto'}
     />
   )
 }

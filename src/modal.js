@@ -1,6 +1,12 @@
 /**
  * @typedef {import("../index").DatePickerProps} Props
  * @typedef {Omit<Props, "timeZoneOffsetInMinutes"> & { timeZoneOffsetInMinutes: string, textColor: string | undefined }} PlatformPickerProps
+ * @typedef {import('./modules').NativeProps & {
+ * onConfirm?:PlatformPickerProps['onConfirm'],
+ * onCancel?:PlatformPickerProps['onCancel'],
+ * modal?: boolean,
+ * open?: boolean,
+ * }} ModalProps
  */
 
 import { useCallback, useEffect, useRef } from 'react'
@@ -10,8 +16,8 @@ import { getNativeModule } from './modules'
 const NativeModule = getNativeModule()
 
 /**
- * @param {PlatformPickerProps} props
- * @param {PlatformPickerProps | undefined} prevProps
+ * @param {ModalProps} props
+ * @param {ModalProps | undefined} prevProps
  */
 const shouldOpenModal = (props, prevProps) => {
   if (!props.modal) return false
@@ -22,8 +28,8 @@ const shouldOpenModal = (props, prevProps) => {
 }
 
 /**
- * @param {PlatformPickerProps} props
- * @param {PlatformPickerProps | undefined} prevProps
+ * @param {ModalProps} props
+ * @param {ModalProps | undefined} prevProps
  * @param {boolean} isClosing
  */
 const shouldCloseModal = (props, prevProps, isClosing) => {
@@ -50,7 +56,7 @@ const usePrevious = (value) => {
   return ref.current
 }
 
-/** @param {{props: PlatformPickerProps, id: string | undefined }} props */
+/** @param {{props: ModalProps, id: string | undefined }} props */
 export const useModal = ({ props, id }) => {
   const closing = useRef(false)
   const previousProps = usePrevious(props)
@@ -80,18 +86,19 @@ export const useModal = ({ props, id }) => {
     [id, props]
   )
 
-  // open picker
+  // open
   useEffect(() => {
+    console.log('should open', shouldOpenModal(props, previousProps))
     if (shouldOpenModal(props, previousProps)) {
       closing.current = false
       Platform.select({
         ios: () => NativeModule.openPicker(props, onConfirm, onCancel),
-        android: () => NativeModule.openPicker(props),
+        android: NativeModule.openPicker(props),
       })
     }
   }, [onCancel, onConfirm, previousProps, props])
 
-  // close picker
+  // close
   useEffect(() => {
     if (shouldCloseModal(props, previousProps, closing.current)) {
       closing.current = true

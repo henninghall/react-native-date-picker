@@ -58,23 +58,24 @@ export const DatePickerAndroid = React.memo((props) => {
     }
   }, [onChange, onSpinnerStateChanged])
 
-  useModal({ props, id: thisId })
+  /** @type {import('./modules').NativeProps & {onConfirm?:PlatformPickerProps['onConfirm'], onCancel?:PlatformPickerProps['onCancel']}}  */
+  const modifiedProps = {
+    ...props,
+    date: toIsoWithTimeZoneOffset(props.date),
+    id: thisId,
+    minimumDate: toIsoWithTimeZoneOffset(props.minimumDate),
+    maximumDate: toIsoWithTimeZoneOffset(props.maximumDate),
+    timezoneOffsetInMinutes: getTimezoneOffsetInMinutes(props),
+    style: getStyle(props),
+    onChange,
+    onStateChange: onSpinnerStateChanged,
+  }
+
+  useModal({ props: modifiedProps, id: thisId })
 
   if (props.modal) return null
 
-  return (
-    <NativeComponent
-      {...props}
-      date={toIsoWithTimeZoneOffset(props.date)}
-      id={thisId}
-      minimumDate={toIsoWithTimeZoneOffset(props.minimumDate)}
-      maximumDate={toIsoWithTimeZoneOffset(props.maximumDate)}
-      timezoneOffsetInMinutes={getTimezoneOffsetInMinutes(props)}
-      style={getStyle(props)}
-      onChange={onChange}
-      onStateChange={onSpinnerStateChanged}
-    />
-  )
+  return <NativeComponent {...modifiedProps} />
 })
 
 /** @param {PlatformPickerProps} props */
