@@ -32,3 +32,11 @@ jobs:
   test-android-unit:
     name: Test
     uses: ./.github/workflows/test-android-unit.yml
+
+  lint:
+    name: Check
+    uses: ./.github/workflows/lint.yml
+
+  typecheck:
+    name: Check
+    uses: ./.github/workflows/typecheck.yml

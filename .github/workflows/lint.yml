@@ -1,0 +1,23 @@
+name: Lint
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  lint-js:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node
+        uses: actions/setup-node@v4
+
+      - name: Install npm dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: yarn lint

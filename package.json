@@ -17,7 +17,9 @@
     "number-picker:update-patch": "bash ./scripts/update-patch.sh",
     "emulator": "bash ./scripts/start-android-emulator.sh",
     "maestro:ios": "maestro test --include-tags=ios .maestro/",
-    "maestro:android": "maestro test --include-tags=android .maestro/"
+    "maestro:android": "maestro test --include-tags=android .maestro/",
+    "typecheck": "yarn tsc",
+    "lint": "yarn eslint ./src"
   },
   "repository": {
     "type": "git",
@@ -47,9 +49,16 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
+    "@react-native/eslint-config": "0.73.2",
+    "@types/jest": "^29.5.12",
+    "@types/react": "18.3.3",
     "babel-jest": "^26.6.3",
+    "eslint": "^8.19.0",
+    "eslint-plugin-ft-flow": "^3.0.9",
     "jest": "^26.6.3",
-    "prettier": "^2.2.1"
+    "prettier": "2.8.8",
+    "react-native": "0.74.1",
+    "typescript": "5.4.5"
   },
   "codegenConfig": {
     "name": "RNDatePickerSpecs",

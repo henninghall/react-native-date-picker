@@ -3,17 +3,19 @@ import { Appearance, Platform, Text } from 'react-native'
 import { colorToHex } from './colorToHex'
 import { throwIfInvalidProps } from './propChecker'
 
+/** @type {React.FC<PlatformPickerProps>} */
 const DatePicker = Platform.select({
-  android: () => require('./DatePickerAndroid').default,
-  ios: () => require('./DatePickerIOS').default,
-  default: () => <Text>DatePicker is not supported on this platform.</Text>,
+  android: () => require('./DatePickerAndroid').DatePickerAndroid,
+  ios: () => require('./DatePickerIOS').DatePickerIOS,
+  default: () => () =>
+    <Text>DatePicker is not supported on this platform.</Text>,
 })()
 
+/** @type {React.FC<Props>} */
 const DatePickerWrapper = (props) => {
   if (__DEV__) throwIfInvalidProps(props)
   return (
     <DatePicker
-      ref={props.innerRef}
       {...props}
       textColor={colorToHex(getTextColor(props))}
       dividerColor={colorToHex(props.dividerColor)}
@@ -32,18 +34,23 @@ const DatePickerWrapper = (props) => {
   )
 }
 
+/** @param {Props} props **/
 const getTheme = (props) => {
   if (props.theme) return props.theme
   if (!Appearance) return 'auto'
-  return Appearance.getColorScheme()
+  const scheme = Appearance.getColorScheme()
+  if (scheme === null) return undefined
+  return scheme
 }
 
+/** @param {Props} props **/
 const getTextColor = (props) => {
   const darkTheme = getTheme(props) === 'dark'
   if (darkTheme) return 'white'
   return undefined
 }
 
+/** @param {Props} props **/
 const getTitle = (props) => {
   const { title, mode } = props
   if (title === null) return ''

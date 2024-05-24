@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { NativeEventEmitter } from 'react-native'
-import { shouldCloseModal, shouldOpenModal } from './modal'
+import { useModal } from './modal'
 import { getNativeComponent, getNativeModule } from './modules'
 
 const NativeComponent = getNativeComponent()
@@ -10,123 +10,98 @@ const height = 180
 const timeModeWidth = 240
 const defaultWidth = 310
 
-class DatePickerAndroid extends React.PureComponent {
-  render() {
-    const props = this.getProps()
+/** @type {React.FC<PlatformPickerProps>} */
+export const DatePickerAndroid = React.memo((props) => {
+  const thisId = useRef(Math.random().toString()).current
 
-    if (shouldOpenModal(props, this.previousProps)) {
-      this.isClosing = false
-      NativeModule.openPicker(props)
+  const onChange = useCallback(
+    /**
+     * @typedef {{date: string, id: string, dateString: string}} Data
+     * @param {{ nativeEvent: Data } | Data & { nativeEvent: undefined }} e
+     */
+    (e) => {
+      const { date, id, dateString } = e.nativeEvent ?? e
+      const newArch = id !== null
+      if (newArch && id !== thisId) return
+      const jsDate = fromIsoWithTimeZoneOffset(date)
+      if (props.onDateChange) props.onDateChange(jsDate)
+      if (props.onDateStringChange) props.onDateStringChange(dateString)
+    },
+    [props, thisId]
+  )
+
+  const onSpinnerStateChanged = useCallback(
+    /**
+     * @typedef {{ spinnerState: "spinning" | "idle", id: string }} SpinnerStateData
+     * @param {{ nativeEvent: SpinnerStateData } | SpinnerStateData & { nativeEvent: undefined }} e
+     */
+    (e) => {
+      const { spinnerState, id } = e.nativeEvent ?? e
+      const newArch = id !== null
+      if (newArch && id !== thisId) return
+      props.onStateChange && props.onStateChange(spinnerState)
+    },
+    [props, thisId]
+  )
+
+  useEffect(() => {
+    const eventEmitter = new NativeEventEmitter(NativeModule)
+    eventEmitter.addListener('dateChange', onChange)
+    eventEmitter.addListener('spinnerStateChange', onSpinnerStateChanged)
+    return () => {
+      eventEmitter.removeAllListeners('dateChange')
+      eventEmitter.removeAllListeners('spinnerStateChange')
     }
-    if (shouldCloseModal(props, this.previousProps, this.isClosing)) {
-      this.closing = true
-      NativeModule.closePicker()
-    }
+  }, [onChange, onSpinnerStateChanged])
 
-    this.previousProps = props
-
-    if (props.modal) return null
-
-    return (
-      <NativeComponent
-        {...props}
-        onChange={this._onChange}
-        onStateChange={this._onSpinnerStateChanged}
-      />
-    )
+  /** @type {NativeProps}  */
+  const modifiedProps = {
+    ...props,
+    date: toIsoWithTimeZoneOffset(props.date),
+    id: thisId,
+    minimumDate: toIsoWithTimeZoneOffset(props.minimumDate),
+    maximumDate: toIsoWithTimeZoneOffset(props.maximumDate),
+    timezoneOffsetInMinutes: getTimezoneOffsetInMinutes(props),
+    style: getStyle(props),
+    onChange,
+    onStateChange: onSpinnerStateChanged,
   }
 
-  getId = () => {
-    if (!this.id) {
-      this.id = Math.random().toString()
-    }
-    return this.id
-  }
+  useModal({ props: modifiedProps, id: thisId })
 
-  componentDidMount = () => {
-    this.eventEmitter = new NativeEventEmitter(NativeModule)
-    this.eventEmitter.addListener('dateChange', this._onChange)
-    this.eventEmitter.addListener(
-      'spinnerStateChange',
-      this._onSpinnerStateChanged
-    )
-    this.eventEmitter.addListener('onConfirm', this._onConfirm)
-    this.eventEmitter.addListener('onCancel', this._onCancel)
-  }
+  if (props.modal) return null
 
-  componentWillUnmount = () => {
-    this.eventEmitter.removeAllListeners('spinnerStateChange')
-    this.eventEmitter.removeAllListeners('dateChange')
-    this.eventEmitter.removeAllListeners('onConfirm')
-    this.eventEmitter.removeAllListeners('onCancel')
-  }
+  return <NativeComponent {...modifiedProps} />
+})
 
-  getProps = () => ({
-    ...this.props,
-    date: this._date(),
-    id: this.getId(),
-    minimumDate: this._minimumDate(),
-    maximumDate: this._maximumDate(),
-    timezoneOffsetInMinutes: this._getTimezoneOffsetInMinutes(),
-    style: this._getStyle(),
-  })
+/** @param {PlatformPickerProps} props */
+const getStyle = (props) => {
+  const width = props.mode === 'time' ? timeModeWidth : defaultWidth
+  return [{ width, height }, props.style]
+}
 
-  _getTimezoneOffsetInMinutes = () => {
-    if (this.props.timeZoneOffsetInMinutes == undefined) return undefined
-    return this.props.timeZoneOffsetInMinutes
-  }
+/** @param {PlatformPickerProps} props */
+const getTimezoneOffsetInMinutes = (props) => {
+  // eslint-disable-next-line eqeqeq
+  if (props.timeZoneOffsetInMinutes == undefined) return undefined
+  return props.timeZoneOffsetInMinutes
+}
 
-  _getStyle = () => {
-    const width = this.props.mode === 'time' ? timeModeWidth : defaultWidth
-    return [{ width, height }, this.props.style]
-  }
+/**
+ * @template {Date | undefined} T
+ * @param {T} date
+ * @returns {T extends Date ? string : undefined}
+ * */
+const toIsoWithTimeZoneOffset = (date) => {
+  /** @ts-ignore */
+  if (!date) return undefined
+  /** @ts-ignore */
+  return date.toISOString()
+}
 
-  _onChange = (e) => {
-    const { date, id, dateString } = e.nativeEvent ?? e
-    const newArch = id !== null
-    if (newArch && id !== this.id) return
-    const jsDate = this._fromIsoWithTimeZoneOffset(date)
-    this.props.onDateChange && this.props.onDateChange(jsDate)
-    if (this.props.onDateStringChange) {
-      this.props.onDateStringChange(dateString)
-    }
-  }
-  _onSpinnerStateChanged = (e) => {
-    const { spinnerState, id } = e.nativeEvent ?? e
-    const newArch = id !== null
-    if (newArch && id !== this.id) return
-    this.props.onStateChange && this.props.onStateChange(spinnerState)
-  }
-
-  _maximumDate = () =>
-    this.props.maximumDate &&
-    this._toIsoWithTimeZoneOffset(this.props.maximumDate)
-
-  _minimumDate = () =>
-    this.props.minimumDate &&
-    this._toIsoWithTimeZoneOffset(this.props.minimumDate)
-
-  _date = () => this._toIsoWithTimeZoneOffset(this.props.date)
-
-  _fromIsoWithTimeZoneOffset = (timestamp) => {
-    return new Date(timestamp)
-  }
-
-  _toIsoWithTimeZoneOffset = (date) => {
-    return date.toISOString()
-  }
-
-  _onConfirm = ({ date, id }) => {
-    if (id !== this.id) return
-    this.isClosing = true
-    this.props.onConfirm(this._fromIsoWithTimeZoneOffset(date))
-  }
-
-  _onCancel = ({ id }) => {
-    if (id !== this.id) return
-    this.isClosing = true
-    this.props.onCancel()
-  }
+/** @param {string} timestamp */
+const fromIsoWithTimeZoneOffset = (timestamp) => {
+  return new Date(timestamp)
 }
 
 export default DatePickerAndroid

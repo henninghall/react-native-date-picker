@@ -34,6 +34,7 @@ describe('colorToHex', () => {
   })
 
   it('should throw when null', () => {
+    // @ts-expect-error
     expect(() => colorToHex(null)).toThrow(Error)
   })
 

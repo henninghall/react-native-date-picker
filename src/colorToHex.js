@@ -1,3 +1,4 @@
+/** @param {string | undefined} c **/
 export function colorToHex(c) {
   if (c === undefined) return c
   if (c === 'none') return c
@@ -8,35 +9,41 @@ export function colorToHex(c) {
     if (c.length === 4) return '#' + c[1] + c[1] + c[2] + c[2] + c[3] + c[3]
     if (c.length === 7) return c
   }
-  const colorFromName = colourNameToHex(c)
+  const colorFromName = colorNameToHex(c)
   if (colorFromName) return colorFromName
   throw Error('Invalid color: ' + c)
 }
 
+/** @param {string} color **/
 function isValidHex(color) {
   return /^#([0-9A-Fa-f]{3}){1,2}$/i.test(color)
 }
 
+/** @param {string} rgb **/
 function parseRgb(rgb) {
-  return rgb
-    .match(
-      /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i
-    )
-    .slice(1)
+  const match = rgb.match(
+    /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i
+  )
+  if (!match) throw Error('Invalid color: ' + rgb)
+  return match.slice(1)
 }
 
+/** @param {string[]} rgbArray **/
 function rgb2hex(rgbArray) {
-  if (rgbArray.length != 3) {
+  if (rgbArray.length !== 3) {
     return ''
   }
   return (
     '#' +
-    parseInt(rgbArray[0]).toString(16).padStart(2, '0') +
-    parseInt(rgbArray[1]).toString(16).padStart(2, '0') +
-    parseInt(rgbArray[2]).toString(16).padStart(2, '0')
+    parseInt(rgbArray[0], 10).toString(16).padStart(2, '0') +
+    parseInt(rgbArray[1], 10).toString(16).padStart(2, '0') +
+    parseInt(rgbArray[2], 10).toString(16).padStart(2, '0')
   )
 }
 
+/**
+ * @param {string} hsl
+ */
 function parseHsl(hsl) {
   const matches = hsl.match(
     /^hsla*\((\d{1,3})\s*[, ]\s*(\d{1,3})%\s*[, ]\s*(\d{1,3})%.*\)/i
@@ -46,14 +53,18 @@ function parseHsl(hsl) {
     throw Error('Invalid color: ' + hsl)
   }
 
+  // @ts-ignore
   const h = matches[1] / 360
+  // @ts-ignore
   const s = matches[2] / 100
+  // @ts-ignore
   const l = matches[3] / 100
   return [h, s, l]
 }
 
+/** @param {(number)[]} hslArray **/
 function hsl2hex(hslArray) {
-  if (hslArray.length != 3) {
+  if (hslArray.length !== 3) {
     return ''
   }
 
@@ -81,13 +92,20 @@ function hsl2hex(hslArray) {
   }
 
   return rgb2hex([
+    // @ts-ignore
     Math.round(r * 255),
+    // @ts-ignore
     Math.round(g * 255),
+    // @ts-ignore
     Math.round(b * 255),
   ])
 }
 
-function colourNameToHex(color) {
+/**
+ * @param {string} color
+ * @returns {string | undefined}
+ *  */
+function colorNameToHex(color) {
   var colors = {
     aliceblue: '#f0f8ff',
     antiquewhite: '#faebd7',

@@ -3,10 +3,22 @@ export function throwIfInvalidProps(props) {
 }
 
 class PropCheck {
+  /**
+   * @typedef {(props: Props & {style: object}) => boolean | undefined} IsInvalid
+   * @param {IsInvalid} isInvalid
+   * @param {string} errorText
+   */
   constructor(isInvalid, errorText) {
+    /** @type {IsInvalid} */
     this.isInvalid = isInvalid
+    /** @type {string} */
     this.errorText = errorText
   }
+
+  /**
+   * @param {Object} props
+   * @throws {Error}
+   */
   validate = (props) => {
     if (this.isInvalid(props)) {
       throw new Error(

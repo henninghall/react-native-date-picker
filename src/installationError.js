@@ -17,7 +17,7 @@ const messages = {
   ios: {
     expo: getMessage([
       "1. Have rebuilt your app (with for instance 'npx expo run:ios')",
-      `2. Are not using Expo Go (Expo Go is unsupported). See README for more info: `,
+      '2. Are not using Expo Go (Expo Go is unsupported). See README for more info: ',
       'https://github.com/henninghall/react-native-date-picker',
     ]),
     nonExpo: getMessage([
@@ -28,7 +28,7 @@ const messages = {
   android: {
     expo: getMessage([
       "1. Have rebuilt your app (with for instance 'npx expo run:android')",
-      `2. Are not using Expo Go (Expo Go is unsupported). See README for more info: `,
+      '2. Are not using Expo Go (Expo Go is unsupported). See README for more info: ',
       'https://github.com/henninghall/react-native-date-picker',
     ]),
     nonExpo: getMessage([
@@ -39,6 +39,7 @@ const messages = {
 
 export const getInstallationErrorMessage = () => {
   try {
+    // @ts-ignore
     require('expo-constants').default
     return messages[Platform.OS].expo
   } catch (e) {
