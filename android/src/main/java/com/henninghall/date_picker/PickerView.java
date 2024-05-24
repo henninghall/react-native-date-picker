@@ -6,19 +6,19 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.bridge.Dynamic;
+import com.henninghall.date_picker.props.DateProp;
 import com.henninghall.date_picker.props.DividerColorProp;
 import com.henninghall.date_picker.props.Is24hourSourceProp;
+import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.MaximumDateProp;
 import com.henninghall.date_picker.props.MinimumDateProp;
 import com.henninghall.date_picker.props.MinuteIntervalProp;
-import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
-import com.henninghall.date_picker.props.DateProp;
-import com.henninghall.date_picker.props.LocaleProp;
 import com.henninghall.date_picker.props.ModeProp;
 import com.henninghall.date_picker.props.TextColorProp;
+import com.henninghall.date_picker.props.TimezoneOffsetInMinutesProp;
+import com.henninghall.date_picker.ui.Accessibility;
 import com.henninghall.date_picker.ui.SpinnerStateListener;
 import com.henninghall.date_picker.ui.UIManager;
-import com.henninghall.date_picker.ui.Accessibility;
 
 import java.util.ArrayList;
 
@@ -113,6 +113,5 @@ public class PickerView extends RelativeLayout {
         super.requestLayout();
         post(measureAndLayout);
     }
-
 
 }
