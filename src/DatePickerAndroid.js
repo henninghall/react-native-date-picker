@@ -1,5 +1,6 @@
 /**
- * @typedef {import("../index.d.ts").DatePickerProps} Props
+ * @typedef {import("../index").DatePickerProps} Props
+ * @typedef {Omit<Props, "timeZoneOffsetInMinutes"> & {timeZoneOffsetInMinutes: string}} PlatformPickerProps
  */
 import React from 'react'
 import { NativeEventEmitter } from 'react-native'
@@ -14,11 +15,12 @@ const timeModeWidth = 240
 const defaultWidth = 310
 
 /**
- * @type {React.FC<Props>}
+ * @type {React.FC<PlatformPickerProps>}
  **/
 export const DatePickerAndroid = (props) => {
   /** @type {string} */
   const id = useRef(Math.random().toString()).current
+  props.timeZoneOffsetInMinutes
 
   return (
     <NativeComponent

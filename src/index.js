@@ -1,12 +1,13 @@
 /**
  * @typedef {import("../index").DatePickerProps} Props
+ * @typedef {Omit<Props, "timeZoneOffsetInMinutes"> & { timeZoneOffsetInMinutes: string, textColor: string}} PlatformPickerProps
  */
 import React from 'react'
-import { Appearance, Platform, Text } from 'react-native'
+import { Appearance, Platform } from 'react-native'
 import { colorToHex } from './colorToHex'
 import { throwIfInvalidProps } from './propChecker'
 
-/** @type {React.FC<Props>} */
+/** @type {React.FC<PlatformPickerProps>} */
 const DatePicker = Platform.select({
   android: () => require('./DatePickerAndroid').DatePickerAndroid,
   // ios: () => require('./DatePickerIOS').default,
@@ -36,22 +37,21 @@ const DatePickerWrapper = (props) => {
   )
 }
 
-/**
- * @param {Props['theme']} props
- * @returns {string}
- **/
+/** @param {Props} props **/
 const getTheme = (props) => {
   if (props.theme) return props.theme
   if (!Appearance) return 'auto'
   return Appearance.getColorScheme()
 }
 
+/** @param {Props} props **/
 const getTextColor = (props) => {
   const darkTheme = getTheme(props) === 'dark'
   if (darkTheme) return 'white'
   return undefined
 }
 
+/** @param {Props} props **/
 const getTitle = (props) => {
   const { title, mode } = props
   if (title === null) return ''
