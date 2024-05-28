@@ -65,7 +65,7 @@ export const useModal = ({ props, id }) => {
 
   const onCancel = useCallback(
     (params) => {
-      if (params.id !== id) return
+      if (params?.id !== id) return
       closing.current = true
       if (props.onCancel) props.onCancel()
     },
