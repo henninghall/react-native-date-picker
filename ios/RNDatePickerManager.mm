@@ -4,7 +4,7 @@
 
 #import "RNDatePickerManager.h"
 #import "RCTConvert.h"
-#import "DatePicker.h"
+#import "react_native_date_picker-Swift.h"
 #import "RNDatePicker.h"
 
 @implementation RCTConvert(UIDatePicker)
@@ -42,6 +42,7 @@ RCT_EXPORT_VIEW_PROPERTY(minimumDate, NSDate)
 RCT_EXPORT_VIEW_PROPERTY(maximumDate, NSDate)
 RCT_EXPORT_VIEW_PROPERTY(minuteInterval, NSInteger)
 RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStateChange, RCTBubblingEventBlock)
 RCT_REMAP_VIEW_PROPERTY(mode, datePickerMode, UIDatePickerMode)
 
 RCT_CUSTOM_VIEW_PROPERTY(timeZoneOffsetInMinutes, NSString, DatePicker)
@@ -106,14 +107,14 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         NSString * textColor = [RCTConvert NSString:[props objectForKey:@"textColor"]];
         if(textColor) [picker setTextColorProp:textColor];
         
-        UIDatePickerMode mode = [RCTConvert UIDatePickerMode:[props objectForKey:@"mode"]];
-        [picker setDatePickerMode:mode];
+//        UIDatePickerMode mode = [RCTConvert UIDatePickerMode:[props objectForKey:@"mode"]];
+//        [picker setDatePickerMode:mode];
         
         NSLocale * locale = [RCTConvert NSLocale:[props objectForKey:@"locale"]];
         if(locale) [picker setLocale:locale];
 
-        int minuteInterval = [RCTConvert int:[props objectForKey:@"minuteInterval"]];
-        [picker setMinuteInterval:minuteInterval];
+//        int minuteInterval = [RCTConvert int:[props objectForKey:@"minuteInterval"]];
+//        [picker setMinuteInterval:minuteInterval];
 
         NSString * timeZoneProp = [props valueForKey:@"timeZoneOffsetInMinutes"];
         if(timeZoneProp) [picker setTimeZoneOffsetInMinutes:timeZoneProp];
@@ -132,7 +133,7 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         [alertView addSubview:picker];
         
         UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:confirmText style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            onConfirm(@[@{ @"timestamp": @(picker.date.timeIntervalSince1970 * 1000.0) }]);
+            onConfirm(@[@{ @"timestamp": @(picker.selectedDate.timeIntervalSince1970 * 1000.0) }]);
         }];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelText style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
             onCancel(@[]);

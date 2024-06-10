@@ -13,10 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 NS_ASSUME_NONNULL_END
 
 #else
-#import "DatePicker.h"
 #import <UIKit/UIKit.h>
 
-@interface RNDatePicker : DatePicker
+@interface RNDatePicker : UIView
 
 
 @end
