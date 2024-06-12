@@ -1,11 +1,13 @@
 //
 //  UIView+isScrolling.swift
-//  react-native-date-picker
+//  FlipDatePicker
 //
 //  Created by Halina Smolskaya on 07/06/2024.
 //
 
-extension UIView {
+import UIKit
+
+public extension UIView {
     func isScrolling() -> Bool {
         if let scrollView = self as? UIScrollView {
             if scrollView.isDragging || scrollView.isDecelerating {

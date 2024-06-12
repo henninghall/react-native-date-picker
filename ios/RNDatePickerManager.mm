@@ -107,14 +107,14 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         NSString * textColor = [RCTConvert NSString:[props objectForKey:@"textColor"]];
         if(textColor) [picker setTextColorProp:textColor];
         
-//        UIDatePickerMode mode = [RCTConvert UIDatePickerMode:[props objectForKey:@"mode"]];
-//        [picker setDatePickerMode:mode];
+        UIDatePickerMode mode = [RCTConvert UIDatePickerMode:[props objectForKey:@"mode"]];
+        [picker setDatePickerMode:mode];
         
         NSLocale * locale = [RCTConvert NSLocale:[props objectForKey:@"locale"]];
         if(locale) [picker setLocale:locale];
 
-//        int minuteInterval = [RCTConvert int:[props objectForKey:@"minuteInterval"]];
-//        [picker setMinuteInterval:minuteInterval];
+        int minuteInterval = [RCTConvert int:[props objectForKey:@"minuteInterval"]];
+        [picker setMinuteInterval:minuteInterval];
 
         NSString * timeZoneProp = [props valueForKey:@"timeZoneOffsetInMinutes"];
         if(timeZoneProp) [picker setTimeZoneOffsetInMinutes:timeZoneProp];

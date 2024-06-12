@@ -1,21 +1,24 @@
 //
 //  DatePicker+UIPickerViewDelegate.swift
-//  react-native-date-picker
+//  FlipDatePicker
 //
 //  Created by Halina Smolskaya on 07/06/2024.
 //
 
+import UIKit
+
 extension DatePicker: UIPickerViewDelegate {
     public func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        guard let component = dataManager.collections[safe: component]?.component else { return 0 }
         switch component {
-        case 0:
-            pickerView.bounds.size.width * 0.35
-        case 1:
-            pickerView.bounds.size.width * 0.1
-        case 2:
-            pickerView.bounds.size.width * 0.25
+        case .year:
+            return pickerView.bounds.size.width * 0.25
+        case .month, .day where datePickerMode == .dateAndTime:
+            return pickerView.bounds.size.width * 0.35
+        case .hour, .minute, .nanosecond, .day:
+            return pickerView.bounds.size.width * 0.1
         default:
-            0
+            return 0
         }
     }
 
@@ -39,17 +42,7 @@ extension DatePicker: UIPickerViewDelegate {
             label.backgroundColor = .clear
         }
 
-        switch component {
-        case 0:
-            label.text = value(forRow: row, pickerViewData: months)
-            label.textAlignment = .left
-        case 1:
-            label.text = value(forRow: row, pickerViewData: days)
-        case 2:
-            label.text = years[row]
-        default:
-            break
-        }
+        label.text = dataManager.getValueInComponentForRow(component: component, row: row)
 
         if !isPickerScrolling, isScrolling() { isPickerScrolling = true }
 
@@ -57,17 +50,34 @@ extension DatePicker: UIPickerViewDelegate {
     }
 
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        isPickerScrolling = false
-        let month = (selectedRow(inComponent: 0) % months.count) + 1
-        let day = Int(value(forRow: selectedRow(inComponent: 1), pickerViewData: days)) ?? 1
-        let year = Int(years[selectedRow(inComponent: 2)]) ?? 1900
+        var newComponents = DateComponents()
+        dataManager.collections.enumerated().map { index, collection in
+            var value: Int? = nil
+            switch collection.component {
+            case .year:
+                value = Int(collection.getValueForRow(selectedRow(inComponent: index)) ?? "")
+            case .day, .month:
+                value = collection.getOriginalRow(selectedRow(inComponent: index)) + 1
+            case .hour where !is24HourFormat():
+                let amPmComponentIndex = dataManager.componentIndex(component: .nanosecond) ?? 0
+                let amPmValue = selectedRow(inComponent: amPmComponentIndex)
+                value = collection.getOriginalRow(selectedRow(inComponent: index))
+                if var value {
+                    value = value == 12 ? 0 : value + 12 * amPmValue
+                }
+            case .hour, .minute:
+                value = collection.getOriginalRow(selectedRow(inComponent: index))
+            default: break
+            }
+            if let value {
+                newComponents.setValue(value, for: collection.component)
+            }
+        }
+        if isPickerScrolling {
+            isPickerScrolling = false
+        }
 
-        var components = DateComponents()
-        components.day = day
-        components.month = month
-        components.year = year
-
-        guard var date = calendar.date(from: adjustDateComponents(components)) else { return }
+        guard var date = calendar.date(from: adjustDateComponents(newComponents)) else { return }
 
         if let minimumDate, date < minimumDate {
             date = minimumDate
@@ -81,11 +91,8 @@ extension DatePicker: UIPickerViewDelegate {
         onChange?(["timestamp": date.timeIntervalSince1970 * 1000])
     }
 
-    private func value(forRow row: Int, pickerViewData: [String]) -> String {
-        pickerViewData[row % pickerViewData.count]
-    }
-
     private func adjustDateComponents(_ components: DateComponents) -> DateComponents {
+        guard datePickerMode == .date || datePickerMode == .dateAndTime else { return components }
         var newComponents = components
         newComponents.day = 1
 
@@ -99,6 +106,12 @@ extension DatePicker: UIPickerViewDelegate {
                 newComponents.day = range.count
             } else if day < 1 {
                 newComponents.day = 1
+            }
+        }
+        if let newDay = newComponents.day, let oldDay = components.day, newDay != oldDay {
+            let disct = oldDay - newDay
+            if let comp = dataManager.collections.firstIndex { $0.component == .day } {
+                selectRow(selectedRow(inComponent: comp) - disct, inComponent: comp, animated: true)
             }
         }
         return newComponents

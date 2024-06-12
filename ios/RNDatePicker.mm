@@ -186,15 +186,14 @@ Class<RCTComponentViewProtocol> RNDatePickerCls(void)
 #else
 - (void)setDatePickerMode:(UIDatePickerMode)datePickerMode
 {
-  //[super setDatePickerMode:datePickerMode];
-  // We need to set minuteInterval after setting datePickerMode, otherwise minuteInterval is invalid in time mode.
-  //self.minuteInterval = _reactMinuteInterval;
+  [_picker setDatePickerMode:datePickerMode];
+  [_picker setMinuteInterval:_reactMinuteInterval];
 }
 
 - (void)setMinuteInterval:(NSInteger)minuteInterval
 {
-//  [super setMinuteInterval:minuteInterval];
-//  _reactMinuteInterval = minuteInterval;
+  [_picker setMinuteInterval:minuteInterval];
+  _reactMinuteInterval = minuteInterval;
 }
 
 - (void)setMinimumDate:(NSDate*)minimumDate
