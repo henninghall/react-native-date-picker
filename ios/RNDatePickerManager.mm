@@ -75,9 +75,25 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
 
         CGRect pickerBounds = picker.bounds;
 
+
+        // Detect the content size category
+        UIContentSizeCategory contentSize = UIApplication.sharedApplication.preferredContentSizeCategory;
+        int heightIncrement = 0;
+        
+        // Adjust height based on content size category
+        if ([contentSize isEqualToString:UIContentSizeCategoryAccessibilityLarge]) {
+            heightIncrement = 15;
+        } else if ([contentSize isEqualToString:UIContentSizeCategoryAccessibilityExtraLarge]) {
+            heightIncrement = 40;
+        } else if ([contentSize isEqualToString:UIContentSizeCategoryAccessibilityExtraExtraLarge]) {
+            heightIncrement = 70;
+        } else if ([contentSize isEqualToString:UIContentSizeCategoryAccessibilityExtraExtraExtraLarge]) {
+            heightIncrement = 90;
+        }
+
         // height
         double pickerHeight = [self getPickerHeight:alertView];
-        int alertHeightPx = iPad ? (title ? 300 : 260) : (title ? 370 : 340);
+        int alertHeightPx = iPad ? (title ? 300 : 260) : (title ? 370 + heightIncrement : 340 + heightIncrement);
         NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:alertView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:alertHeightPx];
         [alertView addConstraint:height];
         pickerBounds.size.height = pickerHeight;
