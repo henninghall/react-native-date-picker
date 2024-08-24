@@ -47,7 +47,7 @@ const getTheme = (props) => {
 const getTextColor = (props) => {
   const darkTheme = getTheme(props) === 'dark'
   if (darkTheme) return 'white'
-  return undefined
+  return 'black'
 }
 
 /** @param {Props} props **/
