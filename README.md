@@ -23,6 +23,10 @@ Thanks to our sponsors 🩷
     <img height="75" src="https://avatars.githubusercontent.com/u/54108407?s=200&v=4"  /></a>
     </td>
     <td>
+    <a href="https://github.com/hesenger">
+    <img height="75" src="https://avatars.githubusercontent.com/u/192213?s=200&v=4"  /></a>
+    </td>
+    <td>
     <a href="https://github.com/hamxahussain">
     <img height="75" src="https://avatars.githubusercontent.com/u/72290128?s=200&v=4"  /></a>
     </td>
@@ -34,6 +38,7 @@ Thanks to our sponsors 🩷
   <tr align="center">
     <td><b>Expo</b></td>
     <td><b>Nordic Brain Tech</b></td>
+    <td><b>hesenger</b></td>
     <td><b>hamxahussain</b></td>
     <td><b>lepadatumihail</b></td>
   </tr>
