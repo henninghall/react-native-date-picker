@@ -4,10 +4,13 @@ package com.henninghall.date_picker;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Dynamic;
@@ -53,14 +56,13 @@ public class DatePickerModuleImpl {
 
     private AlertDialog createDialog(
             ReadableMap props, final PickerView picker, final Callback onConfirm, final Callback onCancel) {
-        String title = props.getString("title");
         String confirmText = props.getString("confirmText");
         final String cancelText = props.getString("cancelText");
-        String buttonColor = props.getString("buttonColor");
+        final String buttonColor = props.getString("buttonColor");
         final View pickerWithMargin = withTopMargin(picker);
 
-        AlertDialog dialog = new AlertDialog.Builder(DatePickerPackage.context.getCurrentActivity(), getTheme(props))
-                .setTitle(title)
+        AlertDialog dialog = new AlertDialogBuilder(DatePickerPackage.context.getCurrentActivity(), getTheme(props))
+                .setColoredTitle(props)
                 .setCancelable(true)
                 .setView(pickerWithMargin)
                 .setPositiveButton(confirmText, new DialogInterface.OnClickListener() {
@@ -153,5 +155,32 @@ public class DatePickerModuleImpl {
         linearLayout.setPadding(0, Utils.toDp(20),0,0);
         return linearLayout;
     }
+
+    static class AlertDialogBuilder extends AlertDialog.Builder {
+        public AlertDialogBuilder(Context context, int themeResId) {
+            super(context, themeResId);
+        }
+        public AlertDialogBuilder setColoredTitle(ReadableMap props){
+            String textColor = props.getString("textColor");
+            String title = props.getString("title");
+            if(textColor == null){
+                this.setTitle(title);
+                return this;
+            }
+            TextView coloredTitle = new TextView(DatePickerPackage.context.getCurrentActivity());
+            coloredTitle.setText(title);
+            TypedValue typedValue = new TypedValue();
+            Resources.Theme theme = DatePickerPackage.context.getCurrentActivity().getTheme();
+            theme.resolveAttribute(R.attr.dialogPreferredPadding, typedValue, true);
+            int paddingInPixels = TypedValue.complexToDimensionPixelSize(typedValue.data, DatePickerPackage.context.getResources().getDisplayMetrics());
+            coloredTitle.setPadding(paddingInPixels, paddingInPixels, paddingInPixels, 0);
+            coloredTitle.setTextSize(20F);
+            int color = Color.parseColor(textColor);
+            coloredTitle.setTextColor(color);
+            this.setCustomTitle(coloredTitle);
+            return this;
+        }
+    }
+
 
 }
