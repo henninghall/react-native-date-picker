@@ -171,7 +171,7 @@ public class DatePickerModuleImpl {
             coloredTitle.setText(title);
             TypedValue typedValue = new TypedValue();
             Resources.Theme theme = DatePickerPackage.context.getCurrentActivity().getTheme();
-            theme.resolveAttribute(R.attr.dialogPreferredPadding, typedValue, true);
+            theme.resolveAttribute(android.R.attr.dialogPreferredPadding, typedValue, true);
             int paddingInPixels = TypedValue.complexToDimensionPixelSize(typedValue.data, DatePickerPackage.context.getResources().getDisplayMetrics());
             coloredTitle.setPadding(paddingInPixels, paddingInPixels, paddingInPixels, 0);
             coloredTitle.setTextSize(20F);
