@@ -19,6 +19,7 @@ const DatePickerWrapper = (props) => {
       {...props}
       textColor={colorToHex(getTextColor(props))}
       dividerColor={colorToHex(getDividerColor(props))}
+      buttonColor={colorToHex(getButtonColor(props))}
       theme={getTheme(props)}
       title={getTitle(props)}
       confirmText={props.confirmText ? props.confirmText : 'Confirm'}
@@ -54,6 +55,15 @@ const getDividerColor = (props) => {
 
 /** @param {Props} props **/
 const getTextColor = (props) => {
+  const theme = getTheme(props)
+  if (theme === 'dark') return 'white'
+  if (theme === 'light') return 'black'
+  return undefined
+}
+
+/** @param {Props} props **/
+const getButtonColor = (props) => {
+  if (props.buttonColor) return props.buttonColor
   const theme = getTheme(props)
   if (theme === 'dark') return 'white'
   if (theme === 'light') return 'black'
