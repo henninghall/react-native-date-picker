@@ -13,9 +13,9 @@ type DateEvent = {
 
 export interface NativeProps extends ViewProps {
   locale?: string
-  date: Double
-  maximumDate?: Double
-  minimumDate?: Double
+  date: string
+  maximumDate?: string
+  minimumDate?: string
   minuteInterval?: Int32
   mode?: WithDefault<'date' | 'time' | 'datetime', 'datetime'>
   onChange: BubblingEventHandler<DateEvent>
