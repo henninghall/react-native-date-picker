@@ -48,9 +48,10 @@ using namespace facebook::react;
 }
 #endif
 
-NSDate* iso8601StringToNSDate(NSString* iso8601String) {
+NSDate* iso8601StringToNSDate(const std::string &iso8601String) {
+    NSString *nsString = [NSString stringWithUTF8String:iso8601String.c_str()];
     NSISO8601DateFormatter *isoFormatter = [[NSISO8601DateFormatter alloc] init];
-    NSDate *date = [isoFormatter dateFromString:iso8601String];
+    NSDate *date = [isoFormatter dateFromString:nsString];
     return date;
 }
 
