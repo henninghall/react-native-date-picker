@@ -56,11 +56,15 @@ jobs:
           # bundler-cache: true
           working-directory: ./examples/${{ env.PROJECT_NAME }}/
 
-      - name: setup-cocoapods
-        if: steps.cache.outputs.cache-hit != 'true'
-        uses: maxim-lobanov/setup-cocoapods@v1
-        with:
-          version: 1.13.0
+      # - name: setup-cocoapods
+      #   if: steps.cache.outputs.cache-hit != 'true'
+      #   uses: maxim-lobanov/setup-cocoapods@v1
+      #   with:
+      #     version: 1.13.0
+
+      - name: Select Xcode
+        # if: steps.cache.outputs.cache-hit != 'true'
+        run: bundle install
 
       - name: Install CocoaPods
         if: steps.cache.outputs.cache-hit != 'true'
