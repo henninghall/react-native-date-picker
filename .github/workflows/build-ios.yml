@@ -47,7 +47,7 @@ jobs:
       - name: Install npm dependencies (root)
         if: steps.cache.outputs.cache-hit != 'true'
         working-directory: ./
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Setup Ruby
         if: steps.cache.outputs.cache-hit != 'true'
