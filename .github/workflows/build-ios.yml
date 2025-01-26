@@ -37,7 +37,7 @@ jobs:
           # cache: 'yarn'
 
       - name: Set Yarn version
-        run: yarn set version stable
+        run: yarn set version 3.6.4
 
       - name: Install npm dependencies (example project)
         if: steps.cache.outputs.cache-hit != 'true'
