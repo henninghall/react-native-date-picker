@@ -27,16 +27,17 @@ jobs:
             ${{ env.APP_PATH }}.dSYM
           key: ${{ runner.os }}-${{ hashFiles('src/**', 'ios/**', env.EXAMPLE_SRC, env.APP_PATH ) }}
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - uses: actions/setup-node@v4
         if: steps.cache.outputs.cache-hit != 'true'
         with:
           node-version: 18
           cache: 'yarn'
 
-      - name: Set up Yarn
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          npm install -g yarn@3.6.4
+      - name: Set Yarn version
+        run: yarn set version stable
 
       - name: Install npm dependencies (example project)
         if: steps.cache.outputs.cache-hit != 'true'
