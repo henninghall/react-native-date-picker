@@ -47,7 +47,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         uses: ruby/setup-ruby@v1
         with:
-          bundler-cache: true
+          # bundler-cache: true
           working-directory: ./examples/${{ env.PROJECT_NAME }}/
 
       - name: setup-cocoapods
