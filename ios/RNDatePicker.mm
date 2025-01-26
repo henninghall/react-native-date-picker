@@ -48,9 +48,11 @@ using namespace facebook::react;
 }
 #endif
 
-NSDate* unixMillisToNSDate (double unixMillis) {
-    double time = unixMillis/1000.0;
-    return [NSDate dateWithTimeIntervalSince1970: time];
+NSDate* iso8601StringToNSDate(const std::string &iso8601String) {
+    NSString *nsString = [NSString stringWithUTF8String:iso8601String.c_str()];
+    NSISO8601DateFormatter *isoFormatter = [[NSISO8601DateFormatter alloc] init];
+    NSDate *date = [isoFormatter dateFromString:nsString];
+    return date;
 }
 
 #ifdef RCT_NEW_ARCH_ENABLED
@@ -101,7 +103,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     
     //  date
     if(oldViewProps.date != newViewProps.date) {
-        [_picker setDate: unixMillisToNSDate(newViewProps.date)];
+        [_picker setDate: iso8601StringToNSDate(newViewProps.date)];
     }
     
     //  locale
@@ -113,12 +115,12 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
     
     // maximumDate
     if(oldViewProps.maximumDate != newViewProps.maximumDate) {
-        [_picker setMaximumDate: unixMillisToNSDate(newViewProps.maximumDate)];
+        [_picker setMaximumDate: iso8601StringToNSDate(newViewProps.maximumDate)];
     }
     
     //  minimumDate
     if(oldViewProps.minimumDate != newViewProps.minimumDate) {
-        [_picker setMinimumDate: unixMillisToNSDate(newViewProps.minimumDate)];
+        [_picker setMinimumDate: iso8601StringToNSDate(newViewProps.minimumDate)];
     }
     
     //  setMinuteInterval
