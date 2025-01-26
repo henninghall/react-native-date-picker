@@ -33,6 +33,11 @@ jobs:
           node-version: 18
           cache: 'yarn'
 
+      - name: Set up Yarn
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          npm install -g yarn@3.6.4
+
       - name: Install npm dependencies (example project)
         if: steps.cache.outputs.cache-hit != 'true'
         working-directory: ./examples/${{ env.PROJECT_NAME }}/
