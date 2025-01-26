@@ -34,7 +34,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         with:
           node-version: 18
-          cache: 'yarn'
+          # cache: 'yarn'
 
       - name: Set Yarn version
         run: yarn set version stable
