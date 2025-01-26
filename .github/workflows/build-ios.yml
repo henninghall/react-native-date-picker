@@ -62,7 +62,8 @@ jobs:
       #   with:
       #     version: 1.13.0
 
-      - name: Select Xcode
+      - name: Bundle install
+        working-directory: ./examples/${{ env.PROJECT_NAME }}
         # if: steps.cache.outputs.cache-hit != 'true'
         run: bundle install
 
