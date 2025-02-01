@@ -51,6 +51,7 @@ using namespace facebook::react;
 NSDate* iso8601StringToNSDate(const std::string &iso8601String) {
     NSString *nsString = [NSString stringWithUTF8String:iso8601String.c_str()];
     NSISO8601DateFormatter *isoFormatter = [[NSISO8601DateFormatter alloc] init];
+    isoFormatter.formatOptions = NSISO8601DateFormatWithInternetDateTime | NSISO8601DateFormatWithFractionalSeconds;
     NSDate *date = [isoFormatter dateFromString:nsString];
     return date;
 }
