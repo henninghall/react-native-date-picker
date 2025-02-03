@@ -41,7 +41,6 @@
     "react-native",
     "react-native-date-picker"
   ],
-  "dependencies": {},
   "peerDependencies": {
     "react": ">= 17.0.1",
     "react-native": ">= 0.64.3"
@@ -67,5 +66,6 @@
     "android": {
       "javaPackageName": "com.henninghall.date_picker"
     }
-  }
+  },
+  "packageManager": "yarn@3.6.4"
 }
