@@ -33,7 +33,7 @@ body:
         ```javascript
         export default class App extends Component {
           state = { date: new Date() }
-          
+
           render = () =>
             <DatePicker
               date={this.state.date}
