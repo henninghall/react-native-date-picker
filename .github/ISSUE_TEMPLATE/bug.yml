@@ -1,0 +1,96 @@
+name: Bug Report
+description: Help us improve react-native-date-picker
+title: ''
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+      placeholder: Tell us what happened...
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+      placeholder: Tell us what should have happened...
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: To Reproduce
+      description: Add example code that reproduces the behavior.
+      placeholder: |
+        ```javascript
+        export default class App extends Component {
+          state = { date: new Date() }
+          
+          render = () =>
+            <DatePicker
+              date={this.state.date}
+              onDateChange={date => this.setState({ date })}
+            />
+        }
+        ```
+      render: javascript
+    validations:
+      required: true
+  - type: checkboxes
+    id: os
+    attributes:
+      label: Operating System
+      description: Which operating system(s) are you seeing this issue on?
+      options:
+        - label: Android
+        - label: iOS
+    validations:
+      required: true
+  - type: input
+    id: rn-version
+    attributes:
+      label: React Native Version
+      description: What version of React Native are you using?
+      placeholder: e.g. 0.69.4
+    validations:
+      required: true
+  - type: input
+    id: expo-version
+    attributes:
+      label: Expo Version (if applicable)
+      description: If you're using Expo, what version are you using?
+      placeholder: e.g. 48.0.0
+    validations:
+      required: false
+  - type: input
+    id: package-version
+    attributes:
+      label: react-native-date-picker version
+      description: What version of react-native-date-picker are you using?
+      placeholder: e.g. 4.2.6
+    validations:
+      required: true
+  - type: checkboxes
+    id: architecture
+    attributes:
+      label: React Native Architecture
+      description: Which React Native architecture are you using?
+      options:
+        - label: Old Architecture (Paper)
+        - label: New Architecture (Fabric)
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code.
+      render: shell
