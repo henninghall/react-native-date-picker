@@ -1,7 +1,7 @@
 name: Bug Report
 description: Help us improve react-native-date-picker
-title: ''
-labels: []
+title: '[Bug]: '
+labels: [bug]
 assignees: []
 body:
   - type: markdown

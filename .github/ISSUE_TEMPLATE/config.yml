@@ -1,5 +1,1 @@
-blank_issues_enabled: true
-contact_links:
-  - name: React Native Date Picker Issues
-    url: https://github.com/henninghall/react-native-date-picker/issues
-    about: Please search existing issues before creating a new one.
+blank_issues_enabled: false
