@@ -10,7 +10,7 @@ This is a React Native Date Picker with following main features:
 
 ## Sponsors
 
-Thanks to our sponsors 🩷
+Thanks to the sponsors 🩷
 
 <table border="1">
   <tr align="center">
@@ -21,6 +21,10 @@ Thanks to our sponsors 🩷
     <td>
     <a href="https://github.com/nordicbraintech">
     <img height="75" src="https://avatars.githubusercontent.com/u/54108407?s=200&v=4"  /></a>
+    </td>
+    <td>
+    <a href="https://github.com/moraex">
+    <img height="75" src="https://avatars.githubusercontent.com/u/10748945?v=4"  /></a>
     </td>
     <td>
     <a href="https://github.com/hesenger">
@@ -38,6 +42,7 @@ Thanks to our sponsors 🩷
   <tr align="center">
     <td><b>Expo</b></td>
     <td><b>Nordic Brain Tech</b></td>
+    <td><b>moraex</b></td>
     <td><b>hesenger</b></td>
     <td><b>hamxahussain</b></td>
     <td><b>lepadatumihail</b></td>
