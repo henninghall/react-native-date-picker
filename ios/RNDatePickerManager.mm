@@ -30,16 +30,49 @@ RCT_EXPORT_METHOD(removeListeners : (NSInteger)count) {
   // Keep: Required for RN built in Event Emitter Calls.
 }
 
+- (NSDate *)convertToNSDate:(id)input {
+    if (!input) return nil;
+    std::string isoString = [input UTF8String];
+    NSString *nsString = [NSString stringWithUTF8String:isoString.c_str()];
+    NSISO8601DateFormatter *isoFormatter = [[NSISO8601DateFormatter alloc] init];
+    isoFormatter.formatOptions = NSISO8601DateFormatWithInternetDateTime | NSISO8601DateFormatWithFractionalSeconds;
+    NSDate *date = [isoFormatter dateFromString:nsString];
+    return date;
+}
+
 - (UIView *)view
 {
   return [RNDatePicker new];
 }
 
 RCT_EXPORT_VIEW_PROPERTY(text, NSString)
-RCT_EXPORT_VIEW_PROPERTY(date, NSString)
+
+RCT_CUSTOM_VIEW_PROPERTY(date, id, RNDatePicker)
+{
+    NSDate *date = [self convertToNSDate:json];
+    if (date) {
+        [(RNDatePicker *)view setDate:date];
+    }
+}
+
 RCT_EXPORT_VIEW_PROPERTY(locale, NSLocale)
-RCT_EXPORT_VIEW_PROPERTY(minimumDate, NSString)
-RCT_EXPORT_VIEW_PROPERTY(maximumDate, NSString)
+
+RCT_CUSTOM_VIEW_PROPERTY(minimumDate, id, RNDatePicker)
+{
+    NSDate *date = [self convertToNSDate:json];
+    if (date) {
+        [(RNDatePicker *)view setMinimumDate:date];
+    }
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(maximumDate, id, RNDatePicker)
+{
+    NSDate *date = [self convertToNSDate:json];
+    if (date) {
+        [(RNDatePicker *)view setMaximumDate:date];
+    }
+}
+
 RCT_EXPORT_VIEW_PROPERTY(minuteInterval, NSInteger)
 RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 RCT_REMAP_VIEW_PROPERTY(mode, datePickerMode, UIDatePickerMode)
