@@ -59,7 +59,7 @@ body:
     attributes:
       label: React Native Version
       description: What version of React Native are you using?
-      placeholder: e.g. 0.69.4
+      placeholder: 0.69.4
     validations:
       required: true
   - type: input
@@ -67,7 +67,7 @@ body:
     attributes:
       label: Expo Version (if applicable)
       description: If you're using Expo, what version are you using?
-      placeholder: e.g. 48.0.0
+      placeholder: 48.0.0
     validations:
       required: false
   - type: input
@@ -75,7 +75,7 @@ body:
     attributes:
       label: react-native-date-picker version
       description: What version of react-native-date-picker are you using?
-      placeholder: e.g. 4.2.6
+      placeholder: 4.2.6
     validations:
       required: true
   - type: checkboxes
