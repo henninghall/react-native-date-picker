@@ -1,0 +1,52 @@
+name: Feature Request
+description: Suggest an idea for react-native-date-picker
+title: '[Feature]: '
+labels: [enhancement]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to suggest a new feature!
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Describe the feature
+      description: A clear and concise description of what you would like to see implemented.
+      placeholder: Tell us what you want to see...
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: Describe the use case for this feature. How would it benefit you and other users?
+      placeholder: Explain how this feature would be useful...
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Have you considered any alternative solutions or workarounds?
+      placeholder: Describe any alternatives you've considered...
+    validations:
+      required: false
+  - type: checkboxes
+    id: os
+    attributes:
+      label: Operating System
+      description: Which operating system(s) would this feature be for?
+      options:
+        - label: Android
+        - label: iOS
+    validations:
+      required: true
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Additional information
+      description: Add any other context or screenshots about the feature request here.
+      placeholder: Any additional details that might help...
+    validations:
+      required: false
