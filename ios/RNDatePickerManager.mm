@@ -51,7 +51,7 @@ RCT_CUSTOM_VIEW_PROPERTY(date, id, RNDatePicker)
 {
     NSDate *date = [self convertToNSDate:json];
     if (date) {
-        [(RNDatePicker *)view setDate:date];
+        [view setDate:date];
     }
 }
 
@@ -61,7 +61,7 @@ RCT_CUSTOM_VIEW_PROPERTY(minimumDate, id, RNDatePicker)
 {
     NSDate *date = [self convertToNSDate:json];
     if (date) {
-        [(RNDatePicker *)view setMinimumDate:date];
+        [view setMinimumDate:date];
     }
 }
 
@@ -69,7 +69,7 @@ RCT_CUSTOM_VIEW_PROPERTY(maximumDate, id, RNDatePicker)
 {
     NSDate *date = [self convertToNSDate:json];
     if (date) {
-        [(RNDatePicker *)view setMaximumDate:date];
+        [view setMaximumDate:date];
     }
 }
 
