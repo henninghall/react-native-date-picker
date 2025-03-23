@@ -6,6 +6,9 @@
 - (void)setup;
 - (void)setTextColorProp:(NSString *)hexColor;
 - (void)setTimeZoneOffsetInMinutes:(NSString *)offset;
+- (void)setDate:(NSDate *)date;
+- (void)setMinimumDate:(NSDate *)minimumDate;
+- (void)setMaximumDate:(NSDate *)maximumDate;
 
 @end
 
