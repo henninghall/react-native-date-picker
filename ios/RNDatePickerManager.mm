@@ -47,29 +47,29 @@ RCT_EXPORT_METHOD(removeListeners : (NSInteger)count) {
 
 RCT_EXPORT_VIEW_PROPERTY(text, NSString)
 
-RCT_CUSTOM_VIEW_PROPERTY(date, id, RNDatePicker)
+RCT_CUSTOM_VIEW_PROPERTY(date, id, DatePicker)
 {
     NSDate *date = [self convertToNSDate:json];
     if (date) {
-        [(RNDatePicker *)view setDate:date];
+        [(DatePicker *)view setDate:date];
     }
 }
 
 RCT_EXPORT_VIEW_PROPERTY(locale, NSLocale)
 
-RCT_CUSTOM_VIEW_PROPERTY(minimumDate, id, RNDatePicker)
+RCT_CUSTOM_VIEW_PROPERTY(minimumDate, id, DatePicker)
 {
     NSDate *date = [self convertToNSDate:json];
     if (date) {
-        [(RNDatePicker *)view setMinimumDate:date];
+        [(DatePicker *)view setMinimumDate:date];
     }
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(maximumDate, id, RNDatePicker)
+RCT_CUSTOM_VIEW_PROPERTY(maximumDate, id, DatePicker)
 {
     NSDate *date = [self convertToNSDate:json];
     if (date) {
-        [(RNDatePicker *)view setMaximumDate:date];
+        [(DatePicker *)view setMaximumDate:date];
     }
 }
 
