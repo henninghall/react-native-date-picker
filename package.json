@@ -66,6 +66,14 @@
     "jsSrcsDir": "src/fabric",
     "android": {
       "javaPackageName": "com.henninghall.date_picker"
+    },
+    "ios": {
+      "componentProvider": {
+        "RNDatePicker": "RNDatePicker"
+      },
+      "modulesProvider": {
+        "RNDatePicker": "RNDatePickerManager"
+      }
     }
   }
 }
