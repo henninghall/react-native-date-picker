@@ -41,7 +41,6 @@
     "react-native",
     "react-native-date-picker"
   ],
-  "dependencies": {},
   "peerDependencies": {
     "react": ">= 17.0.1",
     "react-native": ">= 0.64.3"
@@ -75,5 +74,6 @@
         "RNDatePicker": "RNDatePickerManager"
       }
     }
-  }
+  },
+  "packageManager": "yarn@3.6.4"
 }
