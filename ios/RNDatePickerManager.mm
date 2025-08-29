@@ -234,6 +234,23 @@ RCT_EXPORT_METHOD(closePicker)
     return 216;
 }
 
+// New Architecture support - provide module instance to TurboModule system
++ (BOOL)requiresMainQueueSetup {
+    return NO;
+}
+
+#ifdef RCT_NEW_ARCH_ENABLED
+// Implement the Spec protocol methods required by TurboModule
+- (void)getConstants:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+    resolve(@{});
+}
+
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:(const facebook::react::ObjCTurboModule::InitParams &)params {
+    return std::make_shared<facebook::react::NativeRNDatePickerSpecJSI>(params);
+}
+#endif
+
 @end
+
 
 
