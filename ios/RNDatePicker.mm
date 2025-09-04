@@ -9,6 +9,11 @@
 #import <react/renderer/components/RNDatePickerSpecs/RCTComponentViewHelpers.h>
 #import "RCTFabricComponentsPlugins.h"
 
+#ifdef __cplusplus
+#include <string>
+#include <memory>
+#endif
+
 using namespace facebook::react;
 
 #else

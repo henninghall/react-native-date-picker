@@ -23,8 +23,12 @@ export const DatePickerIOS = (props) => {
     style: [styles.datePickerIOS, props.style],
     date: props.date ? props.date.toISOString() : undefined,
     locale: props.locale ? props.locale : undefined,
-    maximumDate: props.maximumDate ? props.maximumDate.toISOString() : undefined,
-    minimumDate: props.minimumDate ? props.minimumDate.toISOString() : undefined,
+    maximumDate: props.maximumDate
+      ? props.maximumDate.toISOString()
+      : undefined,
+    minimumDate: props.minimumDate
+      ? props.minimumDate.toISOString()
+      : undefined,
     theme: props.theme ? props.theme : 'auto',
   }
 
