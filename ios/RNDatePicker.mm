@@ -135,6 +135,13 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
         if(newViewProps.mode == RNDatePickerMode::Time) [_picker setDatePickerMode:UIDatePickerModeTime];
         if(newViewProps.mode == RNDatePickerMode::Date) [_picker setDatePickerMode:UIDatePickerModeDate];
         if(newViewProps.mode == RNDatePickerMode::Datetime) [_picker setDatePickerMode:UIDatePickerModeDateAndTime];
+        if(newViewProps.mode == RNDatePickerMode::YearAndMonth) {
+            if (@available(iOS 17.4, *)) {
+                [_picker setDatePickerMode:UIDatePickerModeYearAndMonth];
+            } else {
+                [_picker setDatePickerMode:(UIDatePickerMode)4269]; // magic number from iOS team
+            }
+        }
         // We need to set minuteInterval after setting datePickerMode, otherwise minuteInterval is invalid in time mode.
         _picker.minuteInterval = _reactMinuteInterval;
     }

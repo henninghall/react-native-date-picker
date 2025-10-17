@@ -100,9 +100,23 @@ public class Wheels {
         return sb.toString();
     }
 
+    private String getYearAndMonthString(int daysToSubtract) {
+        ArrayList<Wheel> wheels = getOrderedVisibleWheels();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 2; i++) {
+            if (i != 0) sb.append(" ");
+            Wheel w = wheels.get(i);
+            sb.append(w.getValue());
+        }
+        return sb.toString();
+    }
+
     private String getDateString(int daysToSubtract){
         if(state.getMode() == Mode.date ){
             return getDateModeString(daysToSubtract);
+        }
+        if(state.getMode() == Mode.yearAndMonth ){
+            return getYearAndMonthString(daysToSubtract);
         }
         return dayWheel.getValue();
     }
@@ -169,6 +183,10 @@ public class Wheels {
             return wheels.get(0).getFormatPattern() + " "
                     + wheels.get(1).getFormatPattern() + " "
                     + wheels.get(2).getFormatPattern();
+        }
+        if(state.getMode() == Mode.yearAndMonth){
+            return wheels.get(0).getFormatPattern() + " "
+                    + wheels.get(1).getFormatPattern();
         }
         return dayWheel.getFormatPattern();
     }

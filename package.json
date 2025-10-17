@@ -70,9 +70,6 @@
     "ios": {
       "componentProvider": {
         "RNDatePicker": "RNDatePicker"
-      },
-      "modulesProvider": {
-        "RNDatePicker": "RNDatePickerManager"
       }
     }
   }

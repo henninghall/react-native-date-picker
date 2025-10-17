@@ -9,12 +9,29 @@
 
 @implementation RCTConvert(UIDatePicker)
 
-RCT_ENUM_CONVERTER(UIDatePickerMode, (@{
-  @"time": @(UIDatePickerModeTime),
-  @"date": @(UIDatePickerModeDate),
-  @"datetime": @(UIDatePickerModeDateAndTime),
-  @"countdown": @(UIDatePickerModeCountDownTimer), // not supported yet
-}), UIDatePickerModeTime, integerValue)
++ (UIDatePickerMode)UIDatePickerMode:(id)json
+{
+    static NSDictionary *modes;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        modes = @{
+            @"time": @(UIDatePickerModeTime),
+            @"date": @(UIDatePickerModeDate),
+            @"datetime": @(UIDatePickerModeDateAndTime),
+            @"countdown": @(UIDatePickerModeCountDownTimer), // not supported yet
+        };
+    });
+    
+    if ([json isEqualToString:@"yearAndMonth"]) {
+        if (@available(iOS 17.4, *)) {
+            return (UIDatePickerModeYearAndMonth);
+        } else {
+            return (UIDatePickerMode)4269;
+        }
+    }
+    
+    return (UIDatePickerMode)[RCTConvertEnumValue("UIDatePickerMode", modes, @(UIDatePickerModeTime), json) integerValue];
+}
 
 @end
 

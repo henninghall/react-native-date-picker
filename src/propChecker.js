@@ -53,7 +53,9 @@ const heightCheck = new PropCheck(
 
 const modeCheck = new PropCheck(
   (props) =>
-    props && props.mode && !['datetime', 'date', 'time'].includes(props.mode),
+    props &&
+    props.mode &&
+    !['datetime', 'date', 'time', 'yearAndMonth'].includes(props.mode),
   "Invalid mode. Valid modes: 'datetime', 'date', 'time'"
 )
 

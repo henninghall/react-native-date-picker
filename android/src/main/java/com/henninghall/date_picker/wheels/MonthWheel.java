@@ -28,7 +28,7 @@ public class MonthWheel extends Wheel
 
     @Override
     public boolean visible() {
-        return state.getMode() == Mode.date;
+        return state.getMode() == Mode.date || state.getMode() == Mode.yearAndMonth;
     }
 
     @Override

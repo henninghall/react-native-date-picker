@@ -39,6 +39,11 @@ public class DerivedData {
                 visibleWheels.add(WheelType.DATE);
                 break;
             }
+            case yearAndMonth: {
+                visibleWheels.add(WheelType.YEAR);
+                visibleWheels.add(WheelType.MONTH);
+                break;
+            }
         }
         if((mode == Mode.time || mode == Mode.datetime) && state.derived.usesAmPm()){
             visibleWheels.add(WheelType.AM_PM);
