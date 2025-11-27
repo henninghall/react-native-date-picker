@@ -8,7 +8,14 @@
 #import <React/RCTConvert.h>
 #import <React/RCTViewManager.h>
 
+#ifdef RCT_NEW_ARCH_ENABLED
+#import "RNDatePickerSpecs.h"
+#endif
+
 @interface RNDatePickerManager : RCTViewManager
+#ifdef RCT_NEW_ARCH_ENABLED
+<NativeRNDatePickerSpec>
+#endif
 
 @property (strong, nonatomic) UIViewController *topViewController;
 
