@@ -46,11 +46,11 @@ export const DatePickerAndroid = React.memo((props) => {
 
   useEffect(() => {
     const eventEmitter = new NativeEventEmitter(NativeModule)
-    eventEmitter.addListener('dateChange', onChange)
-    eventEmitter.addListener('spinnerStateChange', onSpinnerStateChanged)
+    const subscriptionDateChange = eventEmitter.addListener('dateChange', onChange)
+    const subscriptionSpinnerStateChange = eventEmitter.addListener('spinnerStateChange', onSpinnerStateChanged)
     return () => {
-      eventEmitter.removeAllListeners('dateChange')
-      eventEmitter.removeAllListeners('spinnerStateChange')
+      subscriptionDateChange.remove();
+      subscriptionSpinnerStateChange.remove();
     }
   }, [onChange, onSpinnerStateChanged])
 
