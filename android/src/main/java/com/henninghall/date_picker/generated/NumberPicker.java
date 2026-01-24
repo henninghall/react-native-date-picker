@@ -1050,6 +1050,58 @@ public class NumberPicker extends LinearLayout {
         return super.dispatchTrackballEvent(event);
     }
 
+    /**
+     * Timestamp of last scroll action, used for throttling continuous input.
+     */
+    private long mLastScrollTime = 0;
+
+    /**
+     * Minimum interval between scroll actions in milliseconds.
+     */
+    private static final long SCROLL_INTERVAL_MS = 150;
+
+    /**
+     * Handle generic motion events for scroll support.
+     */
+    @Override
+    public boolean onGenericMotionEvent(MotionEvent event) {
+        if (!mHasSelectorWheel || !isEnabled()) {
+            return super.onGenericMotionEvent(event);
+        }
+
+        final int action = event.getActionMasked();
+        final int source = event.getSource();
+
+        // Handle mouse/trackpad scroll wheel (ACTION_SCROLL with AXIS_VSCROLL)
+        if (action == MotionEvent.ACTION_SCROLL) {
+            float vscroll = event.getAxisValue(MotionEvent.AXIS_VSCROLL);
+            if (vscroll != 0) {
+                // Throttle scroll input to prevent rapid value changes
+                long currentTime = System.currentTimeMillis();
+                if (currentTime - mLastScrollTime < SCROLL_INTERVAL_MS) {
+                    return true; // Consume event but don't act on it yet
+                }
+
+                mLastScrollTime = currentTime;
+                // Determine scroll direction: positive = scroll up (decrement), negative = scroll down (increment)
+                if (vscroll < 0) {
+                    // Scroll down - increment value
+                    if (mWrapSelectorWheel || getValue() < getMaxValue()) {
+                        changeValueByOne(true);
+                    }
+                } else {
+                    // Scroll up - decrement value
+                    if (mWrapSelectorWheel || getValue() > getMinValue()) {
+                        changeValueByOne(false);
+                    }
+                }
+                return true;
+            }
+        }
+
+        return super.onGenericMotionEvent(event);
+    }
+
     @Override
     protected boolean dispatchHoverEvent(MotionEvent event) {
         if (!mHasSelectorWheel) {
