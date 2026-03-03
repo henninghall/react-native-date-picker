@@ -83,7 +83,21 @@ public class Wheels {
     }
 
     String getDateTimeString(int daysToSubtract) {
+        if (state.getMode() == Mode.monthyear) {
+            return getMonthYearDateString() + " 00:00";
+        }
         return getDateString(daysToSubtract) + " " + getTimeString();
+    }
+
+    private String getMonthYearDateString() {
+        ArrayList<Wheel> wheels = getOrderedVisibleWheels();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < wheels.size(); i++) {
+            if (i != 0) sb.append(" ");
+            sb.append(wheels.get(i).getValue());
+        }
+        sb.append(" 1");
+        return sb.toString();
     }
 
     private String getDateModeString(int daysToSubtract) {
@@ -103,6 +117,9 @@ public class Wheels {
     private String getDateString(int daysToSubtract){
         if(state.getMode() == Mode.date ){
             return getDateModeString(daysToSubtract);
+        }
+        if (state.getMode() == Mode.monthyear) {
+            return getMonthYearDateString();
         }
         return dayWheel.getValue();
     }
@@ -170,10 +187,17 @@ public class Wheels {
                     + wheels.get(1).getFormatPattern() + " "
                     + wheels.get(2).getFormatPattern();
         }
+        if (state.getMode() == Mode.monthyear) {
+            return wheels.get(0).getFormatPattern() + " "
+                    + wheels.get(1).getFormatPattern() + " d HH:mm";
+        }
         return dayWheel.getFormatPattern();
     }
 
     public String getFormatPattern() {
+        if (state.getMode() == Mode.monthyear) {
+            return this.getDateFormatPattern();
+        }
         return this.getDateFormatPattern() + " "
                 + hourWheel.getFormatPattern() + " "
                 + minutesWheel.getFormatPattern()

@@ -1,6 +1,6 @@
 # React Native Date Picker
 
-A cross platform <a href="https://github.com/henninghall/react-native-date-picker" title="React Native Date Pickers">react native date picker</a> component for android and ios. It includes 3 different modes: date, time, and datetime. The date picker is customizable and has multiple language support.
+A cross platform <a href="https://github.com/henninghall/react-native-date-picker" title="React Native Date Pickers">react native date picker</a> component for android and ios. It includes 4 different modes: date, time, datetime, and monthyear. The date picker is customizable and has multiple language support.
 
 ## Modal
 
@@ -82,6 +82,10 @@ More info about the <a href="https://github.com/henninghall/react-native-date-pi
 </table>
 
 More info about the <a href="https://github.com/henninghall/react-native-date-picker#date-time-picker">react native datetimepicker</a>.
+
+### React Native Month Year Picker
+
+The monthyear mode lets users select only month and year. On iOS 17.4+ it uses the native year-and-month picker; on older iOS it falls back to the full date picker. On Android it shows year and month wheels only. The returned date is the first day of the selected month at midnight.
 
 <br>
 <a href="https://github.com/henninghall/react-native-date-picker#date-time-picker"><h2>Visit github page → </h2></a>

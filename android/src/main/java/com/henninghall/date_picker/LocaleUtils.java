@@ -5,8 +5,11 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 
+import com.henninghall.date_picker.models.WheelType;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class LocaleUtils {
@@ -42,6 +45,26 @@ public class LocaleUtils {
                 .replaceAll(",", "")
                 .replaceAll("([a-zA-Z]+)", " $1")
                 .trim();
+    }
+
+    /**
+     * Returns wheel order for month-year mode based on locale.
+     * Uses the date pattern to determine if year or month comes first.
+     */
+    public static ArrayList<WheelType> getMonthYearWheelOrder(Locale locale) {
+        String pattern = getDatePattern(locale);
+        int yearPos = pattern.indexOf('y');
+        int monthPos = pattern.indexOf('M');
+        if (monthPos < 0) monthPos = pattern.indexOf('L');
+        ArrayList<WheelType> order = new ArrayList<>();
+        if (yearPos >= 0 && (monthPos < 0 || yearPos < monthPos)) {
+            order.add(WheelType.YEAR);
+            order.add(WheelType.MONTH);
+        } else {
+            order.add(WheelType.MONTH);
+            order.add(WheelType.YEAR);
+        }
+        return order;
     }
 
     static String getDateTimePattern(Locale locale) {

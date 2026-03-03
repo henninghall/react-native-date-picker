@@ -39,6 +39,11 @@ public class DerivedData {
                 visibleWheels.add(WheelType.DATE);
                 break;
             }
+            case monthyear: {
+                visibleWheels.add(WheelType.YEAR);
+                visibleWheels.add(WheelType.MONTH);
+                break;
+            }
         }
         if((mode == Mode.time || mode == Mode.datetime) && state.derived.usesAmPm()){
             visibleWheels.add(WheelType.AM_PM);
@@ -57,6 +62,9 @@ public class DerivedData {
     }
 
     private ArrayList<WheelType> getOrderedWheels() {
+        if (state.getMode() == Mode.monthyear) {
+            return LocaleUtils.getMonthYearWheelOrder(state.getLocale());
+        }
         String dateTimePatternOld = LocaleUtils.getDateTimePattern(state.getLocale());
         String dateTimePattern = dateTimePatternOld.replaceAll("\\('(.+?)'\\)","\\${$1}")
                 .replaceAll("'.+?'","")
@@ -105,7 +113,7 @@ public class DerivedData {
     }
 
     public boolean hasOnly2Wheels(){
-        return state.getMode() == Mode.time && !usesAmPm();
+        return (state.getMode() == Mode.time && !usesAmPm()) || state.getMode() == Mode.monthyear;
     }
 
 

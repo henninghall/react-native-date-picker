@@ -14,6 +14,11 @@ RCT_ENUM_CONVERTER(UIDatePickerMode, (@{
   @"date": @(UIDatePickerModeDate),
   @"datetime": @(UIDatePickerModeDateAndTime),
   @"countdown": @(UIDatePickerModeCountDownTimer), // not supported yet
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 174000
+  @"monthyear": @(UIDatePickerModeYearAndMonth),
+#else
+  @"monthyear": @(UIDatePickerModeDate),
+#endif
 }), UIDatePickerModeTime, integerValue)
 
 @end
@@ -75,7 +80,18 @@ RCT_CUSTOM_VIEW_PROPERTY(maximumDate, id, DatePicker)
 
 RCT_EXPORT_VIEW_PROPERTY(minuteInterval, NSInteger)
 RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
-RCT_REMAP_VIEW_PROPERTY(mode, datePickerMode, UIDatePickerMode)
+RCT_CUSTOM_VIEW_PROPERTY(mode, id, DatePicker)
+{
+    UIDatePickerMode mode = [RCTConvert UIDatePickerMode:json];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 174000
+    if (mode == UIDatePickerModeYearAndMonth) {
+        if (!@available(iOS 17.4, *)) {
+            mode = UIDatePickerModeDate;
+        }
+    }
+#endif
+    [view setDatePickerMode:mode];
+}
 
 RCT_CUSTOM_VIEW_PROPERTY(timeZoneOffsetInMinutes, NSString, DatePicker)
 {
@@ -156,6 +172,13 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         if(textColor) [picker setTextColorProp:textColor];
         
         UIDatePickerMode mode = [RCTConvert UIDatePickerMode:[props objectForKey:@"mode"]];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 174000
+        if (mode == UIDatePickerModeYearAndMonth) {
+            if (!@available(iOS 17.4, *)) {
+                mode = UIDatePickerModeDate;
+            }
+        }
+#endif
         [picker setDatePickerMode:mode];
         
         NSLocale * locale = [RCTConvert NSLocale:[props objectForKey:@"locale"]];
@@ -233,6 +256,22 @@ RCT_EXPORT_METHOD(closePicker)
 {
     return 216;
 }
+
+// New Architecture support - provide module instance to TurboModule system
++ (BOOL)requiresMainQueueSetup {
+    return NO;
+}
+
+#ifdef RCT_NEW_ARCH_ENABLED
+// Implement the Spec protocol methods required by TurboModule
+- (void)getConstants:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+    resolve(@{});
+}
+
+- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:(const facebook::react::ObjCTurboModule::InitParams &)params {
+    return std::make_shared<facebook::react::NativeRNDatePickerSpecJSI>(params);
+}
+#endif
 
 @end
 

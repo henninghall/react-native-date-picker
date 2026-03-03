@@ -3,7 +3,7 @@
 This is a React Native Date Picker with following main features:
 
 📱&nbsp; Supports iOS, Android and Expo<br>
-🕑&nbsp; 3 different modes: Time, Date, DateTime<br>
+🕑&nbsp; 4 different modes: Time, Date, DateTime, MonthYear<br>
 🌍&nbsp; Various languages<br>
 🎨&nbsp; Customizable<br>
 🖼&nbsp; Modal or Inlined<br>
@@ -181,7 +181,7 @@ export default () => {
 | `maximumDate`             | Maximum selectable date. <br/> Example: `new Date("2021-12-31")`                                                                                                                                                                                                                                                      |
 | `minimumDate`             | Minimum selectable date. <br/> Example: `new Date("2021-01-01")`                                                                                                                                                                                                                                                      |
 | `minuteInterval`          | The interval at which minutes can be selected.                                                                                                                                                                                                                                                                        | <img src="docs/minute-interval-ios.png" alt="Date picker minute interval IOS" height="120px" />                                                                                                                                                                | <img src="docs/minute-interval-android.png" alt="Date picker minute interval Android" height="120px" />                                                                                                                                                                                            |
-| `mode`                    | The date picker mode. `"datetime"`, `"date"`, `"time"`                                                                                                                                                                                                                                                                | <img src="docs/datetime-mode-ios.png" alt="React native date time picker" height="120px" /><img src="docs/date-mode-ios.png" alt="React native datepicker" height="120px" /><img src="docs/time-mode-ios.png" alt="React native time picker" height="120px" /> | <img src="docs/datetime-mode-android.png" alt="react native date time picker android" height="120px" /><img src="docs/date-mode-android.png" alt="react native datepicker android" height="120px" /><img src="docs/time-mode-android.png" alt="react native time picker android" height="120px" /> |
+| `mode`                    | The date picker mode. `"datetime"`, `"date"`, `"time"`, `"monthyear"` (monthyear: iOS 17.4+, on older iOS falls back to date mode)                                                                                                                                                                                                                                                                | <img src="docs/datetime-mode-ios.png" alt="React native date time picker" height="120px" /><img src="docs/date-mode-ios.png" alt="React native datepicker" height="120px" /><img src="docs/time-mode-ios.png" alt="React native time picker" height="120px" /> | <img src="docs/datetime-mode-android.png" alt="react native date time picker android" height="120px" /><img src="docs/date-mode-android.png" alt="react native datepicker android" height="120px" /><img src="docs/time-mode-android.png" alt="react native time picker android" height="120px" /> |
 | `locale`                  | The locale for the date picker. Changes language, date order and am/pm preferences. Value needs to be a <a title="react native datepicker locale id" href="https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html">Locale ID.</a> | <img src="docs/locale-ios.png" alt="React Native Date picker locale language ios" height="120px" />                                                                                                                                                            | <img src="docs/locale-android.png" alt="React Native Date picker locale language android" height="120px" />                                                                                                                                                                                        |
 | `timeZoneOffsetInMinutes` | Timezone offset in minutes (default: device's timezone)                                                                                                                                                                                                                                                               |
 | `is24hourSource`          | Change how the 24h mode (am/pm) should be determined, by device settings or by locale. {'locale', 'device'} (android only, default: 'device')                                                                                                                                                                         |
@@ -227,7 +227,7 @@ On iOS the 12/24h preference is determined by the `locale` prop. Set for instanc
 
 ### Is it possible to show only month and year?
 
-This is unfortunately not possible due to the limitation in DatePickerIOS. You should be able to create your own month-year picker with for instance https://github.com/TronNatthakorn/react-native-wheel-pick.
+Yes. Use `mode="monthyear"` to show a picker that lets users select only month and year. On iOS 17.4+ it uses the native `UIDatePicker.Mode.yearAndMonth`; on older iOS it falls back to the full date picker. On Android it uses the custom wheel pickers with year and month only. The returned date is always the first day of the selected month at midnight.
 
 ### Why does the Android app crash in production?
 
@@ -253,9 +253,9 @@ const [state, setState] = useState("idle")
 <ConfirmButton disabled={state === "spinning"} />
 ```
 
-## Three different modes
+## Four different modes
 
-Here are some more info about the three different picker modes that are available.
+Here are some more info about the four different picker modes that are available.
 
 ### Date time picker
 
@@ -317,6 +317,17 @@ Set mode property to `time` to show the time picker:
 <DatePicker
   ...
   mode="time"
+/>
+```
+
+### Month and year picker
+
+The monthyear mode displays a picker for selecting only month and year (e.g. for credit card expiration). On iOS 17.4+ it uses the native year-and-month picker; on older iOS it falls back to the full date picker. On Android it shows year and month wheels only. The returned date is the first day of the selected month at midnight.
+
+```jsx
+<DatePicker
+  ...
+  mode="monthyear"
 />
 ```
 

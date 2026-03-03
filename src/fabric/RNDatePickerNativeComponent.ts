@@ -17,7 +17,7 @@ export interface NativeProps extends ViewProps {
   maximumDate?: string
   minimumDate?: string
   minuteInterval?: Int32
-  mode?: WithDefault<'date' | 'time' | 'datetime', 'datetime'>
+  mode?: WithDefault<'date' | 'time' | 'datetime' | 'monthyear', 'datetime'>
   onChange: BubblingEventHandler<DateEvent>
 
   // Type has to be string to allow null/undefined as value.
