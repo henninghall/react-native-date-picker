@@ -2442,6 +2442,46 @@ public class NumberPicker extends LinearLayout {
 
         private int mAccessibilityFocusedView = UNDEFINED;
 
+        /**
+         * Check if the NumberPicker is visible to the user in a React Native-compatible way.
+         * This avoids issues with the platform's isVisibleToUser() method in RN context.
+         */
+        private boolean isPickerVisibleToUser() {
+            // Check if the view and all its parents are visible
+            if (!NumberPicker.this.isShown()) {
+                return false;
+            }
+            
+            // Check if the view has positive dimensions
+            if (NumberPicker.this.getWidth() <= 0 || NumberPicker.this.getHeight() <= 0) {
+                return false;
+            }
+            
+            // Check if the view is actually attached to a window
+            if (NumberPicker.this.getWindowVisibility() != View.VISIBLE) {
+                return false;
+            }
+            
+            return true;
+        }
+
+        /**
+         * Check if a child element with given bounds is visible to the user.
+         */
+        private boolean isPickerVisibleToUser(Rect bounds) {
+            // First check if the picker itself is visible
+            if (!isPickerVisibleToUser()) {
+                return false;
+            }
+            
+            // Check if the bounds have positive dimensions
+            if (bounds == null || bounds.isEmpty()) {
+                return false;
+            }
+            
+            return true;
+        }
+        
         @Override
         public AccessibilityNodeInfo createAccessibilityNodeInfo(int virtualViewId) {
             switch (virtualViewId) {
@@ -2740,7 +2780,7 @@ public class NumberPicker extends LinearLayout {
             }
             Rect boundsInParent = mTempRect;
             boundsInParent.set(left, top, right, bottom);
-//            info.setVisibleToUser(isVisibleToUser(boundsInParent));
+            info.setVisibleToUser(isPickerVisibleToUser(boundsInParent));
             info.setBoundsInParent(boundsInParent);
             Rect boundsInScreen = boundsInParent;
             int[] locationOnScreen = mTempArray;
@@ -2764,7 +2804,7 @@ public class NumberPicker extends LinearLayout {
             info.setAccessibilityFocused(mAccessibilityFocusedView == virtualViewId);
             Rect boundsInParent = mTempRect;
             boundsInParent.set(left, top, right, bottom);
-//            info.setVisibleToUser(isVisibleToUser(boundsInParent));
+            info.setVisibleToUser(isPickerVisibleToUser(boundsInParent));
             info.setBoundsInParent(boundsInParent);
             Rect boundsInScreen = boundsInParent;
             int[] locationOnScreen = mTempArray;
@@ -2813,8 +2853,8 @@ public class NumberPicker extends LinearLayout {
 //            boundsInParent.scale(applicationScale);
             info.setBoundsInParent(boundsInParent);
 
-//            info.setVisibleToUser(isVisibleToUser());
-
+            info.setVisibleToUser(isPickerVisibleToUser())
+    
             Rect boundsInScreen = boundsInParent;
             int[] locationOnScreen = mTempArray;
             getLocationOnScreen(locationOnScreen);
