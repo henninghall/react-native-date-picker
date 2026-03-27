@@ -1,5 +1,7 @@
 #import "RNDatePicker.h"
 
+#include <string>
+
 #ifdef RCT_NEW_ARCH_ENABLED
 #import "RCTConvert.h"
 #import <React/RCTConversions.h>
