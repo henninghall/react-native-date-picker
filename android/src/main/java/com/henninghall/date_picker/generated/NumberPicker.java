@@ -2853,7 +2853,7 @@ public class NumberPicker extends LinearLayout {
 //            boundsInParent.scale(applicationScale);
             info.setBoundsInParent(boundsInParent);
 
-            info.setVisibleToUser(isPickerVisibleToUser())
+            info.setVisibleToUser(isPickerVisibleToUser());
     
             Rect boundsInScreen = boundsInParent;
             int[] locationOnScreen = mTempArray;
