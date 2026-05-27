@@ -12,6 +12,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Required because pr.yml uses `pull_request_target`, which
+          # otherwise checks out the base branch (master) instead of the
+          # PR head. Without this override, lint runs against master and
+          # PR-side fixes (or breaks) are invisible to the check.
+          # Mirrors the pattern already used in build-android.yml /
+          # build-ios.yml / test-android-*.yml.
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Node
         uses: actions/setup-node@v4

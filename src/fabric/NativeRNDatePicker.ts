@@ -5,7 +5,11 @@ import { Double, UnsafeObject } from 'react-native/Libraries/Types/CodegenTypes'
 export interface Spec extends TurboModule {
   readonly getConstants: () => {}
   closePicker(): void
-  openPicker(props: UnsafeObject): void
+  openPicker(
+    props: UnsafeObject,
+    onConfirm: (result: UnsafeObject) => void,
+    onCancel: () => void
+  ): void
   removeListeners(type: Double): void
   addListener(eventName: string): void
 }

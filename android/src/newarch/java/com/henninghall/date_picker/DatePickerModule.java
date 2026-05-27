@@ -2,6 +2,7 @@ package com.henninghall.date_picker;
 
 import androidx.annotation.NonNull;
 
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableMap;
 
@@ -28,7 +29,13 @@ public class DatePickerModule extends NativeRNDatePickerSpec {
     }
 
     @Override
-    public void openPicker(ReadableMap props){
+    public void openPicker(ReadableMap props, Callback onConfirm, Callback onCancel){
+        // Android delivers confirm/cancel to JS via the RCTDeviceEventEmitter
+        // (see DatePickerModuleImpl), so the callbacks supplied here are
+        // unused. They exist only to keep the TurboModule signature
+        // consistent with the iOS native module, where iOS *does* use the
+        // callbacks. Without them the spec would have to diverge by
+        // platform, which the codegen tooling does not allow.
         module.openPicker(props);
     }
 

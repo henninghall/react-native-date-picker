@@ -76,8 +76,13 @@ export const useModal = ({ props, id }) => {
   useEffect(() => {
     if (shouldOpenModal(props, previousProps)) {
       closing.current = false
+      // The TurboModule spec for `openPicker` declares 3 args because iOS
+      // native uses the callbacks directly. Android routes confirm/cancel
+      // through the `NativeEventEmitter` registered below, so the
+      // callbacks here are no-ops — they exist only to satisfy the
+      // strict arg-count check in the new architecture.
       const params = Platform.select({
-        android: [props],
+        android: [props, () => {}, () => {}],
         ios: [props, onConfirm, onCancel],
       })
       if (!params) throw Error('Unsupported platform')
