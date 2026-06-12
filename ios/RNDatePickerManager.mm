@@ -87,6 +87,53 @@ RCT_CUSTOM_VIEW_PROPERTY(textColor, NSString, DatePicker)
     [view setTextColorProp:[RCTConvert NSString:json]];
 }
 
+- (BOOL)isLandscapeOrientation
+{
+    UIInterfaceOrientation orientation = UIApplication.sharedApplication.statusBarOrientation;
+    return UIInterfaceOrientationIsLandscape(orientation);
+}
+
+- (NSInteger)heightIncrementForContentSizeCategory:(UIContentSizeCategory)category
+{
+    if ([category isEqualToString:UIContentSizeCategoryLarge]) {
+        return 10;
+    }
+    if ([category isEqualToString:UIContentSizeCategoryExtraLarge]) {
+        return 20;
+    }
+    if ([category isEqualToString:UIContentSizeCategoryExtraExtraLarge]) {
+        return 35;
+    }
+    if ([category isEqualToString:UIContentSizeCategoryExtraExtraExtraLarge]) {
+        return 50;
+    }
+    if ([category isEqualToString:UIContentSizeCategoryAccessibilityMedium]) {
+        return 10;
+    }
+    if ([category isEqualToString:UIContentSizeCategoryAccessibilityLarge]) {
+        return 15;
+    }
+    if ([category isEqualToString:UIContentSizeCategoryAccessibilityExtraLarge]) {
+        return 40;
+    }
+    if ([category isEqualToString:UIContentSizeCategoryAccessibilityExtraExtraLarge]) {
+        return 70;
+    }
+    if ([category isEqualToString:UIContentSizeCategoryAccessibilityExtraExtraExtraLarge]) {
+        return 90;
+    }
+    return 0;
+}
+
+- (NSInteger)buttonAreaReserveForHeightIncrement:(NSInteger)heightIncrement isLandscape:(BOOL)isLandscape
+{
+    NSInteger reserve = 60 + (heightIncrement / 2);
+    if (isLandscape) {
+        reserve += 20;
+    }
+    return reserve;
+}
+
 RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
                   onConfirm:(RCTResponseSenderBlock) onConfirm
                   onCancel:(RCTResponseSenderBlock) onCancel)
@@ -94,6 +141,7 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
     dispatch_async(dispatch_get_main_queue(), ^{
         
         bool iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+        BOOL isLandscape = [self isLandscapeOrientation];
         UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
         CGRect rootBounds = rootViewController.view.bounds;
         NSString * title = [RCTConvert NSString:[props objectForKey:@"title"]];
@@ -108,20 +156,10 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
 
         CGRect pickerBounds = picker.bounds;
 
-
-        // Detect the content size category
         UIContentSizeCategory contentSize = UIApplication.sharedApplication.preferredContentSizeCategory;
-        int heightIncrement = 0;
-        
-        // Adjust height based on content size category
-        if ([contentSize isEqualToString:UIContentSizeCategoryAccessibilityLarge]) {
-            heightIncrement = 15;
-        } else if ([contentSize isEqualToString:UIContentSizeCategoryAccessibilityExtraLarge]) {
-            heightIncrement = 40;
-        } else if ([contentSize isEqualToString:UIContentSizeCategoryAccessibilityExtraExtraLarge]) {
-            heightIncrement = 70;
-        } else if ([contentSize isEqualToString:UIContentSizeCategoryAccessibilityExtraExtraExtraLarge]) {
-            heightIncrement = 90;
+        NSInteger heightIncrement = [self heightIncrementForContentSizeCategory:contentSize];
+        if (isLandscape) {
+            heightIncrement += 50;
         }
 
         // height
@@ -129,17 +167,26 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         int alertHeightPx = iPad ? (title ? 300 : 260) : (title ? 370 + heightIncrement : 340 + heightIncrement);
         NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:alertView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:alertHeightPx];
         [alertView addConstraint:height];
-        pickerBounds.size.height = pickerHeight;
         
         // width
-        double pickerWidth = [self getPickerWidth:alertView];
+        double pickerWidth = [self getPickerWidth:alertView isLandscape:isLandscape];
         int alertWidthPx = pickerWidth;
         NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:alertView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:alertWidthPx];
         [alertView addConstraint:width];
         pickerBounds.size.width = pickerWidth;
 
-        // top padding
-        pickerBounds.origin.y += iPad ? (title ? 20: 5) : (title ? 30 : 10);
+        CGFloat pickerTop = iPad ? (title ? 20 : 5) : (title ? 30 : 10);
+        NSInteger buttonAreaReserve = [self buttonAreaReserveForHeightIncrement:heightIncrement isLandscape:isLandscape];
+        CGFloat maxPickerBottom = alertHeightPx - buttonAreaReserve;
+        CGFloat availablePickerHeight = MAX(maxPickerBottom - pickerTop, 0);
+        CGFloat targetPickerHeight = pickerHeight;
+
+        if (isLandscape) {
+            targetPickerHeight = pickerHeight - 20;
+        }
+        pickerBounds.size.height = MIN(targetPickerHeight, availablePickerHeight);
+        pickerBounds.origin.y = pickerTop;
+        picker.clipsToBounds = YES;
         
         [picker setFrame: pickerBounds];
        
@@ -220,10 +267,9 @@ RCT_EXPORT_METHOD(closePicker)
     });
 }
 
-- (double) getPickerWidth :(UIView *) alertView
+- (double) getPickerWidth:(UIView *)alertView isLandscape:(BOOL)isLandscape
 {
     bool iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
-    bool isLandscape = UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation);
     if(iPad) return 320;
     if (isLandscape) return 320;
     return alertView.bounds.size.width - 15;
