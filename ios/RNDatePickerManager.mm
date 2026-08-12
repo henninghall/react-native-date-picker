@@ -87,6 +87,11 @@ RCT_CUSTOM_VIEW_PROPERTY(textColor, NSString, DatePicker)
     [view setTextColorProp:[RCTConvert NSString:json]];
 }
 
+RCT_CUSTOM_VIEW_PROPERTY(theme, NSString, DatePicker)
+{
+    [view setTheme:[RCTConvert NSString:json]];
+}
+
 RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
                   onConfirm:(RCTResponseSenderBlock) onConfirm
                   onCancel:(RCTResponseSenderBlock) onCancel)
@@ -154,6 +159,9 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         
         NSString * textColor = [RCTConvert NSString:[props objectForKey:@"textColor"]];
         if(textColor) [picker setTextColorProp:textColor];
+
+        NSString * theme = [RCTConvert NSString:[props objectForKey:@"theme"]];
+        if (theme) [picker setTheme:theme];
         
         UIDatePickerMode mode = [RCTConvert UIDatePickerMode:[props objectForKey:@"mode"]];
         [picker setDatePickerMode:mode];
@@ -168,7 +176,6 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
         if(timeZoneProp) [picker setTimeZoneOffsetInMinutes:timeZoneProp];
 
         if(@available(iOS 13, *)) {
-            NSString * _Nonnull theme = [RCTConvert NSString:[props objectForKey:@"theme"]];
             if ([theme isEqualToString:@"light"]) {
                 alertController.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
             } else if ([theme isEqualToString:@"dark"]) {
