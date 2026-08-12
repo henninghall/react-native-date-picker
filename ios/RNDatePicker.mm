@@ -150,6 +150,16 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
         NSString *textColor = RCTNSStringFromString(newViewProps.textColor);
         [_picker setTextColorProp:textColor];
     }
+
+    if (oldViewProps.theme != newViewProps.theme) {
+        if (newViewProps.theme == RNDatePickerTheme::Light) {
+            [_picker setTheme:@"light"];
+        } else if (newViewProps.theme == RNDatePickerTheme::Dark) {
+            [_picker setTheme:@"dark"];
+        } else {
+            [_picker setTheme:@"auto"];
+        }
+    }
     
     [super updateProps:props oldProps:oldProps];
 }

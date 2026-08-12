@@ -23,7 +23,7 @@
 
 -(void)setup {
     if(@available(iOS 13, *)) {
-        self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+        self.overrideUserInterfaceStyle = UIUserInterfaceStyleUnspecified;
     }
     if(@available(iOS 14, *)) {
         self.preferredDatePickerStyle = UIDatePickerStyleWheels;
@@ -64,18 +64,104 @@
     #pragma clang diagnostic pop
 }
 
+- (void)refreshAfterInterfaceStyleChange
+{
+    if (self.window == nil) {
+        return;
+    }
+    if (@available(iOS 14.0, *)) {
+        UIDatePickerStyle currentStyle = self.preferredDatePickerStyle;
+        NSDate *currentDate = [self.date copy];
+        UIDatePickerMode currentMode = self.datePickerMode;
+        NSInteger currentMinuteInterval = self.minuteInterval;
+        NSDate *minimumDate = self.minimumDate;
+        NSDate *maximumDate = self.maximumDate;
+        NSLocale *locale = self.locale;
+        NSTimeZone *timeZone = self.timeZone;
+
+        NSSet *targets = [[self allTargets] copy];
+        NSMutableDictionary<NSValue *, NSArray<NSString *> *> *actionsByTarget = [NSMutableDictionary new];
+        for (id target in targets) {
+            NSArray<NSString *> *actions = [self actionsForTarget:target forControlEvent:UIControlEventValueChanged];
+            if (actions.count == 0) {
+                continue;
+            }
+            actionsByTarget[[NSValue valueWithNonretainedObject:target]] = actions;
+            for (NSString *action in actions) {
+                [self removeTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventValueChanged];
+            }
+        }
+
+        self.preferredDatePickerStyle = UIDatePickerStyleCompact;
+        self.preferredDatePickerStyle = currentStyle;
+        self.datePickerMode = currentMode;
+        self.minuteInterval = currentMinuteInterval;
+        self.minimumDate = minimumDate;
+        self.maximumDate = maximumDate;
+        self.locale = locale;
+        self.timeZone = timeZone;
+        [self setDate:currentDate animated:NO];
+
+        for (NSValue *key in actionsByTarget) {
+            id target = [key nonretainedObjectValue];
+            for (NSString *action in actionsByTarget[key]) {
+                [self addTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventValueChanged];
+            }
+        }
+    } else {
+        [self setNeedsLayout];
+        [self layoutIfNeeded];
+    }
+}
+
+- (void)applyInterfaceStyle:(UIUserInterfaceStyle)style API_AVAILABLE(ios(13.0))
+{
+    if (self.overrideUserInterfaceStyle == style) {
+        return;
+    }
+    self.overrideUserInterfaceStyle = style;
+    [self refreshAfterInterfaceStyleChange];
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+{
+    [super traitCollectionDidChange:previousTraitCollection];
+    if (@available(iOS 13, *)) {
+        if (previousTraitCollection == nil) {
+            return;
+        }
+        if (self.traitCollection.userInterfaceStyle == previousTraitCollection.userInterfaceStyle) {
+            return;
+        }
+        [self refreshAfterInterfaceStyleChange];
+    }
+}
+
+- (void)setTheme:(NSString *)theme
+{
+    if (@available(iOS 13, *)) {
+        if ([theme isEqualToString:@"light"]) {
+            [self applyInterfaceStyle:UIUserInterfaceStyleLight];
+        } else if ([theme isEqualToString:@"dark"]) {
+            [self applyInterfaceStyle:UIUserInterfaceStyleDark];
+        } else {
+            [self applyInterfaceStyle:UIUserInterfaceStyleUnspecified];
+        }
+    }
+}
+
 - (void)setTextColorProp:(NSString *)hexColor
 {
     if(@available(iOS 13, *)) {
 
         // black text -> set light mode
         if([hexColor isEqualToString:@"#000000"]){
-            self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+            [self applyInterfaceStyle:UIUserInterfaceStyleLight];
         }
-
+        
         // white text -> set dark mode
         else if([hexColor isEqualToString:@"#FFFFFF"] || [hexColor isEqualToString:@"#ffffff"]){
-            self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+            [self applyInterfaceStyle:UIUserInterfaceStyleDark];
         }
     }
 }
