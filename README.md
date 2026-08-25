@@ -236,6 +236,9 @@ If you have enabled <a href="https://facebook.github.io/react-native/docs/signed
 ```
 -keep public class net.time4j.android.ApplicationStarter
 -keep public class net.time4j.PrettyTime
+-keep public class net.time4j.android.spi.AndroidResourceLoader {
+    public <init>();
+}
 ```
 
 ### What does it take to upgrade to v4 (4.0.0)?
