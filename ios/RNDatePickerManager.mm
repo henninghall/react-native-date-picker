@@ -1,6 +1,7 @@
 #import <React/RCTLog.h>
 #import <React/RCTUIManager.h>
 #import <React/RCTViewManager.h>
+#import <React/RCTUtils.h>
 
 #import "RNDatePickerManager.h"
 #import "RCTConvert.h"
@@ -94,7 +95,7 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
     dispatch_async(dispatch_get_main_queue(), ^{
         
         bool iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
-        UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+        UIViewController *rootViewController = RCTKeyWindow().rootViewController;
         CGRect rootBounds = rootViewController.view.bounds;
         NSString * title = [RCTConvert NSString:[props objectForKey:@"title"]];
         title = [title isEqualToString:@""] ? nil : title;
