@@ -178,6 +178,9 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
             }
         }
         
+        NSString * buttonColor = [RCTConvert NSString:[props objectForKey:@"buttonColor"]];
+        if([buttonColor hasPrefix:@"#"]) alertView.tintColor = [self colorFromHex:buttonColor];
+
         [alertView addSubview:picker];
         
         UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:confirmText style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -192,6 +195,19 @@ RCT_EXPORT_METHOD(openPicker:(NSDictionary *) props
 
         if (@available(iOS 9.0, *)) {
             alertController.preferredAction = confirmAction;
+        }
+
+        // iOS 26 fills the preferred action with the tint under a white label,
+        // unreadable on a light buttonColor: give it a black label there.
+        if (@available(iOS 26, *)) {
+            CGFloat red = 0, green = 0, blue = 0, alpha = 0;
+            if([buttonColor hasPrefix:@"#"]
+               && [alertView.tintColor getRed:&red green:&green blue:&blue alpha:&alpha]
+               && 0.299 * red + 0.587 * green + 0.114 * blue > 0.6) {
+                @try {
+                    [confirmAction setValue:UIColor.blackColor forKey:@"titleTextColor"];
+                } @catch (NSException *exception) {}
+            }
         }
 
         // ipad needs to display the picker in a popover
@@ -218,6 +234,19 @@ RCT_EXPORT_METHOD(closePicker)
     dispatch_async(dispatch_get_main_queue(), ^{
         [self->_topViewController dismissViewControllerAnimated:YES completion:nil];
     });
+}
+
+// buttonColor arrives as #RRGGBB (colorToHex)
+- (UIColor *) colorFromHex :(NSString *) hexColor
+{
+    unsigned int rgb = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexColor];
+    [scanner setScanLocation:1];
+    [scanner scanHexInt:&rgb];
+    return [UIColor colorWithRed:((rgb >> 16) & 0xFF) / 255.0
+                           green:((rgb >> 8) & 0xFF) / 255.0
+                            blue:(rgb & 0xFF) / 255.0
+                           alpha:1.0];
 }
 
 - (double) getPickerWidth :(UIView *) alertView

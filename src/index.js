@@ -64,6 +64,8 @@ const getTextColor = (props) => {
 /** @param {Props} props **/
 const getButtonColor = (props) => {
   if (props.buttonColor) return props.buttonColor
+  // iOS keeps the system tint unless a color is given.
+  if (Platform.OS !== 'android') return undefined
   const theme = getTheme(props)
   if (theme === 'dark') return 'white'
   if (theme === 'light') return 'black'

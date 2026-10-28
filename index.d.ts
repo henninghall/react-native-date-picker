@@ -98,7 +98,7 @@ export interface DatePickerProps extends ViewProps {
   /** Color of the divider on Android */
   dividerColor?: string
 
-  /** Color of the android modal buttons */
+  /** Color of the modal buttons */
   buttonColor?: string
 }
 
